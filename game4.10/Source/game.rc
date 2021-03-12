@@ -106,7 +106,7 @@ IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
 IDB_PRACTICE            BITMAP                  "..\\res\\practice.bmp"
 
-IDB_KIRBY               BITMAP                  "C:\\Users\\±êµY\\¥_¬ì\\109-2OOPL\\GameFramework\\game4.10\\RES\\kirby.bmp"
+IDB_KIRBY               BITMAP                  "..\\RES\\kirby.bmp"
 
 ID_GREEN                BITMAP                  "..\\res\\green.bmp"
 
