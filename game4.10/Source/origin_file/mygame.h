@@ -41,12 +41,17 @@
 #include "CEraser.h"
 #include "CBall.h"
 #include "CBouncingBall.h"
-#include "../../game4.10/kirby.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// Constants
 	/////////////////////////////////////////////////////////////////////////////
+
+	enum AUDIO_ID {				// 定義各種音效的編號
+		AUDIO_DING,				// 0
+		AUDIO_LAKE,				// 1
+		AUDIO_NTUT				// 2
+	};
 
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
@@ -63,12 +68,59 @@ namespace game_framework {
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
+		CMovingBitmap logo;								// csie的logo
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
 	// 每個Member function的Implementation都要弄懂
 	/////////////////////////////////////////////////////////////////////////////
+
+	// tutorial_4_step2_addClassCPractice
+	class CPractice {
+	public:
+		CPractice();
+		void LoadBitmap();
+		void OnMove();
+		void OnShow();
+	private:
+		CMovingBitmap pic;
+		int x, y;
+	};
+
+	//yueh practice
+	class yueh_practice {
+	public:
+		yueh_practice();
+		void LoadBitmap();
+		void onMove();
+		void onShow();
+	private:
+		CMovingBitmap test;
+		int x, y;
+	};
+
+	class CBouncingBall;
+	// tutorial_5_step2_addClassCGameMap
+	class CGameMap
+	{
+	public:
+		CGameMap();
+		void LoadBitmap();							// 載入地圖
+		void OnShow();								// 顯示地圖
+		void OnMove();								// tutorial_6_step3_播放彈跳球的動畫
+		void OnKeyDown(UINT);							// tutorial_6_step3_處理按鍵按下後CGameMap的反應
+		void RandomBouncingBall();					// tutorial_6_step3_隨機彈跳球的個數加入到map中
+		void InitializeBouncingBall(int, int, int);	// tutorial_6_step3_初始化彈跳球
+		~CGameMap();								// tutorial_6_step3_解構子
+	private:
+		CMovingBitmap blue, green;	// 建立藍和綠色地圖
+		int map[4][5];				// 建立一個矩陣的index
+		const int X, Y;				// 大地圖的左上角x, y座標
+		const int MW, MH;			// 每張小地圖的寬高度
+		CBouncingBall* bballs;		// tutorial_6_step3_CBouncingBall指標
+		int random_num;				// tutorial_6_step3_隨機個數
+	};
 
 	class CGameStateRun : public CGameState {
 	public:
@@ -87,7 +139,27 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		kirby Kirby;
+		const int		NUMBALLS;	// 球的總數
+		CMovingBitmap	background;	// 背景圖
+		CMovingBitmap	help;		// 說明圖
+
+		CMovingBitmap   test2;		//yueh test2 bitmap
+		CMovingBitmap   test;		//yueh test bitmap
+		yueh_practice	test3;		//yueh test3
+
+		CBall			*ball;		// 球的陣列
+		CMovingBitmap	corner;		// 角落圖
+		CEraser			eraser;		// 拍子
+		CInteger		hits_left;	// 剩下的撞擊數
+		CBouncingBall   bball;		// 反覆彈跳的球
+
+		CMovingBitmap	kirby;	// tutorial_2a_step2_declareBitmapObject
+		/*
+		CMovingBitmap	practice2;	// tutorial_2b_step2_declareBitmapObject
+		int				picX, picY;	// tutorial_3_step2_declareCoordinateOfPractice
+		*/
+		CPractice		c_practice;	// tutorial_4_step4
+		CGameMap		gamemap;	// tutorial_5_step4_宣告地圖
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -106,4 +178,5 @@ namespace game_framework {
 	private:
 		int counter;	// 倒數之計數器
 	};
+
 }
