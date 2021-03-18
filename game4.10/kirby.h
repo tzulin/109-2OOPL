@@ -9,18 +9,23 @@ namespace game_framework {
 		kirby();
 		~kirby();
 		void LoadBitmap();
-		void DoAnimation();
 		void OnMove();
 		void OnShow();
 		void SetXY(int x_in, int y_in);
 		void SetMovingLeft(bool input);
 		void SetMovingRight(bool input);
+		void SetFacingRight(bool input);
+		void SetFacingLeft(bool input);
 	private:
-		CMovingBitmap now;
-		CAnimation animation;
+		CAnimation KirbyMovingL;
+		CAnimation KirbyMovingR;
+		CAnimation KirbyStand;
+		CAnimation KirbyStandL;
+
 		int x, y;
 		int img_w = 45, img_h = 40;
 		bool IsMovingLeft;
 		bool IsMovingRight;
+		bool IsFacingRight;
 	};
 }

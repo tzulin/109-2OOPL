@@ -224,9 +224,11 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	if (nChar == KEY_LEFT) {
 		Kirby.SetMovingLeft(true);
+		Kirby.SetFacingLeft(true);
 	}
 	if (nChar == KEY_RIGHT) {
 		Kirby.SetMovingRight(true);
+		Kirby.SetFacingRight(true);
 	}
 }
 

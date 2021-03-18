@@ -243,5 +243,77 @@
     <Image Include="..\materials\walk_left\walkL10.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\kirby_walk_10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_close_eyes.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_orign.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_close_eyes_left.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_left.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

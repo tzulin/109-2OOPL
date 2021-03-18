@@ -36,15 +36,11 @@
 #define IDB_BITMAP2                     156
 #define IDB_LOADING                     156
 #define IDB_BITMAP3                     157
-#define IDB_PRACTICE                    157
 #define IDB_KIRBY                       158
 #define ID_GREEN                        159
 #define IDB_BITMAP5                     160
 #define ID_BLUE                         160
-#define IDB_test_44                     162
-#define IDB_test_108820044              166
 #define IDB_test1                       167
-#define IDB_test2                       167
 #define IDB_WALKL1                      168
 #define IDB_WALKL2                      169
 #define IDB_WALKL3                      170
@@ -56,6 +52,21 @@
 #define IDB_WALKL9                      176
 #define IDB_BITMAP6                     177
 #define IDB_WALKL10                     177
+#define IDB_WALKR10                     178
+#define IDB_CLOSE_EYES                  179
+#define IDB_STAND                       180
+#define IDB_WALKR1                      181
+#define IDB_WALKR2                      182
+#define IDB_WALKR3                      183
+#define IDB_WALKR4                      184
+#define IDB_WALKR5                      185
+#define IDB_WALKR6                      186
+#define IDB_WALKR7                      187
+#define IDB_WALKR8                      188
+#define IDB_WALKR9                      189
+#define IDB_CLOSE_EYES_L                190
+#define IDB_BITMAP7                     191
+#define IDB_STANDL                      191
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -68,7 +79,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        178
+#define _APS_NEXT_RESOURCE_VALUE        192
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

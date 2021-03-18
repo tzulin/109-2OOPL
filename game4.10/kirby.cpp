@@ -15,6 +15,7 @@ namespace game_framework {
 		y = origin_y;
 		IsMovingLeft = false;
 		IsMovingRight = false;
+		IsFacingRight = true;
 	}
 
 	kirby::~kirby()
@@ -23,33 +24,79 @@ namespace game_framework {
 
 	void kirby::LoadBitmap()
 	{
-		// now.LoadBitmap(IDB_KIRBY);
 		char *filename[10] = { ".\\res\\walkL1.bmp", ".\\res\\walkL2.bmp", ".\\res\\walkL3.bmp", ".\\res\\walkL4.bmp", ".\\res\\walkL5.bmp", ".\\res\\walkL6.bmp", ".\\res\\walkL7.bmp", ".\\res\\walkL8.bmp", ".\\res\\walkL9.bmp", ".\\res\\walkL10.bmp" };
 		for (int i = 0; i < 10; i++)
 		{
-			animation.AddBitmap(filename[i], RGB(255, 255, 255));
+			KirbyMovingL.AddBitmap(filename[i], RGB(255, 255, 255));
 		}
+
+		KirbyMovingR.AddBitmap(IDB_WALKR1, RGB(255, 255, 255));
+		KirbyMovingR.AddBitmap(IDB_WALKR2, RGB(255, 255, 255));
+		KirbyMovingR.AddBitmap(IDB_WALKR3, RGB(255, 255, 255));
+		KirbyMovingR.AddBitmap(IDB_WALKR4, RGB(255, 255, 255));
+		KirbyMovingR.AddBitmap(IDB_WALKR5, RGB(255, 255, 255));
+		KirbyMovingR.AddBitmap(IDB_WALKR6, RGB(255, 255, 255));
+		KirbyMovingR.AddBitmap(IDB_WALKR7, RGB(255, 255, 255));
+		KirbyMovingR.AddBitmap(IDB_WALKR8, RGB(255, 255, 255));
+		KirbyMovingR.AddBitmap(IDB_WALKR9, RGB(255, 255, 255));
+		KirbyMovingR.AddBitmap(IDB_WALKR10, RGB(255, 255, 255));
+
+		int count = 9;
+		while (count-- > 0) {
+			KirbyStand.AddBitmap(IDB_STAND, RGB(255, 255, 255));
+		}
+		KirbyStand.AddBitmap(IDB_CLOSE_EYES, RGB(255, 255, 255));
+
+		count = 9;
+		while (count-- > 0) {
+			KirbyStandL.AddBitmap(IDB_STANDL, RGB(255, 255, 255));
+		}
+		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 255, 255));
+		
 	}
 
 	void kirby::OnShow()
 	{
-		// now.SetTopLeft(x, y);
-		// now.ShowBitmap();
-		animation.SetTopLeft(x, y);
-		animation.OnShow();
+		if (IsFacingRight) {
+			if (IsMovingRight) {
+				KirbyMovingR.SetDelayCount(3);
+				KirbyMovingR.SetTopLeft(x, y);
+				KirbyMovingR.OnShow();
+			}
+			else {
+				KirbyStand.SetDelayCount(5);
+				KirbyStand.SetTopLeft(x, y);
+				KirbyStand.OnShow();
+			}
+		}
+		else {
+			if (IsMovingLeft) {
+				KirbyMovingL.SetDelayCount(3);
+				KirbyMovingL.SetTopLeft(x, y);
+				KirbyMovingL.OnShow();
+			}
+			else {
+				KirbyStandL.SetDelayCount(5);
+				KirbyStandL.SetTopLeft(x, y);
+				KirbyStandL.OnShow();
+			}
+		}
 	}
 
 	void kirby::OnMove()
 	{
 		const int length = 3;
 
-		if (IsMovingLeft && x > 0) {
+		if (IsMovingLeft && x > 5) {
 			x -= length;
 		}
 		if (IsMovingRight && x < SIZE_X - img_w) {
 			x += length;
 		}
-		animation.OnMove();
+		KirbyMovingL.OnMove();
+		KirbyMovingR.OnMove();
+		KirbyStand.OnMove();
+		KirbyStandL.OnMove();
 	}
 
 	void kirby::SetXY(int x_in, int y_in) {
@@ -63,5 +110,13 @@ namespace game_framework {
 
 	void kirby::SetMovingRight(bool input) {
 		IsMovingRight = input;
+	}
+
+	void kirby::SetFacingRight(bool input) {
+		IsFacingRight = true;
+	}
+
+	void kirby::SetFacingLeft(bool input) {
+		IsFacingRight = false;
 	}
 }

@@ -104,19 +104,11 @@ IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
 IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
-IDB_PRACTICE            BITMAP                  "..\\res\\practice.bmp"
-
 IDB_KIRBY               BITMAP                  "..\\res\\kirby.bmp"
 
 ID_GREEN                BITMAP                  "..\\res\\green.bmp"
 
 ID_BLUE                 BITMAP                  "..\\res\\blue.bmp"
-
-IDB_test_44             BITMAP                  "..\\res\\bitmap4.bmp"
-
-IDB_test_108820044      BITMAP                  "..\\res\\test_new.bmp"
-
-IDB_test2               BITMAP                  "..\\Bitmaps\\test2.bmp"
 
 IDB_WALKL1              BITMAP                  "..\\res\\walkL1.bmp"
 
@@ -137,6 +129,34 @@ IDB_WALKL8              BITMAP                  "..\\res\\walkL8.bmp"
 IDB_WALKL9              BITMAP                  "..\\res\\walkL9.bmp"
 
 IDB_WALKL10             BITMAP                  "..\\res\\walkL10.bmp"
+
+IDB_WALKR10             BITMAP                  "..\\res\\kirby_walk_10.bmp"
+
+IDB_CLOSE_EYES          BITMAP                  "..\\RES\\kirby_close_eyes.bmp"
+
+IDB_STAND               BITMAP                  "..\\RES\\kirby_orign.bmp"
+
+IDB_WALKR1              BITMAP                  "..\\res\\kirby_walk_1.bmp"
+
+IDB_WALKR2              BITMAP                  "..\\res\\kirby_walk_2.bmp"
+
+IDB_WALKR3              BITMAP                  "..\\res\\kirby_walk_3.bmp"
+
+IDB_WALKR4              BITMAP                  "..\\res\\kirby_walk_4.bmp"
+
+IDB_WALKR5              BITMAP                  "..\\res\\kirby_walk_5.bmp"
+
+IDB_WALKR6              BITMAP                  "..\\res\\kirby_walk_6.bmp"
+
+IDB_WALKR7              BITMAP                  "..\\res\\kirby_walk_7.bmp"
+
+IDB_WALKR8              BITMAP                  "..\\res\\kirby_walk_8.bmp"
+
+IDB_WALKR9              BITMAP                  "..\\res\\kirby_walk_9.bmp"
+
+IDB_CLOSE_EYES_L        BITMAP                  "..\\RES\\kirby_close_eyes_left.bmp"
+
+IDB_STANDL              BITMAP                  "..\\RES\\kirby_left.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
