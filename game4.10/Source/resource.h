@@ -45,6 +45,17 @@
 #define IDB_test_108820044              166
 #define IDB_test1                       167
 #define IDB_test2                       167
+#define IDB_WALKL1                      168
+#define IDB_WALKL2                      169
+#define IDB_WALKL3                      170
+#define IDB_WALKL4                      171
+#define IDB_WALKL5                      172
+#define IDB_WALKL6                      173
+#define IDB_WALKL7                      174
+#define IDB_WALKL8                      175
+#define IDB_WALKL9                      176
+#define IDB_BITMAP6                     177
+#define IDB_WALKL10                     177
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -57,7 +68,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        168
+#define _APS_NEXT_RESOURCE_VALUE        178
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

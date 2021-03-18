@@ -114,9 +114,29 @@ ID_BLUE                 BITMAP                  "..\\res\\blue.bmp"
 
 IDB_test_44             BITMAP                  "..\\res\\bitmap4.bmp"
 
-IDB_test_108820044      BITMAP                  "C:\\Users\\aaa71\\OneDrive\\орн▒\\ntut_110\\oopl\\self\\109-2OOPL\\game4.10\\RES\\test_new.bmp"
+IDB_test_108820044      BITMAP                  "..\\res\\test_new.bmp"
 
-IDB_test2               BITMAP                  "C:\\Users\\aaa71\\OneDrive\\орн▒\\ntut_110\\oopl\\self\\109-2OOPL\\game4.10\\Bitmaps\\test2.bmp"
+IDB_test2               BITMAP                  "..\\Bitmaps\\test2.bmp"
+
+IDB_WALKL1              BITMAP                  "..\\res\\walkL1.bmp"
+
+IDB_WALKL2              BITMAP                  "..\\res\\walkL2.bmp"
+
+IDB_WALKL3              BITMAP                  "..\\res\\walkL3.bmp"
+
+IDB_WALKL4              BITMAP                  "..\\res\\walkL4.bmp"
+
+IDB_WALKL5              BITMAP                  "..\\res\\walkL5.bmp"
+
+IDB_WALKL6              BITMAP                  "..\\res\\walkL6.bmp"
+
+IDB_WALKL7              BITMAP                  "..\\res\\walkL7.bmp"
+
+IDB_WALKL8              BITMAP                  "..\\res\\walkL8.bmp"
+
+IDB_WALKL9              BITMAP                  "..\\res\\walkL9.bmp"
+
+IDB_WALKL10             BITMAP                  "..\\res\\walkL10.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

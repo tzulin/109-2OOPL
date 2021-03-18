@@ -213,5 +213,35 @@
     <Image Include="Bitmaps\test2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\materials\walk_left\walkL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
