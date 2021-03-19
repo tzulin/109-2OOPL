@@ -16,16 +16,20 @@ namespace game_framework {
 		void SetMovingRight(bool input);
 		void SetFacingRight(bool input);
 		void SetFacingLeft(bool input);
+		void SetDown(bool input);
 	private:
 		CAnimation KirbyMovingL;
 		CAnimation KirbyMovingR;
 		CAnimation KirbyStand;
 		CAnimation KirbyStandL;
+		CMovingBitmap KirbyDownR;
+		CMovingBitmap KirbyDownL;
 
 		int x, y;
-		int img_w = 45, img_h = 40;
+		int ImgW = 60, ImgH = 60;
 		bool IsMovingLeft;
 		bool IsMovingRight;
 		bool IsFacingRight;
+		bool IsDown; 
 	};
 }
