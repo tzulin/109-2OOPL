@@ -102,7 +102,7 @@ void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+		GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
 }
 
 void CGameStateInit::OnShow()
@@ -121,8 +121,8 @@ void CGameStateInit::OnShow()
 	fp=pDC->SelectObject(&f);					// 選用 font f
 	pDC->SetBkColor(RGB(0,0,0));
 	pDC->SetTextColor(RGB(255,255,0));
-	pDC->TextOut(50,220,"Please click mouse or press SPACE to begin.");
-	pDC->TextOut(5,395,"Press Ctrl-F to switch in between window mode and full screen mode.");
+	pDC->TextOut(50,220,"Please press SPACE to begin.");
+	pDC->TextOut(5,395,"Please make sure your typing mode is in English.");
 	if (ENABLE_GAME_PAUSE)
 		pDC->TextOut(5,425,"Press Ctrl-Q to pause the Game.");
 	pDC->TextOut(5,455,"Press Alt-F4 or ESC to Quit.");
@@ -212,48 +212,61 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	const char KEY_LEFT  = 0x25; // keyboard左箭頭
-	const char KEY_UP    = 0x26; // keyboard上箭頭
-	const char KEY_RIGHT = 0x27; // keyboard右箭頭
-	const char KEY_DOWN  = 0x28; // keyboard下箭頭
-	const char KEY_ESC = 27;   // keyboard esc
+	const char KEY_LEFT  = 0x25;	// keyboard左箭頭
+	const char KEY_UP    = 0x26;	// keyboard上箭頭
+	const char KEY_RIGHT = 0x27;	// keyboard右箭頭
+	const char KEY_DOWN  = 0x28;	// keyboard下箭頭
+	const char KEY_ESC   = 0x1B;    // keyboard esc
+	const char KEY_C     = 0x43;	// keyboard C
+	const char KEY_SPACE = 0x20;	// keyboard space
 
 	if (nChar == KEY_ESC) {
 		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// esc 關閉遊戲
 	}
 
 	if (nChar == KEY_LEFT) {
-		Kirby.SetMovingLeft(true);					// Kirby moving left
-		Kirby.SetFacingLeft(true);					// Kirby facing left
+		Kirby.SetMovingL(true);					// Kirby moving left
+		Kirby.SetFacingL(true);					// Kirby facing left
 	}
 
 	if (nChar == KEY_RIGHT) {
-		Kirby.SetMovingRight(true);					// Kirby moving right
-		Kirby.SetFacingRight(true);					// Kirby facing right
+		Kirby.SetMovingR(true);					// Kirby moving right
+		Kirby.SetFacingR(true);					// Kirby facing right
 	}
 
 	if (nChar == KEY_DOWN) {
 		Kirby.SetDown(true);
 	}
+
+	if (nChar == KEY_C) {
+		Kirby.SetAttack(true);
+	}
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	const char KEY_LEFT  = 0x25; // keyboard左箭頭
-	const char KEY_UP    = 0x26; // keyboard上箭頭
-	const char KEY_RIGHT = 0x27; // keyboard右箭頭
-	const char KEY_DOWN  = 0x28; // keyboard下箭頭
+	const char KEY_LEFT  = 0x25;	// keyboard左箭頭
+	const char KEY_UP    = 0x26;	// keyboard上箭頭
+	const char KEY_RIGHT = 0x27;	// keyboard右箭頭
+	const char KEY_DOWN  = 0x28;	// keyboard下箭頭
+	const char KEY_ESC   = 0x1B;	// keyboard esc
+	const char KEY_C     = 0x43;	// keyboard C
+	const char KEY_SPACE = 0x20;	// keyboard space
 
 	if (nChar == KEY_LEFT) {
-		Kirby.SetMovingLeft(false);					// Kirby stop moving left
+		Kirby.SetMovingL(false);				// Kirby stop moving left
 	}
 
 	if (nChar == KEY_RIGHT) {
-		Kirby.SetMovingRight(false);				// Kirby stop moving right
+		Kirby.SetMovingR(false);				// Kirby stop moving right
 	}
 
 	if (nChar == KEY_DOWN) {
 		Kirby.SetDown(false);
+	}
+
+	if (nChar == KEY_C) {
+		Kirby.SetAttack(false);
 	}
 }
 

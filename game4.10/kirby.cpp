@@ -7,16 +7,19 @@
 #include "kirby.h"
 
 namespace game_framework {
+	const int frame_of_test = 5;
 	kirby::kirby()
 	{
-		const int origin_x = 5;
-		const int origin_y = SIZE_Y - 5 - ImgH;
+		// kirby constructor
+		const int origin_x = frame_of_test;
+		const int origin_y = SIZE_Y - frame_of_test - ImgH;
 		x = origin_x;
 		y = origin_y;
-		IsMovingLeft = false;
-		IsMovingRight = false;
-		IsFacingRight = true;
+		IsMovingL = false;
+		IsMovingR = false;
+		IsFacingR = true;
 		IsDown = false;
+		IsAttack = false;
 	}
 
 	kirby::~kirby()
@@ -72,22 +75,33 @@ namespace game_framework {
 		KirbyStandL.AddBitmap(IDB_STANDL, RGB(255, 255, 255));
 		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 255, 255));	
 
-		KirbyDownR.LoadBitmap(IDB_1, RGB(255, 255, 255));
-		KirbyDownL.LoadBitmap(IDB_2, RGB(255, 255, 255));
-		
+		// load down right and left
+		KirbyDownR.LoadBitmap(IDB_DOWNR1, RGB(255, 255, 255));
+		KirbyDownL.LoadBitmap(IDB_DOWNL1, RGB(255, 255, 255));
+
+		// load down attack right and left
+		KirbyDownAttackR.LoadBitmap(IDB_DOWNR2, RGB(255, 255, 255));
+		KirbyDownAttackL.LoadBitmap(IDB_DOWNL2, RGB(255, 255, 255));
 	}
 
 	void kirby::OnShow()
 	{
 		// facing right
-		if (IsFacingRight) {
+		if (IsFacingR) {
 			if (IsDown) {
-				KirbyDownR.SetTopLeft(x, y);
-				KirbyDownR.ShowBitmap();
-			}else
-			// show walking right
-			if (IsMovingRight) {
-				KirbyMovingR.SetDelayCount(3);
+				if (IsAttack) {
+					// show down attack right
+					KirbyDownAttackR.SetTopLeft(x, y + ImgH - KirbyDownR.Height());
+					KirbyDownAttackR.ShowBitmap();
+				}
+				else {			
+					// show down
+					KirbyDownR.SetTopLeft(x, y + ImgH - KirbyDownR.Height());
+					KirbyDownR.ShowBitmap();
+				}
+			}else if (IsMovingR) {		
+				// show walking right
+				KirbyMovingR.SetDelayCount(2);
 				KirbyMovingR.SetTopLeft(x, y);
 				KirbyMovingR.OnShow();
 			}
@@ -97,16 +111,22 @@ namespace game_framework {
 				KirbyStand.SetTopLeft(x, y);
 				KirbyStand.OnShow();
 			}
-		}
-		else {
+		}else {
 			// facing left
 			if (IsDown) {
-				KirbyDownL.SetTopLeft(x, y);
-				KirbyDownL.ShowBitmap();
-			}else
-			if (IsMovingLeft) {
+				if (IsAttack) {
+					// show down attack left
+					KirbyDownAttackL.SetTopLeft(x, y + ImgH - KirbyDownL.Height());
+					KirbyDownAttackL.ShowBitmap();
+				}
+				else {
+					// show down
+					KirbyDownL.SetTopLeft(x, y + ImgH - KirbyDownL.Height());
+					KirbyDownL.ShowBitmap();
+				}
+			}else if (IsMovingL) {
 				// show walking left 
-				KirbyMovingL.SetDelayCount(3);
+				KirbyMovingL.SetDelayCount(2);
 				KirbyMovingL.SetTopLeft(x, y);
 				KirbyMovingL.OnShow();
 			}
@@ -122,13 +142,30 @@ namespace game_framework {
 	void kirby::OnMove()
 	{
 		// set moving XY
-		const int length = 3;
+		const int length = 2;
 
-		if (IsMovingLeft && x > 5 && !IsDown) {
+		// set moving XY and frame of test 
+		if (IsMovingL && !IsDown && x > frame_of_test) {
+			if (IsFacingR) {
+				IsFacingR = false;
+			}
 			x -= length;
 		}
-		if (IsMovingRight && x < SIZE_X - ImgW && !IsDown) {
+
+		if (IsMovingR && !IsDown && x < SIZE_X - ImgW - frame_of_test) {
+			if (!IsFacingR) {
+				IsFacingR = true;
+			}
 			x += length;
+		}
+
+		if (IsDown && IsAttack) {
+			if (IsFacingR) {
+				x += length * 3;
+			}
+			else {
+				x -= length * 3;
+			}
 		}
 
 		// animation OnMove
@@ -143,23 +180,27 @@ namespace game_framework {
 		y = y_in;
 	}
 
-	void  kirby::SetMovingLeft(bool input) {
-		IsMovingLeft = input;
+	void  kirby::SetMovingL(bool input) {
+		IsMovingL = input;
 	}
 
-	void kirby::SetMovingRight(bool input) {
-		IsMovingRight = input;
+	void kirby::SetMovingR(bool input) {
+		IsMovingR = input;
 	}
 
-	void kirby::SetFacingRight(bool input) {
-		IsFacingRight = true;
+	void kirby::SetFacingR(bool input) {
+		IsFacingR = input;
 	}
 
-	void kirby::SetFacingLeft(bool input) {
-		IsFacingRight = false;
+	void kirby::SetFacingL(bool input) {
+		IsFacingR = !input;
 	}
 
 	void kirby::SetDown(bool input) {
 		IsDown = input;
+	}
+
+	void kirby::SetAttack(bool input) {
+		IsAttack = input;
 	}
 }

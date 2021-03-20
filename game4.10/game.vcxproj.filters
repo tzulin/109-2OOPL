@@ -315,5 +315,17 @@
     <Image Include="RES\kirby_left.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\downL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\downL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\downR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\downR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

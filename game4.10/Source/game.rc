@@ -158,6 +158,14 @@ IDB_CLOSE_EYES_L        BITMAP                  "..\\RES\\kirby_close_eyes_left.
 
 IDB_STANDL              BITMAP                  "..\\RES\\kirby_left.bmp"
 
+IDB_DOWNL2              BITMAP                  "..\\RES\\downL2.bmp"
+
+IDB_DOWNL1              BITMAP                  "..\\RES\\downL1.bmp"
+
+IDB_DOWNR2              BITMAP                  "..\\RES\\downR2.bmp"
+
+IDB_DOWNR1              BITMAP                  "..\\RES\\downR1.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
