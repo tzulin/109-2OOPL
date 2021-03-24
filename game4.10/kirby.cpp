@@ -29,51 +29,46 @@ namespace game_framework {
 	void kirby::LoadBitmap()
 	{	
 		// load walk left
-		char *filename[10] = { ".\\res\\walkL1.bmp", ".\\res\\walkL2.bmp", ".\\res\\walkL3.bmp", ".\\res\\walkL4.bmp", ".\\res\\walkL5.bmp", ".\\res\\walkL6.bmp", ".\\res\\walkL7.bmp", ".\\res\\walkL8.bmp", ".\\res\\walkL9.bmp", ".\\res\\walkL10.bmp" };
+		char *walk_left[10] = { ".\\res\\walk\\walkL1.bmp", ".\\res\\walk\\walkL2.bmp", ".\\res\\walk\\walkL3.bmp", ".\\res\\walk\\walkL4.bmp", ".\\res\\walk\\walkL5.bmp", ".\\res\\walk\\walkL6.bmp", ".\\res\\walk\\walkL7.bmp", ".\\res\\walk\\walkL8.bmp", ".\\res\\walk\\walkL9.bmp", ".\\res\\walk\\walkL10.bmp" };
 		for (int i = 0; i < 10; i++)
 		{
-			KirbyMovingL.AddBitmap(filename[i], RGB(255, 255, 255));
+			KirbyMovingL.AddBitmap(walk_left[i], RGB(255, 0, 0));
 		}
-		
+
 		// load walk right
-		KirbyMovingR.AddBitmap(IDB_WALKR1, RGB(255, 255, 255));
-		KirbyMovingR.AddBitmap(IDB_WALKR2, RGB(255, 255, 255));
-		KirbyMovingR.AddBitmap(IDB_WALKR3, RGB(255, 255, 255));
-		KirbyMovingR.AddBitmap(IDB_WALKR4, RGB(255, 255, 255));
-		KirbyMovingR.AddBitmap(IDB_WALKR5, RGB(255, 255, 255));
-		KirbyMovingR.AddBitmap(IDB_WALKR6, RGB(255, 255, 255));
-		KirbyMovingR.AddBitmap(IDB_WALKR7, RGB(255, 255, 255));
-		KirbyMovingR.AddBitmap(IDB_WALKR8, RGB(255, 255, 255));
-		KirbyMovingR.AddBitmap(IDB_WALKR9, RGB(255, 255, 255));
-		KirbyMovingR.AddBitmap(IDB_WALKR10, RGB(255, 255, 255));	
-		
+		char *walk_right[10] = { ".\\res\\walk\\walkR1.bmp", ".\\res\\walk\\walkR2.bmp", ".\\res\\walk\\walkR3.bmp", ".\\res\\walk\\walkR4.bmp", ".\\res\\walk\\walkR5.bmp", ".\\res\\walk\\walkR6.bmp", ".\\res\\walk\\walkR7.bmp", ".\\res\\walk\\walkR8.bmp", ".\\res\\walk\\walkR9.bmp", ".\\res\\walk\\walkR10.bmp" };
+		for (int i = 0; i < 10; i++)
+		{
+			KirbyMovingR.AddBitmap(walk_right[i], RGB(255, 0, 0));
+		}
+
 		// load stand and wink right
 		int count = 12;
 		while (count-- > 0) {
-			KirbyStand.AddBitmap(IDB_STAND, RGB(255, 255, 255));
+			KirbyStand.AddBitmap(IDB_STAND, RGB(255, 0, 0));
 		}
-		KirbyStand.AddBitmap(IDB_CLOSE_EYES, RGB(255, 255, 255));
+		KirbyStand.AddBitmap(IDB_CLOSE_EYES, RGB(255, 0, 0));
 		count = 12;
 		while (count-- > 0) {
-			KirbyStand.AddBitmap(IDB_STAND, RGB(255, 255, 255));
+			KirbyStand.AddBitmap(IDB_STAND, RGB(255, 0, 0));
 		}
-		KirbyStand.AddBitmap(IDB_CLOSE_EYES, RGB(255, 255, 255));
-		KirbyStand.AddBitmap(IDB_STAND, RGB(255, 255, 255));
-		KirbyStand.AddBitmap(IDB_CLOSE_EYES, RGB(255, 255, 255));	
+		KirbyStand.AddBitmap(IDB_CLOSE_EYES, RGB(255, 0, 0));
+		KirbyStand.AddBitmap(IDB_STAND, RGB(255, 0, 0));
+		KirbyStand.AddBitmap(IDB_CLOSE_EYES, RGB(255, 0, 0));	
 
 		// load stand left
 		count = 12;
 		while (count-- > 0) {
-			KirbyStandL.AddBitmap(IDB_STANDL, RGB(255, 255, 255));
+			KirbyStandL.AddBitmap(IDB_STANDL, RGB(255, 0, 0));
 		}
-		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 255, 255));
+		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 0, 0));
 		count = 12;
 		while (count-- > 0) {
-			KirbyStandL.AddBitmap(IDB_STANDL, RGB(255, 255, 255));
+			KirbyStandL.AddBitmap(IDB_STANDL, RGB(255, 0, 0));
 		}
-		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 255, 255));
-		KirbyStandL.AddBitmap(IDB_STANDL, RGB(255, 255, 255));
-		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 255, 255));	
+		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 0, 0));
+		KirbyStandL.AddBitmap(IDB_STANDL, RGB(255, 0, 0));
+		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 0, 0));	
 
 		// load down right and left
 		KirbyDownR.LoadBitmap(IDB_DOWNR1, RGB(255, 255, 255));

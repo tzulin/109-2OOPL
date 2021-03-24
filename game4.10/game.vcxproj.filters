@@ -327,5 +327,71 @@
     <Image Include="RES\downR1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\walkR9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\3_19_kirby_pic\basic\basicR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -70,28 +70,6 @@ IDB_BACKGROUND          BITMAP                  "..\\res\\ntutcsie.bmp"
 
 IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
 
-IDB_0                   BITMAP                  "..\\res\\bmp0.bmp"
-
-IDB_1                   BITMAP                  "..\\res\\bmp1.bmp"
-
-IDB_2                   BITMAP                  "..\\res\\bmp2.bmp"
-
-IDB_3                   BITMAP                  "..\\res\\bmp3.bmp"
-
-IDB_4                   BITMAP                  "..\\res\\bmp4.bmp"
-
-IDB_5                   BITMAP                  "..\\res\\bmp5.bmp"
-
-IDB_6                   BITMAP                  "..\\res\\bmp6.bmp"
-
-IDB_7                   BITMAP                  "..\\res\\bmp7.bmp"
-
-IDB_8                   BITMAP                  "..\\res\\bmp8.bmp"
-
-IDB_9                   BITMAP                  "..\\res\\bmp9.bmp"
-
-IDB_MINUS               BITMAP                  "..\\res\\bmp10.bmp"
-
 IDB_CENTER              BITMAP                  "..\\res\\center.bmp"
 
 IDB_ERASER2             BITMAP                  "..\\res\\eraser2.bmp"
@@ -110,53 +88,53 @@ ID_GREEN                BITMAP                  "..\\res\\green.bmp"
 
 ID_BLUE                 BITMAP                  "..\\res\\blue.bmp"
 
-IDB_WALKL1              BITMAP                  "..\\res\\walkL1.bmp"
+IDB_WALKL1              BITMAP                  "..\\res\\walk\\walkL1.bmp"
 
-IDB_WALKL2              BITMAP                  "..\\res\\walkL2.bmp"
+IDB_WALKL2              BITMAP                  "..\\res\\walk\\walkL2.bmp"
 
-IDB_WALKL3              BITMAP                  "..\\res\\walkL3.bmp"
+IDB_WALKL3              BITMAP                  "..\\res\\walk\\walkL3.bmp"
 
-IDB_WALKL4              BITMAP                  "..\\res\\walkL4.bmp"
+IDB_WALKL4              BITMAP                  "..\\res\\walk\\walkL4.bmp"
 
-IDB_WALKL5              BITMAP                  "..\\res\\walkL5.bmp"
+IDB_WALKL5              BITMAP                  "..\\res\\walk\\walkL5.bmp"
 
-IDB_WALKL6              BITMAP                  "..\\res\\walkL6.bmp"
+IDB_WALKL6              BITMAP                  "..\\res\\walk\\walkL6.bmp"
 
-IDB_WALKL7              BITMAP                  "..\\res\\walkL7.bmp"
+IDB_WALKL7              BITMAP                  "..\\res\\walk\\walkL7.bmp"
 
-IDB_WALKL8              BITMAP                  "..\\res\\walkL8.bmp"
+IDB_WALKL8              BITMAP                  "..\\res\\walk\\walkL8.bmp"
 
-IDB_WALKL9              BITMAP                  "..\\res\\walkL9.bmp"
+IDB_WALKL9              BITMAP                  "..\\res\\walk\\walkL9.bmp"
 
-IDB_WALKL10             BITMAP                  "..\\res\\walkL10.bmp"
+IDB_WALKL10             BITMAP                  "..\\res\\walk\\walkL10.bmp"
 
-IDB_WALKR10             BITMAP                  "..\\res\\kirby_walk_10.bmp"
+IDB_WALKR10             BITMAP                  "..\\res\\walk\\walkR10.bmp"
 
-IDB_CLOSE_EYES          BITMAP                  "..\\RES\\kirby_close_eyes.bmp"
+IDB_CLOSE_EYES          BITMAP                  "..\\RES\\basic\\basicR2.bmp"
 
-IDB_STAND               BITMAP                  "..\\RES\\kirby_orign.bmp"
+IDB_STAND               BITMAP                  "..\\RES\\basic\\basicR1.bmp"
 
-IDB_WALKR1              BITMAP                  "..\\res\\kirby_walk_1.bmp"
+IDB_WALKR1              BITMAP                  "..\\res\\walk\\walkR1.bmp"
 
-IDB_WALKR2              BITMAP                  "..\\res\\kirby_walk_2.bmp"
+IDB_WALKR2              BITMAP                  "..\\res\\walk\\walkR2.bmp"
 
-IDB_WALKR3              BITMAP                  "..\\res\\kirby_walk_3.bmp"
+IDB_WALKR3              BITMAP                  "..\\res\\walk\\walkR3.bmp"
 
-IDB_WALKR4              BITMAP                  "..\\res\\kirby_walk_4.bmp"
+IDB_WALKR4              BITMAP                  "..\\res\\walk\\walkR4.bmp"
 
-IDB_WALKR5              BITMAP                  "..\\res\\kirby_walk_5.bmp"
+IDB_WALKR5              BITMAP                  "..\\res\\walk\\walkR5.bmp"
 
-IDB_WALKR6              BITMAP                  "..\\res\\kirby_walk_6.bmp"
+IDB_WALKR6              BITMAP                  "..\\res\\walk\\walkR6.bmp"
 
-IDB_WALKR7              BITMAP                  "..\\res\\kirby_walk_7.bmp"
+IDB_WALKR7              BITMAP                  "..\\res\\walk\\walkR7.bmp"
 
-IDB_WALKR8              BITMAP                  "..\\res\\kirby_walk_8.bmp"
+IDB_WALKR8              BITMAP                  "..\\res\\walk\\walkR8.bmp"
 
-IDB_WALKR9              BITMAP                  "..\\res\\kirby_walk_9.bmp"
+IDB_WALKR9              BITMAP                  "..\\res\\walk\\walkR9.bmp"
 
-IDB_CLOSE_EYES_L        BITMAP                  "..\\RES\\kirby_close_eyes_left.bmp"
+IDB_CLOSE_EYES_L        BITMAP                  "..\\RES\\basic\\basicL2.bmp"
 
-IDB_STANDL              BITMAP                  "..\\RES\\kirby_left.bmp"
+IDB_STANDL              BITMAP                  "..\\RES\\basic\\basicL1.bmp"
 
 IDB_DOWNL2              BITMAP                  "..\\RES\\downL2.bmp"
 
