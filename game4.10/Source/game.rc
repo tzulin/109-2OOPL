@@ -144,6 +144,40 @@ IDB_DOWNR2              BITMAP                  "..\\RES\\downR2.bmp"
 
 IDB_DOWNR1              BITMAP                  "..\\RES\\downR1.bmp"
 
+IDB_FLYR1               BITMAP                  "..\\RES\\fly\\flyR1.bmp"
+
+IDB_FLYR2               BITMAP                  "..\\RES\\fly\\flyR2.bmp"
+
+IDB_FLYR3               BITMAP                  "..\\RES\\fly\\flyR3.bmp"
+
+IDB_FLYR4               BITMAP                  "..\\RES\\fly\\flyR4.bmp"
+
+IDB_FLYR5               BITMAP                  "..\\RES\\fly\\flyR5.bmp"
+
+IDB_FLYR6               BITMAP                  "..\\RES\\fly\\flyR6.bmp"
+
+IDB_JUMPR1              BITMAP                  "..\\RES\\jump\\jumpR1.bmp"
+
+IDB_JUMPR2              BITMAP                  "..\\RES\\jump\\jumpR2.bmp"
+
+IDB_JUMPR3              BITMAP                  "..\\RES\\jump\\jumpR3.bmp"
+
+IDB_JUMPR4              BITMAP                  "..\\RES\\jump\\jumpR4.bmp"
+
+IDB_JUMPR5              BITMAP                  "..\\RES\\jump\\jumpR5.bmp"
+
+IDB_JUMPR6              BITMAP                  "..\\RES\\jump\\jumpR6.bmp"
+
+IDB_JUMPR7              BITMAP                  "..\\RES\\jump\\jumpR7.bmp"
+
+IDB_JUMPR8              BITMAP                  "..\\RES\\jump\\jumpR8.bmp"
+
+IDB_JUMPR9              BITMAP                  "..\\RES\\jump\\jumpR9.bmp"
+
+IDB_JUMPR10             BITMAP                  "..\\RES\\jump\\jumpR10.bmp"
+
+IDB_JUMPL1              BITMAP                  "..\\RES\\jump\\jumpL1.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

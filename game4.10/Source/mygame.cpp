@@ -241,6 +241,10 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	if (nChar == KEY_C) {
 		Kirby.SetAttack(true);
 	}
+
+	if (nChar == KEY_SPACE) {
+		Kirby.SetJump(true);
+	}
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)

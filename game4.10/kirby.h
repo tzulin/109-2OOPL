@@ -18,12 +18,15 @@ namespace game_framework {
 		void SetFacingL(bool input);
 		void SetDown(bool input);
 		void SetAttack(bool input);
+		void SetJump(bool input);
 
 	private:
 		CAnimation KirbyMovingL;
 		CAnimation KirbyMovingR;
 		CAnimation KirbyStand;
 		CAnimation KirbyStandL;
+		CAnimation KirbyJumpR;
+		CAnimation KirbyJumpL;
 		CMovingBitmap KirbyDownR;
 		CMovingBitmap KirbyDownL;
 		CMovingBitmap KirbyDownAttackR;
@@ -31,10 +34,16 @@ namespace game_framework {
 
 		int x, y;
 		const int ImgW = 60, ImgH = 60;
+		int floor;			// 地板y座標
+		int init_velocity;	// 初始速度
+		int velocity;		// 目前速度
+		bool IsRising;		// true表示上升
 		bool IsMovingL;
 		bool IsMovingR;
 		bool IsFacingR;
 		bool IsDown; 
 		bool IsAttack;
+		bool InAir;			// true表示在空中
+		// bool KeyPressed;								// 有按鍵被按下
 	};
 }

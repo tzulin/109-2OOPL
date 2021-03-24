@@ -393,5 +393,68 @@
     <Image Include="res\walk\walkR9.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\basic\basicL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\basic\basicL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\basic\basicR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\basic\basicR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -13,13 +13,18 @@ namespace game_framework {
 		// kirby constructor
 		const int origin_x = frame_of_test;
 		const int origin_y = SIZE_Y - frame_of_test - ImgH;
+		const int INIT_VELOCITY = 18;
+		init_velocity = INIT_VELOCITY;
 		x = origin_x;
 		y = origin_y;
+		floor = SIZE_Y;
 		IsMovingL = false;
 		IsMovingR = false;
 		IsFacingR = true;
 		IsDown = false;
 		IsAttack = false;
+		InAir = false;
+		IsRising = true;
 	}
 
 	kirby::~kirby()
@@ -56,7 +61,7 @@ namespace game_framework {
 		KirbyStand.AddBitmap(IDB_STAND, RGB(255, 0, 0));
 		KirbyStand.AddBitmap(IDB_CLOSE_EYES, RGB(255, 0, 0));	
 
-		// load stand left
+		// load stand and wink left
 		count = 12;
 		while (count-- > 0) {
 			KirbyStandL.AddBitmap(IDB_STANDL, RGB(255, 0, 0));
@@ -77,6 +82,24 @@ namespace game_framework {
 		// load down attack right and left
 		KirbyDownAttackR.LoadBitmap(IDB_DOWNR2, RGB(255, 255, 255));
 		KirbyDownAttackL.LoadBitmap(IDB_DOWNL2, RGB(255, 255, 255));
+
+		// load jump right
+		for (int i = 0; i < 5; i++)
+		{
+			KirbyJumpR.AddBitmap(".\\res\\jump\\jumpR1.bmp", RGB(255, 0, 0));
+		}
+		// 空中翻滾 先不要
+		// char *jump_right[10] = { ".\\res\\jump\\jumpR1.bmp", ".\\res\\jump\\jumpR2.bmp", ".\\res\\jump\\jumpR3.bmp", ".\\res\\jump\\jumpR4.bmp", ".\\res\\jump\\jumpR5.bmp", ".\\res\\jump\\jumpR6.bmp", ".\\res\\jump\\jumpR7.bmp", ".\\res\\jump\\jumpR8.bmp", ".\\res\\jump\\jumpR9.bmp", ".\\res\\jump\\jumpR10.bmp"};
+		// for (int i = 0; i < 10; i++)
+		// {
+		// 	KirbyJumpR.AddBitmap(jump_right[i], RGB(255, 0, 0));
+		// }
+
+		// load jump left
+		for (int i = 0; i < 5; i++)
+		{
+			KirbyJumpL.AddBitmap(".\\res\\jump\\jumpL1.bmp", RGB(255, 0, 0));
+		}
 	}
 
 	void kirby::OnShow()
@@ -94,7 +117,13 @@ namespace game_framework {
 					KirbyDownR.SetTopLeft(x, y + ImgH - KirbyDownR.Height());
 					KirbyDownR.ShowBitmap();
 				}
-			}else if (IsMovingR) {		
+			}
+			else if (InAir) {
+				// show jump up
+				KirbyJumpR.SetTopLeft(x, y);
+				KirbyJumpR.OnShow();
+			}
+			else if (IsMovingR) {
 				// show walking right
 				KirbyMovingR.SetDelayCount(2);
 				KirbyMovingR.SetTopLeft(x, y);
@@ -119,7 +148,13 @@ namespace game_framework {
 					KirbyDownL.SetTopLeft(x, y + ImgH - KirbyDownL.Height());
 					KirbyDownL.ShowBitmap();
 				}
-			}else if (IsMovingL) {
+			}
+			else if (InAir) {
+				// show jump up
+				KirbyJumpL.SetTopLeft(x, y);
+				KirbyJumpL.OnShow();
+			}
+			else if (IsMovingL) {
 				// show walking left 
 				KirbyMovingL.SetDelayCount(2);
 				KirbyMovingL.SetTopLeft(x, y);
@@ -163,7 +198,33 @@ namespace game_framework {
 			}
 		}
 
+		if (IsRising && InAir) {
+			if (velocity > 0) {
+				y -= velocity;
+				velocity--;
+			}
+			else {
+				IsRising = false;
+				velocity = 1;
+			}
+		}
+		else {
+			if (y < floor - frame_of_test - ImgH) {
+				y += velocity;
+				velocity++;
+			}
+			else {
+				y = floor - frame_of_test - ImgH;
+				velocity = init_velocity;
+				IsRising = true;
+				InAir = false;
+				KirbyJumpR.Reset();
+				KirbyJumpL.Reset();
+			}
+		}
+
 		// animation OnMove
+		KirbyJumpR.OnMove();
 		KirbyMovingL.OnMove();
 		KirbyMovingR.OnMove();
 		KirbyStand.OnMove();
@@ -198,4 +259,9 @@ namespace game_framework {
 	void kirby::SetAttack(bool input) {
 		IsAttack = input;
 	}
+
+	void kirby::SetJump(bool input) {
+		InAir = input;
+	}
+
 }

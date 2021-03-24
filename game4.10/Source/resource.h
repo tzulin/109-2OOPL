@@ -72,6 +72,30 @@
 #define IDB_BITMAP9                     195
 #define IDB_DOWNR1                      195
 #define IDB_WALKL11                     196
+#define IDB_BITMAP4                     197
+#define IDB_FLYR1                       197
+#define IDB_BITMAP7                     198
+#define IDB_FLYR2                       198
+#define IDB_BITMAP8                     199
+#define IDB_FLYR3                       199
+#define IDB_BITMAP10                    200
+#define IDB_FLYR4                       200
+#define IDB_BITMAP11                    201
+#define IDB_FLYR5                       201
+#define IDB_BITMAP12                    202
+#define IDB_FLYR6                       202
+#define IDB_JUMPR1                      203
+#define IDB_JUMPR2                      204
+#define IDB_JUMPR3                      205
+#define IDB_JUMPR4                      206
+#define IDB_JUMPR5                      207
+#define IDB_JUMPR6                      208
+#define IDB_JUMPR7                      209
+#define IDB_JUMPR8                      210
+#define IDB_JUMPR9                      211
+#define IDB_JUMPR10                     212
+#define IDB_BITMAP13                    213
+#define IDB_JUMPL1                      213
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -84,7 +108,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        197
+#define _APS_NEXT_RESOURCE_VALUE        214
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101
