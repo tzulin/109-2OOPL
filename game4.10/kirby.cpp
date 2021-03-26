@@ -80,8 +80,11 @@ namespace game_framework {
 		KirbyDownL.LoadBitmap(IDB_DOWNL1, RGB(255, 255, 255));
 
 		// load down attack right and left
-		KirbyDownAttackR.LoadBitmap(IDB_DOWNR2, RGB(255, 255, 255));
-		KirbyDownAttackL.LoadBitmap(IDB_DOWNL2, RGB(255, 255, 255));
+		count = 3;
+		while (count-- > 0) {
+			KirbyDownAttackR.AddBitmap(IDB_DOWNR2, RGB(255, 255, 255));
+			KirbyDownAttackL.AddBitmap(IDB_DOWNL2, RGB(255, 255, 255));
+		}
 
 		// load jump right
 		for (int i = 0; i < 5; i++)
@@ -100,6 +103,39 @@ namespace game_framework {
 		{
 			KirbyJumpL.AddBitmap(".\\res\\jump\\jumpL1.bmp", RGB(255, 0, 0));
 		}
+
+		// load scream right and left
+		KirbyScreamR.AddBitmap(IDB_SCREAMR1, RGB(255, 255, 255));
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
+		}
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamR.AddBitmap(IDB_SCREAMR3, RGB(255, 255, 255));
+			KirbyScreamR.AddBitmap(IDB_SCREAMR4, RGB(255, 255, 255));
+		}
+		count = 5;
+		while (count-- > 0) {
+			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
+		}
+		KirbyScreamR.AddBitmap(IDB_SCREAMR5, RGB(255, 255, 255));
+
+		KirbyScreamL.AddBitmap(IDB_SCREAML1, RGB(255, 255, 255));
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
+		}
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamL.AddBitmap(IDB_SCREAML3, RGB(255, 255, 255));
+			KirbyScreamL.AddBitmap(IDB_SCREAML4, RGB(255, 255, 255));
+		}
+		count = 5;
+		while (count-- > 0) {
+			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
+		}
+		KirbyScreamL.AddBitmap(IDB_SCREAML5, RGB(255, 255, 255));
 	}
 
 	void kirby::OnShow()
@@ -109,8 +145,14 @@ namespace game_framework {
 			if (IsDown) {
 				if (IsAttack) {
 					// show down attack right
+					KirbyDownAttackR.SetDelayCount(5);
 					KirbyDownAttackR.SetTopLeft(x, y + ImgH - KirbyDownR.Height());
-					KirbyDownAttackR.ShowBitmap();
+					KirbyDownAttackR.OnMove();
+					KirbyDownAttackR.OnShow();
+					if (KirbyDownAttackR.IsFinalBitmap()) {
+						IsAttack = false;
+						KirbyDownAttackR.Reset();
+					}
 				}
 				else {			
 					// show down
@@ -122,6 +164,17 @@ namespace game_framework {
 				// show jump up
 				KirbyJumpR.SetTopLeft(x, y);
 				KirbyJumpR.OnShow();
+			}
+			else if (IsAttack) {
+				// show scream right
+				KirbyScreamR.SetDelayCount(5);
+				KirbyScreamR.SetTopLeft(x, y + ImgH - KirbyScreamR.Height());
+				KirbyScreamR.OnMove();
+				KirbyScreamR.OnShow();
+				if (KirbyScreamR.IsFinalBitmap()) {
+					IsAttack = false;
+					KirbyScreamR.Reset();
+				}
 			}
 			else if (IsMovingR) {
 				// show walking right
@@ -140,8 +193,14 @@ namespace game_framework {
 			if (IsDown) {
 				if (IsAttack) {
 					// show down attack left
+					KirbyDownAttackL.SetDelayCount(5);
 					KirbyDownAttackL.SetTopLeft(x, y + ImgH - KirbyDownL.Height());
-					KirbyDownAttackL.ShowBitmap();
+					KirbyDownAttackL.OnMove();
+					KirbyDownAttackL.OnShow();
+					if (KirbyDownAttackL.IsFinalBitmap()) {
+						IsAttack = false;
+						KirbyDownAttackL.Reset();
+					}
 				}
 				else {
 					// show down
@@ -153,6 +212,17 @@ namespace game_framework {
 				// show jump up
 				KirbyJumpL.SetTopLeft(x, y);
 				KirbyJumpL.OnShow();
+			}
+			else if (IsAttack) {
+				// show scream right 
+				KirbyScreamL.SetDelayCount(5);
+				KirbyScreamL.SetTopLeft(x, y + ImgH - KirbyScreamR.Height());
+				KirbyScreamL.OnMove();
+				KirbyScreamL.OnShow();
+				if (KirbyScreamL.IsFinalBitmap()) {
+					IsAttack = false;
+					KirbyScreamL.Reset();
+				}
 			}
 			else if (IsMovingL) {
 				// show walking left 
@@ -175,25 +245,26 @@ namespace game_framework {
 		const int length = 2;
 
 		// set moving XY and frame of test 
-		if (IsMovingL && !IsDown && x > frame_of_test) {
+		if (IsMovingL && !IsDown && !IsAttack && x > frame_of_test) {
 			if (IsFacingR) {
 				IsFacingR = false;
 			}
 			x -= length;
 		}
 
-		if (IsMovingR && !IsDown && x < SIZE_X - ImgW - frame_of_test) {
+		if (IsMovingR && !IsDown && !IsAttack && x < SIZE_X - ImgW - frame_of_test) {
 			if (!IsFacingR) {
 				IsFacingR = true;
 			}
 			x += length;
 		}
 
+		// set down attack right and left
 		if (IsDown && IsAttack) {
-			if (IsFacingR) {
+			if (IsFacingR && x < SIZE_X - ImgW - frame_of_test) {
 				x += length * 3;
 			}
-			else {
+			else if (x > frame_of_test) {
 				x -= length * 3;
 			}
 		}
@@ -229,6 +300,11 @@ namespace game_framework {
 		KirbyMovingR.OnMove();
 		KirbyStand.OnMove();
 		KirbyStandL.OnMove();
+		/*KirbyScreamR.OnMove();
+		KirbyScreamL.OnMove();
+		KirbyDownAttackR.OnMove();
+		KirbyDownAttackL.OnMove();
+		*/
 	}
 
 	void kirby::SetXY(int x_in, int y_in) {

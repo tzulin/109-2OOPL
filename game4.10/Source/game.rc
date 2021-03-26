@@ -136,13 +136,13 @@ IDB_CLOSE_EYES_L        BITMAP                  "..\\RES\\basic\\basicL2.bmp"
 
 IDB_STANDL              BITMAP                  "..\\RES\\basic\\basicL1.bmp"
 
-IDB_DOWNL2              BITMAP                  "..\\RES\\downL2.bmp"
+IDB_DOWNL2              BITMAP                  "..\\RES\\down\\downL2.bmp"
 
-IDB_DOWNL1              BITMAP                  "..\\RES\\downL1.bmp"
+IDB_DOWNL1              BITMAP                  "..\\RES\\down\\downL1.bmp"
 
-IDB_DOWNR2              BITMAP                  "..\\RES\\downR2.bmp"
+IDB_DOWNR2              BITMAP                  "..\\RES\\down\\downR2.bmp"
 
-IDB_DOWNR1              BITMAP                  "..\\RES\\downR1.bmp"
+IDB_DOWNR1              BITMAP                  "..\\RES\\down\\downR1.bmp"
 
 IDB_FLYR1               BITMAP                  "..\\RES\\fly\\flyR1.bmp"
 
@@ -177,6 +177,26 @@ IDB_JUMPR9              BITMAP                  "..\\RES\\jump\\jumpR9.bmp"
 IDB_JUMPR10             BITMAP                  "..\\RES\\jump\\jumpR10.bmp"
 
 IDB_JUMPL1              BITMAP                  "..\\RES\\jump\\jumpL1.bmp"
+
+IDB_SCREAML1            BITMAP                  "..\\RES\\scream\\screamL1.bmp"
+
+IDB_SCREAML2            BITMAP                  "..\\RES\\scream\\screamL2.bmp"
+
+IDB_SCREAML3            BITMAP                  "..\\RES\\scream\\screamL3.bmp"
+
+IDB_SCREAML4            BITMAP                  "..\\RES\\scream\\screamL4.bmp"
+
+IDB_SCREAML5            BITMAP                  "..\\RES\\scream\\screamL5.bmp"
+
+IDB_SCREAMR1            BITMAP                  "..\\RES\\scream\\screamR1.bmp"
+
+IDB_SCREAMR2            BITMAP                  "..\\RES\\scream\\screamR2.bmp"
+
+IDB_SCREAMR3            BITMAP                  "..\\RES\\scream\\screamR3.bmp"
+
+IDB_SCREAMR4            BITMAP                  "..\\RES\\scream\\screamR4.bmp"
+
+IDB_SCREAMR5            BITMAP                  "..\\RES\\scream\\screamR5.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

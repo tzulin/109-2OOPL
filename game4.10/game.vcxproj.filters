@@ -456,5 +456,47 @@
     <Image Include="RES\jump\jumpL1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\scream\screamL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamL3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamL4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamL5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamR3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamR4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamR5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\down\downL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\down\downL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\down\downR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\down\downR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

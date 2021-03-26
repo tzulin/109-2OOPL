@@ -143,7 +143,7 @@ void CGameStateOver::OnMove()
 {
 	counter--;
 	if (counter < 0)
-		GotoGameState(GAME_STATE_INIT);
+		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// esc Ãö³¬¹CÀ¸		
 }
 
 void CGameStateOver::OnBeginState()

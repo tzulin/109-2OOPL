@@ -38,9 +38,6 @@
  *      3. Use ShowInitProgress(percent) to display loading progress.
 */
 
-#include "CEraser.h"
-#include "CBall.h"
-#include "CBouncingBall.h"
 #include "../../game4.10/kirby.h"
 
 namespace game_framework {

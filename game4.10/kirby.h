@@ -27,10 +27,13 @@ namespace game_framework {
 		CAnimation KirbyStandL;
 		CAnimation KirbyJumpR;
 		CAnimation KirbyJumpL;
+		CAnimation KirbyScreamR;
+		CAnimation KirbyScreamL;
+		CAnimation KirbyDownAttackR;
+		CAnimation KirbyDownAttackL;
+
 		CMovingBitmap KirbyDownR;
 		CMovingBitmap KirbyDownL;
-		CMovingBitmap KirbyDownAttackR;
-		CMovingBitmap KirbyDownAttackL;
 
 		int x, y;
 		const int ImgW = 60, ImgH = 60;

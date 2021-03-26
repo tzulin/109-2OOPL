@@ -36,6 +36,7 @@
 #define IDB_BITMAP2                     156
 #define IDB_LOADING                     156
 #define IDB_BITMAP3                     157
+#define IDB_SCREAMR5                    157
 #define IDB_KIRBY                       158
 #define ID_GREEN                        159
 #define IDB_BITMAP5                     160
@@ -96,6 +97,16 @@
 #define IDB_JUMPR10                     212
 #define IDB_BITMAP13                    213
 #define IDB_JUMPL1                      213
+#define IDB_SCREAML1                    214
+#define IDB_SCREAML2                    215
+#define IDB_SCREAML3                    216
+#define IDB_SCREAML4                    217
+#define IDB_SCREAML5                    218
+#define IDB_SCREAMR1                    219
+#define IDB_SCREAMR2                    220
+#define IDB_SCREAMR3                    221
+#define IDB_SCREAMR4                    222
+#define IDB_BITMAP23                    223
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -108,7 +119,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        214
+#define _APS_NEXT_RESOURCE_VALUE        224
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

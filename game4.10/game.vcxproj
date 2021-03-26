@@ -352,6 +352,10 @@
     <Image Include="RES\downL2.bmp" />
     <Image Include="RES\downR1.bmp" />
     <Image Include="RES\downR2.bmp" />
+    <Image Include="RES\down\downL1.bmp" />
+    <Image Include="RES\down\downL2.bmp" />
+    <Image Include="RES\down\downR1.bmp" />
+    <Image Include="RES\down\downR2.bmp" />
     <Image Include="RES\fly\flyR1.bmp" />
     <Image Include="RES\fly\flyR2.bmp" />
     <Image Include="RES\fly\flyR3.bmp" />
@@ -386,6 +390,16 @@
     <Image Include="RES\kirby_walk_8.bmp" />
     <Image Include="RES\kirby_walk_9.bmp" />
     <Image Include="res\practice.bmp" />
+    <Image Include="RES\scream\screamL1.bmp" />
+    <Image Include="RES\scream\screamL2.bmp" />
+    <Image Include="RES\scream\screamL3.bmp" />
+    <Image Include="RES\scream\screamL4.bmp" />
+    <Image Include="RES\scream\screamL5.bmp" />
+    <Image Include="RES\scream\screamR1.bmp" />
+    <Image Include="RES\scream\screamR2.bmp" />
+    <Image Include="RES\scream\screamR3.bmp" />
+    <Image Include="RES\scream\screamR4.bmp" />
+    <Image Include="RES\scream\screamR5.bmp" />
     <Image Include="RES\test_new.bmp" />
     <Image Include="res\walkL1.bmp" />
     <Image Include="res\walkL10.bmp" />
