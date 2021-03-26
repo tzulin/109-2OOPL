@@ -20,6 +20,8 @@ namespace game_framework {
 		void SetAttack(bool input);
 		void SetJump(bool input);
 
+		int GetCase();
+
 	private:
 		CAnimation KirbyMovingL;
 		CAnimation KirbyMovingR;

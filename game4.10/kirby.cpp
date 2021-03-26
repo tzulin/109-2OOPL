@@ -140,7 +140,8 @@ namespace game_framework {
 
 	void kirby::OnShow()
 	{
-		// facing right
+		/*
+        //facing right
 		if (IsFacingR) {
 			if (IsDown) {
 				if (IsAttack) {
@@ -214,7 +215,7 @@ namespace game_framework {
 				KirbyJumpL.OnShow();
 			}
 			else if (IsAttack) {
-				// show scream right 
+				// show scream left
 				KirbyScreamL.SetDelayCount(5);
 				KirbyScreamL.SetTopLeft(x, y + ImgH - KirbyScreamR.Height());
 				KirbyScreamL.OnMove();
@@ -231,11 +232,112 @@ namespace game_framework {
 				KirbyMovingL.OnShow();
 			}
 			else {
-				// show standing right
+				// show standing left
 				KirbyStandL.SetDelayCount(3);
 				KirbyStandL.SetTopLeft(x, y);
 				KirbyStandL.OnShow();
 			}
+		}*/
+		switch (GetCase()) {
+		// case jump up right
+		case 1:
+			KirbyJumpR.SetTopLeft(x, y);
+			KirbyJumpR.OnShow();
+			break;
+
+		// case down attack right
+		case 2:
+			KirbyDownAttackR.SetDelayCount(5);
+			KirbyDownAttackR.SetTopLeft(x, y + ImgH - KirbyDownR.Height());
+			KirbyDownAttackR.OnMove();
+			KirbyDownAttackR.OnShow();
+			if (KirbyDownAttackR.IsFinalBitmap()) {
+				IsAttack = false;
+				KirbyDownAttackR.Reset();
+			}
+			break;
+
+		// case down right
+		case 3:
+			KirbyDownR.SetTopLeft(x, y + ImgH - KirbyDownR.Height());
+			KirbyDownR.ShowBitmap();
+			break;
+
+		// case scream right
+		case 4:
+			KirbyScreamR.SetDelayCount(5);
+			KirbyScreamR.SetTopLeft(x, y + ImgH - KirbyScreamR.Height());
+			KirbyScreamR.OnMove();
+			KirbyScreamR.OnShow();
+			if (KirbyScreamR.IsFinalBitmap()) {
+				IsAttack = false;
+				KirbyScreamR.Reset();
+			}
+			break;
+
+		// case walking right
+		case 5:
+			KirbyMovingR.SetDelayCount(2);
+			KirbyMovingR.SetTopLeft(x, y);
+			KirbyMovingR.OnShow();
+			break;
+
+		// case standing right
+		case 6:
+			KirbyStand.SetDelayCount(3);
+			KirbyStand.SetTopLeft(x, y);
+			KirbyStand.OnShow();
+			break;
+
+		// case jump up left
+		case 7:
+			KirbyJumpL.SetTopLeft(x, y);
+			KirbyJumpL.OnShow();
+			break;
+
+		// case down attack left
+		case 8:
+			KirbyDownAttackL.SetDelayCount(5);
+			KirbyDownAttackL.SetTopLeft(x, y + ImgH - KirbyDownAttackL.Height());
+			KirbyDownAttackL.OnMove();
+			KirbyDownAttackL.OnShow();
+			if (KirbyDownAttackL.IsFinalBitmap()) {
+				IsAttack = false;
+				KirbyDownAttackL.Reset();
+			}
+			break;
+
+		// case down left
+		case 9:
+			KirbyDownL.SetTopLeft(x, y + ImgH - KirbyDownL.Height());
+			KirbyDownL.ShowBitmap();
+			break;
+
+		// case scream left 
+		case 10:
+			KirbyScreamL.SetDelayCount(5);
+			KirbyScreamL.SetTopLeft(x, y + ImgH - KirbyScreamL.Height());
+			KirbyScreamL.OnMove();
+			KirbyScreamL.OnShow();
+			if (KirbyScreamL.IsFinalBitmap()) {
+				IsAttack = false;
+				KirbyScreamL.Reset();
+			}
+			break;
+
+		// case walking left
+		case 11:
+			KirbyMovingL.SetDelayCount(2);
+			KirbyMovingL.SetTopLeft(x, y);
+			KirbyMovingL.OnShow();
+			break;
+
+		// case standing left
+		case 12:
+			KirbyStandL.SetDelayCount(3);
+			KirbyStandL.SetTopLeft(x, y);
+			KirbyStandL.OnShow();
+			break;
 		}
 	}
 
@@ -340,4 +442,63 @@ namespace game_framework {
 		InAir = input;
 	}
 
+	int kirby::GetCase() {
+		if (IsFacingR) {
+			if (InAir) {
+				// case jump up right
+				return 1;
+			}
+			else if (IsDown) {
+				if (IsAttack) {
+					// case down attack right
+					return 2;
+				}
+				else {
+					// case down right
+					return 3;
+				}
+			}
+			else if (IsAttack) {
+				// case scream right
+				return 4;
+			}
+			else if (IsMovingR) {
+				// case walking right
+				return 5;
+			}
+			else {
+				// case standing right
+				return 6;
+			}
+		}
+		else {
+			// facing left
+			if (InAir) {
+				// case jump up left
+				return 7;
+			}
+			else if (IsDown) {
+				if (IsAttack) {
+					// case down attack left
+					return 8;
+				}
+				else {
+					// case down left
+					return 9;
+				}
+			}
+			else if (IsAttack) {
+				// case scream left 
+				return 10;
+			}
+			else if (IsMovingL) {
+				// case walking left 
+				return 11;
+			}
+			else {
+				// case standing left
+				return 12;
+			}
+		}
+	}
 }

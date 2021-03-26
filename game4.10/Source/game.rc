@@ -62,31 +62,11 @@ END
 // Bitmap
 //
 
-IDB_BALL                BITMAP                  "..\\res\\ball.bmp"
-
-IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
-
-IDB_BACKGROUND          BITMAP                  "..\\res\\ntutcsie.bmp"
-
-IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
-
-IDB_CENTER              BITMAP                  "..\\res\\center.bmp"
-
-IDB_ERASER2             BITMAP                  "..\\res\\eraser2.bmp"
-
-IDB_ERASER3             BITMAP                  "..\\res\\eraser3.bmp"
-
 IDB_CONTINUE            BITMAP                  "..\\res\\continue.bmp"
-
-IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
 IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
 IDB_KIRBY               BITMAP                  "..\\res\\kirby.bmp"
-
-ID_GREEN                BITMAP                  "..\\res\\green.bmp"
-
-ID_BLUE                 BITMAP                  "..\\res\\blue.bmp"
 
 IDB_WALKL1              BITMAP                  "..\\res\\walk\\walkL1.bmp"
 
