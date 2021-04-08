@@ -25,6 +25,10 @@ namespace game_framework {
 		IsAttack = false;
 		InAir = false;
 		IsRising = true;
+		IsJumping = false;
+		IsFlying = false;
+		IsFat = false;
+		FlyUp = false;
 	}
 
 	kirby::~kirby()
@@ -132,6 +136,42 @@ namespace game_framework {
 			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
 		}
 		KirbyScreamL.AddBitmap(IDB_SCREAML5, RGB(255, 255, 255));
+
+		// load flyR
+		KirbyFlyR.AddBitmap(".\\res\\fly\\flyR1.bmp", RGB(255, 0, 0));
+		KirbyFlyR.AddBitmap(".\\res\\fly\\flyR2.bmp", RGB(255, 0, 0));
+		KirbyFlyR.AddBitmap(".\\res\\fly\\flyR3.bmp", RGB(255, 0, 0));
+		KirbyFlyR.AddBitmap(".\\res\\fly\\flyR4.bmp", RGB(255, 0, 0));
+		KirbyFlyR.AddBitmap(".\\res\\fly\\flyR5.bmp", RGB(255, 0, 0));
+
+		// load flyingR
+		KirbyFlyingR.AddBitmap(".\\res\\fly\\flyR6.bmp", RGB(255, 0, 0));
+		KirbyFlyingR.AddBitmap(".\\res\\fly\\flyR7.bmp", RGB(255, 0, 0));
+		KirbyFlyingR.AddBitmap(".\\res\\fly\\flyR8.bmp", RGB(255, 0, 0));
+		KirbyFlyingR.AddBitmap(".\\res\\fly\\flyR9.bmp", RGB(255, 0, 0));
+		KirbyFlyingR.AddBitmap(".\\res\\fly\\flyR10.bmp", RGB(255, 0, 0));
+		KirbyFlyingR.AddBitmap(".\\res\\fly\\flyR9.bmp", RGB(255, 0, 0));
+		KirbyFlyingR.AddBitmap(".\\res\\fly\\flyR8.bmp", RGB(255, 0, 0));
+		KirbyFlyingR.AddBitmap(".\\res\\fly\\flyR7.bmp", RGB(255, 0, 0));
+		KirbyFlyingR.AddBitmap(".\\res\\fly\\flyR6.bmp", RGB(255, 0, 0));
+
+		// load flyL
+		KirbyFlyL.AddBitmap(".\\res\\fly\\flyL1.bmp", RGB(255, 0, 0));
+		KirbyFlyL.AddBitmap(".\\res\\fly\\flyL2.bmp", RGB(255, 0, 0));
+		KirbyFlyL.AddBitmap(".\\res\\fly\\flyL3.bmp", RGB(255, 0, 0));
+		KirbyFlyL.AddBitmap(".\\res\\fly\\flyL4.bmp", RGB(255, 0, 0));
+		KirbyFlyL.AddBitmap(".\\res\\fly\\flyL5.bmp", RGB(255, 0, 0));
+
+		// load flyingL
+		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL6.bmp", RGB(255, 0, 0));
+		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL7.bmp", RGB(255, 0, 0));
+		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL8.bmp", RGB(255, 0, 0));
+		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL9.bmp", RGB(255, 0, 0));
+		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL10.bmp", RGB(255, 0, 0));
+		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL9.bmp", RGB(255, 0, 0));
+		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL8.bmp", RGB(255, 0, 0));
+		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL7.bmp", RGB(255, 0, 0));
+		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL6.bmp", RGB(255, 0, 0));
 	}
 
 	void kirby::OnShow()
@@ -189,8 +229,30 @@ namespace game_framework {
 			KirbyStand.OnShow();
 			break;
 
-		// case jump up left
+		// case fly up right
 		case 7:
+			KirbyFlyR.SetDelayCount(5);
+			KirbyFlyR.SetTopLeft(x, y);
+			KirbyFlyR.OnMove();
+			KirbyFlyR.OnShow();
+			if (KirbyFlyR.IsFinalBitmap()) {
+				KirbyFlyR.Reset();
+			}
+			break;
+
+		// case flying right
+		case 8:
+			KirbyFlyingR.SetDelayCount(3);
+			KirbyFlyingR.SetTopLeft(x, y);
+			KirbyFlyingR.OnMove();
+			KirbyFlyingR.OnShow();
+			if (KirbyFlyingR.IsFinalBitmap()) {
+				KirbyFlyingR.Reset();
+			}
+			break;
+
+		// case jump up left
+		case 9:
 			KirbyJumpL.SetDelayCount(4);
 			KirbyJumpL.SetTopLeft(x, y);
 			KirbyJumpL.OnMove();
@@ -198,7 +260,7 @@ namespace game_framework {
 			break;
 
 		// case down attack left
-		case 8:
+		case 10:
 			KirbyDownAttackL.SetDelayCount(5);
 			KirbyDownAttackL.SetTopLeft(x, y + ImgH - KirbyDownAttackL.Height());
 			KirbyDownAttackL.OnMove();
@@ -210,13 +272,13 @@ namespace game_framework {
 			break;
 
 		// case down left
-		case 9:
+		case 11:
 			KirbyDownL.SetTopLeft(x, y + ImgH - KirbyDownL.Height());
 			KirbyDownL.ShowBitmap();
 			break;
 
 		// case scream left 
-		case 10:
+		case 12:
 			KirbyScreamL.SetDelayCount(5);
 			KirbyScreamL.SetTopLeft(x, y + ImgH - KirbyScreamL.Height());
 			KirbyScreamL.OnMove();
@@ -228,17 +290,39 @@ namespace game_framework {
 			break;
 
 		// case walking left
-		case 11:
+		case 13:
 			KirbyMovingL.SetDelayCount(2);
 			KirbyMovingL.SetTopLeft(x, y);
 			KirbyMovingL.OnShow();
 			break;
 
 		// case standing left
-		case 12:
+		case 14:
 			KirbyStandL.SetDelayCount(3);
 			KirbyStandL.SetTopLeft(x, y);
 			KirbyStandL.OnShow();
+			break;
+
+		// case fly up left
+		case 15:
+			KirbyFlyL.SetDelayCount(5);
+			KirbyFlyL.SetTopLeft(x, y);
+			KirbyFlyL.OnMove();
+			KirbyFlyL.OnShow();
+			if (KirbyFlyL.IsFinalBitmap()) {
+				KirbyFlyL.Reset();
+			}
+			break;
+
+		// case flying left
+		case 16:
+			KirbyFlyingL.SetDelayCount(3);
+			KirbyFlyingL.SetTopLeft(x, y);
+			KirbyFlyingL.OnMove();
+			KirbyFlyingL.OnShow();
+			if (KirbyFlyingL.IsFinalBitmap()) {
+				KirbyFlyingL.Reset();
+			}
 			break;
 		}
 	}
@@ -273,14 +357,27 @@ namespace game_framework {
 			}
 		}
 
+		// set jump and fly
 		if (IsRising && InAir) {
-			if (velocity > 0) {
-				y -= velocity;
-				velocity--;
+			if (IsJumping) {
+				if (velocity > 0) {
+					y -= velocity;
+					velocity--;
+				}
+				else {
+					IsRising = false;
+					velocity = 1;
+				}
 			}
-			else {
-				IsRising = false;
-				velocity = 1;
+			else if (FlyUp && IsFat) {
+				if (velocity > 0) {
+					y -= velocity;
+					velocity--;
+					IsFlying = true;
+				}
+				else {
+					FlyUp = false;
+				}
 			}
 		}
 		else {
@@ -291,10 +388,16 @@ namespace game_framework {
 			else {
 				y = floor - frame_of_test - ImgH;
 				velocity = init_velocity;
-				IsRising = true;
 				InAir = false;
+				IsRising = true;
+				IsJumping = false;
 				KirbyJumpR.Reset();
 				KirbyJumpL.Reset();
+				IsFlying = false;
+				// KirbyFlyR.Reset();
+				// KirbyFlyingR.Reset();
+				// KirbyFlyL.Reset();
+				// KirbyFlyingL.Reset();
 			}
 		}
 
@@ -337,15 +440,26 @@ namespace game_framework {
 
 	void kirby::SetAttack(bool input) {
 		IsAttack = input;
+		if (IsFat && InAir) {
+			IsFat = false;
+			InAir = false;
+		}
 	}
 
 	void kirby::SetJump(bool input) {
 		InAir = input;
+		IsJumping = input;
+	}
+
+	void kirby::SetFly(bool input) {
+		InAir = input;
+		IsFat = input;
+		FlyUp = input;
 	}
 
 	int kirby::GetCase() {
 		if (IsFacingR) {
-			if (InAir) {
+			if (IsJumping) {
 				// case jump up right
 				return 1;
 			}
@@ -363,6 +477,14 @@ namespace game_framework {
 				// case scream right
 				return 4;
 			}
+			else if (FlyUp) {
+				// case fly right
+				return 7;
+			}
+			else if (IsFlying) {
+				// case flying right
+				return 8;
+			}
 			else if (IsMovingR) {
 				// case walking right
 				return 5;
@@ -374,31 +496,39 @@ namespace game_framework {
 		}
 		else {
 			// facing left
-			if (InAir) {
+			if (IsJumping) {
 				// case jump up left
-				return 7;
+				return 9;
 			}
 			else if (IsDown) {
 				if (IsAttack) {
 					// case down attack left
-					return 8;
+					return 10;
 				}
 				else {
 					// case down left
-					return 9;
+					return 11;
 				}
 			}
 			else if (IsAttack) {
 				// case scream left 
-				return 10;
+				return 12;
+			}
+			else if (FlyUp) {
+				// case fly left
+				return 15;
+			}
+			else if (IsFlying) {
+				// case flying left
+				return 16;
 			}
 			else if (IsMovingL) {
 				// case walking left 
-				return 11;
+				return 13;
 			}
 			else {
 				// case standing left
-				return 12;
+				return 14;
 			}
 		}
 	}

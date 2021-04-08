@@ -19,6 +19,7 @@ namespace game_framework {
 		void SetDown(bool input);
 		void SetAttack(bool input);
 		void SetJump(bool input);
+		void SetFly(bool input);
 
 		int GetCase();
 
@@ -33,6 +34,10 @@ namespace game_framework {
 		CAnimation KirbyScreamL;
 		CAnimation KirbyDownAttackR;
 		CAnimation KirbyDownAttackL;
+		CAnimation KirbyFlyR;
+		CAnimation KirbyFlyingR;
+		CAnimation KirbyFlyL;
+		CAnimation KirbyFlyingL;
 
 		CMovingBitmap KirbyDownR;
 		CMovingBitmap KirbyDownL;
@@ -48,7 +53,11 @@ namespace game_framework {
 		bool IsFacingR;
 		bool IsDown; 
 		bool IsAttack;
-		bool InAir;			// true表示在空中
+		bool InAir;
+		bool IsJumping;
+		bool IsFlying;
+		bool IsFat;
+		bool FlyUp;
 		// bool KeyPressed;								// 有按鍵被按下
 	};
 }
