@@ -11,11 +11,6 @@ namespace game_framework {
 		void LoadBitmap();
 		void OnMove();
 		void OnShow();
-		void SetXY(int x_in, int y_in);
-		void SetMovingR(bool input);
-		void SetMovingL(bool input);
-		void SetFacingR(bool input);
-		void SetFacingL(bool input);
 
 	private:
 		CAnimation WaddleMovingL;

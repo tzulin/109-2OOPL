@@ -86,12 +86,5 @@ namespace game_framework {
 
 		WaddleMovingL.OnMove();
 		WaddleMovingR.OnMove();
-		// WaddleStand.OnMove();
-		// WaddleStandL.OnMove();
-	}
-
-	void waddle::SetXY(int x_in, int y_in) {
-		x = x_in;
-		y = y_in;
 	}
 }
