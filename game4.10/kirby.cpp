@@ -141,6 +141,10 @@ namespace game_framework {
 		KirbyFlyR.AddBitmap(".\\res\\fly\\flyR1.bmp", RGB(255, 0, 0));
 		KirbyFlyR.AddBitmap(".\\res\\fly\\flyR2.bmp", RGB(255, 0, 0));
 		KirbyFlyR.AddBitmap(".\\res\\fly\\flyR3.bmp", RGB(255, 0, 0));
+		count = 3;
+		while (count-- > 0) {
+			KirbyFlyR.AddBitmap(".\\res\\fly\\flyR4.bmp", RGB(255, 0, 0));
+		}
 		KirbyFlyR.AddBitmap(".\\res\\fly\\flyR4.bmp", RGB(255, 0, 0));
 		KirbyFlyR.AddBitmap(".\\res\\fly\\flyR5.bmp", RGB(255, 0, 0));
 
@@ -159,7 +163,10 @@ namespace game_framework {
 		KirbyFlyL.AddBitmap(".\\res\\fly\\flyL1.bmp", RGB(255, 0, 0));
 		KirbyFlyL.AddBitmap(".\\res\\fly\\flyL2.bmp", RGB(255, 0, 0));
 		KirbyFlyL.AddBitmap(".\\res\\fly\\flyL3.bmp", RGB(255, 0, 0));
-		KirbyFlyL.AddBitmap(".\\res\\fly\\flyL4.bmp", RGB(255, 0, 0));
+		count = 3;
+		while (count-- > 0) {
+			KirbyFlyL.AddBitmap(".\\res\\fly\\flyL4.bmp", RGB(255, 0, 0));
+		}
 		KirbyFlyL.AddBitmap(".\\res\\fly\\flyL5.bmp", RGB(255, 0, 0));
 
 		// load flyingL
@@ -391,13 +398,11 @@ namespace game_framework {
 				InAir = false;
 				IsRising = true;
 				IsJumping = false;
+				IsFlying = false;
 				KirbyJumpR.Reset();
 				KirbyJumpL.Reset();
-				IsFlying = false;
-				// KirbyFlyR.Reset();
-				// KirbyFlyingR.Reset();
-				// KirbyFlyL.Reset();
-				// KirbyFlyingL.Reset();
+				KirbyFlyR.Reset();
+				KirbyFlyL.Reset();
 			}
 		}
 
@@ -481,7 +486,7 @@ namespace game_framework {
 				// case fly right
 				return 7;
 			}
-			else if (IsFlying) {
+			else if (IsFat && IsFlying) {
 				// case flying right
 				return 8;
 			}
@@ -518,7 +523,7 @@ namespace game_framework {
 				// case fly left
 				return 15;
 			}
-			else if (IsFlying) {
+			else if (IsFat && IsFlying) {
 				// case flying left
 				return 16;
 			}
