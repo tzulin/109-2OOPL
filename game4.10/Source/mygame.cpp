@@ -153,12 +153,91 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	Kirby.OnMove();										// Kirby OnMove
 	Waddle.OnMove();									// Waddle OnMove
+	WaddleDoo.OnMove();								    // WaddleDoo OnMove
+	if (!Kirby.IsAlive()) {
+		GotoGameState(GAME_STATE_OVER);
+	}
+	if (Waddle.GetHp() > 0) {
+		int* KirbyXy = Kirby.GetXy();
+		int* WaddleXy = Waddle.GetXy();
+		int x1 = KirbyXy[0], y1 = KirbyXy[1];
+		int x2 = x1 + Kirby.GetWeight();
+		int y2 = y1 + Kirby.GetHeight();
+		int wx1 = WaddleXy[0], wy1 = WaddleXy[1];
+		int wx2 = wx1 + Waddle.GetWeight();
+		int wy2 = wy1 + Waddle.GetHeight();
+		if (wx1 > x1 && wx1 < x2) {
+			if (wy1 > y1 && wy1 < y2) {
+				Kirby.SetHp(Kirby.GetHp() - 1);
+				Waddle.SetHp(Waddle.GetHp() - 1);
+			}
+		}else if (wx1 > x1 && wx1 < x2) {
+			if (wy2 > y1 && wy2 < y2) {
+				Kirby.SetHp(Kirby.GetHp() - 1);
+				Waddle.SetHp(Waddle.GetHp() - 1);
+			}
+		}else if (wx2 > x1 && wx2 < x2) {
+			if (wy1 > y1 && wy1 < y2) {
+				Kirby.SetHp(Kirby.GetHp() - 1);
+				Waddle.SetHp(Waddle.GetHp() - 1);
+			}
+		}else if (wx2 > x1 && wx2 < x2) {
+			if (wy2 > y1 && wy2 < y2) {
+				Kirby.SetHp(Kirby.GetHp() - 1);
+				Waddle.SetHp(Waddle.GetHp() - 1);
+			}
+		}
+		delete KirbyXy;
+		delete WaddleXy;
+	}
+	if (WaddleDoo.GetHp() > 0) {
+		int* KirbyXy = Kirby.GetXy();
+		int* WaddleDooXy = WaddleDoo.GetXy();
+		int x1 = KirbyXy[0], y1 = KirbyXy[1];
+		int x2 = x1 + Kirby.GetWeight();
+		int y2 = y1 + Kirby.GetHeight();
+		int wx1 = WaddleDooXy[0], wy1 = WaddleDooXy[1];
+		int wx2 = wx1 + WaddleDoo.GetWeight();
+		int wy2 = wy1 + WaddleDoo.GetHeight();
+		if (wx1 >= x1 && wx1 <= x2) {
+			if (wy1 > y1 && wy1 < y2) {
+				Kirby.SetHp(Kirby.GetHp() - 1);
+				WaddleDoo.SetHp(WaddleDoo.GetHp() - 1);
+			}
+		}else if (wx1 > x1 && wx1 < x2) {
+			if (wy2 > y1 && wy2 < y2) {
+				Kirby.SetHp(Kirby.GetHp() - 1);
+				WaddleDoo.SetHp(WaddleDoo.GetHp() - 1);
+			}
+		}else if (wx2 > x1 && wx2 < x2) {
+			if (wy1 > y1 && wy1 < y2) {
+				Kirby.SetHp(Kirby.GetHp() - 1);
+				WaddleDoo.SetHp(WaddleDoo.GetHp() - 1);
+			}
+		}else if (wx2 > x1 && wx2 < x2) {
+			if (wy2 > y1 && wy2 < y2) {
+				Kirby.SetHp(Kirby.GetHp() - 1);
+				WaddleDoo.SetHp(WaddleDoo.GetHp() - 1);
+			}
+		}
+		delete KirbyXy;
+		delete WaddleDooXy;
+	}
+	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
+	Map.LoadBitmap(".\\res\\map_example.bmp");			// map load and set
+	Map.SetTopLeft(0, 0);
+	kirbyHp.LoadBitmap(".\\res\\kirby_hpPic.bmp", RGB(236, 28, 36));
+	kirbyHp.SetTopLeft(0, SIZE_Y  - kirbyHp.Height());							// kirbyHp load and set
+	kirbyHpInt.LoadBitmap();
+	kirbyHpInt.SetDigits(2);
+	kirbyHpInt.SetTopLeft(kirbyHp.Width(), SIZE_Y - kirbyHp.Height() + 5);						// kirbyHpInt load and set
 	Kirby.LoadBitmap();									// Kirby LoadBitmap
 	Waddle.LoadBitmap();								// Waddle LoadBitmap
+	WaddleDoo.LoadBitmap();								// WaddleDoo LoadBitmap
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -169,6 +248,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_DOWN  = 0x28;	// keyboard下箭頭
 	const char KEY_ESC   = 0x1B;    // keyboard esc
 	const char KEY_C     = 0x43;	// keyboard C
+	const char KEY_W	 = 0x57;	// keyboard W
 	const char KEY_SPACE = 0x20;	// keyboard space
 
 	if (nChar == KEY_ESC) {
@@ -193,6 +273,11 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		Kirby.SetAttack(true);
 	}
 
+	if (nChar == KEY_W) {
+		Waddle.Reset();
+		WaddleDoo.Reset();
+	}
+
 	if (nChar == KEY_SPACE) {
 		Kirby.SetJump(true);
 	}
@@ -210,6 +295,7 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_DOWN  = 0x28;	// keyboard下箭頭
 	const char KEY_ESC   = 0x1B;	// keyboard esc
 	const char KEY_C     = 0x43;	// keyboard C
+	const char KEY_O	 = 0x57;	// keyboard W
 	const char KEY_SPACE = 0x20;	// keyboard space
 
 	if (nChar == KEY_LEFT) {
@@ -251,7 +337,15 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 
 void CGameStateRun::OnShow()
 {
-	Waddle.OnShow();								// Waddle OnShow
+	Map.ShowBitmap();
+	kirbyHpInt.ShowBitmap();						// hp int show
+	if (Waddle.GetHp() > 0) {
+		Waddle.OnShow();								// Waddle OnShow
+	}
+	if (WaddleDoo.GetHp() > 0) {
+		WaddleDoo.OnShow();								// WaddleDoo onshow
+	}
 	Kirby.OnShow();									// Kirby OnShow
+	kirbyHp.ShowBitmap();							// kibyHp show						
 }
 }//namespace end

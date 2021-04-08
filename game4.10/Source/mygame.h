@@ -87,6 +87,10 @@ namespace game_framework {
 	private:
 		kirby Kirby;
 		waddle Waddle;
+		waddleDoo WaddleDoo;
+		CMovingBitmap kirbyHp;
+		CMovingBitmap Map;
+		CInteger kirbyHpInt;
  	};
 
 	/////////////////////////////////////////////////////////////////////////////

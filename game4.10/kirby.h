@@ -20,8 +20,14 @@ namespace game_framework {
 		void SetAttack(bool input);
 		void SetJump(bool input);
 		void SetFly(bool input);
+		void SetHp(int input);
 
 		int GetCase();
+		int GetHp();
+		int* GetXy();
+		int GetWeight();
+		int GetHeight();
+		bool IsAlive();
 
 	private:
 		CAnimation KirbyMovingL;
@@ -42,7 +48,7 @@ namespace game_framework {
 		CMovingBitmap KirbyDownR;
 		CMovingBitmap KirbyDownL;
 
-		int x, y;
+		int x, y, hp;
 		const int ImgW = 60, ImgH = 60;
 		int floor;			// 地板y座標
 		int init_velocity;	// 初始速度

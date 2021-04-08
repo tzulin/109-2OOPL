@@ -12,12 +12,14 @@ namespace game_framework {
 	{
 		// kirby constructor
 		const int origin_x = frame_of_test;
-		const int origin_y = SIZE_Y - frame_of_test - ImgH;
+		const int origin_y = SIZE_Y - 60 - ImgH;
 		const int INIT_VELOCITY = 18;
+		const int INIT_HP = 5;
 		init_velocity = INIT_VELOCITY;
+		hp = INIT_HP;
 		x = origin_x;
 		y = origin_y;
-		floor = SIZE_Y;
+		floor = SIZE_Y - 60;
 		IsMovingL = false;
 		IsMovingR = false;
 		IsFacingR = true;
@@ -212,7 +214,7 @@ namespace game_framework {
 
 		// case scream right
 		case 4:
-			KirbyScreamR.SetDelayCount(5);
+			KirbyScreamR.SetDelayCount(3);
 			KirbyScreamR.SetTopLeft(x, y + ImgH - KirbyScreamR.Height());
 			KirbyScreamR.OnMove();
 			KirbyScreamR.OnShow();
@@ -286,7 +288,7 @@ namespace game_framework {
 
 		// case scream left 
 		case 12:
-			KirbyScreamL.SetDelayCount(5);
+			KirbyScreamL.SetDelayCount(3);
 			KirbyScreamL.SetTopLeft(x, y + ImgH - KirbyScreamL.Height());
 			KirbyScreamL.OnMove();
 			KirbyScreamL.OnShow();
@@ -337,7 +339,7 @@ namespace game_framework {
 	void kirby::OnMove()
 	{
 		// set moving XY
-		const int length = 2;
+		const int length = 4;
 
 		// set moving XY and frame of test 
 		if (IsMovingL && !IsDown && !IsAttack && x > frame_of_test) {
@@ -462,6 +464,10 @@ namespace game_framework {
 		FlyUp = input;
 	}
 
+	void kirby::SetHp(int input) {
+		hp = input;
+	}
+
 	int kirby::GetCase() {
 		if (IsFacingR) {
 			if (IsJumping) {
@@ -535,6 +541,31 @@ namespace game_framework {
 				// case standing left
 				return 14;
 			}
+		}
+	}
+
+	int kirby::GetHp() {
+		return hp;
+	}
+
+	int* kirby::GetXy() {
+		return new int[2]{ x, y };
+	}
+
+	int kirby::GetWeight() {
+		return ImgW;
+	}
+
+	int kirby::GetHeight() {
+		return ImgH;
+	}
+
+	bool kirby::IsAlive() {
+		if (hp > 0) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }

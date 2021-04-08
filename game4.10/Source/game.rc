@@ -178,6 +178,28 @@ IDB_SCREAMR4            BITMAP                  "..\\RES\\scream\\screamR4.bmp"
 
 IDB_SCREAMR5            BITMAP                  "..\\RES\\scream\\screamR5.bmp"
 
+IDB_0                   BITMAP                  "..\\RES\\bmp0.bmp"
+
+IDB_1                   BITMAP                  "..\\RES\\bmp1.bmp"
+
+IDB_2                   BITMAP                  "..\\RES\\bmp2.bmp"
+
+IDB_3                   BITMAP                  "..\\RES\\bmp3.bmp"
+
+IDB_4                   BITMAP                  "..\\RES\\bmp4.bmp"
+
+IDB_5                   BITMAP                  "..\\RES\\bmp5.bmp"
+
+IDB_6                   BITMAP                  "..\\RES\\bmp6.bmp"
+
+IDB_7                   BITMAP                  "..\\RES\\bmp7.bmp"
+
+IDB_8                   BITMAP                  "..\\RES\\bmp8.bmp"
+
+IDB_9                   BITMAP                  "..\\RES\\bmp9.bmp"
+
+IDB_MINUS               BITMAP                  "..\\RES\\bmp10.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

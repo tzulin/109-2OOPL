@@ -408,6 +408,7 @@
     <Image Include="res\walkL8.bmp" />
     <Image Include="res\walkL9.bmp" />
     <Image Include="res\walkR9.bmp" />
+    <Image Include="res\walk\bitmap14.bmp" />
     <Image Include="res\walk\walkL1.bmp" />
     <Image Include="res\walk\walkL10.bmp" />
     <Image Include="res\walk\walkL2.bmp" />

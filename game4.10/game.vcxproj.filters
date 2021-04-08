@@ -486,5 +486,8 @@
     <Image Include="RES\down\downR1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\walk\bitmap14.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

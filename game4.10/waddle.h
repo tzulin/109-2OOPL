@@ -1,6 +1,6 @@
 namespace game_framework {
 /////////////////////////////////////////////////////////////////////////////
-// class waddleDee
+// class waddleDee and waddleDoo
 //
 /////////////////////////////////////////////////////////////////////////////
 
@@ -11,6 +11,12 @@ namespace game_framework {
 		void LoadBitmap();
 		void OnMove();
 		void OnShow();
+		int* GetXy();
+		int GetHp();
+		int GetWeight();
+		int GetHeight();
+		void SetHp(int input);
+		void Reset();
 
 	private:
 		CAnimation WaddleMovingL;
@@ -21,7 +27,39 @@ namespace game_framework {
 		// CMovingBitmap KirbyDownR;
 		// CMovingBitmap KirbyDownL;
 
-		int x, y;
+		int x, y, hp;
+		const int ImgW = 64, ImgH = 60;
+		int floor;			// 地板y座標
+		bool IsMovingL;
+		bool IsMovingR;
+		bool IsFacingR;
+	};
+
+
+	class waddleDoo {
+	public:
+		waddleDoo();
+		~waddleDoo();
+		void LoadBitmap();
+		void OnMove();
+		void OnShow();
+		int* GetXy();
+		int GetHp();
+		int GetWeight();
+		int GetHeight();
+		void SetHp(int input);
+		void Reset();
+
+	private:
+		CAnimation WaddleDooMovingL;
+		CAnimation WaddleDooMovingR;
+		CAnimation WaddleDooStand;
+		CAnimation WaddleDooStandL;
+
+		// CMovingBitmap KirbyDownR;
+		// CMovingBitmap KirbyDownL;
+
+		int x, y, hp;
 		const int ImgW = 64, ImgH = 60;
 		int floor;			// 地板y座標
 		bool IsMovingL;
