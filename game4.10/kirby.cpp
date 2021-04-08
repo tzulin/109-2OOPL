@@ -87,21 +87,17 @@ namespace game_framework {
 		}
 
 		// load jump right
-		for (int i = 0; i < 5; i++)
+		char *jump_right[10] = { ".\\res\\jump\\jumpR1.bmp", ".\\res\\jump\\jumpR2.bmp", ".\\res\\jump\\jumpR3.bmp", ".\\res\\jump\\jumpR4.bmp", ".\\res\\jump\\jumpR5.bmp", ".\\res\\jump\\jumpR6.bmp", ".\\res\\jump\\jumpR7.bmp", ".\\res\\jump\\jumpR8.bmp", ".\\res\\jump\\jumpR9.bmp", ".\\res\\jump\\jumpR10.bmp" };
+		for (int i = 0; i < 10; i++)
 		{
-			KirbyJumpR.AddBitmap(".\\res\\jump\\jumpR1.bmp", RGB(255, 0, 0));
+			KirbyJumpR.AddBitmap(jump_right[i], RGB(255, 0, 0));
 		}
-		// 空中翻滾 先不要
-		// char *jump_right[10] = { ".\\res\\jump\\jumpR1.bmp", ".\\res\\jump\\jumpR2.bmp", ".\\res\\jump\\jumpR3.bmp", ".\\res\\jump\\jumpR4.bmp", ".\\res\\jump\\jumpR5.bmp", ".\\res\\jump\\jumpR6.bmp", ".\\res\\jump\\jumpR7.bmp", ".\\res\\jump\\jumpR8.bmp", ".\\res\\jump\\jumpR9.bmp", ".\\res\\jump\\jumpR10.bmp"};
-		// for (int i = 0; i < 10; i++)
-		// {
-		// 	KirbyJumpR.AddBitmap(jump_right[i], RGB(255, 0, 0));
-		// }
 
 		// load jump left
-		for (int i = 0; i < 5; i++)
+		char *jump_left[10] = { ".\\res\\jump\\jumpL1.bmp", ".\\res\\jump\\jumpL2.bmp", ".\\res\\jump\\jumpL3.bmp", ".\\res\\jump\\jumpL4.bmp", ".\\res\\jump\\jumpL5.bmp", ".\\res\\jump\\jumpL6.bmp", ".\\res\\jump\\jumpL7.bmp", ".\\res\\jump\\jumpL8.bmp", ".\\res\\jump\\jumpL9.bmp", ".\\res\\jump\\jumpL10.bmp" };
+		for (int i = 0; i < 10; i++)
 		{
-			KirbyJumpL.AddBitmap(".\\res\\jump\\jumpL1.bmp", RGB(255, 0, 0));
+			KirbyJumpL.AddBitmap(jump_left[i], RGB(255, 0, 0));
 		}
 
 		// load scream right and left
@@ -143,7 +139,9 @@ namespace game_framework {
 		switch (GetCase()) {
 		// case jump up right
 		case 1:
+			KirbyJumpR.SetDelayCount(4);
 			KirbyJumpR.SetTopLeft(x, y);
+			KirbyJumpR.OnMove();
 			KirbyJumpR.OnShow();
 			break;
 
@@ -193,7 +191,9 @@ namespace game_framework {
 
 		// case jump up left
 		case 7:
+			KirbyJumpL.SetDelayCount(4);
 			KirbyJumpL.SetTopLeft(x, y);
+			KirbyJumpL.OnMove();
 			KirbyJumpL.OnShow();
 			break;
 
@@ -299,7 +299,6 @@ namespace game_framework {
 		}
 
 		// animation OnMove
-		KirbyJumpR.OnMove();
 		KirbyMovingL.OnMove();
 		KirbyMovingR.OnMove();
 		KirbyStand.OnMove();
