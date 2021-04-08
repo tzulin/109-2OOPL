@@ -152,11 +152,13 @@ void CGameStateRun::OnBeginState()
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	Kirby.OnMove();										// Kirby OnMove
+	Waddle.OnMove();									// Waddle OnMove
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
 	Kirby.LoadBitmap();									// Kirby LoadBitmap
+	Waddle.LoadBitmap();								// Waddle LoadBitmap
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -249,6 +251,7 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 
 void CGameStateRun::OnShow()
 {
+	Waddle.OnShow();								// Waddle OnShow
 	Kirby.OnShow();									// Kirby OnShow
 }
 }//namespace end

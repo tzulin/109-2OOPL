@@ -123,6 +123,9 @@
     <ClCompile Include="kirby.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="waddle.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -153,6 +156,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="kirby.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="waddle.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

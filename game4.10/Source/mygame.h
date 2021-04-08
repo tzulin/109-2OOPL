@@ -39,6 +39,7 @@
 */
 
 #include "../../game4.10/kirby.h"
+#include "../../game4.10/waddle.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -85,6 +86,7 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		kirby Kirby;
+		waddle Waddle;
  	};
 
 	/////////////////////////////////////////////////////////////////////////////
