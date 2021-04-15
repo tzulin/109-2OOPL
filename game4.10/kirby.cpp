@@ -14,11 +14,14 @@ namespace game_framework {
 		const int origin_x = frame_of_test;
 		const int origin_y = SIZE_Y - 60 - ImgH;
 		const int INIT_VELOCITY = 18;
+		const int FLY_VELOCITY = 9;
 		const int INIT_HP = 5;
 		init_velocity = INIT_VELOCITY;
+		fly_velocity = FLY_VELOCITY;
 		hp = INIT_HP;
 		x = origin_x;
 		y = origin_y;
+		sky_top = 0;
 		floor = SIZE_Y - 60;
 		IsMovingL = false;
 		IsMovingR = false;
@@ -367,7 +370,10 @@ namespace game_framework {
 		}
 
 		// set jump and fly
-		if (IsRising && InAir) {
+		if (IsRising && InAir && !IsAttack && !IsDown) {
+			if (y < sky_top) {		// ¸I¨ì¤ÑªáªO
+				IsRising = false;
+			}
 			if (IsJumping) {
 				if (velocity > 0) {
 					y -= velocity;
@@ -382,17 +388,23 @@ namespace game_framework {
 				if (velocity > 0) {
 					y -= velocity;
 					velocity--;
-					IsFlying = true;
 				}
 				else {
+					IsRising = false;
 					FlyUp = false;
+					velocity = fly_velocity;
 				}
 			}
 		}
 		else {
 			if (y < floor - frame_of_test - ImgH) {
-				y += velocity;
-				velocity++;
+				if (IsJumping || !IsFlying) {
+					y += velocity;
+					velocity++;
+				}
+				else if (IsFlying) {
+					y++;
+				}
 			}
 			else {
 				y = floor - frame_of_test - ImgH;
@@ -400,7 +412,6 @@ namespace game_framework {
 				InAir = false;
 				IsRising = true;
 				IsJumping = false;
-				IsFlying = false;
 				KirbyJumpR.Reset();
 				KirbyJumpL.Reset();
 				KirbyFlyR.Reset();
@@ -442,26 +453,46 @@ namespace game_framework {
 	}
 
 	void kirby::SetDown(bool input) {
-		IsDown = input;
+		if (!IsAttack && !InAir) {
+			IsDown = input;
+		}
 	}
 
 	void kirby::SetAttack(bool input) {
 		IsAttack = input;
-		if (IsFat && InAir) {
+		if (IsFlying && InAir) {
 			IsFat = false;
 			InAir = false;
+			FlyUp = false;
+			IsFlying = false;
+			IsRising = false;
 		}
 	}
 
 	void kirby::SetJump(bool input) {
-		InAir = input;
-		IsJumping = input;
+		if (IsJumping) {
+			SetFly(true);
+		}
+		if (!IsFlying) {
+			InAir = input;
+			IsJumping = input;
+		}
+		else {
+			SetFly(true);
+		}
 	}
 
 	void kirby::SetFly(bool input) {
-		InAir = input;
-		IsFat = input;
-		FlyUp = input;
+		if (!IsAttack && !IsDown) {
+			InAir = input;
+			IsFat = input;
+			FlyUp = input;
+			IsRising = input;
+			IsFlying = input;
+		}
+		if (IsJumping) {
+			IsJumping = false;
+		}
 	}
 
 	void kirby::SetHp(int input) {
@@ -470,11 +501,11 @@ namespace game_framework {
 
 	int kirby::GetCase() {
 		if (IsFacingR) {
-			if (IsJumping) {
+			if (IsJumping && !IsFat && !IsAttack) {
 				// case jump up right
 				return 1;
 			}
-			else if (IsDown) {
+			else if (IsDown && !IsJumping && !IsFlying) {
 				if (IsAttack) {
 					// case down attack right
 					return 2;
@@ -484,15 +515,15 @@ namespace game_framework {
 					return 3;
 				}
 			}
-			else if (IsAttack) {
+			else if (IsAttack && !IsJumping && !IsFlying) {
 				// case scream right
 				return 4;
 			}
-			else if (FlyUp) {
-				// case fly right
+			else if (FlyUp && !IsFat && !IsAttack && !IsDown) {
+				// case fly up right
 				return 7;
 			}
-			else if (IsFat && IsFlying) {
+			else if (IsFat && IsFlying && !IsAttack && !IsDown) {
 				// case flying right
 				return 8;
 			}
@@ -507,11 +538,11 @@ namespace game_framework {
 		}
 		else {
 			// facing left
-			if (IsJumping) {
+			if (IsJumping && !IsFat && !IsAttack) {
 				// case jump up left
 				return 9;
 			}
-			else if (IsDown) {
+			else if (IsDown && !IsJumping && !IsFlying) {
 				if (IsAttack) {
 					// case down attack left
 					return 10;
@@ -521,15 +552,15 @@ namespace game_framework {
 					return 11;
 				}
 			}
-			else if (IsAttack) {
+			else if (IsAttack && !IsJumping && !IsFlying) {
 				// case scream left 
 				return 12;
 			}
-			else if (FlyUp) {
-				// case fly left
+			else if (FlyUp && !IsFat && !IsAttack && !IsDown) {
+				// case fly up left
 				return 15;
 			}
-			else if (IsFat && IsFlying) {
+			else if (IsFat && IsFlying && !IsAttack && !IsDown) {
 				// case flying left
 				return 16;
 			}

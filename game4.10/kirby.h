@@ -50,8 +50,10 @@ namespace game_framework {
 
 		int x, y, hp;
 		const int ImgW = 60, ImgH = 60;
+		int sky_top;		// 天頂y座標
 		int floor;			// 地板y座標
 		int init_velocity;	// 初始速度
+		int fly_velocity;	// kirby inAir 時的飛行速度
 		int velocity;		// 目前速度
 		bool IsRising;		// true表示上升
 		bool IsMovingL;
