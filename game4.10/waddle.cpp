@@ -28,7 +28,7 @@ namespace game_framework {
 	}
 
 	int* waddle::GetXy() {
-		return new int[2]{ x, y };
+		return new int[4]{ x, y, x+ImgW, y+ImgH};
 	}
 
 	int waddle::GetHp() {
@@ -138,7 +138,7 @@ namespace game_framework {
 	}
 
 	int* waddleDoo::GetXy() {
-		return new int[2]{ x, y };
+		return new int[4]{ x, y, x + ImgW, y + ImgH };
 	}
 
 	int waddleDoo::GetHp() {

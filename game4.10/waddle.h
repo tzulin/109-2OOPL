@@ -24,9 +24,6 @@ namespace game_framework {
 		CAnimation WaddleStand;
 		CAnimation WaddleStandL;
 
-		// CMovingBitmap KirbyDownR;
-		// CMovingBitmap KirbyDownL;
-
 		int x, y, hp;
 		const int ImgW = 64, ImgH = 60;
 		int floor;			// ¦aªOy®y¼Ð
@@ -55,9 +52,6 @@ namespace game_framework {
 		CAnimation WaddleDooMovingR;
 		CAnimation WaddleDooStand;
 		CAnimation WaddleDooStandL;
-
-		// CMovingBitmap KirbyDownR;
-		// CMovingBitmap KirbyDownL;
 
 		int x, y, hp;
 		const int ImgW = 64, ImgH = 60;
