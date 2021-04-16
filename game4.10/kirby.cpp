@@ -576,7 +576,7 @@ namespace game_framework {
 	}
 
 	int* kirby::GetXy() {
-		return new int[2]{ x, y };
+		return new int[4]{ x, y , x+ImgW, y+ImgH };
 	}
 
 	int kirby::GetWidth() {

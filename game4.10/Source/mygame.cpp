@@ -160,29 +160,22 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	if (Waddle.GetHp() > 0) {
 		int* KirbyXy = Kirby.GetXy();
 		int* WaddleXy = Waddle.GetXy();
-		int x1 = KirbyXy[0], y1 = KirbyXy[1];
-		int x2 = x1 + Kirby.GetWidth();
-		int y2 = y1 + Kirby.GetHeight();
-		int wx1 = WaddleXy[0], wy1 = WaddleXy[1];
-		int wx2 = wx1 + Waddle.GetWeight();
-		int wy2 = wy1 + Waddle.GetHeight();
-		if (wx1 > x1 && wx1 < x2) {
-			if (wy1 > y1 && wy1 < y2) {
+
+		if (WaddleXy[0] > KirbyXy[0] && WaddleXy[0] < KirbyXy[2]) {					// kirby meet waddle from left
+			if (WaddleXy[1] > KirbyXy[1] && WaddleXy[1] < KirbyXy[3]) {
 				Kirby.SetHp(Kirby.GetHp() - 1);
 				Waddle.SetHp(Waddle.GetHp() - 1);
 			}
-		}else if (wx1 > x1 && wx1 < x2) {
-			if (wy2 > y1 && wy2 < y2) {
+			else if (WaddleXy[3] > KirbyXy[1] && WaddleXy[3] < KirbyXy[3]) {
 				Kirby.SetHp(Kirby.GetHp() - 1);
 				Waddle.SetHp(Waddle.GetHp() - 1);
 			}
-		}else if (wx2 > x1 && wx2 < x2) {
-			if (wy1 > y1 && wy1 < y2) {
+		}else if (WaddleXy[2] > KirbyXy[0] && WaddleXy[2] < KirbyXy[2]) {			// kirby meet waddle from right
+			if (WaddleXy[1] > KirbyXy[1] && WaddleXy[1] < KirbyXy[3]) {
 				Kirby.SetHp(Kirby.GetHp() - 1);
 				Waddle.SetHp(Waddle.GetHp() - 1);
 			}
-		}else if (wx2 > x1 && wx2 < x2) {
-			if (wy2 > y1 && wy2 < y2) {
+			else if (WaddleXy[3] > KirbyXy[1] && WaddleXy[3] < KirbyXy[3]) {
 				Kirby.SetHp(Kirby.GetHp() - 1);
 				Waddle.SetHp(Waddle.GetHp() - 1);
 			}
@@ -193,29 +186,24 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	if (WaddleDoo.GetHp() > 0) {
 		int* KirbyXy = Kirby.GetXy();
 		int* WaddleDooXy = WaddleDoo.GetXy();
-		int x1 = KirbyXy[0], y1 = KirbyXy[1];
-		int x2 = x1 + Kirby.GetWidth();
-		int y2 = y1 + Kirby.GetHeight();
-		int wx1 = WaddleDooXy[0], wy1 = WaddleDooXy[1];
-		int wx2 = wx1 + WaddleDoo.GetWeight();
-		int wy2 = wy1 + WaddleDoo.GetHeight();
-		if (wx1 >= x1 && wx1 <= x2) {
-			if (wy1 > y1 && wy1 < y2) {
+
+		if (WaddleDooXy[0] >= KirbyXy[0] && WaddleDooXy[0] <= KirbyXy[2]) {
+			if (WaddleDooXy[1] > KirbyXy[1] && WaddleDooXy[1] < KirbyXy[3]) {
 				Kirby.SetHp(Kirby.GetHp() - 1);
 				WaddleDoo.SetHp(WaddleDoo.GetHp() - 1);
 			}
-		}else if (wx1 > x1 && wx1 < x2) {
-			if (wy2 > y1 && wy2 < y2) {
+		}else if (WaddleDooXy[0] > KirbyXy[0] && WaddleDooXy[0] < KirbyXy[2]) {
+			if (WaddleDooXy[3] > KirbyXy[1] && WaddleDooXy[3] < KirbyXy[3]) {
 				Kirby.SetHp(Kirby.GetHp() - 1);
 				WaddleDoo.SetHp(WaddleDoo.GetHp() - 1);
 			}
-		}else if (wx2 > x1 && wx2 < x2) {
-			if (wy1 > y1 && wy1 < y2) {
+		}else if (WaddleDooXy[2] > KirbyXy[0] && WaddleDooXy[2] < KirbyXy[2]) {
+			if (WaddleDooXy[1] > KirbyXy[1] && WaddleDooXy[1] < KirbyXy[3]) {
 				Kirby.SetHp(Kirby.GetHp() - 1);
 				WaddleDoo.SetHp(WaddleDoo.GetHp() - 1);
 			}
-		}else if (wx2 > x1 && wx2 < x2) {
-			if (wy2 > y1 && wy2 < y2) {
+		}else if (WaddleDooXy[2] > KirbyXy[0] && WaddleDooXy[2] < KirbyXy[2]) {
+			if (WaddleDooXy[3] > KirbyXy[1] && WaddleDooXy[3] < KirbyXy[3]) {
 				Kirby.SetHp(Kirby.GetHp() - 1);
 				WaddleDoo.SetHp(WaddleDoo.GetHp() - 1);
 			}
