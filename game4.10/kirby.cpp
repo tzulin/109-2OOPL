@@ -460,12 +460,8 @@ namespace game_framework {
 
 	void kirby::SetAttack(bool input) {
 		IsAttack = input;
-		if (IsFlying && InAir) {
-			IsFat = false;
-			InAir = false;
-			FlyUp = false;
-			IsFlying = false;
-			IsRising = false;
+		if (IsFlying) {
+			SetFly(false);
 		}
 	}
 
@@ -515,7 +511,7 @@ namespace game_framework {
 					return 3;
 				}
 			}
-			else if (IsAttack && !IsJumping && !IsFlying) {
+			else if (IsAttack && !IsJumping) {
 				// case scream right
 				return 4;
 			}
@@ -552,7 +548,7 @@ namespace game_framework {
 					return 11;
 				}
 			}
-			else if (IsAttack && !IsJumping && !IsFlying) {
+			else if (IsAttack && !IsJumping) {
 				// case scream left 
 				return 12;
 			}
