@@ -25,7 +25,7 @@ namespace game_framework {
 		int GetCase();
 		int GetHp();
 		int* GetXy();
-		int GetWeight();
+		int GetWidth();
 		int GetHeight();
 		bool IsAlive();
 

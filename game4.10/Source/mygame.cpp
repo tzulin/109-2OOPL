@@ -161,7 +161,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		int* KirbyXy = Kirby.GetXy();
 		int* WaddleXy = Waddle.GetXy();
 		int x1 = KirbyXy[0], y1 = KirbyXy[1];
-		int x2 = x1 + Kirby.GetWeight();
+		int x2 = x1 + Kirby.GetWidth();
 		int y2 = y1 + Kirby.GetHeight();
 		int wx1 = WaddleXy[0], wy1 = WaddleXy[1];
 		int wx2 = wx1 + Waddle.GetWeight();
@@ -194,7 +194,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		int* KirbyXy = Kirby.GetXy();
 		int* WaddleDooXy = WaddleDoo.GetXy();
 		int x1 = KirbyXy[0], y1 = KirbyXy[1];
-		int x2 = x1 + Kirby.GetWeight();
+		int x2 = x1 + Kirby.GetWidth();
 		int y2 = y1 + Kirby.GetHeight();
 		int wx1 = WaddleDooXy[0], wy1 = WaddleDooXy[1];
 		int wx2 = wx1 + WaddleDoo.GetWeight();

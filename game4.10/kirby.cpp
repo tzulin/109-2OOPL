@@ -579,7 +579,7 @@ namespace game_framework {
 		return new int[2]{ x, y };
 	}
 
-	int kirby::GetWeight() {
+	int kirby::GetWidth() {
 		return ImgW;
 	}
 
