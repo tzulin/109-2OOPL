@@ -339,6 +339,6 @@ void CGameStateRun::OnShow()
 	}
 	Kirby.OnShow();									// Kirby OnShow
 	kirbyHp.ShowBitmap();							// kibyHp show	
-	StarBlock.onShow();								// StarBlock onShow
+	//StarBlock.onShow();								// StarBlock onShow
 }
 }//namespace end
