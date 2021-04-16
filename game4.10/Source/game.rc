@@ -200,6 +200,8 @@ IDB_9                   BITMAP                  "..\\RES\\bmp9.bmp"
 
 IDB_MINUS               BITMAP                  "..\\RES\\bmp10.bmp"
 
+IDB_STARBLOCK           BITMAP                  "..\\RES\\starblock.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

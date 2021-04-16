@@ -238,6 +238,10 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	Kirby.LoadBitmap();									// Kirby LoadBitmap
 	Waddle.LoadBitmap();								// Waddle LoadBitmap
 	WaddleDoo.LoadBitmap();								// WaddleDoo LoadBitmap
+	StarBlock.LoadBitmap();								// StarBlock LoadBitmap setTopLeft
+	int* temp = StarBlock.getHw();
+	StarBlock.setXY(10, SIZE_Y - 60 - temp[0]);
+	delete temp;
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -346,6 +350,7 @@ void CGameStateRun::OnShow()
 		WaddleDoo.OnShow();								// WaddleDoo onshow
 	}
 	Kirby.OnShow();									// Kirby OnShow
-	kirbyHp.ShowBitmap();							// kibyHp show						
+	kirbyHp.ShowBitmap();							// kibyHp show	
+	StarBlock.onShow();								// StarBlock onShow
 }
 }//namespace end
