@@ -154,7 +154,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	Kirby.OnMove();										// Kirby OnMove
 	Waddle.OnMove();									// Waddle OnMove
 	WaddleDoo.OnMove();								    // WaddleDoo OnMove
-	if (!Kirby.IsAlive()) {
+	if (!Kirby.IsAlive()) {								// Kirby dead
 		GotoGameState(GAME_STATE_OVER);
 	}
 	if (Waddle.GetHp() > 0) {
@@ -187,8 +187,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				Waddle.SetHp(Waddle.GetHp() - 1);
 			}
 		}
-		delete KirbyXy;
-		delete WaddleXy;
+		delete [] KirbyXy;
+		delete [] WaddleXy;
 	}
 	if (WaddleDoo.GetHp() > 0) {
 		int* KirbyXy = Kirby.GetXy();
@@ -220,8 +220,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				WaddleDoo.SetHp(WaddleDoo.GetHp() - 1);
 			}
 		}
-		delete KirbyXy;
-		delete WaddleDooXy;
+		delete [] KirbyXy;
+		delete [] WaddleDooXy;
 	}
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
 }
