@@ -14,10 +14,12 @@ namespace game_framework {
 		const int origin_x = frame_of_test;
 		const int origin_y = SIZE_Y - 60 - ImgH;
 		const int INIT_VELOCITY = 18;
-		const int FLY_VELOCITY = 9;
+		const int INIT_FLY_VELOCITY = 9;
 		const int INIT_HP = 5;
 		init_velocity = INIT_VELOCITY;
-		fly_velocity = FLY_VELOCITY;
+		velocity = INIT_VELOCITY;
+		init_fly_velocity = INIT_FLY_VELOCITY;
+		fly_velocity = INIT_FLY_VELOCITY;
 		hp = INIT_HP;
 		x = origin_x;
 		y = origin_y;
@@ -385,18 +387,18 @@ namespace game_framework {
 				}
 			}
 			else if (FlyUp && IsFat) {
-				if (velocity > 0) {
-					y -= velocity;
-					velocity--;
+				if (fly_velocity > 0) {
+					y -= fly_velocity;
+					fly_velocity--;
 				}
 				else {
 					IsRising = false;
 					FlyUp = false;
-					velocity = fly_velocity;
+					fly_velocity = init_fly_velocity;
 				}
 			}
 		}
-		else {
+		else {											// falling
 			if (y < floor - frame_of_test - ImgH) {
 				if (IsJumping || !IsFlying) {
 					y += velocity;

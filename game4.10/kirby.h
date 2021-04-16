@@ -21,6 +21,7 @@ namespace game_framework {
 		void SetJump(bool input);
 		void SetFly(bool input);
 		void SetHp(int input);
+		// void MeetEnemy(enemy e);
 
 		int GetCase();
 		int GetHp();
@@ -53,8 +54,9 @@ namespace game_framework {
 		int sky_top;		// 天頂y座標
 		int floor;			// 地板y座標
 		int init_velocity;	// 初始速度
-		int fly_velocity;	// kirby inAir 時的飛行速度
 		int velocity;		// 目前速度
+		int init_fly_velocity;	// 初始飛行速度
+		int fly_velocity;	// kirby inAir 時的飛行速度
 		bool IsRising;		// true表示上升
 		bool IsMovingL;
 		bool IsMovingR;
