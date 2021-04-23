@@ -1,5 +1,6 @@
 
 #include "../../game4.10/kirby.h"
+// #include "../../game4.10/enemy.h"
 #include "../../game4.10/waddle.h"
 #include "../../game4.10/things.h"
 
@@ -54,6 +55,7 @@ namespace game_framework {
 		CMovingBitmap Map;
 		CInteger kirbyHpInt;
 		starBlock StarBlock;
+		int temp_floor = 60;
  	};
 
 	/////////////////////////////////////////////////////////////////////////////

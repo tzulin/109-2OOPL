@@ -8,16 +8,17 @@
 
 namespace game_framework {
 	const int frame_of_test = 5;
+	const int temp_floor = 60;
 	waddle::waddle()
 	{
 		// waddle constructor
 		const int origin_x = (SIZE_X - ImgW - frame_of_test) / 2;
-		const int origin_y = SIZE_Y - 60 - ImgH;
+		const int origin_y = SIZE_Y - temp_floor - ImgH;
 		const int INIT_HP = 0;
 		hp = INIT_HP;
 		x = origin_x;
 		y = origin_y;
-		floor = SIZE_Y - 60;
+		floor = SIZE_Y - temp_floor;
 		IsMovingL = true;
 		IsMovingR = false;
 		IsFacingR = false;
@@ -28,7 +29,7 @@ namespace game_framework {
 	}
 
 	int* waddle::GetXy() {
-		return new int[2]{ x, y };
+		return new int[4]{ x, y, x+ImgW, y+ImgH};
 	}
 
 	int waddle::GetHp() {
@@ -49,7 +50,7 @@ namespace game_framework {
 
 	void waddle::Reset() {
 		const int origin_x = (SIZE_X - ImgW - frame_of_test) / 2;
-		const int origin_y = SIZE_Y - 60 - ImgH;
+		const int origin_y = SIZE_Y - temp_floor - ImgH;
 		x = origin_x;
 		y = origin_y;
 		hp = 1;
@@ -122,12 +123,12 @@ namespace game_framework {
 	{
 		// waddle constructor
 		const int origin_x = SIZE_X - ImgW - frame_of_test;
-		const int origin_y = SIZE_Y - 60 - ImgH;
+		const int origin_y = SIZE_Y - temp_floor  - ImgH;
 		const int INIT_HP = 0;
 		hp = INIT_HP;
 		x = origin_x;
 		y = origin_y;
-		floor = SIZE_Y - 60;
+		floor = SIZE_Y - temp_floor;
 		IsMovingL = true;
 		IsMovingR = false;
 		IsFacingR = false;
@@ -138,7 +139,7 @@ namespace game_framework {
 	}
 
 	int* waddleDoo::GetXy() {
-		return new int[2]{ x, y };
+		return new int[4]{ x, y, x + ImgW, y + ImgH };
 	}
 
 	int waddleDoo::GetHp() {
@@ -159,7 +160,7 @@ namespace game_framework {
 
 	void waddleDoo::Reset() {
 		const int origin_x = SIZE_X - ImgW - frame_of_test;
-		const int origin_y = SIZE_Y - 60 - ImgH;
+		const int origin_y = SIZE_Y - temp_floor - ImgH;
 		x = origin_x;
 		y = origin_y;
 		hp = 1;

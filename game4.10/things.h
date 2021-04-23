@@ -2,17 +2,23 @@ namespace game_framework {
 	class starBlock {
 	public:
 		void LoadBitmap();
-		void onShow();
-		void setXY(int, int);
+		void OnShow();
+		void SetShow(bool);
+		void SetXY(int, int);
+		starBlock();
+		int* GetHw();
+		int* GetXy();
+		bool GetShow();
 	private:
 		CMovingBitmap starBlockPic;
 		int x, y;
+		bool IsShow;
 	};
 
 	class blankBlock {
 	public:
-		void setXY(int, int);
-		void setHW(int, int);
+		void SetXY(int, int);
+		void SetHW(int, int);
 	private:
 		int x, y;
 		int height, width;

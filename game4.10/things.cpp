@@ -7,26 +7,47 @@
 #include "things.h"
 
 namespace game_framework {
+
+	starBlock::starBlock(){
+		IsShow = true;
+	}
+
 	void starBlock::LoadBitmap() {
 		starBlockPic.LoadBitmap(IDB_STARBLOCK);
 	}
 
-	void starBlock::setXY(int input_x, int input_y) {
+	void starBlock::SetXY(int input_x, int input_y) {
 		x = input_x;
 		y = input_y;
 	}
 
-	void starBlock::onShow() {
+	int* starBlock::GetHw() {
+		return new int[2]{ starBlockPic.Height(), starBlockPic.Width() };
+	}
+
+	int* starBlock::GetXy() {
+		return new int[4]{ x, y , x + starBlockPic.Width(), y + starBlockPic.Height()};
+	}
+
+	bool starBlock::GetShow() {
+		return IsShow;
+	}
+
+	void starBlock::OnShow() {
 		starBlockPic.SetTopLeft(x, y);
 		starBlockPic.ShowBitmap();
 	}
 
-	void blankBlock::setHW(int input_h, int input_w) {
+	void starBlock::SetShow(bool input) {
+		IsShow = input;
+	}
+
+	void blankBlock::SetHW(int input_h, int input_w) {
 		height = input_h;
 		width = input_w;
 	}
 
-	void blankBlock::setXY(int input_x, int input_y) {
+	void blankBlock::SetXY(int input_x, int input_y) {
 		x = input_x;
 		y = input_y;
 	}
