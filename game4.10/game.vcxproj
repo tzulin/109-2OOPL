@@ -258,6 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="kirby.cpp" />
+    <ClCompile Include="things.cpp" />
     <ClCompile Include="Source\audio.cpp" />
     <ClCompile Include="Source\game.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -302,6 +303,7 @@
     <ClCompile Include="waddle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="things.h" />
     <ClInclude Include="kirby.h" />
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\game.h" />
@@ -396,6 +398,7 @@
     <Image Include="RES\scream\screamR3.bmp" />
     <Image Include="RES\scream\screamR4.bmp" />
     <Image Include="RES\scream\screamR5.bmp" />
+    <Image Include="RES\starblock.bmp" />
     <Image Include="RES\test_new.bmp" />
     <Image Include="res\walkL1.bmp" />
     <Image Include="res\walkL10.bmp" />
