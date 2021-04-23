@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{1a913106-0be0-4476-b0ce-2aa855072614}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="MFC">
+      <UniqueIdentifier>{da904ee8-7f59-4a6c-b3ff-b91b6fb6d0ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLibrary">
+      <UniqueIdentifier>{df7aa532-3fdf-46a0-b3fc-8f5922e8d9e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyGame">
+      <UniqueIdentifier>{0c798913-b7d2-4e26-8241-0f83266cd626}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\ball.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\bmp0.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\bmp1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\bmp10.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\bmp2.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\bmp3.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\bmp4.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\bmp5.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\bmp6.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\bmp7.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\bmp8.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\bmp9.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\center.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\continue.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\corner.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\eraser1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\eraser2.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\eraser3.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\game.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\game.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\gamecurs.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\gameDoc.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\help.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\loading.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\ntutcsie.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\audio.cpp">
+      <Filter>GameLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\game.cpp">
+      <Filter>MFC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\gameDoc.cpp">
+      <Filter>MFC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\gamelib.cpp">
+      <Filter>GameLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\gameView.cpp">
+      <Filter>MFC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MainFrm.cpp">
+      <Filter>MFC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StdAfx.cpp">
+      <Filter>MFC</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\mygame.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="kirby.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="waddle.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\audio.h">
+      <Filter>GameLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\game.h">
+      <Filter>MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\gameDoc.h">
+      <Filter>MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\gamelib.h">
+      <Filter>GameLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\gameView.h">
+      <Filter>MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MainFrm.h">
+      <Filter>MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource.h">
+      <Filter>MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StdAfx.h">
+      <Filter>MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mygame.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="kirby.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="waddle.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Source\game.rc">
+      <Filter>MFC</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bitmap3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\blue.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\practice.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\green.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bmp00001.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\test_new.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Bitmaps\test2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\walk_left\walkL10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_close_eyes.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_orign.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_walk_9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkL10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_close_eyes_left.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kirby_left.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\downL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\downL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\downR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\downR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walkR9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\materials\3_19_kirby_pic\basic\basicR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkL10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\walkR9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\basic\basicL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\basic\basicL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\basic\basicR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\basic\basicR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\fly\flyR6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR6.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR7.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR9.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpR10.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\jump\jumpL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamL3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamL4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamL5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamR3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamR4.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\scream\screamR5.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\down\downL2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\down\downL1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\down\downR2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\down\downR1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\walk\bitmap14.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
