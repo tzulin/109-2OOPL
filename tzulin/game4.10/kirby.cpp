@@ -16,7 +16,7 @@ namespace game_framework {
 		const int origin_y = SIZE_Y - temp_floor - ImgH;
 		const int INIT_VELOCITY = 18;
 		const int INIT_FLY_VELOCITY = 9;
-		const int INIT_HP = 20;
+		const int INIT_HP = 10;
 		init_velocity = INIT_VELOCITY;
 		velocity = INIT_VELOCITY;
 		init_fly_velocity = INIT_FLY_VELOCITY;
