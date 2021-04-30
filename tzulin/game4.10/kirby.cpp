@@ -427,11 +427,6 @@ namespace game_framework {
 		KirbyMovingR.OnMove();
 		KirbyStand.OnMove();
 		KirbyStandL.OnMove();
-		/*KirbyScreamR.OnMove();
-		KirbyScreamL.OnMove();
-		KirbyDownAttackR.OnMove();
-		KirbyDownAttackL.OnMove();
-		*/
 	}
 
 	bool kirby::MeetEnemy(enemy e) {
@@ -516,7 +511,7 @@ namespace game_framework {
 	}
 
 	void kirby::SetFly(bool input) {
-		if (!IsAttack && !IsDown) {
+		if (!IsDown) {
 			InAir = input;
 			IsFat = input;
 			FlyUp = input;
@@ -538,7 +533,7 @@ namespace game_framework {
 				// case jump up right
 				return 1;
 			}
-			else if (IsDown && !IsJumping && !IsFlying) {
+			else if (IsDown && !IsJumping && !IsFlying && !IsFat) {
 				if (IsAttack) {
 					// case down attack right
 					return 2;
@@ -556,7 +551,7 @@ namespace game_framework {
 				// case fly up right
 				return 7;
 			}
-			else if (IsFat && IsFlying && !IsAttack && !IsDown) {
+			else if (IsFat && IsFlying && !IsAttack) {
 				// case flying right
 				return 8;
 			}
@@ -593,7 +588,7 @@ namespace game_framework {
 				// case fly up left
 				return 15;
 			}
-			else if (IsFat && IsFlying && !IsAttack && !IsDown) {
+			else if (IsFat && IsFlying && !IsAttack) {
 				// case flying left
 				return 16;
 			}
