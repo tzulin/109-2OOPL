@@ -25,8 +25,9 @@ namespace game_framework {
 		void SetAttack(bool input);
 		void SetJump(bool input);
 		void SetFly(bool input);
-		void SetHp(int input);
-		bool MeetEnemy(enemy e);
+		void Hurt(int input, int time);
+		// void BackX();
+		bool MeetEnemy(enemy & e);
 
 		int GetCase();
 		int GetHp();
@@ -52,6 +53,8 @@ namespace game_framework {
 		CAnimation KirbyFlyingR;
 		CAnimation KirbyFlyL;
 		CAnimation KirbyFlyingL;
+		CAnimation KirbyHurtR;
+		CAnimation KirbyHurtL;
 
 		CMovingBitmap KirbyDownR;
 		CMovingBitmap KirbyDownL;
@@ -75,6 +78,9 @@ namespace game_framework {
 		bool IsFlying;
 		bool IsFat;
 		bool FlyUp;
+		bool EnemyFromL;
+		bool IsHurt;
+		int LastHurt;
 	};
 }
 

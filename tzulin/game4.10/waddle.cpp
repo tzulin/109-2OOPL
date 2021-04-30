@@ -33,6 +33,11 @@ namespace game_framework {
 		x = origin_x;
 		y = origin_y;
 		hp = 1;
+		power = 1;
+		IsFacingR = false;
+		IsMovingL = true;
+		IsMovingR = false;
+		LastHurt = 0;
 	}
 
 	void waddleDoo::LoadBitmap()
@@ -57,7 +62,12 @@ namespace game_framework {
 		const int origin_y = SIZE_Y - 60 - ImgH;
 		x = origin_x;
 		y = origin_y;
-		hp = 1;
+		hp = 2;
+		power = 2;
+		IsFacingR = false;
+		IsMovingL = true;
+		IsMovingR = false;
+		LastHurt = 0;
 	}
 
 }

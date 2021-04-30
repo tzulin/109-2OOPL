@@ -16,7 +16,7 @@ namespace game_framework {
 		const int origin_y = SIZE_Y - temp_floor - ImgH;
 		const int INIT_VELOCITY = 18;
 		const int INIT_FLY_VELOCITY = 9;
-		const int INIT_HP = 5;
+		const int INIT_HP = 20;
 		init_velocity = INIT_VELOCITY;
 		velocity = INIT_VELOCITY;
 		init_fly_velocity = INIT_FLY_VELOCITY;
@@ -37,6 +37,8 @@ namespace game_framework {
 		IsFlying = false;
 		IsFat = false;
 		FlyUp = false;
+		LastHurt = 0;
+		IsHurt = false;
 	}
 
 	kirby::~kirby()
@@ -187,7 +189,25 @@ namespace game_framework {
 		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL8.bmp", RGB(255, 0, 0));
 		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL7.bmp", RGB(255, 0, 0));
 		KirbyFlyingL.AddBitmap(".\\res\\fly\\flyL6.bmp", RGB(255, 0, 0));
-	}
+
+		// load hurtR
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR1.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR2.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR3.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR5.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR6.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR7.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR8.bmp", RGB(255, 255, 255));
+
+		// load hurtL
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL1.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL2.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL3.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL5.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL6.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL7.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL8.bmp", RGB(255, 255, 255));
+}
 
 	void kirby::OnShow()
 	{
@@ -339,6 +359,29 @@ namespace game_framework {
 				KirbyFlyingL.Reset();
 			}
 			break;
+
+		// case hurt right
+		case 17: 
+			KirbyHurtR.SetDelayCount(4);
+			KirbyHurtR.SetTopLeft(x, y);
+			KirbyHurtR.OnMove();
+			KirbyHurtR.OnShow();
+			if (KirbyHurtR.IsFinalBitmap()) {
+				IsHurt = false;
+				KirbyHurtR.Reset();
+			}
+			break;
+
+		// case hurt left
+		case 18:
+			KirbyHurtL.SetDelayCount(4);
+			KirbyHurtL.SetTopLeft(x, y);
+			KirbyHurtL.OnMove();
+			KirbyHurtL.OnShow();
+			if (KirbyHurtL.IsFinalBitmap()) {
+				IsHurt = false;
+				KirbyHurtL.Reset();
+			}
 		}
 	}
 
@@ -348,14 +391,14 @@ namespace game_framework {
 		const int length = 4;
 
 		// set moving XY and frame of test 
-		if (IsMovingL && !IsDown && !IsAttack && x > frame_of_test) {
+		if (IsMovingL && !IsDown && !IsAttack && !IsHurt && x > frame_of_test) {
 			if (IsFacingR) {
 				IsFacingR = false;
 			}
 			x -= length;
 		}
 
-		if (IsMovingR && !IsDown && !IsAttack && x < SIZE_X - ImgW - frame_of_test) {
+		if (IsMovingR && !IsDown && !IsAttack && !IsHurt && x < SIZE_X - ImgW - frame_of_test) {
 			if (!IsFacingR) {
 				IsFacingR = true;
 			}
@@ -363,7 +406,7 @@ namespace game_framework {
 		}
 
 		// set down attack right and left
-		if (IsDown && IsAttack) {
+		if (IsDown && IsAttack && !IsHurt) {
 			if (IsFacingR && x < SIZE_X - ImgW - frame_of_test) {
 				x += length * 3;
 			}
@@ -373,7 +416,7 @@ namespace game_framework {
 		}
 
 		// set jump and fly
-		if (IsRising && InAir && !IsAttack && !IsDown) {
+		if (IsRising && InAir && !IsAttack && !IsDown && !IsHurt) {
 			if (y < sky_top) {		// ¸I¨ì¤ÑªáªO
 				IsRising = false;
 			}
@@ -422,6 +465,16 @@ namespace game_framework {
 			}
 		}
 
+		// kirby is hurt
+		if (IsHurt) {
+			if (!EnemyFromL && x > frame_of_test) {
+				x -= 3;
+			}
+			else if (x < SIZE_X - ImgW - frame_of_test) {
+				x += 3;
+			}
+		}
+
 		// animation OnMove
 		KirbyMovingL.OnMove();
 		KirbyMovingR.OnMove();
@@ -429,7 +482,7 @@ namespace game_framework {
 		KirbyStandL.OnMove();
 	}
 
-	bool kirby::MeetEnemy(enemy e) {
+	bool kirby::MeetEnemy(enemy & e) {
 		int* KirbyXy = GetXy();
 		int* enemyXY = e.GetXy();
 
@@ -437,11 +490,15 @@ namespace game_framework {
 			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
 				delete[] KirbyXy;
 				delete[] enemyXY;
+				e.BackX(true);
+				EnemyFromL = false;
 				return true;
 			}
 			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
 				delete[] KirbyXy;
 				delete[] enemyXY;
+				e.BackX(true);
+				EnemyFromL = false;
 				return true;
 			}
 		}
@@ -449,11 +506,15 @@ namespace game_framework {
 			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
 				delete[] KirbyXy;
 				delete[] enemyXY;
+				e.BackX(false);
+				EnemyFromL = true;
 				return true;
 			}
 			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
 				delete[] KirbyXy;
 				delete[] enemyXY;
+				e.BackX(false);
+				EnemyFromL = true;
 				return true;
 			}
 		}
@@ -485,23 +546,25 @@ namespace game_framework {
 	}
 
 	void kirby::SetDown(bool input) {
-		if (!IsAttack && !InAir) {
+		if (!IsAttack && !InAir && !IsHurt) {
 			IsDown = input;
 		}
 	}
 
 	void kirby::SetAttack(bool input) {
-		IsAttack = input;
+		if (!IsHurt) {
+			IsAttack = input;
+		}
 		if (IsFlying) {
 			SetFly(false);
 		}
 	}
 
 	void kirby::SetJump(bool input) {
-		if (IsJumping) {
+		if (IsJumping && !IsHurt) {
 			SetFly(true);
 		}
-		if (!IsFlying) {
+		if (!IsFlying && !IsHurt) {
 			InAir = input;
 			IsJumping = input;
 		}
@@ -511,7 +574,7 @@ namespace game_framework {
 	}
 
 	void kirby::SetFly(bool input) {
-		if (!IsDown) {
+		if (!IsDown || !IsHurt) {
 			InAir = input;
 			IsFat = input;
 			FlyUp = input;
@@ -523,82 +586,119 @@ namespace game_framework {
 		}
 	}
 
-	void kirby::SetHp(int input) {
-		hp = input;
+	/*
+	void kirby::BackX() {
+		if (IsFacingR) {
+			x -= 25;
+		}
+		else {
+			x += 25;
+		}
+	}
+	*/
+	
+	void kirby::Hurt(int input, int time) {
+		if (abs(LastHurt - time) < 30) {
+			return;
+		}
+		LastHurt = time;
+		hp -= input;
+		IsHurt = true;
+		SetDown(false);
+		SetAttack(false);
+		SetJump(false);
+		SetFly(false);
+		// BackX();
 	}
 
 	int kirby::GetCase() {
-		if (IsFacingR) {
-			if (IsJumping && !IsFat && !IsAttack) {
-				// case jump up right
-				return 1;
-			}
-			else if (IsDown && !IsJumping && !IsFlying && !IsFat) {
-				if (IsAttack) {
-					// case down attack right
-					return 2;
+		if (IsHurt) {
+			if (EnemyFromL) {
+				if (IsFacingR) {
+					IsFacingR = false;
 				}
-				else {
-					// case down right
-					return 3;
-				}
-			}
-			else if (IsAttack && !IsJumping) {
-				// case scream right
-				return 4;
-			}
-			else if (FlyUp && !IsFat && !IsAttack && !IsDown) {
-				// case fly up right
-				return 7;
-			}
-			else if (IsFat && IsFlying && !IsAttack) {
-				// case flying right
-				return 8;
-			}
-			else if (IsMovingR) {
-				// case walking right
-				return 5;
+				return 18;
 			}
 			else {
-				// case standing right
-				return 6;
+				if (!IsFacingR) {
+					IsFacingR = true;
+				}
+				return 17;
 			}
 		}
 		else {
-			// facing left
-			if (IsJumping && !IsFat && !IsAttack) {
-				// case jump up left
-				return 9;
-			}
-			else if (IsDown && !IsJumping && !IsFlying) {
-				if (IsAttack) {
-					// case down attack left
-					return 10;
+			if (IsFacingR) {
+				if (IsJumping && !IsFat && !IsAttack) {
+					// case jump up right
+					return 1;
+				}
+				else if (IsDown && !IsJumping && !IsFlying && !IsFat) {
+					if (IsAttack) {
+						// case down attack right
+						return 2;
+					}
+					else {
+						// case down right
+						return 3;
+					}
+				}
+				else if (IsAttack && !IsJumping) {
+					// case scream right
+					return 4;
+				}
+				else if (FlyUp && !IsFat && !IsAttack && !IsDown) {
+					// case fly up right
+					return 7;
+				}
+				else if (IsFat && IsFlying && !IsAttack) {
+					// case flying right
+					return 8;
+				}
+				else if (IsMovingR) {
+					// case walking right
+					return 5;
 				}
 				else {
-					// case down left
-					return 11;
+					// case standing right
+					return 6;
 				}
 			}
-			else if (IsAttack && !IsJumping) {
-				// case scream left 
-				return 12;
-			}
-			else if (FlyUp && !IsFat && !IsAttack && !IsDown) {
-				// case fly up left
-				return 15;
-			}
-			else if (IsFat && IsFlying && !IsAttack) {
-				// case flying left
-				return 16;
-			}
-			else if (IsMovingL) {
-				// case walking left 
-				return 13;
-			}
 			else {
-				// case standing left
-				return 14;
+				// facing left
+				if (IsJumping && !IsFat && !IsAttack) {
+					// case jump up left
+					return 9;
+				}
+				else if (IsDown && !IsJumping && !IsFlying) {
+					if (IsAttack) {
+						// case down attack left
+						return 10;
+					}
+					else {
+						// case down left
+						return 11;
+					}
+				}
+				else if (IsAttack && !IsJumping) {
+					// case scream left 
+					return 12;
+				}
+				else if (FlyUp && !IsFat && !IsAttack && !IsDown) {
+					// case fly up left
+					return 15;
+				}
+				else if (IsFat && IsFlying && !IsAttack) {
+					// case flying left
+					return 16;
+				}
+				else if (IsMovingL) {
+					// case walking left 
+					return 13;
+				}
+				else {
+					// case standing left
+					return 14;
+				}
 			}
 		}
 	}
