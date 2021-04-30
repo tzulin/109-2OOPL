@@ -97,7 +97,7 @@ void CGameStateOver::OnMove()
 
 void CGameStateOver::OnBeginState()
 {
-	counter = 30 * 5; // 5 seconds
+	counter = 30 * 3; // 3 seconds
 }
 
 void CGameStateOver::OnInit()
@@ -151,6 +151,7 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
+	counter++;
 	Kirby.OnMove();										// Kirby OnMove
 	if (!Kirby.IsAlive()) {								// Kirby dead
 		GotoGameState(GAME_STATE_OVER);
@@ -160,16 +161,16 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		Waddle.OnMove();									// Waddle OnMove
 
 		if (Kirby.MeetEnemy(Waddle)) {
-			Kirby.SetHp(Kirby.GetHp() - 1);
-			Waddle.SetHp(Waddle.GetHp() - 1);
+			Kirby.Hurt(Waddle.GetPower(), counter);
+			Waddle.Hurt(1, counter);
 		}
 	}
 	if (WaddleDoo.GetHp() > 0) {
 		WaddleDoo.OnMove();								    // WaddleDoo OnMove
 
 		if (Kirby.MeetEnemy(WaddleDoo)) {
-			Kirby.SetHp(Kirby.GetHp() - 1);
-			WaddleDoo.SetHp(WaddleDoo.GetHp() - 1);
+			Kirby.Hurt(Waddle.GetPower(), counter);
+			WaddleDoo.Hurt(1, counter);
 		}
 	}
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer

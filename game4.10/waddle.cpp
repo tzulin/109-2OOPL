@@ -32,7 +32,8 @@ namespace game_framework {
 		const int origin_y = SIZE_Y - 60 - ImgH;
 		x = origin_x;
 		y = origin_y;
-		hp = 1;
+		hp = 10;
+		power = 1;
 	}
 
 	void waddleDoo::LoadBitmap()
@@ -57,7 +58,8 @@ namespace game_framework {
 		const int origin_y = SIZE_Y - 60 - ImgH;
 		x = origin_x;
 		y = origin_y;
-		hp = 1;
+		hp = 10;
+		power = 2;
 	}
 
 }

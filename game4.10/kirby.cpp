@@ -16,7 +16,7 @@ namespace game_framework {
 		const int origin_y = SIZE_Y - temp_floor - ImgH;
 		const int INIT_VELOCITY = 18;
 		const int INIT_FLY_VELOCITY = 9;
-		const int INIT_HP = 5;
+		const int INIT_HP = 20;
 		init_velocity = INIT_VELOCITY;
 		velocity = INIT_VELOCITY;
 		init_fly_velocity = INIT_FLY_VELOCITY;
@@ -37,6 +37,7 @@ namespace game_framework {
 		IsFlying = false;
 		IsFat = false;
 		FlyUp = false;
+		LastHurt = 0;
 	}
 
 	kirby::~kirby()
@@ -427,14 +428,9 @@ namespace game_framework {
 		KirbyMovingR.OnMove();
 		KirbyStand.OnMove();
 		KirbyStandL.OnMove();
-		/*KirbyScreamR.OnMove();
-		KirbyScreamL.OnMove();
-		KirbyDownAttackR.OnMove();
-		KirbyDownAttackL.OnMove();
-		*/
 	}
 
-	bool kirby::MeetEnemy(enemy e) {
+	bool kirby::MeetEnemy(enemy & e) {
 		int* KirbyXy = GetXy();
 		int* enemyXY = e.GetXy();
 
@@ -442,11 +438,13 @@ namespace game_framework {
 			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
 				delete[] KirbyXy;
 				delete[] enemyXY;
+				e.BackX(true);
 				return true;
 			}
 			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
 				delete[] KirbyXy;
 				delete[] enemyXY;
+				e.BackX(true);
 				return true;
 			}
 		}
@@ -454,11 +452,13 @@ namespace game_framework {
 			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
 				delete[] KirbyXy;
 				delete[] enemyXY;
+				e.BackX(false);
 				return true;
 			}
 			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
 				delete[] KirbyXy;
 				delete[] enemyXY;
+				e.BackX(false);
 				return true;
 			}
 		}
@@ -516,7 +516,7 @@ namespace game_framework {
 	}
 
 	void kirby::SetFly(bool input) {
-		if (!IsAttack && !IsDown) {
+		if (!IsDown) {
 			InAir = input;
 			IsFat = input;
 			FlyUp = input;
@@ -528,8 +528,22 @@ namespace game_framework {
 		}
 	}
 
-	void kirby::SetHp(int input) {
-		hp = input;
+	void kirby::BackX() {
+		if (IsFacingR) {
+			x -= 25;
+		}
+		else {
+			x += 25;
+		}
+	}
+
+	void kirby::Hurt(int input, int time) {
+		if (abs(LastHurt - time) < 30) {
+			return;
+		}
+		LastHurt = time;
+		hp -= input;
+		BackX();
 	}
 
 	int kirby::GetCase() {
@@ -538,7 +552,7 @@ namespace game_framework {
 				// case jump up right
 				return 1;
 			}
-			else if (IsDown && !IsJumping && !IsFlying) {
+			else if (IsDown && !IsJumping && !IsFlying && !IsFat) {
 				if (IsAttack) {
 					// case down attack right
 					return 2;
@@ -556,7 +570,7 @@ namespace game_framework {
 				// case fly up right
 				return 7;
 			}
-			else if (IsFat && IsFlying && !IsAttack && !IsDown) {
+			else if (IsFat && IsFlying && !IsAttack) {
 				// case flying right
 				return 8;
 			}
@@ -593,7 +607,7 @@ namespace game_framework {
 				// case fly up left
 				return 15;
 			}
-			else if (IsFat && IsFlying && !IsAttack && !IsDown) {
+			else if (IsFat && IsFlying && !IsAttack) {
 				// case flying left
 				return 16;
 			}

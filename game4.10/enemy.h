@@ -18,8 +18,11 @@ namespace game_framework {
 		int GetHp();
 		int GetWidth();
 		int GetHeight();
-		void SetHp(int input);
-		virtual  void Reset();
+		int GetPower();
+		void BackX(bool fromL);
+		void Hurt(int input, int time);
+		virtual void Reset();
+		// virtual void SetAttack();
 
 	protected:
 		CAnimation MovingL;
@@ -28,12 +31,15 @@ namespace game_framework {
 		CAnimation StandL;
 
 		int x, y, hp;
+		int power;			// §ðÀ»¤O
 		int origin_x, origin_y;
 		const int ImgW = 64, ImgH = 60;
 		int floor;			// ¦aªOy®y¼Ð
 		bool IsMovingL;
 		bool IsMovingR;
 		bool IsFacingR;
+		bool IsAttack;
+		int LastHurt;
 	};
 }
 

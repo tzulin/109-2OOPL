@@ -19,10 +19,12 @@ namespace game_framework {
 		hp = INIT_HP;
 		x = origin_x;
 		y = origin_y;
+		power = 1;
 		floor = SIZE_Y - 60;
 		IsMovingL = true;
 		IsMovingR = false;
 		IsFacingR = false;
+		LastHurt = 0;
 	}
 
 	enemy::~enemy()
@@ -45,8 +47,25 @@ namespace game_framework {
 		return ImgH;
 	}
 
-	void enemy::SetHp(int input) {
-		hp = input;
+	int enemy::GetPower() {
+		return power;
+	}
+
+	void enemy::BackX(bool fromL) {
+		if (fromL) {
+			x += 25;
+		}
+		else {
+			x -= 25;
+		}
+	}
+
+	void enemy::Hurt(int input, int time) {
+		if (abs(LastHurt - time) < 30) {
+			return;
+		}
+		LastHurt = time;
+		hp -= input;
 	}
 
 	void enemy::Reset() {
