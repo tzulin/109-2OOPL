@@ -1,7 +1,7 @@
 #ifndef KIRBY_H
 #define KIRBY_H
 
-#include "./enemy.h"
+// #include "./enemy.h"
 
 namespace game_framework {
 /////////////////////////////////////////////////////////////////////////////
@@ -25,9 +25,10 @@ namespace game_framework {
 		void SetAttack(bool input);
 		void SetJump(bool input);
 		void SetFly(bool input);
+		void SetEnemyFromL(bool input);
 		void Hurt(int input, int time);
-		void BackX();
-		bool MeetEnemy(enemy & e);
+		// void BackX();
+		// bool MeetEnemy(enemy & e);
 
 		int GetCase();
 		int GetHp();
@@ -53,6 +54,8 @@ namespace game_framework {
 		CAnimation KirbyFlyingR;
 		CAnimation KirbyFlyL;
 		CAnimation KirbyFlyingL;
+		CAnimation KirbyHurtR;
+		CAnimation KirbyHurtL;
 
 		CMovingBitmap KirbyDownR;
 		CMovingBitmap KirbyDownL;
@@ -76,6 +79,8 @@ namespace game_framework {
 		bool IsFlying;
 		bool IsFat;
 		bool FlyUp;
+		bool EnemyFromL;
+		bool IsHurt;
 		int LastHurt;
 	};
 }

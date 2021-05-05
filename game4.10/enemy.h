@@ -1,6 +1,8 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include "./kirby.h"
+
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// class enemy
@@ -22,11 +24,16 @@ namespace game_framework {
 		void BackX(bool fromL);
 		void Hurt(int input, int time);
 		virtual void Reset();
+		virtual bool MeetKirby(kirby & k);
+		virtual bool SeeKirby(kirby k);
+		void Attack(kirby k, int time);
 		// virtual void SetAttack();
 
 	protected:
 		CAnimation MovingL;
 		CAnimation MovingR;
+		CAnimation AttackR;
+		CAnimation AttackL;
 		CAnimation Stand;
 		CAnimation StandL;
 
@@ -35,11 +42,14 @@ namespace game_framework {
 		int origin_x, origin_y;
 		const int ImgW = 64, ImgH = 60;
 		int floor;			// ¦aªOy®y¼Ð
+		bool IsFacingR;
 		bool IsMovingL;
 		bool IsMovingR;
-		bool IsFacingR;
 		bool IsAttack;
+		bool IsHurt;
 		int LastHurt;
+		int LastAttack;
+		bool KirbyFromL;
 	};
 }
 

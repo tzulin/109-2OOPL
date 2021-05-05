@@ -21,10 +21,12 @@ namespace game_framework {
 		y = origin_y;
 		power = 1;
 		floor = SIZE_Y - 60;
+		IsFacingR = false;
 		IsMovingL = true;
 		IsMovingR = false;
-		IsFacingR = false;
+		IsAttack = false;
 		LastHurt = 0;
+		LastAttack = 0;
 	}
 
 	enemy::~enemy()
@@ -53,10 +55,10 @@ namespace game_framework {
 
 	void enemy::BackX(bool fromL) {
 		if (fromL) {
-			x += 25;
+			x += 60;
 		}
 		else {
-			x -= 25;
+			x -= 60;
 		}
 	}
 
@@ -76,18 +78,128 @@ namespace game_framework {
 		hp = 1;
 	}
 
+	bool enemy::MeetKirby(kirby & k) {
+		int* KirbyXy = k.GetXy();
+		int* enemyXY = GetXy();
+
+		if (enemyXY[0] > KirbyXy[0] && enemyXY[0] < KirbyXy[2]) {					// kirby meet enemy from left
+			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
+				delete[] KirbyXy;
+				delete[] enemyXY;
+				BackX(true);
+				k.SetEnemyFromL(false);
+				return true;
+			}
+			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
+				delete[] KirbyXy;
+				delete[] enemyXY;
+				BackX(true);
+				k.SetEnemyFromL(false);
+				return true;
+			}
+		}
+		else if (enemyXY[2] > KirbyXy[0] && enemyXY[2] < KirbyXy[2]) {			// kirby meet enemy from right
+			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
+				delete[] KirbyXy;
+				delete[] enemyXY;
+				BackX(false);
+				k.SetEnemyFromL(true);
+				return true;
+			}
+			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
+				delete[] KirbyXy;
+				delete[] enemyXY;
+				BackX(false);
+				k.SetEnemyFromL(true);
+				return true;
+			}
+		}
+		delete[] KirbyXy;
+		delete[] enemyXY;
+		return false;
+	}
+
+	bool enemy::SeeKirby(kirby k) {
+		int* KirbyXy = k.GetXy();
+		int* enemyXY = GetXy();
+
+		if (enemyXY[0]-ImgW > KirbyXy[0] && enemyXY[0]-ImgW < KirbyXy[2]) {					// enemy meet kirby from left
+			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
+				delete[] KirbyXy;
+				delete[] enemyXY;
+				KirbyFromL = true;
+				return true;
+			}
+			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
+				delete[] KirbyXy;
+				delete[] enemyXY;
+				KirbyFromL = true;
+				return true;
+			}
+		}
+		else if (enemyXY[2]+ImgW> KirbyXy[0] && enemyXY[2]+ImgW < KirbyXy[2]) {				// enemy meet kirby from right
+			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
+				delete[] KirbyXy;
+				delete[] enemyXY;
+				KirbyFromL = false;
+				return true;
+			}
+			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
+				delete[] KirbyXy;
+				delete[] enemyXY;
+				KirbyFromL = false;
+				return true;
+			}
+		}
+
+		delete[] KirbyXy;
+		delete[] enemyXY;
+		return false;
+	}
+
+	void enemy::Attack(kirby k, int time) {
+		if (abs(LastAttack - time) < 30) {
+			return;
+		}
+		LastAttack = time;
+		IsAttack = true;
+	}
+
 	void enemy::OnShow()
 	{
-		if (IsFacingR) {
-			MovingR.SetDelayCount(3);
-			MovingR.SetTopLeft(x, y);
-			MovingR.OnShow();
+		if (!IsAttack) {
+			if (IsMovingR) {
+				MovingR.SetDelayCount(3);
+				MovingR.SetTopLeft(x, y);
+				MovingR.OnShow();
+			}
+			else {
+				MovingL.SetDelayCount(3);
+				MovingL.SetTopLeft(x, y);
+				MovingL.OnShow();
+			}
 		}
 		else {
-			MovingL.SetDelayCount(3);
-			MovingL.SetTopLeft(x, y);
-			MovingL.OnShow();
+			if (KirbyFromL) {
+				AttackL.SetDelayCount(10);
+				AttackL.SetTopLeft(x-68, y-68);
+				AttackL.OnShow();
+				if (AttackL.IsFinalBitmap()) {
+					AttackL.Reset();
+					IsAttack = false;
+				}
+			}
+			else {
+				AttackR.SetDelayCount(3);
+				AttackR.SetTopLeft(x, y);
+				AttackR.OnShow();
+				if (AttackR.IsFinalBitmap()) {
+					AttackR.Reset();
+					IsAttack = false;
+				}
+			}
 		}
+
 	}
 
 	void enemy::OnMove()
@@ -95,31 +207,35 @@ namespace game_framework {
 		// set moving XY
 		const int length = 2;
 
-		// set moving XY and frame of test 
-		if (IsMovingL && x > frame_of_test) {
-			if (IsFacingR) {
-				IsFacingR = false;
+		if (!IsAttack) {
+			// set moving XY and frame of test 
+			if (IsMovingL && x > frame_of_test) {
+				if (IsFacingR) {
+					IsFacingR = false;
+				}
+				x -= length;
 			}
-			x -= length;
-		}
-		else if (x <= frame_of_test) {
-			IsMovingL = false;
-			IsMovingR = true;
-		}
+			else if (x <= frame_of_test) {
+				IsMovingL = false;
+				IsMovingR = true;
+			}
 
-		if (IsMovingR && x < SIZE_X - ImgW) {
-			if (!IsFacingR) {
-				IsFacingR = true;
+			if (IsMovingR && x < SIZE_X - ImgW) {
+				if (!IsFacingR) {
+					IsFacingR = true;
+				}
+				x += length;
 			}
-			x += length;
-		}
-		else if (x >= SIZE_X - ImgW) {
-			IsMovingR = false;
-			IsMovingL = true;
+			else if (x >= SIZE_X - ImgW) {
+				IsMovingR = false;
+				IsMovingL = true;
+			}
 		}
 
 		MovingL.OnMove();
 		MovingR.OnMove();
+		AttackR.OnMove();
+		AttackL.OnMove();
 	}
 
 	void enemy::LoadBitmap()
