@@ -481,7 +481,8 @@ namespace game_framework {
 		KirbyStand.OnMove();
 		KirbyStandL.OnMove();
 	}
-
+	
+	/*
 	bool kirby::MeetEnemy(enemy & e) {
 		int* KirbyXy = GetXy();
 		int* enemyXY = e.GetXy();
@@ -523,6 +524,7 @@ namespace game_framework {
 		delete[] enemyXY;
 		return false;
 	}
+	*/
 
 	void kirby::SetXY(int x_in, int y_in) {
 		x = x_in;
@@ -584,6 +586,10 @@ namespace game_framework {
 		if (IsJumping) {
 			IsJumping = false;
 		}
+	}
+
+	void kirby::SetEnemyFromL(bool input) {
+		EnemyFromL = input;
 	}
 
 	/*

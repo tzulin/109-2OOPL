@@ -159,16 +159,23 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 
 	if (Waddle.GetHp() > 0) {
 		Waddle.OnMove();									// Waddle OnMove
-		if (Kirby.MeetEnemy(Waddle)) {
+		if (Waddle.MeetKirby(Kirby)) {
 			Kirby.Hurt(Waddle.GetPower(), counter);
 			Waddle.Hurt(1, counter);
+		}
+		if (Waddle.SeeKirby(Kirby)) {
+			Waddle.Attack(Kirby, counter);
 		}
 	}
 	if (WaddleDoo.GetHp() > 0) {
 		WaddleDoo.OnMove();								    // WaddleDoo OnMove
-		if (Kirby.MeetEnemy(WaddleDoo)) {
+		if (WaddleDoo.MeetKirby(Kirby)) {
 			Kirby.Hurt(WaddleDoo.GetPower(), counter);
 			WaddleDoo.Hurt(1, counter);
+		}
+		if (WaddleDoo.SeeKirby(Kirby)) {
+			WaddleDoo.Attack(Kirby, counter);
+			// Kirby.Hurt(WaddleDoo.GetPower(), counter);
 		}
 	}
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
