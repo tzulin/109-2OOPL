@@ -75,6 +75,8 @@ namespace game_framework {
 		const int origin_y = SIZE_Y - 60 - ImgH;
 		x = origin_x;
 		y = origin_y;
+		wL.SetShow(false);
+		wR.SetShow(false);
 		hp = 1;
 	}
 
@@ -182,20 +184,27 @@ namespace game_framework {
 		else {
 			if (KirbyFromL) {
 				AttackL.SetDelayCount(10);
-				AttackL.SetTopLeft(x-68, y-68);
+				AttackL.SetTopLeft(x, y);
 				AttackL.OnShow();
+				wL.SetXy(x, y, !IsFacingR);
+				wL.SetShow(true);
+				wL.OnShow();
 				if (AttackL.IsFinalBitmap()) {
 					AttackL.Reset();
 					IsAttack = false;
+					wL.SetShow(false);
 				}
 			}
 			else {
 				AttackR.SetDelayCount(3);
 				AttackR.SetTopLeft(x, y);
 				AttackR.OnShow();
+				wR.SetShow(true);
+				wR.OnShow();
 				if (AttackR.IsFinalBitmap()) {
 					AttackR.Reset();
 					IsAttack = false;
+					wR.SetShow(false);
 				}
 			}
 		}
@@ -236,6 +245,8 @@ namespace game_framework {
 		MovingR.OnMove();
 		AttackR.OnMove();
 		AttackL.OnMove();
+		wL.OnMove();
+		// wR.OnMove();
 	}
 
 	void enemy::LoadBitmap()

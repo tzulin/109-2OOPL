@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include "./kirby.h"
+#include "./weapon.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -24,7 +25,7 @@ namespace game_framework {
 		void BackX(bool fromL);
 		void Hurt(int input, int time);
 		virtual void Reset();
-		virtual bool MeetKirby(kirby & k);
+		bool MeetKirby(kirby & k);
 		virtual bool SeeKirby(kirby k);
 		void Attack(kirby k, int time);
 		// virtual void SetAttack();
@@ -36,6 +37,8 @@ namespace game_framework {
 		CAnimation AttackL;
 		CAnimation Stand;
 		CAnimation StandL;
+		weapon wL;
+		weapon wR;
 
 		int x, y, hp;
 		int power;			// §ðÀ»¤O
