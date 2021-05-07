@@ -24,11 +24,15 @@ namespace game_framework {
 			PlayAttack.SetDelayCount(3);
 			PlayAttack.SetTopLeft(x, y);
 			PlayAttack.OnShow();
-			if (PlayAttack.IsFinalBitmap()) {
+			/*if (PlayAttack.IsFinalBitmap()) {
 				PlayAttack.Reset();
 				IsShow = false;
-			}
+			}*/
 		}
+	}
+
+	void weapon::AnimationReset() {
+		PlayAttack.Reset();
 	}
 
 	void weapon::OnMove() {

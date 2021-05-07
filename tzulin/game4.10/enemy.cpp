@@ -183,15 +183,17 @@ namespace game_framework {
 		}
 		else {
 			if (KirbyFromL) {
-				AttackL.SetDelayCount(10);
+				AttackL.SetDelayCount(3);
 				AttackL.SetTopLeft(x, y);
 				AttackL.OnShow();
 				wL.SetXy(x, y, !IsFacingR);
+				wL.OnMove();
 				wL.SetShow(true);
 				wL.OnShow();
 				if (AttackL.IsFinalBitmap()) {
 					AttackL.Reset();
 					IsAttack = false;
+					wL.AnimationReset();
 					wL.SetShow(false);
 				}
 			}
@@ -245,13 +247,13 @@ namespace game_framework {
 		MovingR.OnMove();
 		AttackR.OnMove();
 		AttackL.OnMove();
-		wL.OnMove();
+		// wL.OnMove();
 		// wR.OnMove();
 	}
 
 	void enemy::LoadBitmap()
 	{
-		MovingR.AddBitmap(".\\res\\waddledee\\walk\\walkR1.bmp");
-		MovingL.AddBitmap(".\\res\\waddledee\\walk\\walkL1.bmp");
+		//MovingR.AddBitmap(".\\res\\waddledee\\walk\\walkR1.bmp");
+		//MovingL.AddBitmap(".\\res\\waddledee\\walk\\walkL1.bmp");
 	}
 }

@@ -11,6 +11,7 @@ namespace game_framework {
 		void SetShow(bool);
 		void SetXy(int enemyX, int enemyY, bool enemyFaceL);
 		int* GetXy();
+		void AnimationReset();
 	protected:
 		CAnimation PlayAttack;
 		int x, y;
