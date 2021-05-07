@@ -8,7 +8,7 @@
 
 namespace game_framework {
 
-	starBlock::starBlock(){
+	starBlock::starBlock() {
 		IsShow = true;
 	}
 
@@ -26,7 +26,7 @@ namespace game_framework {
 	}
 
 	int* starBlock::GetXy() {
-		return new int[4]{ x, y , x + starBlockPic.Width(), y + starBlockPic.Height()};
+		return new int[4]{ x, y , x + starBlockPic.Width(), y + starBlockPic.Height() };
 	}
 
 	bool starBlock::GetShow() {

@@ -26,7 +26,9 @@ namespace game_framework {
 		void SetJump(bool input);
 		void SetFly(bool input);
 		void SetEnemyFromL(bool input);
+		void SetEaten(bool input);
 		void Hurt(int input, int time);
+		void ThrowStar();
 		// void BackX();
 		// bool MeetEnemy(enemy & e);
 
@@ -81,6 +83,7 @@ namespace game_framework {
 		bool FlyUp;
 		bool EnemyFromL;
 		bool IsHurt;
+		bool IsEaten;
 		int LastHurt;
 	};
 }

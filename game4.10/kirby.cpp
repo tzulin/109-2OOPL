@@ -39,6 +39,7 @@ namespace game_framework {
 		FlyUp = false;
 		LastHurt = 0;
 		IsHurt = false;
+		IsEaten = false;
 	}
 
 	kirby::~kirby()
@@ -382,6 +383,12 @@ namespace game_framework {
 				IsHurt = false;
 				KirbyHurtL.Reset();
 			}
+			break;
+		default:
+			CMovingBitmap temp;
+			temp.LoadBitmap(IDB_KIRBY);
+			temp.ShowBitmap();
+			break;
 		}
 	}
 
@@ -474,6 +481,12 @@ namespace game_framework {
 				x += 3;
 			}
 		}
+
+		// kirby throw star
+		if (IsAttack) {
+			ThrowStar();
+		}
+		
 
 		// animation OnMove
 		KirbyMovingL.OnMove();
@@ -588,6 +601,10 @@ namespace game_framework {
 		}
 	}
 
+	void kirby::SetEaten(bool input) {
+		IsEaten = input;
+	}
+
 	void kirby::SetEnemyFromL(bool input) {
 		EnemyFromL = input;
 	}
@@ -615,6 +632,14 @@ namespace game_framework {
 		SetJump(false);
 		SetFly(false);
 		// BackX();
+	}
+
+	void kirby::ThrowStar() {
+		if (!IsEaten)
+			return;
+		else {
+			IsEaten = false;
+		}
 	}
 
 	int kirby::GetCase() {
@@ -664,6 +689,10 @@ namespace game_framework {
 					// case walking right
 					return 5;
 				}
+				else if (IsEaten) {
+					// case IsEaten right
+					return 19;
+				}
 				else {
 					// case standing right
 					return 6;
@@ -700,6 +729,10 @@ namespace game_framework {
 				else if (IsMovingL) {
 					// case walking left 
 					return 13;
+				}
+				else if (IsEaten) {
+					// case IsEaten left
+					return 20;
 				}
 				else {
 					// case standing left
