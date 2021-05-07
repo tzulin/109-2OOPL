@@ -255,7 +255,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_W) {
-		Waddle.Reset();
+		// Waddle.Reset();
 		WaddleDoo.Reset();
 	}
 
