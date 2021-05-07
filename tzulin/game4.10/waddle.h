@@ -2,6 +2,7 @@
 #define WADDLE_H
 
 #include "./enemy.h"
+#include "./weapon.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -20,7 +21,6 @@ namespace game_framework {
 	public:
 		void LoadBitmap() override;
 		void Reset() override;
-		bool MeetKirby(kirby & k) override;
 	};
 
 }

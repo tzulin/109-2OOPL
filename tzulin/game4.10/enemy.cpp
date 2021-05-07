@@ -75,6 +75,8 @@ namespace game_framework {
 		const int origin_y = SIZE_Y - 60 - ImgH;
 		x = origin_x;
 		y = origin_y;
+		wL.SetShow(false);
+		wR.SetShow(false);
 		hp = 1;
 	}
 
@@ -128,13 +130,13 @@ namespace game_framework {
 				delete[] KirbyXy;
 				delete[] enemyXY;
 				KirbyFromL = true;
-				return true;
+				return KirbyFromL && !IsFacingR;
 			}
 			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
 				delete[] KirbyXy;
 				delete[] enemyXY;
 				KirbyFromL = true;
-				return true;
+				return KirbyFromL && !IsFacingR;
 			}
 		}
 		else if (enemyXY[2]+ImgW> KirbyXy[0] && enemyXY[2]+ImgW < KirbyXy[2]) {				// enemy meet kirby from right
@@ -142,13 +144,13 @@ namespace game_framework {
 				delete[] KirbyXy;
 				delete[] enemyXY;
 				KirbyFromL = false;
-				return true;
+				return !KirbyFromL && IsFacingR;
 			}
 			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
 				delete[] KirbyXy;
 				delete[] enemyXY;
 				KirbyFromL = false;
-				return true;
+				return !KirbyFromL && IsFacingR;
 			}
 		}
 
@@ -181,21 +183,33 @@ namespace game_framework {
 		}
 		else {
 			if (KirbyFromL) {
-				AttackL.SetDelayCount(10);
-				AttackL.SetTopLeft(x-68, y-68);
+				AttackL.SetDelayCount(5);
+				AttackL.SetTopLeft(x, y);
 				AttackL.OnShow();
+				wL.SetWeapon(x, y, IsFacingR);
+				wL.SetShow(true);
+				wL.OnMove();
+				wL.OnShow();
 				if (AttackL.IsFinalBitmap()) {
 					AttackL.Reset();
+					wL.AnimationReset();
 					IsAttack = false;
+					wL.SetShow(false);
 				}
 			}
 			else {
-				AttackR.SetDelayCount(3);
+				AttackR.SetDelayCount(5);
 				AttackR.SetTopLeft(x, y);
 				AttackR.OnShow();
+				wR.SetWeapon(x, y, IsFacingR);
+				wR.SetShow(true);
+				wR.OnMove();
+				wR.OnShow();
 				if (AttackR.IsFinalBitmap()) {
 					AttackR.Reset();
+					wR.AnimationReset();
 					IsAttack = false;
+					wR.SetShow(false);
 				}
 			}
 		}
@@ -208,6 +222,8 @@ namespace game_framework {
 		const int length = 2;
 
 		if (!IsAttack) {
+			MovingL.OnMove();
+			MovingR.OnMove();
 			// set moving XY and frame of test 
 			if (IsMovingL && x > frame_of_test) {
 				if (IsFacingR) {
@@ -231,16 +247,11 @@ namespace game_framework {
 				IsMovingL = true;
 			}
 		}
-
-		MovingL.OnMove();
-		MovingR.OnMove();
-		AttackR.OnMove();
-		AttackL.OnMove();
+		else {
+			AttackR.OnMove();
+			AttackL.OnMove();
+		}
 	}
 
-	void enemy::LoadBitmap()
-	{
-		MovingR.AddBitmap(".\\res\\waddledee\\walk\\walkR1.bmp");
-		MovingL.AddBitmap(".\\res\\waddledee\\walk\\walkL1.bmp");
-	}
+	void enemy::LoadBitmap(){}
 }
