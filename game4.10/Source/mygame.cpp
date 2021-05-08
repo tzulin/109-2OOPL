@@ -8,6 +8,7 @@
 #include "gamelib.h"
 #include "mygame.h"
 
+
 namespace game_framework {
 /////////////////////////////////////////////////////////////////////////////
 // 這個class為遊戲的遊戲開頭畫面物件
@@ -219,6 +220,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		delete[] StarBlockXy;
 		delete[] KirbyXy;
 	}
+
+	if (Meet(Kirby, *StarBlock)) {
+		int i = 2;
+	}
+	else {
+		int i = 1;
+	}
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -349,7 +357,7 @@ void CGameStateRun::OnShow()
 	
 	Kirby.OnShow();									// Kirby OnShow
 	kirbyHp.ShowBitmap();							// kibyHp show	
-	
+
 	
 	if (StarBlock->GetShow()) {
 		StarBlock->OnShow();							// StarBlock onShow

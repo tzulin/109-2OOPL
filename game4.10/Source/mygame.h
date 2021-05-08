@@ -3,6 +3,7 @@
 #include "../../game4.10/enemy.h"
 #include "../../game4.10/waddle.h"
 #include "../../game4.10/things.h"
+#include "../../game4.10/system.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -56,6 +57,7 @@ namespace game_framework {
 		CInteger kirbyHpInt;
 		starBlock * StarBlock;
 		int temp_floor = 60, counter = 0;
+		CInteger test;
  	};
 
 	/////////////////////////////////////////////////////////////////////////////

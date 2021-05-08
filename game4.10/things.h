@@ -1,3 +1,6 @@
+#ifndef THINGS_H
+#define THINGS_H
+
 namespace game_framework {
 	class starBlock {
 	public:
@@ -24,3 +27,5 @@ namespace game_framework {
 		int height, width;
 	};
 }
+
+#endif
