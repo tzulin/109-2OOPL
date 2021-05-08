@@ -154,6 +154,7 @@ void CGameStateRun::OnBeginState()
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	counter++;
+	Kirby.SetCounter(counter);							// kirby setcounter
 	Kirby.OnMove();										// Kirby OnMove
 	if (!Kirby.IsAlive()) {								// Kirby dead
 		GotoGameState(GAME_STATE_OVER);
@@ -205,10 +206,12 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		if (canAttackR && Kirby.IsScreamR()) {
 			StarBlock->SetShow(false);
 			Kirby.SetEaten(true);
+			Kirby.SetAttack(false);
 		}
 		else if (canAttackL && Kirby.IsScreamL()) {
 			StarBlock->SetShow(false);
 			Kirby.SetEaten(true);
+			Kirby.SetAttack(false);
 		}
 		else {
 			StarBlock->SetShow(true);
@@ -220,7 +223,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
-	StarBlock = new starBlock;
 	Map.LoadBitmap(".\\res\\map_example.bmp");			// map load and set
 	Map.SetTopLeft(0, 0);
 	kirbyHp.LoadBitmap(".\\res\\kirby_hpPic.bmp", RGB(236, 28, 36));
@@ -231,9 +233,10 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	Kirby.LoadBitmap();									// Kirby LoadBitmap
 	Waddle.LoadBitmap();								// Waddle LoadBitmap
 	WaddleDoo.LoadBitmap();								// WaddleDoo LoadBitmap
+	StarBlock = new starBlock;
 	StarBlock->LoadBitmap();							// StarBlock LoadBitmap setTopLeft
 	int* temp = StarBlock->GetHw();
-	StarBlock->SetXY(SIZE_X/2, SIZE_Y - temp_floor - temp[0]);
+	StarBlock->SetXY(SIZE_X / 2, SIZE_Y - temp_floor - temp[0]);
 	delete[] temp;
 }
 
@@ -347,7 +350,7 @@ void CGameStateRun::OnShow()
 	Kirby.OnShow();									// Kirby OnShow
 	kirbyHp.ShowBitmap();							// kibyHp show	
 	
-
+	
 	if (StarBlock->GetShow()) {
 		StarBlock->OnShow();							// StarBlock onShow
 	}

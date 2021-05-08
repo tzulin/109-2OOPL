@@ -510,5 +510,11 @@
     <Image Include="RES\starblock.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\walk\bitmap15.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\star.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

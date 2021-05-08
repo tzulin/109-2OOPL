@@ -208,10 +208,29 @@ namespace game_framework {
 		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL6.bmp", RGB(255, 255, 255));
 		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL7.bmp", RGB(255, 255, 255));
 		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL8.bmp", RGB(255, 255, 255));
+
+		// load Star Throw
+		int rgb[3] = {0, 0, 0};
+		StarThrow.LoadBitmap(IDB_STARTHROW, rgb, 100);
 }
 
 	void kirby::OnShow()
 	{
+		StarThrow.OnMove();
+		if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 100) {
+			int* temp = StarThrow.GetXy();
+			if (StarThrow.GetAttackFacingR()) {
+				StarThrow.SetXy(temp[0] + 10, temp[1]);
+			}
+			else {
+				StarThrow.SetXy(temp[0] - 10, temp[1]);
+			}
+			delete[] temp;
+			StarThrow.OnShow();
+		}
+		else {
+			StarThrow.SetShow(false);
+		}
 		switch (GetCase()) {
 		// case jump up right
 		case 1:
@@ -363,7 +382,7 @@ namespace game_framework {
 
 		// case hurt right
 		case 17: 
-			KirbyHurtR.SetDelayCount(4);
+			KirbyHurtR.SetDelayCount(2);
 			KirbyHurtR.SetTopLeft(x, y);
 			KirbyHurtR.OnMove();
 			KirbyHurtR.OnShow();
@@ -375,7 +394,7 @@ namespace game_framework {
 
 		// case hurt left
 		case 18:
-			KirbyHurtL.SetDelayCount(4);
+			KirbyHurtL.SetDelayCount(2);
 			KirbyHurtL.SetTopLeft(x, y);
 			KirbyHurtL.OnMove();
 			KirbyHurtL.OnShow();
@@ -475,18 +494,17 @@ namespace game_framework {
 		// kirby is hurt
 		if (IsHurt) {
 			if (!EnemyFromL && x > frame_of_test) {
-				x -= 3;
+				x -= 2;
 			}
 			else if (x < SIZE_X - ImgW - frame_of_test) {
-				x += 3;
+				x += 2;
 			}
 		}
 
 		// kirby throw star
-		if (IsAttack) {
+		if (IsEaten && IsAttack) {
 			ThrowStar();
 		}
-		
 
 		// animation OnMove
 		KirbyMovingL.OnMove();
@@ -609,6 +627,10 @@ namespace game_framework {
 		EnemyFromL = input;
 	}
 
+	void kirby::SetCounter(int input_counter) {
+		game_state_counter = input_counter;
+	}
+
 	/*
 	void kirby::BackX() {
 		if (IsFacingR) {
@@ -635,11 +657,12 @@ namespace game_framework {
 	}
 
 	void kirby::ThrowStar() {
-		if (!IsEaten)
-			return;
-		else {
-			IsEaten = false;
-		}
+		int* temp = GetXy();
+		StarThrow.SetAttackState(game_state_counter, IsFacingR, temp);
+		delete[] temp;
+		StarThrow.SetShow(true);
+		IsEaten = false;
+		IsAttack = false;
 	}
 
 	int kirby::GetCase() {
