@@ -11,11 +11,21 @@ namespace game_framework {
 
 	weapon::weapon() {
 		IsShow = false;
+		attack_time = 0;
+	}
+
+	weapon::~weapon() {
 	}
 
 	void weapon::LoadBitmap(char** pic, int* rgb, int n) {
 		for (int i = 0; i < n; i++) {
 			PlayAttack.AddBitmap(pic[i], RGB(rgb[0], rgb[1], rgb[2]));
+		}
+	}
+
+	void weapon::LoadBitmap(int IDB_INPUT, int* rgb, int n) {
+		for (int i = 0; i < n; i++) {
+			PlayAttack.AddBitmap(IDB_INPUT, RGB(rgb[0], rgb[1], rgb[2]));
 		}
 	}
 
@@ -56,12 +66,29 @@ namespace game_framework {
 			x = enemyX - ImgW;
 			y = enemyY - (ImgH - enemyImgH);
 		}
+	}
 
+	void weapon::SetXy(int input_x, int input_y) {
+		x = input_x;
+		y = input_y;
+	}
+
+	void weapon::SetAttackState(int input_attack_time, bool IsFacingR, int* input_Xy) {
+		x = input_Xy[0];
+		y = input_Xy[1];
+		attack_time = input_attack_time;
+		AttackIsFacingR = IsFacingR;
 	}
 
 	int* weapon::GetXy() {
 		return new int[4]{ x, y, x + ImgW, y + ImgH };
 	}
 
+	int weapon::GetAttackTime() {
+		return attack_time;
+	}
 
+	bool weapon::GetAttackFacingR() {
+		return AttackIsFacingR;
+	}
 }
