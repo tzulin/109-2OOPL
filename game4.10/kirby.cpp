@@ -493,10 +493,9 @@ namespace game_framework {
 
 		// kirby is hurt
 		if (IsHurt) {
-			if (!EnemyFromL && x > frame_of_test) {
+			if (!OtherFromL) {
 				x -= 2;
-			}
-			else if (x < SIZE_X - ImgW - frame_of_test) {
+			} else  {
 				x += 2;
 			}
 		}
@@ -512,50 +511,6 @@ namespace game_framework {
 		KirbyStand.OnMove();
 		KirbyStandL.OnMove();
 	}
-	
-	/*
-	bool kirby::MeetEnemy(enemy & e) {
-		int* KirbyXy = GetXy();
-		int* enemyXY = e.GetXy();
-
-		if (enemyXY[0] > KirbyXy[0] && enemyXY[0] < KirbyXy[2]) {					// kirby meet enemy from left
-			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				e.BackX(true);
-				EnemyFromL = false;
-				return true;
-			}
-			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				e.BackX(true);
-				EnemyFromL = false;
-				return true;
-			}
-		}
-		else if (enemyXY[2] > KirbyXy[0] && enemyXY[2] < KirbyXy[2]) {			// kirby meet enemy from right
-			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				e.BackX(false);
-				EnemyFromL = true;
-				return true;
-			}
-			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				e.BackX(false);
-				EnemyFromL = true;
-				return true;
-			}
-		}
-
-		delete[] KirbyXy;
-		delete[] enemyXY;
-		return false;
-	}
-	*/
 
 	void kirby::SetXY(int x_in, int y_in) {
 		x = x_in;
@@ -623,24 +578,19 @@ namespace game_framework {
 		IsEaten = input;
 	}
 
-	void kirby::SetEnemyFromL(bool input) {
-		EnemyFromL = input;
+	void kirby::YouAreLeft(bool YouAreLeft) {
+		OtherFromL = !YouAreLeft;
+		if (OtherFromL) {
+			int i = 0;
+		}
+		else {
+			int i = 0;
+		}
 	}
 
 	void kirby::SetCounter(int input_counter) {
 		game_state_counter = input_counter;
 	}
-
-	/*
-	void kirby::BackX() {
-		if (IsFacingR) {
-			x -= 25;
-		}
-		else {
-			x += 25;
-		}
-	}
-	*/
 	
 	void kirby::Hurt(int input, int time) {
 		if (abs(LastHurt - time) < 30) {
@@ -667,7 +617,7 @@ namespace game_framework {
 
 	int kirby::GetCase() {
 		if (IsHurt) {
-			if (EnemyFromL) {
+			if (OtherFromL) {
 				if (IsFacingR) {
 					IsFacingR = false;
 				}

@@ -66,6 +66,7 @@ namespace game_framework {
 		if (abs(LastHurt - time) < 30) {
 			return;
 		}
+		BackX(OtherFromL);
 		LastHurt = time;
 		hp -= input;
 	}
@@ -79,7 +80,7 @@ namespace game_framework {
 		wR.SetShow(false);
 		hp = 1;
 	}
-
+	/*
 	bool enemy::MeetKirby(kirby & k) {
 		int* KirbyXy = k.GetXy();
 		int* enemyXY = GetXy();
@@ -120,7 +121,8 @@ namespace game_framework {
 		delete[] enemyXY;
 		return false;
 	}
-
+	*/
+	/*
 	bool enemy::SeeKirby(kirby k) {
 		int* KirbyXy = k.GetXy();
 		int* enemyXY = GetXy();
@@ -157,7 +159,7 @@ namespace game_framework {
 		delete[] KirbyXy;
 		delete[] enemyXY;
 		return false;
-	}
+	}*/
 
 	void enemy::Attack(kirby k, int time) {
 		if (abs(LastAttack - time) < 30) {
@@ -165,6 +167,10 @@ namespace game_framework {
 		}
 		LastAttack = time;
 		IsAttack = true;
+	}
+
+	void enemy::YouAreLeft(bool YouAreLeft) {
+		OtherFromL = !YouAreLeft;
 	}
 
 	void enemy::OnShow()
@@ -182,7 +188,7 @@ namespace game_framework {
 			}
 		}
 		else {
-			if (KirbyFromL) {
+			if (OtherFromL) {
 				AttackL.SetDelayCount(5);
 				AttackL.SetTopLeft(x, y);
 				AttackL.OnShow();

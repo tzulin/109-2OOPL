@@ -25,9 +25,10 @@ namespace game_framework {
 		void BackX(bool fromL);
 		void Hurt(int input, int time);
 		virtual void Reset();
-		bool MeetKirby(kirby & k);
-		virtual bool SeeKirby(kirby k);
+		//bool MeetKirby(kirby & k);
+		//virtual bool SeeKirby(kirby k);
 		void Attack(kirby k, int time);
+		void YouAreLeft(bool YouAreLeft);
 		// virtual void SetAttack();
 
 	protected:
@@ -52,6 +53,7 @@ namespace game_framework {
 		bool IsHurt;
 		int LastHurt;
 		int LastAttack;
+		bool OtherFromL;
 		bool KirbyFromL;
 	};
 }

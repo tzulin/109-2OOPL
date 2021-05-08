@@ -31,6 +31,8 @@ namespace game_framework {
 		void SetCounter(int);
 		void Hurt(int input, int time);
 		void ThrowStar();
+		void YouAreLeft(bool YouAreLeft);
+
 		// void BackX();
 		// bool MeetEnemy(enemy & e);
 
@@ -87,6 +89,7 @@ namespace game_framework {
 		bool IsFat;
 		bool FlyUp;
 		bool EnemyFromL;
+		bool OtherFromL;
 		bool IsHurt;
 		bool IsEaten;
 		int LastHurt;

@@ -51,10 +51,11 @@ namespace game_framework {
 		LastHurt = 0;
 	}
 
+	/*
 	bool waddle::SeeKirby(kirby k) {
 		return false;
 	}
-
+	*/
 	void waddleDoo::LoadBitmap()
 	{
 		// load walk right

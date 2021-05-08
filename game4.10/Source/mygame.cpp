@@ -163,24 +163,28 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	if (Waddle.GetHp() > 0) {
 		Waddle.OnMove();									// Waddle OnMove
-		if (Waddle.MeetKirby(Kirby)) {
+		if (Meet(Waddle, Kirby)) {
 			Kirby.Hurt(Waddle.GetPower(), counter);
 			Waddle.Hurt(1, counter);
 		}
+		/*
 		if (Waddle.SeeKirby(Kirby)) {
 			Waddle.Attack(Kirby, counter);
 		}
+		*/
 	}
 	if (WaddleDoo.GetHp() > 0) {
 		WaddleDoo.OnMove();								    // WaddleDoo OnMove
-		if (WaddleDoo.MeetKirby(Kirby)) {
+		if (Meet(WaddleDoo, Kirby)) {
 			Kirby.Hurt(WaddleDoo.GetPower(), counter);
 			WaddleDoo.Hurt(1, counter);
 		}
+		/*
 		if (WaddleDoo.SeeKirby(Kirby)) {
 			WaddleDoo.Attack(Kirby, counter);
 			// Kirby.Hurt(WaddleDoo.GetPower(), counter);
 		}
+		 */
 	}
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
 
@@ -220,13 +224,14 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		delete[] StarBlockXy;
 		delete[] KirbyXy;
 	}
-
+	/*
 	if (Meet(Kirby, *StarBlock)) {
 		int i = 2;
 	}
 	else {
 		int i = 1;
 	}
+	*/
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定

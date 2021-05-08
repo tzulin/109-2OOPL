@@ -17,6 +17,15 @@ namespace game_framework {
 				if (aXy[i] > bXy[0] && aXy[i] < bXy[2] && aXy[n] > bXy[1] && aXy[n] < bXy[3]) {
 					delete[] aXy;
 					delete[] bXy;
+					if (i == 0) {
+						// b在A左邊
+						a.YouAreLeft(false);
+						b.YouAreLeft(true);
+					}
+					else {
+						a.YouAreLeft(true);
+						b.YouAreLeft(false);
+					}
 					return true;
 				}
 				n += 2;
@@ -31,6 +40,15 @@ namespace game_framework {
 				if (bXy[i] > aXy[0] && bXy[i] < aXy[2] && bXy[n] > aXy[1] && bXy[n] < aXy[3]) {
 					delete[] aXy;
 					delete[] bXy;
+					if (i == 0) {
+						// a在b左邊
+						a.YouAreLeft(true);
+						b.YouAreLeft(false);
+					}
+					else {
+						a.YouAreLeft(false);
+						b.YouAreLeft(true);
+					}
 					return true;
 				}
 				n += 2;
