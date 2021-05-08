@@ -1,10 +1,13 @@
+#ifndef THINGS_H
+#define THINGS_H
+
 namespace game_framework {
 	class starBlock {
 	public:
 		void LoadBitmap();
 		void OnShow();
 		void SetShow(bool);
-		void SetXY(int, int);
+		void SetXy(int, int);
 		starBlock();
 		int* GetHw();
 		int* GetXy();
@@ -17,10 +20,12 @@ namespace game_framework {
 
 	class blankBlock {
 	public:
-		void SetXY(int, int);
-		void SetHW(int, int);
+		void SetXy(int, int);
+		void SetHw(int, int);
 	private:
 		int x, y;
 		int height, width;
 	};
 }
+
+#endif

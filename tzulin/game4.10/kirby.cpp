@@ -39,6 +39,8 @@ namespace game_framework {
 		FlyUp = false;
 		LastHurt = 0;
 		IsHurt = false;
+		IsEaten = false;
+		OtherFromL = false;
 	}
 
 	kirby::~kirby()
@@ -382,6 +384,12 @@ namespace game_framework {
 				IsHurt = false;
 				KirbyHurtL.Reset();
 			}
+			break;
+		default:
+			CMovingBitmap temp;
+			temp.LoadBitmap(IDB_KIRBY);
+			temp.ShowBitmap();
+			break;
 		}
 	}
 
@@ -467,7 +475,7 @@ namespace game_framework {
 
 		// kirby is hurt
 		if (IsHurt) {
-			if (!EnemyFromL && x > frame_of_test) {
+			if (!OtherFromL && x > frame_of_test) {
 				x -= 3;
 			}
 			else if (x < SIZE_X - ImgW - frame_of_test) {
@@ -475,58 +483,20 @@ namespace game_framework {
 			}
 		}
 
+		// kirby throw star
+		if (IsAttack) {
+			ThrowStar();
+		}
+		
+
 		// animation OnMove
 		KirbyMovingL.OnMove();
 		KirbyMovingR.OnMove();
 		KirbyStand.OnMove();
 		KirbyStandL.OnMove();
 	}
-	
-	/*
-	bool kirby::MeetEnemy(enemy & e) {
-		int* KirbyXy = GetXy();
-		int* enemyXY = e.GetXy();
 
-		if (enemyXY[0] > KirbyXy[0] && enemyXY[0] < KirbyXy[2]) {					// kirby meet enemy from left
-			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				e.BackX(true);
-				EnemyFromL = false;
-				return true;
-			}
-			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				e.BackX(true);
-				EnemyFromL = false;
-				return true;
-			}
-		}
-		else if (enemyXY[2] > KirbyXy[0] && enemyXY[2] < KirbyXy[2]) {			// kirby meet enemy from right
-			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				e.BackX(false);
-				EnemyFromL = true;
-				return true;
-			}
-			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				e.BackX(false);
-				EnemyFromL = true;
-				return true;
-			}
-		}
-
-		delete[] KirbyXy;
-		delete[] enemyXY;
-		return false;
-	}
-	*/
-
-	void kirby::SetXY(int x_in, int y_in) {
+	void kirby::SetXy(int x_in, int y_in) {
 		x = x_in;
 		y = y_in;
 	}
@@ -588,20 +558,17 @@ namespace game_framework {
 		}
 	}
 
+	void kirby::SetEaten(bool input) {
+		IsEaten = input;
+	}
+
 	void kirby::SetEnemyFromL(bool input) {
 		EnemyFromL = input;
 	}
 
-	/*
-	void kirby::BackX() {
-		if (IsFacingR) {
-			x -= 25;
-		}
-		else {
-			x += 25;
-		}
+	void kirby::SetOtherFromL(bool input) {
+		OtherFromL = input;
 	}
-	*/
 	
 	void kirby::Hurt(int input, int time) {
 		if (abs(LastHurt - time) < 30) {
@@ -614,12 +581,19 @@ namespace game_framework {
 		SetAttack(false);
 		SetJump(false);
 		SetFly(false);
-		// BackX();
+	}
+
+	void kirby::ThrowStar() {
+		if (!IsEaten)
+			return;
+		else {
+			IsEaten = false;
+		}
 	}
 
 	int kirby::GetCase() {
 		if (IsHurt) {
-			if (EnemyFromL) {
+			if (OtherFromL) {
 				if (IsFacingR) {
 					IsFacingR = false;
 				}
@@ -664,6 +638,10 @@ namespace game_framework {
 					// case walking right
 					return 5;
 				}
+				else if (IsEaten) {
+					// case IsEaten right
+					return 19;
+				}
 				else {
 					// case standing right
 					return 6;
@@ -700,6 +678,10 @@ namespace game_framework {
 				else if (IsMovingL) {
 					// case walking left 
 					return 13;
+				}
+				else if (IsEaten) {
+					// case IsEaten left
+					return 20;
 				}
 				else {
 					// case standing left

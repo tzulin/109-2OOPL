@@ -16,7 +16,7 @@ namespace game_framework {
 		void LoadBitmap();
 		void OnMove();
 		void OnShow();
-		void SetXY(int x_in, int y_in);
+		void SetXy(int x_in, int y_in);
 		void SetMovingL(bool input);
 		void SetMovingR(bool input);
 		void SetFacingR(bool input);
@@ -26,9 +26,10 @@ namespace game_framework {
 		void SetJump(bool input);
 		void SetFly(bool input);
 		void SetEnemyFromL(bool input);
+		void SetOtherFromL(bool input);
+		void SetEaten(bool input);
 		void Hurt(int input, int time);
-		// void BackX();
-		// bool MeetEnemy(enemy & e);
+		void ThrowStar();
 
 		int GetCase();
 		int GetHp();
@@ -80,7 +81,9 @@ namespace game_framework {
 		bool IsFat;
 		bool FlyUp;
 		bool EnemyFromL;
+		bool OtherFromL;
 		bool IsHurt;
+		bool IsEaten;
 		int LastHurt;
 	};
 }

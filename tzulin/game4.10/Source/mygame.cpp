@@ -143,6 +143,8 @@ CGameStateRun::CGameStateRun(CGame *g)
 
 CGameStateRun::~CGameStateRun()
 {
+	if(StarBlock != nullptr)
+		delete StarBlock;
 }
 
 void CGameStateRun::OnBeginState()
@@ -159,7 +161,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	if (Waddle.GetHp() > 0) {
 		Waddle.OnMove();									// Waddle OnMove
-		if (Waddle.MeetKirby(Kirby)) {
+		if (Meet(Kirby, Waddle)) {
 			Kirby.Hurt(Waddle.GetPower(), counter);
 			Waddle.Hurt(1, counter);
 		}
@@ -169,7 +171,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 	if (WaddleDoo.GetHp() > 0) {
 		WaddleDoo.OnMove();								    // WaddleDoo OnMove
-		if (WaddleDoo.MeetKirby(Kirby)) {
+		if (Meet(Kirby, WaddleDoo)) {
 			Kirby.Hurt(WaddleDoo.GetPower(), counter);
 			WaddleDoo.Hurt(1, counter);
 		}
@@ -180,31 +182,45 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
 
-	int* StarBlockXy = StarBlock.GetXy();
-	int* KirbyXy = Kirby.GetXy();
-	bool canAttack = false;
-	int for_count = 0;
-	for (;for_count < 5;for_count++) {
-		if (StarBlockXy[0] > KirbyXy[2] + for_count) {
-			canAttack = true;
-			break;
+	if (StarBlock != nullptr) {
+		int* StarBlockXy = StarBlock->GetXy(); 
+		int* KirbyXy = Kirby.GetXy();
+		bool canAttackR = false;
+		bool canAttackL = false;
+		int for_count = 0;
+		for (;for_count < 10;for_count++) {
+			int x_different = StarBlockXy[0] - KirbyXy[2];
+			int x_different2 = KirbyXy[0] - StarBlockXy[2];
+			int y_different = StarBlockXy[1] - KirbyXy[1];
+			int y_different2 = KirbyXy[3] - StarBlockXy[3];
+			if (x_different > for_count && x_different < 60 && y_different < for_count * 4 && y_different2 < for_count * 4) {
+				canAttackR = true;
+				break;
+			}
+			if (x_different2 > for_count && x_different2 < 60 && y_different < for_count * 4 && y_different2 < for_count * 4) {
+				canAttackL = true;
+				break;
+			}
 		}
-	}
-	if (canAttack) {
-		if (Kirby.IsScreamR()) {
-			StarBlock.SetShow(false);
+		if (canAttackR && Kirby.IsScreamR()) {
+			StarBlock->SetShow(false);
+			Kirby.SetEaten(true);
+		}
+		else if (canAttackL && Kirby.IsScreamL()) {
+			StarBlock->SetShow(false);
+			Kirby.SetEaten(true);
 		}
 		else {
-			StarBlock.SetShow(true);
+			StarBlock->SetShow(true);
 		}
+		delete[] StarBlockXy;
+		delete[] KirbyXy;
 	}
-	
-	delete[] StarBlockXy;
-	delete[] KirbyXy;
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
+	StarBlock = new starBlock;
 	Map.LoadBitmap(".\\res\\map_example.bmp");			// map load and set
 	Map.SetTopLeft(0, 0);
 	kirbyHp.LoadBitmap(".\\res\\kirby_hpPic.bmp", RGB(236, 28, 36));
@@ -215,10 +231,10 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	Kirby.LoadBitmap();									// Kirby LoadBitmap
 	Waddle.LoadBitmap();								// Waddle LoadBitmap
 	WaddleDoo.LoadBitmap();								// WaddleDoo LoadBitmap
-	StarBlock.LoadBitmap();								// StarBlock LoadBitmap setTopLeft
-	int* temp = StarBlock.GetHw();
-	StarBlock.SetXY(SIZE_X/2, SIZE_Y - temp_floor - temp[0]);
-	delete temp;
+	StarBlock->LoadBitmap();							// StarBlock LoadBitmap setTopLeft
+	int* temp = StarBlock->GetHw();
+	StarBlock->SetXy(SIZE_X/2, SIZE_Y - temp_floor - temp[0]);
+	delete[] temp;
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -331,8 +347,9 @@ void CGameStateRun::OnShow()
 	Kirby.OnShow();									// Kirby OnShow
 	kirbyHp.ShowBitmap();							// kibyHp show	
 	
-	if (StarBlock.GetShow()) {
-		StarBlock.OnShow();							// StarBlock onShow
+
+	if (StarBlock->GetShow()) {
+		StarBlock->OnShow();							// StarBlock onShow
 	}
 }
 }//namespace end

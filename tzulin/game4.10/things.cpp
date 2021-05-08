@@ -8,7 +8,7 @@
 
 namespace game_framework {
 
-	starBlock::starBlock(){
+	starBlock::starBlock() {
 		IsShow = true;
 	}
 
@@ -16,7 +16,7 @@ namespace game_framework {
 		starBlockPic.LoadBitmap(IDB_STARBLOCK);
 	}
 
-	void starBlock::SetXY(int input_x, int input_y) {
+	void starBlock::SetXy(int input_x, int input_y) {
 		x = input_x;
 		y = input_y;
 	}
@@ -26,7 +26,7 @@ namespace game_framework {
 	}
 
 	int* starBlock::GetXy() {
-		return new int[4]{ x, y , x + starBlockPic.Width(), y + starBlockPic.Height()};
+		return new int[4]{ x, y , x + starBlockPic.Width(), y + starBlockPic.Height() };
 	}
 
 	bool starBlock::GetShow() {
@@ -42,12 +42,12 @@ namespace game_framework {
 		IsShow = input;
 	}
 
-	void blankBlock::SetHW(int input_h, int input_w) {
+	void blankBlock::SetHw(int input_h, int input_w) {
 		height = input_h;
 		width = input_w;
 	}
 
-	void blankBlock::SetXY(int input_x, int input_y) {
+	void blankBlock::SetXy(int input_x, int input_y) {
 		x = input_x;
 		y = input_y;
 	}

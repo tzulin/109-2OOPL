@@ -3,6 +3,7 @@
 #include "../../game4.10/enemy.h"
 #include "../../game4.10/waddle.h"
 #include "../../game4.10/things.h"
+#include "../../game4.10/system.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -54,7 +55,7 @@ namespace game_framework {
 		CMovingBitmap kirbyHp;
 		CMovingBitmap Map;
 		CInteger kirbyHpInt;
-		starBlock StarBlock;
+		starBlock * StarBlock;
 		int temp_floor = 60, counter = 0;
  	};
 
