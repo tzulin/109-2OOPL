@@ -150,6 +150,13 @@ CGameStateRun::~CGameStateRun()
 		}
 		delete[] StarBlockList;
 	}
+
+	if (Waddle != nullptr) {
+		delete Waddle;
+	}
+	if (WaddleDoo != nullptr) {
+		delete WaddleDoo;
+	}
 }
 
 void CGameStateRun::OnBeginState()
@@ -166,71 +173,62 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	Kirby.OnMove();										// Kirby OnMove
 	
-	if (Waddle.GetHp() > 0) {
-		Waddle.OnMove();									// Waddle OnMove
-		if (Meet(Waddle, Kirby)) {
-			Kirby.Hurt(Waddle.GetPower(), counter);
-			Waddle.Hurt(1, counter);
+	if (Waddle != nullptr) {
+		if (Waddle->GetHp() > 0) {
+			Waddle->OnMove();									// Waddle OnMove
+			if (Meet(*Waddle, Kirby)) {
+				Kirby.Hurt(Waddle->GetPower(), counter);
+				Waddle->Hurt(1, counter);
+			}
+			/*
+			if (Waddle.SeeKirby(Kirby)) {
+				Waddle.Attack(Kirby, counter);
+			}
+			*/
 		}
-		/*
-		if (Waddle.SeeKirby(Kirby)) {
-			Waddle.Attack(Kirby, counter);
-		}
-		*/
-		
 	}
-	if (WaddleDoo.GetHp() > 0) {
-		if (Meet(WaddleDoo, Kirby)) {
-			Kirby.Hurt(WaddleDoo.GetPower(), counter);
-			WaddleDoo.Hurt(1, counter);
+	if (WaddleDoo != nullptr) {
+		if (WaddleDoo->GetHp() > 0) {
+			if (Meet(*WaddleDoo, Kirby)) {
+				Kirby.Hurt(WaddleDoo->GetPower(), counter);
+				WaddleDoo->Hurt(1, counter);
+			}
+			WaddleDoo->OnMove();								    // WaddleDoo OnMove
 		}
-		WaddleDoo.OnMove();								    // WaddleDoo OnMove
 	}
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
 
-	
 	if (StarBlockList != nullptr) {							// starblock can attack or not
 		for (int i = 0; i < 25;i++) {
 			if (StarBlockList[i] != nullptr) {
-				int* StarBlockXy = StarBlockList[i]->GetXy();
-				int* KirbyXy = Kirby.GetXy();
-				bool canAttackR = false;
-				bool canAttackL = false;
-				int for_count = 0;
-				for (;for_count < 10;for_count++) {
-					int x_different = StarBlockXy[0] - KirbyXy[2];
-					int x_different2 = KirbyXy[0] - StarBlockXy[2];
-					int y_different = StarBlockXy[1] - KirbyXy[1];
-					int y_different2 = KirbyXy[3] - StarBlockXy[3];
-					if (x_different > for_count && x_different < 60 && y_different < for_count * 8 && y_different2 < for_count * 8) {
-						canAttackR = true;
-						break;
-					}
-					if (x_different2 > for_count && x_different2 < 60 && y_different < for_count * 8 && y_different2 < for_count * 8) {
-						canAttackL = true;
-						break;
-					}
-				}
-				if (canAttackR && Kirby.IsScreamR()) {
+				if (KirbyCanAttack(Kirby, StarBlockList[i]) && (Kirby.IsScreamR() || Kirby.IsScreamL())) {
 					StarBlockList[i]->SetShow(false);
 					Kirby.SetEaten(true);
 					Kirby.SetAttack(false);
 					delete[] StarBlockList[i];
 					StarBlockList[i] = nullptr;
-				}
-				else if (canAttackL && Kirby.IsScreamL()) {
-					StarBlockList[i]->SetShow(false);
-					Kirby.SetEaten(true);
-					Kirby.SetAttack(false);
-					delete[] StarBlockList[i];
-					StarBlockList[i] = nullptr;
-				}
-				else {
+				}else{
 					StarBlockList[i]->SetShow(true);
 				}
-				delete[] StarBlockXy;
-				delete[] KirbyXy;
 			}
+		}
+	}
+
+	if (Waddle != nullptr) {
+		if (KirbyCanAttack(Kirby, Waddle) && (Kirby.IsScreamR() || Kirby.IsScreamL())) {
+			Kirby.SetEaten(true);
+			Kirby.SetAttack(false);
+			delete Waddle;
+			Waddle = nullptr;
+		}
+	}
+
+	if (WaddleDoo != nullptr) {
+		if (KirbyCanAttack(Kirby, WaddleDoo) && (Kirby.IsScreamR() || Kirby.IsScreamL())) {
+			Kirby.SetEaten(true);
+			Kirby.SetAttack(false);
+			delete WaddleDoo;
+			WaddleDoo = nullptr;
 		}
 	}
 }
@@ -245,8 +243,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	kirbyHpInt.SetDigits(2);
 	kirbyHpInt.SetTopLeft(kirbyHp.Width(), SIZE_Y - kirbyHp.Height() + 5);						// kirbyHpInt load and set
 	Kirby.LoadBitmap();									// Kirby LoadBitmap
-	Waddle.LoadBitmap();								// Waddle LoadBitmap
-	WaddleDoo.LoadBitmap();								// WaddleDoo LoadBitmap
+	Waddle = nullptr;
+	WaddleDoo = nullptr;
 	StarBlockList = nullptr;
 	
 }
@@ -286,8 +284,18 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_W) {
-		Waddle.Reset();
-		WaddleDoo.Reset();
+		if (Waddle != nullptr) {
+			delete Waddle;
+		}
+		if (WaddleDoo != nullptr) {
+			delete WaddleDoo;
+		}
+		Waddle = new waddle;
+		WaddleDoo = new waddleDoo;
+		Waddle->LoadBitmap();								// Waddle LoadBitmap
+		WaddleDoo->LoadBitmap();							// WaddleDoo LoadBitmap
+		Waddle->Reset();
+		WaddleDoo->Reset();
 	}
 
 	if (nChar == KEY_S) {
@@ -373,11 +381,15 @@ void CGameStateRun::OnShow()
 	Map.ShowBitmap();
 	kirbyHpInt.ShowBitmap();						// hp int show
 	
-	if (Waddle.GetHp() > 0) {
-		Waddle.OnShow();								// Waddle OnShow
+	if (Waddle != nullptr) {
+		if (Waddle->GetHp() > 0) {
+			Waddle->OnShow();								// Waddle OnShow
+		}
 	}
-	if (WaddleDoo.GetHp() > 0) {
-		WaddleDoo.OnShow();								// WaddleDoo onshow
+	if (WaddleDoo != nullptr) {
+		if (WaddleDoo->GetHp() > 0) {
+			WaddleDoo->OnShow();								// WaddleDoo onshow
+		}
 	}
 	
 	Kirby.OnShow();									// Kirby OnShow

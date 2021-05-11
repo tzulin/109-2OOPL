@@ -743,4 +743,31 @@ namespace game_framework {
 	bool kirby::IsScreamL() {
 		return IsAttack && !IsFacingR && !IsDown;
 	}
+	/*
+	template < class T >
+	bool kirby::CanAttack(T t) {
+		int* StarBlockXy = t.GetXy();
+		int* KirbyXy = GetXy();
+		bool canAttackR = false;
+		bool canAttackL = false;
+		int for_count = 0;
+		for (;for_count < 10;for_count++) {
+			int x_different = StarBlockXy[0] - KirbyXy[2];
+			int x_different2 = KirbyXy[0] - StarBlockXy[2];
+			int y_different = StarBlockXy[1] - KirbyXy[1];
+			int y_different2 = KirbyXy[3] - StarBlockXy[3];
+			if (x_different > for_count && x_different < 60 && y_different < for_count * 8 && y_different2 < for_count * 8) {
+				canAttackR = true;
+				break;
+			}
+			if (x_different2 > for_count && x_different2 < 60 && y_different < for_count * 8 && y_different2 < for_count * 8) {
+				canAttackL = true;
+				break;
+			}
+		}
+
+		delete[] StarBlockXy;
+		delete[] KirbyXy;
+	}
+	*/
 }

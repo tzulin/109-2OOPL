@@ -3,6 +3,7 @@
 
 // #include "./enemy.h"
 #include "./weapon.h"
+#include "./things.h"
 
 namespace game_framework {
 /////////////////////////////////////////////////////////////////////////////
@@ -10,6 +11,7 @@ namespace game_framework {
 //
 /////////////////////////////////////////////////////////////////////////////
 
+	
 	class kirby {
 	public:
 		kirby();
@@ -26,15 +28,11 @@ namespace game_framework {
 		void SetAttack(bool input);
 		void SetJump(bool input);
 		void SetFly(bool input);
-		void SetEnemyFromL(bool input);
 		void SetEaten(bool input);
 		void SetCounter(int);
 		void Hurt(int input, int time);
 		void ThrowStar();
 		void YouAreLeft(bool YouAreLeft);
-
-		// void BackX();
-		// bool MeetEnemy(enemy & e);
 
 		int GetCase();
 		int GetHp();
@@ -44,6 +42,8 @@ namespace game_framework {
 		bool IsAlive();
 		bool IsScreamR();
 		bool IsScreamL();
+		/*template < class T >
+		bool CanAttack(T t);*/
 
 	private:
 		CAnimation KirbyMovingL;
