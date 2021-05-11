@@ -1,3 +1,4 @@
+
 #include "stdafx.h"
 #include "source/Resource.h"
 #include <mmsystem.h>
@@ -40,6 +41,7 @@ namespace game_framework {
 		LastHurt = 0;
 		IsHurt = false;
 		IsEaten = false;
+		OtherFromL = false;
 	}
 
 	kirby::~kirby()
@@ -580,12 +582,6 @@ namespace game_framework {
 
 	void kirby::YouAreLeft(bool YouAreLeft) {
 		OtherFromL = !YouAreLeft;
-		if (OtherFromL) {
-			int i = 0;
-		}
-		else {
-			int i = 0;
-		}
 	}
 
 	void kirby::SetCounter(int input_counter) {

@@ -6,8 +6,11 @@
 
 namespace game_framework {
 
+	//bool Can
+	
+
 	template <class T, class U>
-	bool Meet(T a, U b) {
+	bool Meet(T & a, U & b) {
 		int* aXy = a.GetXy();
 		int* bXy = b.GetXy();
 		
@@ -23,6 +26,7 @@ namespace game_framework {
 						b.YouAreLeft(true);
 					}
 					else {
+						// a在b左邊
 						a.YouAreLeft(true);
 						b.YouAreLeft(false);
 					}
@@ -33,7 +37,7 @@ namespace game_framework {
 			n = 1;
 			i += 2;
 		}
-
+		
 		i = 0, n = 1;
 		for (int count = 0; count < 2; count++) {
 			for (int _count = 0; _count < 2; _count++) {
@@ -46,6 +50,7 @@ namespace game_framework {
 						b.YouAreLeft(false);
 					}
 					else {
+						// b在a左邊
 						a.YouAreLeft(false);
 						b.YouAreLeft(true);
 					}
@@ -56,6 +61,7 @@ namespace game_framework {
 			n = 1;
 			i += 2;
 		}
+		
 		
 		
 		// 沒碰到

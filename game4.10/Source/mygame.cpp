@@ -144,8 +144,12 @@ CGameStateRun::CGameStateRun(CGame *g)
 
 CGameStateRun::~CGameStateRun()
 {
-	if(StarBlock != nullptr)
-		delete StarBlock;
+	if (StarBlockList != nullptr) {
+		for (int i = 0;i < 25;i++) {
+			delete[] StarBlockList[i];
+		}
+		delete[] StarBlockList;
+	}
 }
 
 void CGameStateRun::OnBeginState()
@@ -156,11 +160,12 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	counter++;
 	Kirby.SetCounter(counter);							// kirby setcounter
-	Kirby.OnMove();										// Kirby OnMove
 	if (!Kirby.IsAlive()) {								// Kirby dead
 		GotoGameState(GAME_STATE_OVER);
 	}
 
+	Kirby.OnMove();										// Kirby OnMove
+	
 	if (Waddle.GetHp() > 0) {
 		Waddle.OnMove();									// Waddle OnMove
 		if (Meet(Waddle, Kirby)) {
@@ -172,66 +177,62 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			Waddle.Attack(Kirby, counter);
 		}
 		*/
+		
 	}
 	if (WaddleDoo.GetHp() > 0) {
-		WaddleDoo.OnMove();								    // WaddleDoo OnMove
 		if (Meet(WaddleDoo, Kirby)) {
 			Kirby.Hurt(WaddleDoo.GetPower(), counter);
 			WaddleDoo.Hurt(1, counter);
 		}
-		/*
-		if (WaddleDoo.SeeKirby(Kirby)) {
-			WaddleDoo.Attack(Kirby, counter);
-			// Kirby.Hurt(WaddleDoo.GetPower(), counter);
-		}
-		 */
+		WaddleDoo.OnMove();								    // WaddleDoo OnMove
 	}
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
 
-	if (StarBlock != nullptr) {
-		int* StarBlockXy = StarBlock->GetXy(); 
-		int* KirbyXy = Kirby.GetXy();
-		bool canAttackR = false;
-		bool canAttackL = false;
-		int for_count = 0;
-		for (;for_count < 10;for_count++) {
-			int x_different = StarBlockXy[0] - KirbyXy[2];
-			int x_different2 = KirbyXy[0] - StarBlockXy[2];
-			int y_different = StarBlockXy[1] - KirbyXy[1];
-			int y_different2 = KirbyXy[3] - StarBlockXy[3];
-			if (x_different > for_count && x_different < 60 && y_different < for_count * 4 && y_different2 < for_count * 4) {
-				canAttackR = true;
-				break;
+	
+	if (StarBlockList != nullptr) {							// starblock can attack or not
+		for (int i = 0; i < 25;i++) {
+			if (StarBlockList[i] != nullptr) {
+				int* StarBlockXy = StarBlockList[i]->GetXy();
+				int* KirbyXy = Kirby.GetXy();
+				bool canAttackR = false;
+				bool canAttackL = false;
+				int for_count = 0;
+				for (;for_count < 10;for_count++) {
+					int x_different = StarBlockXy[0] - KirbyXy[2];
+					int x_different2 = KirbyXy[0] - StarBlockXy[2];
+					int y_different = StarBlockXy[1] - KirbyXy[1];
+					int y_different2 = KirbyXy[3] - StarBlockXy[3];
+					if (x_different > for_count && x_different < 60 && y_different < for_count * 8 && y_different2 < for_count * 8) {
+						canAttackR = true;
+						break;
+					}
+					if (x_different2 > for_count && x_different2 < 60 && y_different < for_count * 8 && y_different2 < for_count * 8) {
+						canAttackL = true;
+						break;
+					}
+				}
+				if (canAttackR && Kirby.IsScreamR()) {
+					StarBlockList[i]->SetShow(false);
+					Kirby.SetEaten(true);
+					Kirby.SetAttack(false);
+					delete[] StarBlockList[i];
+					StarBlockList[i] = nullptr;
+				}
+				else if (canAttackL && Kirby.IsScreamL()) {
+					StarBlockList[i]->SetShow(false);
+					Kirby.SetEaten(true);
+					Kirby.SetAttack(false);
+					delete[] StarBlockList[i];
+					StarBlockList[i] = nullptr;
+				}
+				else {
+					StarBlockList[i]->SetShow(true);
+				}
+				delete[] StarBlockXy;
+				delete[] KirbyXy;
 			}
-			if (x_different2 > for_count && x_different2 < 60 && y_different < for_count * 4 && y_different2 < for_count * 4) {
-				canAttackL = true;
-				break;
-			}
 		}
-		if (canAttackR && Kirby.IsScreamR()) {
-			StarBlock->SetShow(false);
-			Kirby.SetEaten(true);
-			Kirby.SetAttack(false);
-		}
-		else if (canAttackL && Kirby.IsScreamL()) {
-			StarBlock->SetShow(false);
-			Kirby.SetEaten(true);
-			Kirby.SetAttack(false);
-		}
-		else {
-			StarBlock->SetShow(true);
-		}
-		delete[] StarBlockXy;
-		delete[] KirbyXy;
 	}
-	/*
-	if (Meet(Kirby, *StarBlock)) {
-		int i = 2;
-	}
-	else {
-		int i = 1;
-	}
-	*/
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -246,11 +247,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	Kirby.LoadBitmap();									// Kirby LoadBitmap
 	Waddle.LoadBitmap();								// Waddle LoadBitmap
 	WaddleDoo.LoadBitmap();								// WaddleDoo LoadBitmap
-	StarBlock = new starBlock;
-	StarBlock->LoadBitmap();							// StarBlock LoadBitmap setTopLeft
-	int* temp = StarBlock->GetHw();
-	StarBlock->SetXY(SIZE_X / 2, SIZE_Y - temp_floor - temp[0]);
-	delete[] temp;
+	StarBlockList = nullptr;
+	
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -262,6 +260,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_ESC   = 0x1B;    // keyboard esc
 	const char KEY_C     = 0x43;	// keyboard C
 	const char KEY_W	 = 0x57;	// keyboard W
+	const char KEY_S	 = 0X53;	// keyboard S
 	const char KEY_SPACE = 0x20;	// keyboard space
 
 	if (nChar == KEY_ESC) {
@@ -287,8 +286,28 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_W) {
-		// Waddle.Reset();
+		Waddle.Reset();
 		WaddleDoo.Reset();
+	}
+
+	if (nChar == KEY_S) {
+		if (StarBlockList != nullptr) {
+			for (int i = 0;i < 25;i++) {
+				if (StarBlockList[i] != nullptr) {
+					delete[] StarBlockList[i];
+				}
+			}
+			delete[] StarBlockList;
+		}
+		StarBlockList = new starBlock*[25];
+		starBlock** blocks = StarBlockList;
+		for (int i = 0;i < 5;i++) {
+			for (int n = 0;n < 5;n++) {
+				blocks[i * 5 + n] = new starBlock;
+				blocks[i * 5 + n]->LoadBitmap();							// StarBlock LoadBitmap setTopLeft
+				blocks[i * 5 + n]->SetXY(SIZE_X/2 + 32*i, SIZE_Y - 32*n - temp_floor);
+			}
+		}
 	}
 
 	if (nChar == KEY_SPACE) {
@@ -309,6 +328,7 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_ESC   = 0x1B;	// keyboard esc
 	const char KEY_C     = 0x43;	// keyboard C
 	const char KEY_O	 = 0x57;	// keyboard W
+	const char KEY_S = 0X53;	// keyboard S
 	const char KEY_SPACE = 0x20;	// keyboard space
 
 	if (nChar == KEY_LEFT) {
@@ -364,8 +384,15 @@ void CGameStateRun::OnShow()
 	kirbyHp.ShowBitmap();							// kibyHp show	
 
 	
-	if (StarBlock->GetShow()) {
-		StarBlock->OnShow();							// StarBlock onShow
+	if (StarBlockList != nullptr) {
+		for (int i = 0;i < 25;i++) {
+			if (StarBlockList[i] != nullptr) {
+				if (StarBlockList[i]->GetShow()) {
+					StarBlockList[i]->OnShow();							// StarBlock onShow
+				}
+			}
+		}
 	}
+	
 }
 }//namespace end
