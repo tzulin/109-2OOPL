@@ -519,35 +519,5 @@
     <Image Include="RES\star.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="RES\basic\fat_basicR1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\basic\fat_basicR2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\walk\fat_kirby_walkR1.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\walk\fat_kirby_walkR2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\walk\fat_kirby_walkR3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\walk\fat_kirby_walkR4.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\walk\fat_kirby_walkR5.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\walk\fat_kirby_walkR6.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\walk\fat_kirby_walkR7.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\walk\fat_kirby_walkR8.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
 </Project>

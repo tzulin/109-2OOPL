@@ -5,13 +5,6 @@
 #include "./enemy.h"
 
 namespace game_framework {
-	/*bool CanMoveXy(int* wantToMoveXy, int* BlockXy) {
-		bool result = true;
-		if (wantToMoveXy[0] > BlockXy[0] && wantToMoveXy[0] < BlockXy[2] && wantToMoveXy[1] > BlockXy[1] && wantToMoveXy[1] < BlockXy[3]) {
-			result = false;
-		}
-		return result;
-	}*/
 
 	inline bool EnemyCanAttack(enemy & e, kirby & k) {
 		int* kirbyXy = k.GetXy();

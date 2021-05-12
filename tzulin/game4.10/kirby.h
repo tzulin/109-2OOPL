@@ -31,11 +31,11 @@ namespace game_framework {
 		void SetFly(bool input);
 		void SetEaten(bool input);
 		void SetCounter(int);
-		void SetBlockers(int** input_blockers);
+		void SetBlockers(int** input_blocks, int input_number_of_blocks);
 		void Hurt(int input, int time);
 		void ThrowStar();
 		void YouAreLeft(bool YouAreLeft);
-		weapon GetWeapon();
+		weapon* GetWeapon();
 
 		int GetCase();
 		int GetHp();
@@ -45,6 +45,8 @@ namespace game_framework {
 		bool IsAlive();
 		bool IsScreamR();
 		bool IsScreamL();
+
+		//bool CanMove;
 
 	private:
 		CAnimation KirbyMovingL;
@@ -73,10 +75,11 @@ namespace game_framework {
 
 		weapon StarThrow;
 
-		int** blockerXys;
+		int** blockXys;
 
 		int x, y, hp;
 		const int ImgW = 60, ImgH = 60;
+		int now_img_w, now_img_h;
 		int sky_top;		// 天頂y座標
 		int floor;			// 地板y座標
 		int init_velocity;	// 初始速度
@@ -84,6 +87,7 @@ namespace game_framework {
 		int init_fly_velocity;	// 初始飛行速度
 		int fly_velocity;	// kirby inAir 時的飛行速度
 		int game_state_counter;		// game state counter
+		int number_of_block;
 		int LastHurt;				// last hurt time 初始為零
 		bool IsRising;		// true表示上升
 		bool IsMovingL;
@@ -99,6 +103,7 @@ namespace game_framework {
 		bool OtherFromL;
 		bool IsHurt;
 		bool IsEaten;
+		bool YouAreGround;
 	};
 }
 

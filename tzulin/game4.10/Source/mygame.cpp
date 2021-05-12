@@ -157,6 +157,17 @@ CGameStateRun::~CGameStateRun()
 	if (WaddleDoo != nullptr) {
 		delete WaddleDoo;
 	}
+
+	if (blockXys != nullptr) {				// delete blockXys
+		for (int i = 0; i < 25;i++) {
+			if (blockXys[i] != nullptr) {
+				delete[] blockXys[i];
+				blockXys[i] = nullptr;
+			}
+		}
+		delete[] blockXys;
+		blockXys = nullptr;
+	}
 }
 
 void CGameStateRun::OnBeginState()
@@ -172,7 +183,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	Kirby.OnMove();										// Kirby OnMove
-	weapon KirbyWeapon = Kirby.GetWeapon();
+	weapon* KirbyWeapon = Kirby.GetWeapon();
 
 	if (Waddle != nullptr) {
 		if (Waddle->GetHp() > 0) {
@@ -183,9 +194,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				Waddle->Hurt(1, counter);
 			}
 			// kirby weapon hit enemy
-			if (Meet(KirbyWeapon, *Waddle) && KirbyWeapon.WeaponIsShow()) {
+			if (Meet(*KirbyWeapon, *Waddle) && KirbyWeapon->WeaponIsShow()) {
 				Waddle->Hurt(1, counter);
-				KirbyWeapon.SetShow(false);
+				KirbyWeapon->SetShow(false);
 			}
 		}
 	}
@@ -199,9 +210,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				WaddleDoo->Hurt(1, counter);
 			}
 			// kirby weapon hit enemy
-			if (Meet(KirbyWeapon, *WaddleDoo) && KirbyWeapon.WeaponIsShow()) {
+			if (Meet(*KirbyWeapon, *WaddleDoo) && KirbyWeapon->WeaponIsShow()) {
 				WaddleDoo->Hurt(1, counter);
-				KirbyWeapon.SetShow(false);
+				KirbyWeapon->SetShow(false);
 			}
 			// enemy weapon hit kirby
 			if (EnemyCanAttack(*WaddleDoo, Kirby)) {
@@ -213,26 +224,57 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			}
 		}
 	}
+
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
 
-	//int** tempBlockXy
+	
 	if (StarBlockList != nullptr) {							// starblock can attack or not
 		for (int i = 0; i < 25;i++) {
 			if (StarBlockList[i] != nullptr) {
+				/*if (Meet(Kirby, *StarBlockList[i])) {
+					Kirby.CanMove = false;
+				}*/
 				if (KirbyCanAttack(Kirby, StarBlockList[i])) {
 					StarBlockList[i]->SetShow(false);
 					Kirby.SetEaten(true);
 					Kirby.SetAttack(false);
 					delete[] StarBlockList[i];
 					StarBlockList[i] = nullptr;
-				}else{
+				}
+				else {
 					StarBlockList[i]->SetShow(true);
 				}
 			}
 		}
 	}
 
-	//Kirby.SetBlockers();
+
+	
+	if (StarBlockList != nullptr) {			// get blockXys
+		blockXys = new int*[25];
+		for (int i = 0; i < 25;i++) {
+			if (StarBlockList[i] != nullptr) {
+				blockXys[i] = StarBlockList[i]->GetXy();
+			}
+			else {
+				blockXys[i] = nullptr;
+			}
+		}
+	}
+
+	Kirby.SetBlockers(blockXys, 25);
+
+	if (blockXys != nullptr) {				// delete blockXys
+		for (int i = 0; i < 25;i++) {
+			if (blockXys[i] != nullptr) {
+				delete[] blockXys[i];
+				blockXys[i] = nullptr;
+			}
+		}
+		delete[] blockXys;
+		blockXys = nullptr;
+	}
+	
 
 	if (Waddle != nullptr) {												// waddle can attack check
 		if (KirbyCanAttack(Kirby, Waddle)) {
@@ -266,7 +308,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	Waddle = nullptr;
 	WaddleDoo = nullptr;
 	StarBlockList = nullptr;
-	
+	blockXys = nullptr;
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)

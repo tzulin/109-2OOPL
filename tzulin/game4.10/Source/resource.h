@@ -101,18 +101,6 @@
 #define IDB_STARBLOCK                   236
 #define IDB_STAr                        238
 #define IDB_STARTHROW                   238
-#define IDB_FAT_STANDR1                 240
-#define IDB_FAT_STAND                   240
-#define IDB_FAT_CLOSE_EYES              242
-#define IDB_FAT_WALKR1                  243
-#define IDB_FAT_WALKR2                  244
-#define IDB_FAT_WALKR3                  245
-#define IDB_FAT_WALKR4                  246
-#define IDB_FAT_WALKR5                  247
-#define IDB_FAT_WALKR6                  248
-#define IDB_FAT_WALKR7                  250
-#define IDB_BITMAP16                    251
-#define IDB_FAT_WALKR8                  251
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -125,7 +113,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        252
+#define _APS_NEXT_RESOURCE_VALUE        239
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101
