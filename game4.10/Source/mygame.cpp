@@ -172,28 +172,45 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 	}
 
 	Kirby.OnMove();										// Kirby OnMove
-	
+	weapon KirbyWeapon = Kirby.GetWeapon();
+
 	if (Waddle != nullptr) {
 		if (Waddle->GetHp() > 0) {
 			Waddle->OnMove();									// Waddle OnMove
+			// kirby meet enemy
 			if (Meet(*Waddle, Kirby)) {
 				Kirby.Hurt(Waddle->GetPower(), counter);
 				Waddle->Hurt(1, counter);
 			}
-			/*
-			if (Waddle.SeeKirby(Kirby)) {
-				Waddle.Attack(Kirby, counter);
+			// kirby weapon hit enemy
+			if (Meet(KirbyWeapon, *Waddle) && KirbyWeapon.WeaponIsShow()) {
+				Waddle->Hurt(1, counter);
+				KirbyWeapon.SetShow(false);
 			}
-			*/
 		}
 	}
 	if (WaddleDoo != nullptr) {
+		weapon WaddleDooWeapon = WaddleDoo->GetWeapon();
 		if (WaddleDoo->GetHp() > 0) {
+			WaddleDoo->OnMove();								    // WaddleDoo OnMove
+			// kirby meet enemy
 			if (Meet(*WaddleDoo, Kirby)) {
 				Kirby.Hurt(WaddleDoo->GetPower(), counter);
 				WaddleDoo->Hurt(1, counter);
 			}
-			WaddleDoo->OnMove();								    // WaddleDoo OnMove
+			// kirby weapon hit enemy
+			if (Meet(KirbyWeapon, *WaddleDoo) && KirbyWeapon.WeaponIsShow()) {
+				WaddleDoo->Hurt(1, counter);
+				KirbyWeapon.SetShow(false);
+			}
+			// enemy weapon hit kirby
+			if (EnemyCanAttack(*WaddleDoo, Kirby)) {
+				WaddleDoo->OnMove();								    // WaddleDoo OnMove
+				WaddleDoo->Attack(Kirby, counter);
+				if (Meet(WaddleDooWeapon, Kirby) && WaddleDooWeapon.WeaponIsShow()) {
+					Kirby.Hurt(WaddleDoo->GetPower(), counter);
+				}
+			}
 		}
 	}
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer

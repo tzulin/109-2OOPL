@@ -80,86 +80,6 @@ namespace game_framework {
 		wR.SetShow(false);
 		hp = 1;
 	}
-	/*
-	bool enemy::MeetKirby(kirby & k) {
-		int* KirbyXy = k.GetXy();
-		int* enemyXY = GetXy();
-
-		if (enemyXY[0] > KirbyXy[0] && enemyXY[0] < KirbyXy[2]) {					// kirby meet enemy from left
-			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				BackX(true);
-				k.SetEnemyFromL(false);
-				return true;
-			}
-			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				BackX(true);
-				k.SetEnemyFromL(false);
-				return true;
-			}
-		}
-		else if (enemyXY[2] > KirbyXy[0] && enemyXY[2] < KirbyXy[2]) {			// kirby meet enemy from right
-			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				BackX(false);
-				k.SetEnemyFromL(true);
-				return true;
-			}
-			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				BackX(false);
-				k.SetEnemyFromL(true);
-				return true;
-			}
-		}
-		delete[] KirbyXy;
-		delete[] enemyXY;
-		return false;
-	}
-	*/
-	/*
-	bool enemy::SeeKirby(kirby k) {
-		int* KirbyXy = k.GetXy();
-		int* enemyXY = GetXy();
-
-		if (enemyXY[0]-ImgW > KirbyXy[0] && enemyXY[0]-ImgW < KirbyXy[2]) {					// enemy meet kirby from left
-			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				KirbyFromL = true;
-				return KirbyFromL && !IsFacingR;
-			}
-			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				KirbyFromL = true;
-				return KirbyFromL && !IsFacingR;
-			}
-		}
-		else if (enemyXY[2]+ImgW> KirbyXy[0] && enemyXY[2]+ImgW < KirbyXy[2]) {				// enemy meet kirby from right
-			if (enemyXY[1] > KirbyXy[1] && enemyXY[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				KirbyFromL = false;
-				return !KirbyFromL && IsFacingR;
-			}
-			else if (enemyXY[3] > KirbyXy[1] && enemyXY[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXY;
-				KirbyFromL = false;
-				return !KirbyFromL && IsFacingR;
-			}
-		}
-
-		delete[] KirbyXy;
-		delete[] enemyXY;
-		return false;
-	}*/
 
 	void enemy::Attack(kirby k, int time) {
 		if (abs(LastAttack - time) < 30) {
@@ -260,4 +180,17 @@ namespace game_framework {
 	}
 
 	void enemy::LoadBitmap(){}
+
+	bool enemy::EnemyFacingR() {
+		return IsFacingR;
+	}
+
+	weapon enemy::GetWeapon() {
+		if (IsFacingR) {
+			return wR;
+		}
+		else {
+			return wL;
+		}
+	}
 }

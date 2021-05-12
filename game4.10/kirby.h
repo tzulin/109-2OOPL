@@ -33,6 +33,7 @@ namespace game_framework {
 		void Hurt(int input, int time);
 		void ThrowStar();
 		void YouAreLeft(bool YouAreLeft);
+		weapon GetWeapon();
 
 		int GetCase();
 		int GetHp();
@@ -42,8 +43,6 @@ namespace game_framework {
 		bool IsAlive();
 		bool IsScreamR();
 		bool IsScreamL();
-		/*template < class T >
-		bool CanAttack(T t);*/
 
 	private:
 		CAnimation KirbyMovingL;
@@ -88,7 +87,6 @@ namespace game_framework {
 		bool IsFlying;
 		bool IsFat;
 		bool FlyUp;
-		bool EnemyFromL;
 		bool OtherFromL;
 		bool IsHurt;
 		bool IsEaten;

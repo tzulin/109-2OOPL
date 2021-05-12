@@ -2,9 +2,48 @@
 #define SYSTEM_H
 
 #include "./kirby.h"
-#include "./things.h"
+#include "./enemy.h"
 
 namespace game_framework {
+
+	inline bool EnemyCanAttack(enemy & e, kirby & k) {
+		int* kirbyXy = k.GetXy();
+		int* enemyXY = e.GetXy();
+		// enemy 在 kirby 右邊
+		if (enemyXY[0] - 60 > kirbyXy[0] && enemyXY[0] - 60 < kirbyXy[2] && !e.EnemyFacingR()) {
+			if (enemyXY[1] > kirbyXy[1] && enemyXY[1] < kirbyXy[3]) {
+				delete[] kirbyXy;
+				delete[] enemyXY;
+				e.YouAreLeft(false);
+				return true;
+			}
+			else if (enemyXY[3] > kirbyXy[1] && enemyXY[3] < kirbyXy[3]) {
+				delete[] kirbyXy;
+				delete[] enemyXY;
+				e.YouAreLeft(false);
+				return true;
+			}
+		}
+		// enemy 在 kirby 左邊
+		else if (enemyXY[2] + 60 > kirbyXy[0] && enemyXY[2] + 60 < kirbyXy[2] && e.EnemyFacingR()) {				// enemy meet kirby from right
+			if (enemyXY[1] > kirbyXy[1] && enemyXY[1] < kirbyXy[3]) {
+				delete[] kirbyXy;
+				delete[] enemyXY;
+				e.YouAreLeft(true);
+				return true;
+			}
+			else if (enemyXY[3] > kirbyXy[1] && enemyXY[3] < kirbyXy[3]) {
+				delete[] kirbyXy;
+				delete[] enemyXY;
+				e.YouAreLeft(true);
+				return true;
+			}
+		}
+		delete[] kirbyXy;
+		delete[] enemyXY;
+		return false;
+	}
+
 	template < class T >
 	bool KirbyCanAttack(kirby & Kirby, T * t) {
 		int* StarBlockXy = t->GetXy();
@@ -84,15 +123,11 @@ namespace game_framework {
 			n = 1;
 			i += 2;
 		}
-		
-		
-		
 		// 沒碰到
 		delete[] aXy;
 		delete[] bXy;
  		return false;
 	}
-
 }
 
 
