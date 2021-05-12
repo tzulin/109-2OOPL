@@ -34,10 +34,6 @@ namespace game_framework {
 			PlayAttack.SetDelayCount(5);
 			PlayAttack.SetTopLeft(x, y);
 			PlayAttack.OnShow();
-			/*if (PlayAttack.IsFinalBitmap()) {
-				PlayAttack.Reset();
-				IsShow = false;
-			}*/
 		}
 	}
 
@@ -90,5 +86,13 @@ namespace game_framework {
 
 	bool weapon::GetAttackFacingR() {
 		return AttackIsFacingR;
+	}
+
+	bool weapon::WeaponIsShow() {
+		return IsShow;
+	}
+
+	void weapon::YouAreLeft(bool YouAreLeft) {
+		OtherFromL = !YouAreLeft;
 	}
 }

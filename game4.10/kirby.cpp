@@ -220,19 +220,21 @@ namespace game_framework {
 	void kirby::OnShow()
 	{
 		StarThrow.OnMove();
-		if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 100) {
-			int* temp = StarThrow.GetXy();
-			if (StarThrow.GetAttackFacingR()) {
-				StarThrow.SetXy(temp[0] + 10, temp[1]);
+		if (StarThrow.WeaponIsShow()) {
+			if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 100) {
+				int* temp = StarThrow.GetXy();
+				if (StarThrow.GetAttackFacingR()) {
+					StarThrow.SetXy(temp[0] + 10, temp[1]);
+				}
+				else {
+					StarThrow.SetXy(temp[0] - 10, temp[1]);
+				}
+				delete[] temp;
+				StarThrow.OnShow();
 			}
 			else {
-				StarThrow.SetXy(temp[0] - 10, temp[1]);
+				StarThrow.SetShow(false);
 			}
-			delete[] temp;
-			StarThrow.OnShow();
-		}
-		else {
-			StarThrow.SetShow(false);
 		}
 		switch (GetCase()) {
 		// case jump up right
@@ -506,11 +508,11 @@ namespace game_framework {
 		if (IsHurt) {
 			if (!OtherFromL) {
 				// x -= 2;
-				SetXY(x - 2, y);
+				SetXY(x - 4, y);
 			} else  {
 				// x += 2;
-				SetXY(x + 2, y);
-			}
+				SetXY(x + 4, y);
+			} 
 		}
 
 		// kirby throw star
@@ -619,7 +621,6 @@ namespace game_framework {
 		SetAttack(false);
 		SetJump(false);
 		SetFly(false);
-		// BackX();
 	}
 
 	void kirby::ThrowStar() {
@@ -762,5 +763,10 @@ namespace game_framework {
 
 	bool kirby::IsScreamL() {
 		return IsAttack && !IsFacingR && !IsDown;
+	}
+
+
+	weapon kirby::GetWeapon() {
+		return StarThrow;
 	}
 }

@@ -17,7 +17,9 @@ namespace game_framework {
 		void SetAttackState(int attack_time, bool IsFacingR, int* input_Xy);
 		int GetAttackTime();
 		int* GetXy();
+		void YouAreLeft(bool YouAreLeft);
 		bool GetAttackFacingR();
+		bool WeaponIsShow();
 	protected:
 		CAnimation PlayAttack;
 		int x, y;
@@ -26,6 +28,7 @@ namespace game_framework {
 		int attack_time;
 		bool IsShow;
 		bool AttackIsFacingR;
+		bool OtherFromL;
 	};
 }
 
