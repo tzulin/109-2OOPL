@@ -27,7 +27,6 @@ namespace game_framework {
 		IsAttack = false;
 		LastHurt = 0;
 		LastAttack = 0;
-		OtherFromL = true;
 	}
 
 	enemy::~enemy()
@@ -81,90 +80,6 @@ namespace game_framework {
 		wR.SetShow(false);
 		hp = 1;
 	}
-/*
-	bool enemy::MeetKirby(kirby & k) {
-		int* KirbyXy = k.GetXy();
-		int* enemyXy = GetXy();
-
-		if (enemyXy[0] > KirbyXy[0] && enemyXy[0] < KirbyXy[2]) {					// kirby meet enemy from left
-			if (enemyXy[1] > KirbyXy[1] && enemyXy[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXy;
-				BackX(true);
-				k.SetEnemyFromL(false);
-				return true;
-			}
-			else if (enemyXy[3] > KirbyXy[1] && enemyXy[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXy;
-				BackX(true);
-				k.SetEnemyFromL(false);
-				return true;
-			}
-		}
-		else if (enemyXy[2] > KirbyXy[0] && enemyXy[2] < KirbyXy[2]) {			// kirby meet enemy from right
-			if (enemyXy[1] > KirbyXy[1] && enemyXy[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXy;
-				BackX(false);
-				k.SetEnemyFromL(true);
-				return true;
-			}
-			else if (enemyXy[3] > KirbyXy[1] && enemyXy[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXy;
-				BackX(false);
-				k.SetEnemyFromL(true);
-				return true;
-			}
-		}
-		delete[] KirbyXy;
-		delete[] enemyXy;
-		return false;
-	}
-*/
-
-	bool enemy::SeeKirby(kirby k) {
-		int* KirbyXy = k.GetXy();
-		int* enemyXy = GetXy();
-
-		if (enemyXy[0]-ImgW > KirbyXy[0] && enemyXy[0]-ImgW < KirbyXy[2]) {					// enemy meet kirby from left
-			if (enemyXy[1] > KirbyXy[1] && enemyXy[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXy;
-				KirbyFromL = true;
-				return KirbyFromL && !IsFacingR;
-			}
-			else if (enemyXy[3] > KirbyXy[1] && enemyXy[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXy;
-				KirbyFromL = true;
-				return KirbyFromL && !IsFacingR;
-			}
-		}
-		else if (enemyXy[2]+ImgW> KirbyXy[0] && enemyXy[2]+ImgW < KirbyXy[2]) {				// enemy meet kirby from right
-			if (enemyXy[1] > KirbyXy[1] && enemyXy[1] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXy;
-				KirbyFromL = false;
-				return !KirbyFromL && IsFacingR;
-			}
-			else if (enemyXy[3] > KirbyXy[1] && enemyXy[3] < KirbyXy[3]) {
-				delete[] KirbyXy;
-				delete[] enemyXy;
-				KirbyFromL = false;
-				return !KirbyFromL && IsFacingR;
-			}
-		}
-
-		delete[] KirbyXy;
-		delete[] enemyXy;
-		return false;
-	}
-
-	void enemy::SetOtherFromL(bool input) {
-		OtherFromL = input;
-	}
 
 	void enemy::Attack(kirby k, int time) {
 		if (abs(LastAttack - time) < 30) {
@@ -172,6 +87,10 @@ namespace game_framework {
 		}
 		LastAttack = time;
 		IsAttack = true;
+	}
+
+	void enemy::YouAreLeft(bool YouAreLeft) {
+		OtherFromL = !YouAreLeft;
 	}
 
 	void enemy::OnShow()
@@ -189,7 +108,7 @@ namespace game_framework {
 			}
 		}
 		else {
-			if (KirbyFromL) {
+			if (OtherFromL) {
 				AttackL.SetDelayCount(5);
 				AttackL.SetTopLeft(x, y);
 				AttackL.OnShow();
@@ -225,7 +144,7 @@ namespace game_framework {
 
 	void enemy::OnMove()
 	{
-		// set moving Xy
+		// set moving XY
 		const int length = 2;
 
 		if (!IsAttack) {
@@ -261,4 +180,17 @@ namespace game_framework {
 	}
 
 	void enemy::LoadBitmap(){}
+
+	bool enemy::EnemyFacingR() {
+		return IsFacingR;
+	}
+
+	weapon enemy::GetWeapon() {
+		if (IsFacingR) {
+			return wR;
+		}
+		else {
+			return wL;
+		}
+	}
 }

@@ -50,13 +50,14 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		kirby Kirby;
-		waddle Waddle;
-		waddleDoo WaddleDoo;
+		waddle* Waddle;
+		waddleDoo* WaddleDoo;
 		CMovingBitmap kirbyHp;
 		CMovingBitmap Map;
 		CInteger kirbyHpInt;
-		starBlock * StarBlock;
+		starBlock ** StarBlockList;
 		int temp_floor = 60, counter = 0;
+		CInteger test;
  	};
 
 	/////////////////////////////////////////////////////////////////////////////

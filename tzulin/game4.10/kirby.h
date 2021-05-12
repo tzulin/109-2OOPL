@@ -2,6 +2,9 @@
 #define KIRBY_H
 
 // #include "./enemy.h"
+#include "./weapon.h"
+#include "./things.h"
+
 
 namespace game_framework {
 /////////////////////////////////////////////////////////////////////////////
@@ -9,6 +12,7 @@ namespace game_framework {
 //
 /////////////////////////////////////////////////////////////////////////////
 
+	
 	class kirby {
 	public:
 		kirby();
@@ -16,7 +20,7 @@ namespace game_framework {
 		void LoadBitmap();
 		void OnMove();
 		void OnShow();
-		void SetXy(int x_in, int y_in);
+		void SetXY(int x_in, int y_in);
 		void SetMovingL(bool input);
 		void SetMovingR(bool input);
 		void SetFacingR(bool input);
@@ -25,11 +29,13 @@ namespace game_framework {
 		void SetAttack(bool input);
 		void SetJump(bool input);
 		void SetFly(bool input);
-		void SetEnemyFromL(bool input);
-		void SetOtherFromL(bool input);
 		void SetEaten(bool input);
+		void SetCounter(int);
+		void SetBlockers(int** input_blockers);
 		void Hurt(int input, int time);
 		void ThrowStar();
+		void YouAreLeft(bool YouAreLeft);
+		weapon GetWeapon();
 
 		int GetCase();
 		int GetHp();
@@ -61,6 +67,10 @@ namespace game_framework {
 		CMovingBitmap KirbyDownR;
 		CMovingBitmap KirbyDownL;
 
+		weapon StarThrow;
+
+		int** blockerXys;
+
 		int x, y, hp;
 		const int ImgW = 60, ImgH = 60;
 		int sky_top;		// 天頂y座標
@@ -69,6 +79,8 @@ namespace game_framework {
 		int velocity;		// 目前速度
 		int init_fly_velocity;	// 初始飛行速度
 		int fly_velocity;	// kirby inAir 時的飛行速度
+		int game_state_counter;		// game state counter
+		int LastHurt;				// last hurt time 初始為零
 		bool IsRising;		// true表示上升
 		bool IsMovingL;
 		bool IsMovingR;
@@ -80,11 +92,9 @@ namespace game_framework {
 		bool IsFlying;
 		bool IsFat;
 		bool FlyUp;
-		bool EnemyFromL;
 		bool OtherFromL;
 		bool IsHurt;
 		bool IsEaten;
-		int LastHurt;
 	};
 }
 

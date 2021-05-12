@@ -7,7 +7,7 @@ namespace game_framework {
 		void LoadBitmap();
 		void OnShow();
 		void SetShow(bool);
-		void SetXy(int, int);
+		void SetXY(int, int);
 		starBlock();
 		int* GetHw();
 		int* GetXy();
@@ -20,8 +20,8 @@ namespace game_framework {
 
 	class blankBlock {
 	public:
-		void SetXy(int, int);
-		void SetHw(int, int);
+		void SetXY(int, int);
+		void SetHW(int, int);
 	private:
 		int x, y;
 		int height, width;
