@@ -58,6 +58,7 @@ namespace game_framework {
 		starBlock ** StarBlockList;
 		int temp_floor = 60, counter = 0;
 		CInteger test;
+		int** blockXys;
  	};
 
 	/////////////////////////////////////////////////////////////////////////////

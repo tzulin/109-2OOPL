@@ -21,6 +21,10 @@ namespace game_framework {
 		y = input_y;
 	}
 
+	void starBlock::YouAreLeft(bool input) {
+
+	}
+
 	int* starBlock::GetHw() {
 		return new int[2]{ starBlockPic.Height(), starBlockPic.Width() };
 	}

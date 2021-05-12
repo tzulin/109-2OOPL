@@ -12,6 +12,7 @@ namespace game_framework {
 		int* GetHw();
 		int* GetXy();
 		bool GetShow();
+		void YouAreLeft(bool);
 	private:
 		CMovingBitmap starBlockPic;
 		int x, y;
