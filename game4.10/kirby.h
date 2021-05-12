@@ -5,6 +5,7 @@
 #include "./weapon.h"
 #include "./things.h"
 
+
 namespace game_framework {
 /////////////////////////////////////////////////////////////////////////////
 // class kirby
@@ -30,6 +31,7 @@ namespace game_framework {
 		void SetFly(bool input);
 		void SetEaten(bool input);
 		void SetCounter(int);
+		void SetBlockers(int** input_blockers);
 		void Hurt(int input, int time);
 		void ThrowStar();
 		void YouAreLeft(bool YouAreLeft);
@@ -68,6 +70,8 @@ namespace game_framework {
 
 		weapon StarThrow;
 
+		int** blockerXys;
+
 		int x, y, hp;
 		const int ImgW = 60, ImgH = 60;
 		int sky_top;		// 天頂y座標
@@ -77,6 +81,7 @@ namespace game_framework {
 		int init_fly_velocity;	// 初始飛行速度
 		int fly_velocity;	// kirby inAir 時的飛行速度
 		int game_state_counter;		// game state counter
+		int LastHurt;				// last hurt time 初始為零
 		bool IsRising;		// true表示上升
 		bool IsMovingL;
 		bool IsMovingR;
@@ -92,7 +97,6 @@ namespace game_framework {
 		bool OtherFromL;
 		bool IsHurt;
 		bool IsEaten;
-		int LastHurt;
 	};
 }
 

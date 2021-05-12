@@ -42,6 +42,7 @@ namespace game_framework {
 		IsHurt = false;
 		IsEaten = false;
 		OtherFromL = false;
+		blockerXys = nullptr;
 	}
 
 	kirby::~kirby()
@@ -423,23 +424,27 @@ namespace game_framework {
 			if (IsFacingR) {
 				IsFacingR = false;
 			}
-			x -= length;
+			// x -= length;
+			SetXY(x - length, y);
 		}
 
 		if (IsMovingR && !IsDown && !IsAttack && !IsHurt && x < SIZE_X - ImgW - frame_of_test) {
 			if (!IsFacingR) {
 				IsFacingR = true;
 			}
-			x += length;
+			// x += length;
+			SetXY(x + length, y);
 		}
 
 		// set down attack right and left
 		if (IsDown && IsAttack && !IsHurt) {
 			if (IsFacingR && x < SIZE_X - ImgW - frame_of_test) {
-				x += length * 3;
+				// x += length * 3;
+				SetXY(x + length * 3, y);
 			}
 			else if (x > frame_of_test) {
-				x -= length * 3;
+				// x -= length * 3;
+				SetXY(x - length * 3, y);
 			}
 		}
 
@@ -450,7 +455,8 @@ namespace game_framework {
 			}
 			if (IsJumping) {
 				if (velocity > 0) {
-					y -= velocity;
+					// y -= velocity;
+					SetXY(x, y - velocity);
 					velocity--;
 				}
 				else {
@@ -460,7 +466,8 @@ namespace game_framework {
 			}
 			else if (FlyUp && IsFat) {
 				if (fly_velocity > 0) {
-					y -= fly_velocity;
+					// y -= fly_velocity;
+					SetXY(x, y - fly_velocity);
 					fly_velocity--;
 				}
 				else {
@@ -473,11 +480,13 @@ namespace game_framework {
 		else {											// falling
 			if (y < floor - frame_of_test - ImgH) {
 				if (IsJumping || !IsFlying) {
-					y += velocity;
+					// y += velocity;
+					SetXY(x, y + velocity);
 					velocity++;
 				}
 				else if (IsFlying) {
-					y++;
+					// y++;
+					SetXY(x, y + 1);
 				}
 			}
 			else {
@@ -496,9 +505,11 @@ namespace game_framework {
 		// kirby is hurt
 		if (IsHurt) {
 			if (!OtherFromL) {
-				x -= 2;
+				// x -= 2;
+				SetXY(x - 2, y);
 			} else  {
-				x += 2;
+				// x += 2;
+				SetXY(x + 2, y);
 			}
 		}
 
@@ -515,6 +526,9 @@ namespace game_framework {
 	}
 
 	void kirby::SetXY(int x_in, int y_in) {
+		if (blockerXys != nullptr) {
+
+		}
 		x = x_in;
 		y = y_in;
 	}
@@ -586,6 +600,12 @@ namespace game_framework {
 
 	void kirby::SetCounter(int input_counter) {
 		game_state_counter = input_counter;
+	}
+
+	void kirby::SetBlockers(int** input_blockers) {
+		if (input_blockers != nullptr) {
+			blockerXys = input_blockers;
+		}
 	}
 	
 	void kirby::Hurt(int input, int time) {
@@ -743,31 +763,4 @@ namespace game_framework {
 	bool kirby::IsScreamL() {
 		return IsAttack && !IsFacingR && !IsDown;
 	}
-	/*
-	template < class T >
-	bool kirby::CanAttack(T t) {
-		int* StarBlockXy = t.GetXy();
-		int* KirbyXy = GetXy();
-		bool canAttackR = false;
-		bool canAttackL = false;
-		int for_count = 0;
-		for (;for_count < 10;for_count++) {
-			int x_different = StarBlockXy[0] - KirbyXy[2];
-			int x_different2 = KirbyXy[0] - StarBlockXy[2];
-			int y_different = StarBlockXy[1] - KirbyXy[1];
-			int y_different2 = KirbyXy[3] - StarBlockXy[3];
-			if (x_different > for_count && x_different < 60 && y_different < for_count * 8 && y_different2 < for_count * 8) {
-				canAttackR = true;
-				break;
-			}
-			if (x_different2 > for_count && x_different2 < 60 && y_different < for_count * 8 && y_different2 < for_count * 8) {
-				canAttackL = true;
-				break;
-			}
-		}
-
-		delete[] StarBlockXy;
-		delete[] KirbyXy;
-	}
-	*/
 }

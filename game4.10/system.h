@@ -5,6 +5,14 @@
 #include "./things.h"
 
 namespace game_framework {
+	/*bool CanMoveXy(int* wantToMoveXy, int* BlockXy) {
+		bool result = true;
+		if (wantToMoveXy[0] > BlockXy[0] && wantToMoveXy[0] < BlockXy[2] && wantToMoveXy[1] > BlockXy[1] && wantToMoveXy[1] < BlockXy[3]) {
+			result = false;
+		}
+		return result;
+	}*/
+
 	template < class T >
 	bool KirbyCanAttack(kirby & Kirby, T * t) {
 		int* StarBlockXy = t->GetXy();

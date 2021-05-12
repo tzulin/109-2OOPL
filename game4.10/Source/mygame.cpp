@@ -173,7 +173,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	Kirby.OnMove();										// Kirby OnMove
 	
-	if (Waddle != nullptr) {
+	if (Waddle != nullptr) {							// waddle meet hurt
 		if (Waddle->GetHp() > 0) {
 			Waddle->OnMove();									// Waddle OnMove
 			if (Meet(*Waddle, Kirby)) {
@@ -187,7 +187,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			*/
 		}
 	}
-	if (WaddleDoo != nullptr) {
+	if (WaddleDoo != nullptr) {								// waddledoo meet and hurt
 		if (WaddleDoo->GetHp() > 0) {
 			if (Meet(*WaddleDoo, Kirby)) {
 				Kirby.Hurt(WaddleDoo->GetPower(), counter);
@@ -198,6 +198,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
 
+	//int** tempBlockXy
 	if (StarBlockList != nullptr) {							// starblock can attack or not
 		for (int i = 0; i < 25;i++) {
 			if (StarBlockList[i] != nullptr) {
@@ -214,7 +215,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		}
 	}
 
-	if (Waddle != nullptr) {
+	//Kirby.SetBlockers();
+
+	if (Waddle != nullptr) {												// waddle can attack check
 		if (KirbyCanAttack(Kirby, Waddle) && (Kirby.IsScreamR() || Kirby.IsScreamL())) {
 			Kirby.SetEaten(true);
 			Kirby.SetAttack(false);
@@ -223,7 +226,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		}
 	}
 
-	if (WaddleDoo != nullptr) {
+	if (WaddleDoo != nullptr) {											// waddledoo can attack check
 		if (KirbyCanAttack(Kirby, WaddleDoo) && (Kirby.IsScreamR() || Kirby.IsScreamL())) {
 			Kirby.SetEaten(true);
 			Kirby.SetAttack(false);
