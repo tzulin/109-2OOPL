@@ -78,6 +78,20 @@ namespace game_framework {
 			KirbyMovingR.AddBitmap(walk_right[i], RGB(255, 0, 0));
 		}
 
+		// load fat walk left
+		char *fat_walk_left[8] = { ".\\res\\walk\\fat_walkL1.bmp", ".\\res\\walk\\fat_walkL2.bmp", ".\\res\\walk\\fat_walkL3.bmp", ".\\res\\walk\\fat_walkL4.bmp", ".\\res\\walk\\fat_walkL5.bmp", ".\\res\\walk\\fat_walkL6.bmp", ".\\res\\walk\\fat_walkL7.bmp", ".\\res\\walk\\fat_walkL8.bmp" };
+		for (int i = 0; i < 8; i++)
+		{
+			KirbyFatMovingL.AddBitmap(fat_walk_left[i], RGB(255, 255, 255));
+		}
+
+		// load fat walk right
+		char *fat_walk_right[8] = { ".\\res\\walk\\fat_walkR1.bmp", ".\\res\\walk\\fat_walkR2.bmp", ".\\res\\walk\\fat_walkR3.bmp", ".\\res\\walk\\fat_walkR4.bmp", ".\\res\\walk\\fat_walkR5.bmp", ".\\res\\walk\\fat_walkR6.bmp", ".\\res\\walk\\fat_walkR7.bmp", ".\\res\\walk\\fat_walkR8.bmp" };
+		for (int i = 0; i < 8; i++)
+		{
+			KirbyFatMovingR.AddBitmap(fat_walk_right[i], RGB(255, 255, 255));
+		}
+
 		// load stand and wink right
 		int count = 12;
 		while (count-- > 0) {
@@ -105,6 +119,38 @@ namespace game_framework {
 		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 0, 0));
 		KirbyStandL.AddBitmap(IDB_STANDL, RGB(255, 0, 0));
 		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 0, 0));	
+
+		// load fat stand and wink right
+		count = 12;
+		while (count-- > 0) {
+			KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR1.bmp", RGB(255, 255, 255));
+		}
+		KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR2.bmp", RGB(255, 255, 255));
+
+		count = 12;
+		while (count-- > 0) {
+			KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR1.bmp", RGB(255, 255, 255));
+
+		}
+		KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR2.bmp", RGB(255, 255, 255));
+		KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR1.bmp", RGB(255, 255, 255));
+		KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR2.bmp", RGB(255, 255, 255));
+
+		// load fat stand and wink left
+		count = 12;
+		while (count-- > 0) {
+			KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL1.bmp", RGB(255, 255, 255));
+		}
+		KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL2.bmp", RGB(255, 255, 255));
+
+		count = 12;
+		while (count-- > 0) {
+			KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL1.bmp", RGB(255, 255, 255));
+
+		}
+		KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL2.bmp", RGB(255, 255, 255));
+		KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL1.bmp", RGB(255, 255, 255));
+		KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL2.bmp", RGB(255, 255, 255));
 
 		// load down right and left
 		KirbyDownR.LoadBitmap(IDB_DOWNR1, RGB(255, 255, 255));
@@ -444,6 +490,39 @@ namespace game_framework {
 				KirbyHurtL.Reset();
 			}
 			break;
+
+		// case IsEaten standing right
+		case 19:
+			KirbyFatStand.SetDelayCount(3);
+			KirbyFatStand.SetTopLeft(x, y);
+			KirbyFatStand.OnMove();
+			KirbyFatStand.OnShow();
+			break;
+
+		// case IsEaten standing left
+		case 20:
+			KirbyFatStandL.SetDelayCount(3);
+			KirbyFatStandL.SetTopLeft(x, y);
+			KirbyFatStandL.OnMove();
+			KirbyFatStandL.OnShow();
+			break;
+
+		// case fat walk right 21
+		case 21:
+			KirbyFatMovingR.SetDelayCount(2);
+			KirbyFatMovingR.SetTopLeft(x, y);
+			KirbyFatMovingR.OnMove();
+			KirbyFatMovingR.OnShow();
+			break;
+
+		// case fat walk left 22
+		case 22:
+			KirbyFatMovingL.SetDelayCount(2);
+			KirbyFatMovingL.SetTopLeft(x, y);
+			KirbyFatMovingL.OnMove();
+			KirbyFatMovingL.OnShow();
+			break;
+
 		default:
 			CMovingBitmap temp;
 			temp.LoadBitmap(IDB_KIRBY);
@@ -821,12 +900,16 @@ namespace game_framework {
 					// case flying right
 					return 8;
 				}
-				else if (IsMovingR) {
+				else if (IsMovingR && !IsEaten) {
 					// case walking right
 					return 5;
 				}
+				else if (IsEaten && IsMovingR) {
+					// case IsEaten  walking right
+					return 21;
+				}
 				else if (IsEaten) {
-					// case IsEaten right
+					// case IsEaten standing right
 					return 19;
 				}
 				else {
@@ -862,12 +945,16 @@ namespace game_framework {
 					// case flying left
 					return 16;
 				}
-				else if (IsMovingL) {
+				else if (IsMovingL && !IsEaten) {
 					// case walking left 
 					return 13;
 				}
+				else if (IsEaten && IsMovingL) {
+					// case IsEaten walking left
+					return 22;
+				}
 				else if (IsEaten) {
-					// case IsEaten left
+					// case IsEaten standing left
 					return 20;
 				}
 				else {
