@@ -345,6 +345,8 @@
     <Image Include="RES\basic\basicL2.bmp" />
     <Image Include="RES\basic\basicR1.bmp" />
     <Image Include="RES\basic\basicR2.bmp" />
+    <Image Include="RES\basic\fat_basicR1.bmp" />
+    <Image Include="RES\basic\fat_basicR2.bmp" />
     <Image Include="res\bitmap3.bmp" />
     <Image Include="res\bitmap4.bmp" />
     <Image Include="res\bitmap5.bmp" />
@@ -419,6 +421,14 @@
     <Image Include="res\walkR9.bmp" />
     <Image Include="res\walk\bitmap14.bmp" />
     <Image Include="res\walk\bitmap15.bmp" />
+    <Image Include="RES\walk\fat_kirby_walkR1.bmp" />
+    <Image Include="RES\walk\fat_kirby_walkR2.bmp" />
+    <Image Include="RES\walk\fat_kirby_walkR3.bmp" />
+    <Image Include="RES\walk\fat_kirby_walkR4.bmp" />
+    <Image Include="RES\walk\fat_kirby_walkR5.bmp" />
+    <Image Include="RES\walk\fat_kirby_walkR6.bmp" />
+    <Image Include="RES\walk\fat_kirby_walkR7.bmp" />
+    <Image Include="RES\walk\fat_kirby_walkR8.bmp" />
     <Image Include="res\walk\walkL1.bmp" />
     <Image Include="res\walk\walkL10.bmp" />
     <Image Include="res\walk\walkL2.bmp" />

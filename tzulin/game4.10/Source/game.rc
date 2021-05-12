@@ -204,6 +204,10 @@ IDB_STARBLOCK           BITMAP                  "..\\RES\\starblock.bmp"
 
 IDB_STARTHROW           BITMAP                  "..\\RES\\star.bmp"
 
+IDB_FAT_STAND           BITMAP                  "..\\RES\\basic\\fat_basicR1.bmp"
+
+IDB_FAT_CLOSE_EYES      BITMAP                  "..\\RES\\basic\\fat_basicR2.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

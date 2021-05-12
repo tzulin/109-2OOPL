@@ -49,8 +49,12 @@ namespace game_framework {
 	private:
 		CAnimation KirbyMovingL;
 		CAnimation KirbyMovingR;
+		CAnimation KirbyFatMovingL;
+		CAnimation KirbyFatMovingR;
 		CAnimation KirbyStand;
 		CAnimation KirbyStandL;
+		CAnimation KirbyFatStand;
+		CAnimation KirbyFatStandL;
 		CAnimation KirbyJumpR;
 		CAnimation KirbyJumpL;
 		CAnimation KirbyScreamR;
