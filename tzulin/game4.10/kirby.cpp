@@ -1,3 +1,4 @@
+
 #include "stdafx.h"
 #include "source/Resource.h"
 #include <mmsystem.h>
@@ -41,6 +42,7 @@ namespace game_framework {
 		IsHurt = false;
 		IsEaten = false;
 		OtherFromL = false;
+		blockerXys = nullptr;
 	}
 
 	kirby::~kirby()
@@ -209,10 +211,31 @@ namespace game_framework {
 		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL6.bmp", RGB(255, 255, 255));
 		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL7.bmp", RGB(255, 255, 255));
 		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL8.bmp", RGB(255, 255, 255));
+
+		// load Star Throw
+		int rgb[3] = {0, 0, 0};
+		StarThrow.LoadBitmap(IDB_STARTHROW, rgb, 100);
 }
 
 	void kirby::OnShow()
 	{
+		StarThrow.OnMove();
+		if (StarThrow.WeaponIsShow()) {
+			if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 100) {
+				int* temp = StarThrow.GetXy();
+				if (StarThrow.GetAttackFacingR()) {
+					StarThrow.SetXy(temp[0] + 10, temp[1]);
+				}
+				else {
+					StarThrow.SetXy(temp[0] - 10, temp[1]);
+				}
+				delete[] temp;
+				StarThrow.OnShow();
+			}
+			else {
+				StarThrow.SetShow(false);
+			}
+		}
 		switch (GetCase()) {
 		// case jump up right
 		case 1:
@@ -364,7 +387,7 @@ namespace game_framework {
 
 		// case hurt right
 		case 17: 
-			KirbyHurtR.SetDelayCount(4);
+			KirbyHurtR.SetDelayCount(2);
 			KirbyHurtR.SetTopLeft(x, y);
 			KirbyHurtR.OnMove();
 			KirbyHurtR.OnShow();
@@ -376,7 +399,7 @@ namespace game_framework {
 
 		// case hurt left
 		case 18:
-			KirbyHurtL.SetDelayCount(4);
+			KirbyHurtL.SetDelayCount(2);
 			KirbyHurtL.SetTopLeft(x, y);
 			KirbyHurtL.OnMove();
 			KirbyHurtL.OnShow();
@@ -403,23 +426,27 @@ namespace game_framework {
 			if (IsFacingR) {
 				IsFacingR = false;
 			}
-			x -= length;
+			// x -= length;
+			SetXY(x - length, y);
 		}
 
 		if (IsMovingR && !IsDown && !IsAttack && !IsHurt && x < SIZE_X - ImgW - frame_of_test) {
 			if (!IsFacingR) {
 				IsFacingR = true;
 			}
-			x += length;
+			// x += length;
+			SetXY(x + length, y);
 		}
 
 		// set down attack right and left
 		if (IsDown && IsAttack && !IsHurt) {
 			if (IsFacingR && x < SIZE_X - ImgW - frame_of_test) {
-				x += length * 3;
+				// x += length * 3;
+				SetXY(x + length * 3, y);
 			}
 			else if (x > frame_of_test) {
-				x -= length * 3;
+				// x -= length * 3;
+				SetXY(x - length * 3, y);
 			}
 		}
 
@@ -430,7 +457,8 @@ namespace game_framework {
 			}
 			if (IsJumping) {
 				if (velocity > 0) {
-					y -= velocity;
+					// y -= velocity;
+					SetXY(x, y - velocity);
 					velocity--;
 				}
 				else {
@@ -440,7 +468,8 @@ namespace game_framework {
 			}
 			else if (FlyUp && IsFat) {
 				if (fly_velocity > 0) {
-					y -= fly_velocity;
+					// y -= fly_velocity;
+					SetXY(x, y - fly_velocity);
 					fly_velocity--;
 				}
 				else {
@@ -453,11 +482,13 @@ namespace game_framework {
 		else {											// falling
 			if (y < floor - frame_of_test - ImgH) {
 				if (IsJumping || !IsFlying) {
-					y += velocity;
+					// y += velocity;
+					SetXY(x, y + velocity);
 					velocity++;
 				}
 				else if (IsFlying) {
-					y++;
+					// y++;
+					SetXY(x, y + 1);
 				}
 			}
 			else {
@@ -475,19 +506,19 @@ namespace game_framework {
 
 		// kirby is hurt
 		if (IsHurt) {
-			if (!OtherFromL && x > frame_of_test) {
-				x -= 3;
-			}
-			else if (x < SIZE_X - ImgW - frame_of_test) {
-				x += 3;
-			}
+			if (!OtherFromL) {
+				// x -= 2;
+				SetXY(x - 4, y);
+			} else  {
+				// x += 2;
+				SetXY(x + 4, y);
+			} 
 		}
 
 		// kirby throw star
-		if (IsAttack) {
+		if (IsEaten && IsAttack) {
 			ThrowStar();
 		}
-		
 
 		// animation OnMove
 		KirbyMovingL.OnMove();
@@ -496,7 +527,10 @@ namespace game_framework {
 		KirbyStandL.OnMove();
 	}
 
-	void kirby::SetXy(int x_in, int y_in) {
+	void kirby::SetXY(int x_in, int y_in) {
+		if (blockerXys != nullptr) {
+
+		}
 		x = x_in;
 		y = y_in;
 	}
@@ -562,12 +596,18 @@ namespace game_framework {
 		IsEaten = input;
 	}
 
-	void kirby::SetEnemyFromL(bool input) {
-		EnemyFromL = input;
+	void kirby::YouAreLeft(bool YouAreLeft) {
+		OtherFromL = !YouAreLeft;
 	}
 
-	void kirby::SetOtherFromL(bool input) {
-		OtherFromL = input;
+	void kirby::SetCounter(int input_counter) {
+		game_state_counter = input_counter;
+	}
+
+	void kirby::SetBlockers(int** input_blockers) {
+		if (input_blockers != nullptr) {
+			blockerXys = input_blockers;
+		}
 	}
 	
 	void kirby::Hurt(int input, int time) {
@@ -584,11 +624,12 @@ namespace game_framework {
 	}
 
 	void kirby::ThrowStar() {
-		if (!IsEaten)
-			return;
-		else {
-			IsEaten = false;
-		}
+		int* temp = GetXy();
+		StarThrow.SetAttackState(game_state_counter, IsFacingR, temp);
+		delete[] temp;
+		StarThrow.SetShow(true);
+		IsEaten = false;
+		IsAttack = false;
 	}
 
 	int kirby::GetCase() {
@@ -722,5 +763,10 @@ namespace game_framework {
 
 	bool kirby::IsScreamL() {
 		return IsAttack && !IsFacingR && !IsDown;
+	}
+
+
+	weapon kirby::GetWeapon() {
+		return StarThrow;
 	}
 }

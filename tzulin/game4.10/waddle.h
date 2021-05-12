@@ -14,7 +14,7 @@ namespace game_framework {
 	public:
 		void LoadBitmap() override;
 		void Reset() override;
-		bool SeeKirby(kirby k) override;
+		//bool SeeKirby(kirby k) override;
 	};
 
 	class waddleDoo : public enemy {

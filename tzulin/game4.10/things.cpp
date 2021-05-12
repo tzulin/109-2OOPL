@@ -16,7 +16,7 @@ namespace game_framework {
 		starBlockPic.LoadBitmap(IDB_STARBLOCK);
 	}
 
-	void starBlock::SetXy(int input_x, int input_y) {
+	void starBlock::SetXY(int input_x, int input_y) {
 		x = input_x;
 		y = input_y;
 	}
@@ -42,12 +42,12 @@ namespace game_framework {
 		IsShow = input;
 	}
 
-	void blankBlock::SetHw(int input_h, int input_w) {
+	void blankBlock::SetHW(int input_h, int input_w) {
 		height = input_h;
 		width = input_w;
 	}
 
-	void blankBlock::SetXy(int input_x, int input_y) {
+	void blankBlock::SetXY(int input_x, int input_y) {
 		x = input_x;
 		y = input_y;
 	}

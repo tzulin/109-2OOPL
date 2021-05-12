@@ -51,10 +51,11 @@ namespace game_framework {
 		LastHurt = 0;
 	}
 
+	/*
 	bool waddle::SeeKirby(kirby k) {
 		return false;
 	}
-
+	*/
 	void waddleDoo::LoadBitmap()
 	{
 		// load walk right
@@ -77,24 +78,16 @@ namespace game_framework {
 		}
 
 		// load attack left
-		/*
-		char *attack_left[10] = { ".\\res\\waddledoo\\attack\\attackL1.bmp",".\\res\\waddledoo\\attack\\attackL2.bmp", ".\\res\\waddledoo\\attack\\attackL3.bmp", ".\\res\\waddledoo\\attack\\attackL4.bmp", ".\\res\\waddledoo\\attack\\attackL5.bmp", ".\\res\\waddledoo\\attack\\attackL6.bmp", ".\\res\\waddledoo\\attack\\attackL7.bmp", ".\\res\\waddledoo\\attack\\attackL8.bmp", ".\\res\\waddledoo\\attack\\attackL9.bmp", ".\\res\\waddledoo\\attack\\attackL10.bmp"};
-		for (int i = 0; i < 5; i++) {
-			AttackL.AddBitmap(attack_left[i], RGB(84, 109, 142));
-		}
-		*/
 		for (int i = 0; i < 10; i++) {
 			AttackL.AddBitmap(".\\res\\waddledoo\\walk\\walkL5.bmp");
 		}
 
 		// load weapon bitmap
 		char* weapon_left[10] = { ".\\res\\weapon\\waddledoo\\attackL1.bmp", ".\\res\\weapon\\waddledoo\\attackL2.bmp", ".\\res\\weapon\\waddledoo\\attackL3.bmp", ".\\res\\weapon\\waddledoo\\attackL4.bmp", ".\\res\\weapon\\waddledoo\\attackL5.bmp", ".\\res\\weapon\\waddledoo\\attackL6.bmp", ".\\res\\weapon\\waddledoo\\attackL7.bmp", ".\\res\\weapon\\waddledoo\\attackL8.bmp", ".\\res\\weapon\\waddledoo\\attackL9.bmp", ".\\res\\weapon\\waddledoo\\attackL10.bmp"};
-		char* weapon_right[10] = {".\\res\\weapon\\waddledoo\\attackR1.bmp", ".\\res\\weapon\\waddledoo\\attackR2.bmp", ".\\res\\weapon\\waddledoo\\attackR2.bmp", ".\\res\\weapon\\waddledoo\\attackR3.bmp", ".\\res\\weapon\\waddledoo\\attackR4.bmp", ".\\res\\weapon\\waddledoo\\attackR6.bmp", ".\\res\\weapon\\waddledoo\\attackR7.bmp", ".\\res\\weapon\\waddledoo\\attackR8.bmp", ".\\res\\weapon\\waddledoo\\attackR9.bmp", ".\\res\\weapon\\waddledoo\\attackR10.bmp" };
+		char* weapon_right[10] = {".\\res\\weapon\\waddledoo\\attackR1.bmp", ".\\res\\weapon\\waddledoo\\attackR2.bmp", ".\\res\\weapon\\waddledoo\\attackR3.bmp", ".\\res\\weapon\\waddledoo\\attackR4.bmp", ".\\res\\weapon\\waddledoo\\attackR5.bmp", ".\\res\\weapon\\waddledoo\\attackR6.bmp", ".\\res\\weapon\\waddledoo\\attackR7.bmp", ".\\res\\weapon\\waddledoo\\attackR8.bmp", ".\\res\\weapon\\waddledoo\\attackR9.bmp", ".\\res\\weapon\\waddledoo\\attackR10.bmp" };
 		int rgb[3] = { 255, 255, 255 };
 		wL.LoadBitmap(weapon_left, rgb, 10);
 		wR.LoadBitmap(weapon_right, rgb, 10);
-		// for (int i = 0; i < 10; i++) {
-		// }
 	}
 
 	void waddleDoo::Reset() {
