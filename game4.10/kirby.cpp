@@ -219,23 +219,10 @@ namespace game_framework {
 
 	void kirby::OnShow()
 	{
-		StarThrow.OnMove();
 		if (StarThrow.WeaponIsShow()) {
-			if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 100) {
-				int* temp = StarThrow.GetXy();
-				if (StarThrow.GetAttackFacingR()) {
-					StarThrow.SetXy(temp[0] + 10, temp[1]);
-				}
-				else {
-					StarThrow.SetXy(temp[0] - 10, temp[1]);
-				}
-				delete[] temp;
-				StarThrow.OnShow();
-			}
-			else {
-				StarThrow.SetShow(false);
-			}
+			StarThrow.OnShow();
 		}
+		
 		switch (GetCase()) {
 		// case jump up right
 		case 1:
@@ -520,6 +507,21 @@ namespace game_framework {
 			ThrowStar();
 		}
 
+		StarThrow.OnMove();
+		if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 100) {
+			int* temp = StarThrow.GetXy();
+			if (StarThrow.GetAttackFacingR()) {
+				StarThrow.SetXy(temp[0] + 10, temp[1]);
+			}
+			else {
+				StarThrow.SetXy(temp[0] - 10, temp[1]);
+			}
+			delete[] temp;
+		}
+		else {
+			StarThrow.SetShow(false);
+		}
+
 		// animation OnMove
 		KirbyMovingL.OnMove();
 		KirbyMovingR.OnMove();
@@ -766,7 +768,7 @@ namespace game_framework {
 	}
 
 
-	weapon kirby::GetWeapon() {
-		return StarThrow;
+	weapon* kirby::GetWeapon() {
+		return &StarThrow;
 	}
 }

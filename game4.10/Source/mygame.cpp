@@ -172,7 +172,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	Kirby.OnMove();										// Kirby OnMove
-	weapon KirbyWeapon = Kirby.GetWeapon();
+	weapon* KirbyWeapon = Kirby.GetWeapon();
 
 	if (Waddle != nullptr) {
 		if (Waddle->GetHp() > 0) {
@@ -183,9 +183,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				Waddle->Hurt(1, counter);
 			}
 			// kirby weapon hit enemy
-			if (Meet(KirbyWeapon, *Waddle) && KirbyWeapon.WeaponIsShow()) {
+			if (Meet(*KirbyWeapon, *Waddle) && KirbyWeapon->WeaponIsShow()) {
 				Waddle->Hurt(1, counter);
-				KirbyWeapon.SetShow(false);
+				KirbyWeapon->SetShow(false);
 			}
 		}
 	}
@@ -199,9 +199,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				WaddleDoo->Hurt(1, counter);
 			}
 			// kirby weapon hit enemy
-			if (Meet(KirbyWeapon, *WaddleDoo) && KirbyWeapon.WeaponIsShow()) {
+			if (Meet(*KirbyWeapon, *WaddleDoo) && KirbyWeapon->WeaponIsShow()) {
 				WaddleDoo->Hurt(1, counter);
-				KirbyWeapon.SetShow(false);
+				KirbyWeapon->SetShow(false);
 			}
 			// enemy weapon hit kirby
 			if (EnemyCanAttack(*WaddleDoo, Kirby)) {

@@ -35,7 +35,7 @@ namespace game_framework {
 		void Hurt(int input, int time);
 		void ThrowStar();
 		void YouAreLeft(bool YouAreLeft);
-		weapon GetWeapon();
+		weapon* GetWeapon();
 
 		int GetCase();
 		int GetHp();
