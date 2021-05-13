@@ -306,6 +306,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="system.h" />
     <ClInclude Include="things.h" />
     <ClInclude Include="kirby.h" />

@@ -4,7 +4,8 @@
 #include <ddraw.h>
 #include "source/audio.h"
 #include "source/gamelib.h"
-#include "things.h"
+//#include "things.h"
+#include "Header.h"
 
 namespace game_framework {
 

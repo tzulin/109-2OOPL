@@ -4,8 +4,9 @@
 #include <ddraw.h>
 #include "source/audio.h"
 #include "source/gamelib.h"
-#include "enemy.h"
-#include "waddle.h"
+/*#include "enemy.h"
+#include "waddle.h"*/
+#include "Header.h"
 
 namespace game_framework {
 	const int frame_of_test = 5;

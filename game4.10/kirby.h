@@ -31,9 +31,13 @@ namespace game_framework {
 		void SetFly(bool input);
 		void SetEaten(bool input);
 		void SetCounter(int);
+
 		void SetMap(CMovingBitmap* Map);
-		void SetThings(starBlock* Block);
-		void SetBlockers(int** input_blocks, int input_number_of_blocks);
+		void SetThings(starBlock** Blocks_input, int input_number);
+		void SetWaddles(waddle** waddles_input, int input_number);
+		void SetWaddleDoos(waddleDoo** waddle_doos_input, int input_number);
+
+		void SetRun(bool input);
 		void Hurt(int input, int time);
 		void ThrowStar();
 		void YouAreLeft(bool YouAreLeft);
@@ -47,8 +51,6 @@ namespace game_framework {
 		bool IsAlive();
 		bool IsScreamR();
 		bool IsScreamL();
-
-		//bool CanMove;
 
 	private:
 		CAnimation KirbyMovingL;
@@ -76,10 +78,12 @@ namespace game_framework {
 		CMovingBitmap KirbyDownL;
 		CMovingBitmap * Map;
 
-		starBlock * StarBlockTest;
+		waddle* WaddleList;
+		waddleDoo* WaddleDooList;
+		starBlock ** StarBlockList;
+		int number_of_star_blocks, number_of_waddles, number_of_waddle_doos;
 		weapon StarThrow;
 
-		int** blockXys;
 
 		int x, y, hp;
 		const int ImgW = 60, ImgH = 60;
@@ -91,7 +95,6 @@ namespace game_framework {
 		int init_fly_velocity;	// 初始飛行速度
 		int fly_velocity;	// kirby inAir 時的飛行速度
 		int game_state_counter;		// game state counter
-		int number_of_block;
 		int LastHurt;				// last hurt time 初始為零
 		int BoundaryTop, BoundaryRight, BoundaryLeft; // boundary 
 		bool IsRising;		// true表示上升
@@ -109,6 +112,7 @@ namespace game_framework {
 		bool IsHurt;
 		bool IsEaten;
 		bool YouAreGround;
+		bool IsRun;
 	};
 }
 

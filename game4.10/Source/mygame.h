@@ -1,9 +1,10 @@
 
-#include "../../game4.10/kirby.h"
+/*#include "../../game4.10/kirby.h"
 #include "../../game4.10/enemy.h"
 #include "../../game4.10/waddle.h"
 #include "../../game4.10/things.h"
-#include "../../game4.10/system.h"
+#include "../../game4.10/system.h"*/
+#include "../../game4.10/Header.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -49,18 +50,16 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		kirby Kirby;
-		waddle* Waddle;
-		waddleDoo* WaddleDoo;
 		CMovingBitmap kirbyHp;
 		CMovingBitmap Map;
 		CInteger kirbyHpInt;
-		starBlock ** StarBlockList;
-		starBlock * StarBlockTest;
-		starBlock * StarBlockTest2;
-		int temp_floor = 60, counter = 0;
-		CInteger test;
-		int** blockXys;
+		kirby Kirby;
+
+		waddle** WaddleList;
+		waddleDoo** WaddleDooList;
+		starBlock** StarBlockList;
+		int temp_floor = 60, counter = 0, last_left = 0, last_right = 0;
+		int number_of_star_blocks = 0, number_of_waddles = 0, number_of_waddle_doos = 0;
  	};
 
 	/////////////////////////////////////////////////////////////////////////////

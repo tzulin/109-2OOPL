@@ -5,7 +5,8 @@
 #include <ddraw.h>
 #include "source/audio.h"
 #include "source/gamelib.h"
-#include "kirby.h"
+//#include "kirby.h"
+#include "Header.h"
 
 namespace game_framework {
 	const int frame_of_test = 5;
@@ -47,22 +48,13 @@ namespace game_framework {
 		IsHurt = false;
 		IsEaten = false;
 		OtherFromL = false;
-		blockXys = nullptr;
 		YouAreGround = true;
+		StarBlockList = nullptr;
+		IsRun = false;
 	}
 
 	kirby::~kirby()
 	{
-		if (blockXys != nullptr) {				// delete blockXys
-			for (int i = 0; i < 25;i++) {
-				if (blockXys[i] != nullptr) {
-					delete[] blockXys[i];
-					blockXys[i] = nullptr;
-				}
-			}
-			delete[] blockXys;
-			blockXys = nullptr;
-		}
 	}
 
 	void kirby::LoadBitmap()
@@ -544,16 +536,26 @@ namespace game_framework {
 			if (IsFacingR) {
 				IsFacingR = false;
 			}
-			// x -= length;
-			SetXY(x - length, y);
+			if (IsRun && !InAir) {
+				SetXY(x - length * 3, y);
+			}
+			else {
+				// x -= length;
+				SetXY(x - length, y);
+			}
 		}
 
 		if (IsMovingR && !IsDown && !IsAttack && !IsHurt && x < SIZE_X - ImgW - frame_of_test) {
 			if (!IsFacingR) {
 				IsFacingR = true;
 			}
-			// x += length;
-			SetXY(x + length, y);
+			if (IsRun && !InAir) {
+				SetXY(x + length * 3, y);
+			}
+			else {
+				// x += length;
+				SetXY(x + length, y);
+			}
 		}
 
 		// set down attack right and left
@@ -671,45 +673,12 @@ namespace game_framework {
 	}
 
 	void kirby::SetXY(int x_in, int y_in) {
-		if (x_in - x > 0) {
-			// right
-			if (x_in > BoundaryLeft - now_img_w && Map->Left() >  - (BoundaryRight - SIZE_X/2)) {
-				Map->SetTopLeft(Map->Left() - (x_in - x), Map->Top());
-				StarBlockTest->SetXY(StarBlockTest->Left() - (x_in - x), StarBlockTest->Top());
-				return;
-			}
-		}
-		else if(x_in - x < 0){
-			// left
-			if (x_in < BoundaryLeft && Map->Left() < 0) {
-				Map->SetTopLeft(Map->Left() - (x_in - x), Map->Top());
-				StarBlockTest->SetXY(StarBlockTest->Left() - (x_in - x), StarBlockTest->Top());
-				return;
-			}
-		}
-
-		if (y_in - y > 0) {
-			// go down
-			if (y_in > BoundaryTop && Map->Top() > -480) {
-				Map->SetTopLeft(Map->Left(), Map->Top() - (y_in - y));
-				StarBlockTest->SetXY(StarBlockTest->Left(), StarBlockTest->Top() - (y_in - y));
-				return;
-			}
-		}
-		else if(y_in - y < 0){
-			// go up
-			if (y_in < BoundaryTop && Map->Top() < 0) {
-				Map->SetTopLeft(Map->Left(), Map->Top() - (y_in - y));
-				StarBlockTest->SetXY(StarBlockTest->Left(), StarBlockTest->Top() - (y_in - y));
-				return;
-			}
-		}
 		int aXy[4] = { x_in, y_in, x_in + now_img_w, y_in + now_img_h};
 		bool result = true;
-		if (blockXys != nullptr) {
-			for (int k = 0; k < number_of_block;k++) {
-				if (blockXys[k] != nullptr) {
-					int* bXy = blockXys[k];
+		if (StarBlockList != nullptr) {
+			for (int k = 0;k < number_of_star_blocks;k++) {
+				if (StarBlockList[k] != nullptr) {
+					int* bXy = StarBlockList[k]->GetXy();
 					int i = 0, n = 1;
 					for (int count = 0; count < 2; count++) {
 						for (int _count = 0; _count < 2; _count++) {
@@ -741,11 +710,126 @@ namespace game_framework {
 						n = 1;
 						i += 2;
 					}
+					delete[] bXy;
 				}
 			}
 		}
 		
+		
 		if (result) {
+			if (x_in - x > 0) {
+				// right
+				if (x_in > BoundaryLeft - now_img_w && Map->Left() > -(BoundaryRight - SIZE_X / 2)) {
+					Map->SetTopLeft(Map->Left() - (x_in - x), Map->Top());
+					if (StarBlockList != nullptr) {
+						for (int i = 0;i < number_of_star_blocks;i++) {
+							if (StarBlockList[i] != nullptr) {
+								StarBlockList[i]->SetXY(StarBlockList[i]->Left() - (x_in - x), StarBlockList[i]->Top());
+							}
+						}
+					}
+					if (WaddleList != nullptr) {
+						for (int i = 0;i < number_of_waddles;i++) {
+							if (WaddleList[i] != nullptr) {
+								WaddleList[i]->SetXy(WaddleList[i]->Left() - (x_in - x), WaddleList[i]->Top());
+							}
+						}
+					}
+					if (WaddleDooList != nullptr) {
+						for (int i = 0;i < number_of_waddle_doos;i++) {
+							if (WaddleDooList[i] != nullptr) {
+								WaddleDooList[i]->SetXy(WaddleDooList[i]->Left() - (x_in - x), WaddleDooList[i]->Top());
+							}
+						}
+					}
+					return;
+				}
+			}
+			else if (x_in - x < 0) {
+				// left
+				if (x_in < BoundaryLeft && Map->Left() < 0) {
+					Map->SetTopLeft(Map->Left() - (x_in - x), Map->Top());
+					if (StarBlockList != nullptr) {
+						for (int i = 0;i < number_of_star_blocks;i++) {
+							if (StarBlockList[i] != nullptr) {
+								StarBlockList[i]->SetXY(StarBlockList[i]->Left() - (x_in - x), StarBlockList[i]->Top());
+							}
+						}
+					}
+					if (WaddleList != nullptr) {
+						for (int i = 0;i < number_of_waddles;i++) {
+							if (WaddleList[i] != nullptr) {
+								WaddleList[i]->SetXy(WaddleList[i]->Left() - (x_in - x), WaddleList[i]->Top());
+							}
+						}
+					}
+					if (WaddleDooList != nullptr) {
+						for (int i = 0;i < number_of_waddle_doos;i++) {
+							if (WaddleDooList[i] != nullptr) {
+								WaddleDooList[i]->SetXy(WaddleDooList[i]->Left() - (x_in - x), WaddleDooList[i]->Top());
+							}
+						}
+					}
+					return;
+				}
+			}
+
+			if (y_in - y > 0) {
+				// go down
+				if (y_in > BoundaryTop && Map->Top() > -480) {
+					Map->SetTopLeft(Map->Left(), Map->Top() - (y_in - y));
+					if (StarBlockList != nullptr) {
+						for (int i = 0;i < number_of_star_blocks;i++) {
+							if (StarBlockList[i] != nullptr) {
+								StarBlockList[i]->SetXY(StarBlockList[i]->Left(), StarBlockList[i]->Top() - (y_in - y));
+							}
+						}
+					}
+					if (WaddleList != nullptr) {
+						for (int i = 0;i < number_of_waddles;i++) {
+							if (WaddleList[i] != nullptr) {
+								WaddleList[i]->SetXy(WaddleList[i]->Left(), WaddleList[i]->Top() - (y_in - y));
+							}
+						}
+					}
+					if (WaddleDooList != nullptr) {
+						for (int i = 0;i < number_of_waddle_doos;i++) {
+							if (WaddleDooList[i] != nullptr) {
+								WaddleDooList[i]->SetXy(WaddleDooList[i]->Left(), WaddleDooList[i]->Top() - (y_in - y));
+							}
+						}
+					}
+					return;
+				}
+			}
+			else if (y_in - y < 0) {
+				// go up
+				if (y_in < BoundaryTop && Map->Top() < 0) {
+					Map->SetTopLeft(Map->Left(), Map->Top() - (y_in - y));
+					if (StarBlockList != nullptr) {
+						for (int i = 0;i < number_of_star_blocks;i++) {
+							if (StarBlockList[i] != nullptr) {
+								StarBlockList[i]->SetXY(StarBlockList[i]->Left(), StarBlockList[i]->Top() - (y_in - y));
+							}
+						}
+					}
+					if (WaddleList != nullptr) {
+						for (int i = 0;i < number_of_waddles;i++) {
+							if (WaddleList[i] != nullptr) {
+								WaddleList[i]->SetXy(WaddleList[i]->Left(), WaddleList[i]->Top() - (y_in - y));
+							}
+						}
+					}
+					if (WaddleDooList != nullptr) {
+						for (int i = 0;i < number_of_waddle_doos;i++) {
+							if (WaddleDooList[i] != nullptr) {
+								WaddleDooList[i]->SetXy(WaddleDooList[i]->Left(), WaddleDooList[i]->Top() - (y_in - y));
+							}
+						}
+					}
+					return;
+				}
+			}
 			x = x_in;
 			y = y_in;
 		}
@@ -826,36 +910,23 @@ namespace game_framework {
 		Map = input_Map;
 	}
 
-	void kirby::SetThings(starBlock * input) {
-		StarBlockTest = input;
+	void kirby::SetThings(starBlock ** input, int number_input) {
+		StarBlockList = input;
+		number_of_star_blocks = number_input;
 	}
 
-	void kirby::SetBlockers(int** input_blockers, int input_number_of_block) {
-		if (input_blockers != nullptr) {
-			if (blockXys == nullptr) {
-				blockXys = new int*[input_number_of_block];
-				for (int i = 0;i < input_number_of_block;i++) {
-					blockXys[i] = nullptr;
-				}
-			}
-			for (int i = 0; i < 25;i++) {
-				if (input_blockers[i] != nullptr) {
-					if (blockXys[i] == nullptr) {
-						blockXys[i] = new int[4];
-					}
-					for (int n = 0;n < 4;n++) {
-						blockXys[i][n] = input_blockers[i][n];
-					}
-				}
-				else {
-					if (blockXys[i] != nullptr) {
-						delete[] blockXys[i];
-					}
-					blockXys[i] = nullptr;
-				}
-			}
-		}
-		number_of_block = input_number_of_block;
+	void kirby::SetWaddles(waddle** input, int number_input) {
+		WaddleList = input;
+		number_of_waddles = number_input;
+	}
+
+	void kirby::SetWaddleDoos(waddleDoo** input, int number_input) {
+		WaddleDooList = input;
+		number_of_waddle_doos = number_input;
+	}
+
+	void kirby::SetRun(bool input) {
+		IsRun = input;
 	}
 	
 	void kirby::Hurt(int input, int time) {

@@ -4,7 +4,8 @@
 #include <ddraw.h>
 #include "source/audio.h"
 #include "source/gamelib.h"
-#include "enemy.h"
+//#include "enemy.h"
+#include "Header.h"
 
 namespace game_framework {
 	const int frame_of_test = 5;
@@ -53,12 +54,20 @@ namespace game_framework {
 		return power;
 	}
 
+	int enemy::Top() {
+		return y;
+	}
+
+	int enemy::Left() {
+		return x;
+	}
+
 	void enemy::BackX(bool fromL) {
 		if (fromL) {
-			x += 60;
+			SetXy(x + 60, y);
 		}
 		else {
-			x -= 60;
+			SetXy(x - 60, y);
 		}
 	}
 
@@ -148,32 +157,33 @@ namespace game_framework {
 		// set moving XY
 		const int length = 2;
 
+		/*
 		SetXy(x - Map->GetXChange(), y - Map->GetYChange());
 		Map->ResetChange();
+		*/
 
 		if (!IsAttack) {
 			MovingL.OnMove();
 			MovingR.OnMove();
 			// set moving XY and frame of test 
-			// move left
 			if (IsMovingL && x >= Map->Left()) {
 				if (IsFacingR) {
 					IsFacingR = false;
 				}
-				x -= length;
+				SetXy(x - length, y);
 			}
-			else if (x <= frame_of_test) { // or x < Map->Left(), enemy is at boundary
+			else if (x <= Map->Left()) {
 				IsMovingL = false;
 				IsMovingR = true;
 			}
-			// move right
-			if (IsMovingR && x <= Map->Left()+Map->Width()-ImgW) {
+
+			if (IsMovingR && x <= Map->Left() + Map->Width() - ImgW) {
 				if (!IsFacingR) {
 					IsFacingR = true;
 				}
-				x += length;
+				SetXy(x + length, y);
 			}
-			else if (x >= SIZE_X - ImgW) {  // or x > Map->Left()+Map->Width()-ImgW, enemy is at boundary
+			else if (x >= Map->Left() + Map->Width() - ImgW) {
 				IsMovingR = false;
 				IsMovingL = true;
 			}
@@ -190,13 +200,57 @@ namespace game_framework {
 		Map = input;
 	}
 
+	void enemy::SetThings(starBlock** input, int input_number) {
+		number_of_star_blocks = input_number;
+		StarBlockList = input;
+	}
+
 	bool enemy::EnemyFacingR() {
 		return IsFacingR;
 	}
 
-	void enemy::SetXy(int input_x, int input_y) {
-		x = input_x;
-		y = input_y;
+	void enemy::SetXy(int x_in, int y_in) {
+		int aXy[4] = { x_in, y_in, x_in + MovingR.Width(), y_in +  MovingR.Height()};
+		bool result = true;
+		if (StarBlockList != nullptr) {
+			for (int k = 0;k < number_of_star_blocks;k++) {
+				if (StarBlockList[k] != nullptr) {
+					int* bXy = StarBlockList[k]->GetXy();
+					int i = 0, n = 1;
+					for (int count = 0; count < 2; count++) {
+						for (int _count = 0; _count < 2; _count++) {
+							if (aXy[i] > bXy[0] && aXy[i] < bXy[2] && aXy[n] > bXy[1] && aXy[n] < bXy[3]) {
+								result = false;
+								IsMovingL = !IsMovingL;
+								IsMovingR = !IsMovingR;
+							}
+							n += 2;
+						}
+						n = 1;
+						i += 2;
+					}
+
+					i = 0, n = 1;
+					for (int count = 0; count < 2; count++) {
+						for (int _count = 0; _count < 2; _count++) {
+							if (bXy[i] > aXy[0] && bXy[i] < aXy[2] && bXy[n] > aXy[1] && bXy[n] < aXy[3]) {
+								result = false;
+								IsMovingL = !IsMovingL;
+								IsMovingR = !IsMovingR;
+							}
+							n += 2;
+						}
+						n = 1;
+						i += 2;
+					}
+					delete[] bXy;
+				}
+			}
+		}
+		if (result) {
+			x = x_in;
+			y = y_in;
+		}
 	}
 
 	weapon enemy::GetWeapon() {
@@ -205,23 +259,6 @@ namespace game_framework {
 		}
 		else {
 			return wL;
-		}
-	}
-
-	void enemy::MeetBlock() {
-		if (IsMovingR) {
-			if (IsFacingR) {
-				IsFacingR = false;
-			}
-			IsMovingR = false;
-			IsMovingL = true;
-		}
-		else {
-			if (!IsFacingR) {
-				IsFacingR = true;
-			}
-			IsMovingL = false;
-			IsMovingR = true;
 		}
 	}
 }
