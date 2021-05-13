@@ -651,7 +651,7 @@ namespace game_framework {
 		}
 
 		StarThrow.OnMove();
-		if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 100) {
+		if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 50) {
 			int* temp = StarThrow.GetXy();
 			if (StarThrow.GetAttackFacingR()) {
 				StarThrow.SetXy(temp[0] + 10, temp[1]);
@@ -677,7 +677,7 @@ namespace game_framework {
 		bool result = true;
 		if (StarBlockList != nullptr) {
 			for (int k = 0;k < number_of_star_blocks;k++) {
-				if (StarBlockList[k] != nullptr) {
+				if (StarBlockList[k] != nullptr && StarBlockList[k]->GetShow()) {
 					int* bXy = StarBlockList[k]->GetXy();
 					int i = 0, n = 1;
 					for (int count = 0; count < 2; count++) {

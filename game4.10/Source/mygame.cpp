@@ -197,7 +197,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	if (WaddleList != nullptr) {
 		for (int i = 0; i < number_of_waddles;i++) {
-			if (WaddleList[i] != nullptr) {
+			if (WaddleList[i] != nullptr && WaddleList[i]->GetHp() > 0) {
 				WaddleList[i]->SetMap(&Map);
 				WaddleList[i]->SetThings(StarBlockList, number_of_star_blocks);
 				if (WaddleList[i]->GetHp() > 0) {
@@ -217,7 +217,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	if (WaddleDooList != nullptr) {
 		for (int i = 0; i < number_of_waddle_doos;i++) {
-			if (WaddleDooList[i] != nullptr) {
+			if (WaddleDooList[i] != nullptr && WaddleDooList[i]->GetHp() > 0) {
 				WaddleDooList[i]->SetMap(&Map);
 				WaddleDooList[i]->SetThings(StarBlockList, number_of_star_blocks);
 				weapon WaddleDooWeapon = WaddleDooList[i]->GetWeapon();
@@ -248,22 +248,14 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	if (StarBlockList != nullptr) {							// starblock can attack or not
 		for (int i = 0; i < number_of_star_blocks;i++) {
-			if (StarBlockList[i] != nullptr) {
+			if (StarBlockList[i] != nullptr && StarBlockList[i]->GetShow()) {
+				if (Meet(*KirbyWeapon, *StarBlockList[i]) && KirbyWeapon->WeaponIsShow()) {			// kirby weapon hit enemy
+					KirbyWeapon->SetShow(false);
+				}
 				if (KirbyCanAttack(Kirby, StarBlockList[i])) {
 					StarBlockList[i]->SetShow(false);
-					delete[] StarBlockList[i];
-					starBlock** temp = new starBlock*[number_of_star_blocks - 1];
-					for (int k = 0;k < i;k++) {
-						temp[k] = StarBlockList[k];
-					}
-					for (int k = i;k < number_of_star_blocks - 1;k++) {
-						temp[k] = StarBlockList[k + 1];
-					}
 					Kirby.SetEaten(true);
 					Kirby.SetAttack(false);
-					delete[] StarBlockList;
-					StarBlockList = temp;
-					number_of_star_blocks--;
 				}
 			}
 		}
@@ -271,21 +263,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	if (WaddleList != nullptr) {
 		for (int i = 0;i < number_of_waddles;i++) {
-			if (WaddleList[i] != nullptr) {												// waddle can attack check
+			if (WaddleList[i] != nullptr && WaddleList[i]->GetHp() > 0) {												// waddle can attack check
 				if (KirbyCanAttack(Kirby, WaddleList[i])) {
-					delete WaddleList[i];
-					waddle** temp = new waddle*[number_of_waddles - 1];
-					for (int k = 0;k < i;k++) {
-						temp[k] = WaddleList[k];
-					}
-					for (int k = i;k < number_of_waddles - 1;k++) {
-						temp[k] = WaddleList[k + 1];
-					}
+					WaddleList[i]->Hurt(10, counter);
 					Kirby.SetEaten(true);
 					Kirby.SetAttack(false);
-					delete WaddleList;
-					WaddleList = temp;
-					number_of_waddles--;
 				}
 			}
 		}
@@ -293,21 +275,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	if (WaddleDooList != nullptr) {
 		for (int i = 0;i < number_of_waddle_doos;i++) {
-			if (WaddleDooList[i] != nullptr) {												// waddle doo can attack check
+			if (WaddleDooList[i] != nullptr && WaddleDooList[i]->GetHp() > 0) {												// waddle doo can attack check
 				if (KirbyCanAttack(Kirby, WaddleDooList[i])) {
-					delete WaddleDooList[i];
-					waddleDoo** temp = new waddleDoo*[number_of_waddle_doos - 1];
-					for (int k = 0;k < i;k++) {
-						temp[k] = WaddleDooList[k];
-					}
-					for (int k = i;k < number_of_waddle_doos - 1;k++) {
-						temp[k] = WaddleDooList[k + 1];
-					}
+					WaddleDooList[i]->Hurt(10, counter);
 					Kirby.SetEaten(true);
 					Kirby.SetAttack(false);
-					delete WaddleDooList;
-					WaddleDooList = temp;
-					number_of_waddle_doos--;
 				}
 			}
 		}
@@ -331,14 +303,14 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	WaddleDooList = nullptr;
 	StarBlockList = nullptr;
 
-	if (WaddleDooList != nullptr) {
+	/*if (WaddleDooList != nullptr) {
 		for (int i = 0;i < number_of_waddle_doos;i++) {
 			if (WaddleDooList[i] != nullptr) {
 				delete WaddleDooList[i];
 			}
 		}
 		delete WaddleDooList;
-	}
+	}*/
 	WaddleDooList = new waddleDoo*[3];
 	number_of_waddle_doos = 3;
 	for (int i = 0;i < number_of_waddle_doos;i++) {
@@ -348,14 +320,14 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		WaddleDooList[i]->SetXy(1500 + 300 * i, SIZE_Y - temp_floor - WaddleDooList[i]->GetHeight());
 	}
 
-	if (WaddleList != nullptr) {
+	/*if (WaddleList != nullptr) {
 		for (int i = 0;i < number_of_waddles;i++) {
 			if (WaddleList[i] != nullptr) {
 				delete WaddleList[i];
 			}
 		}
 		delete WaddleList;
-	}
+	}*/
 	WaddleList = new waddle*[3];
 	number_of_waddles = 3;
 	for (int i = 0;i < number_of_waddles;i++) {
@@ -365,14 +337,14 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		WaddleList[i]->SetXy(500 + 400 * i, SIZE_Y - temp_floor - WaddleList[i]->GetHeight());
 	}
 
-	if (StarBlockList != nullptr) {
+	/*if (StarBlockList != nullptr) {
 		for (int i = 0;i < number_of_star_blocks;i++) {
 			if (StarBlockList[i] != nullptr) {
 				delete[] StarBlockList[i];
 			}
 		}
 		delete[] StarBlockList;
-	}
+	}*/
 	StarBlockList = new starBlock*[38];
 	number_of_star_blocks = 38;
 	starBlock** blocks = StarBlockList;
