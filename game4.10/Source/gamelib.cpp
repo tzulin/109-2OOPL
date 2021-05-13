@@ -437,7 +437,7 @@ int CMovingBitmap::Width()
 }
 
 int* CMovingBitmap::GetXy() {
-	return new int[4]{location.top, location.left, location.bottom, location.right};
+	return new int[4]{location.left, location.top, location.right, location.bottom};
 }
 
 void CMovingBitmap::YouAreLeft(bool input) {

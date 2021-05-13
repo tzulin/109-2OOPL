@@ -175,12 +175,6 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 {
 	counter++;
 
-	/*
-	if (Meet(Kirby, Door) && Kirby.GetUpKey()) {
-		GotoGameState(GAME_STATE_OVER);
-	}
-	*/
-
 	Kirby.SetCounter(counter);							// kirby get counter
 	Kirby.SetMap(&Map);									// kirby get map pointer
 	Kirby.SetDoor(&Door);
@@ -427,7 +421,23 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_S) {
-		
+		if (StarBlockList != nullptr) {
+			for (int i = 0;i < number_of_star_blocks;i++) {
+				StarBlockList[i]->SetShow(false);
+			}
+		}
+
+		if (WaddleList != nullptr) {
+			for (int i = 0; i < number_of_waddles;i++) {
+				WaddleList[i]->Hurt(10, counter);
+			}
+		}
+
+		if (WaddleDooList != nullptr) {
+			for (int i = 0; i < number_of_waddle_doos;i++) {
+				WaddleDooList[i]->Hurt(10, counter);
+			}
+		}
 	}
 
 	if (nChar == KEY_SPACE) {
@@ -435,11 +445,10 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_UP) {
-		Kirby.SetUpKey(true);
+		if (Meet(Kirby, Door)) {
+			GotoGameState(GAME_STATE_OVER);
+		}
 		Kirby.SetFly(true);
-	}
-	else {
-		Kirby.SetUpKey(false);
 	}
 }
 

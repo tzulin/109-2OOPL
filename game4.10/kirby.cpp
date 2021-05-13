@@ -906,10 +906,6 @@ namespace game_framework {
 		OtherFromL = !YouAreLeft;
 	}
 
-	void kirby::SetUpKey(bool input) {
-		PressUpKey = input;
-	}
-
 	void kirby::SetCounter(int input_counter) {
 		game_state_counter = input_counter;
 	}
@@ -1103,11 +1099,6 @@ namespace game_framework {
 	bool kirby::IsScreamL() {
 		return IsAttack && !IsFacingR && !IsDown;
 	}
-
-	bool kirby::GetUpKey() {
-		return PressUpKey;
-	}
-
 
 	weapon* kirby::GetWeapon() {
 		return &StarThrow;
