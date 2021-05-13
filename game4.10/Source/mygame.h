@@ -56,6 +56,7 @@ namespace game_framework {
 		CMovingBitmap Map;
 		CInteger kirbyHpInt;
 		starBlock ** StarBlockList;
+		starBlock * StarBlockTest;
 		int temp_floor = 60, counter = 0;
 		CInteger test;
 		int** blockXys;

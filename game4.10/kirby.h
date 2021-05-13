@@ -31,6 +31,8 @@ namespace game_framework {
 		void SetFly(bool input);
 		void SetEaten(bool input);
 		void SetCounter(int);
+		void SetMap(CMovingBitmap* Map);
+		void SetThings(starBlock* Block);
 		void SetBlockers(int** input_blocks, int input_number_of_blocks);
 		void Hurt(int input, int time);
 		void ThrowStar();
@@ -72,7 +74,9 @@ namespace game_framework {
 
 		CMovingBitmap KirbyDownR;
 		CMovingBitmap KirbyDownL;
+		CMovingBitmap * Map;
 
+		starBlock * StarBlockTest;
 		weapon StarThrow;
 
 		int** blockXys;
@@ -89,6 +93,7 @@ namespace game_framework {
 		int game_state_counter;		// game state counter
 		int number_of_block;
 		int LastHurt;				// last hurt time 初始為零
+		int BoundaryTop, BoundaryRight, BoundaryLeft; // boundary 
 		bool IsRising;		// true表示上升
 		bool IsMovingL;
 		bool IsMovingR;

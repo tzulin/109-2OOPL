@@ -205,10 +205,15 @@ public:
 	void  ShowBitmap(CMovingBitmap &);	// 將圖貼到到另一張圖上 (僅供特殊用途)
 	int   Top();						// 取得圖形的左上角的 y 座標
 	int   Width();						// 取得圖形的寬度
+	// void SetChange(int x_input, int y_input);
+	void ResetChange();
+	int GetXChange();
+	int GetYChange();
 protected:
 	CRect    location;			// location of the bitmap
 	bool     isBitmapLoaded;	// whether a bitmap has been loaded
 	unsigned SurfaceID;			// the surface id of this bitmap
+	int x_change, y_change;
 };
 
 /////////////////////////////////////////////////////////////////////////////

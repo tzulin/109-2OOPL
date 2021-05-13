@@ -18,6 +18,9 @@ namespace game_framework {
 		const int INIT_VELOCITY = 18;
 		const int INIT_FLY_VELOCITY = 9;
 		const int INIT_HP = 10;
+		BoundaryTop = SIZE_Y / 2;
+		BoundaryLeft = SIZE_X / 2;
+		BoundaryRight = 2560 - BoundaryLeft;
 		now_img_h = ImgH;
 		now_img_w = ImgW;
 		init_velocity = INIT_VELOCITY;
@@ -631,10 +634,10 @@ namespace game_framework {
 
 		// kirby is hurt
 		if (IsHurt) {
-			if (!OtherFromL) {
+			if (!OtherFromL && x - 4 > 0) {
 				// x -= 2;
 				SetXY(x - 4, y);
-			} else  {
+			} else if(x + 4 < SIZE_X - now_img_w){
 				// x += 2;
 				SetXY(x + 4, y);
 			} 
@@ -666,28 +669,40 @@ namespace game_framework {
 		KirbyStand.OnMove();
 		KirbyStandL.OnMove();
 	}
-	/*
-	void kirby::SetXY(int x_in, int y_in) {
-		if (CanMove) {
-			x = x_in;
-			y = y_in;
-		}
-	}
-	*/
 
 	void kirby::SetXY(int x_in, int y_in) {
 		if (x_in - x > 0) {
 			// right
+			if (x_in > BoundaryLeft - now_img_w && Map->Left() >  - (BoundaryRight - SIZE_X/2)) {
+				Map->SetTopLeft(Map->Left() - (x_in - x), Map->Top());
+				StarBlockTest->SetXY(StarBlockTest->Left() - (x_in - x), StarBlockTest->Top());
+				return;
+			}
 		}
-		else {
+		else if(x_in - x < 0){
 			// left
+			if (x_in < BoundaryLeft && Map->Left() < 0) {
+				Map->SetTopLeft(Map->Left() - (x_in - x), Map->Top());
+				StarBlockTest->SetXY(StarBlockTest->Left() - (x_in - x), StarBlockTest->Top());
+				return;
+			}
 		}
 
 		if (y_in - y > 0) {
 			// go down
+			if (y_in > BoundaryTop && Map->Top() > -480) {
+				Map->SetTopLeft(Map->Left(), Map->Top() - (y_in - y));
+				StarBlockTest->SetXY(StarBlockTest->Left(), StarBlockTest->Top() - (y_in - y));
+				return;
+			}
 		}
-		else {
+		else if(y_in - y < 0){
 			// go up
+			if (y_in < BoundaryTop && Map->Top() < 0) {
+				Map->SetTopLeft(Map->Left(), Map->Top() - (y_in - y));
+				StarBlockTest->SetXY(StarBlockTest->Left(), StarBlockTest->Top() - (y_in - y));
+				return;
+			}
 		}
 		int aXy[4] = { x_in, y_in, x_in + now_img_w, y_in + now_img_h};
 		bool result = true;
@@ -805,6 +820,14 @@ namespace game_framework {
 
 	void kirby::SetCounter(int input_counter) {
 		game_state_counter = input_counter;
+	}
+
+	void kirby::SetMap(CMovingBitmap* input_Map) {
+		Map = input_Map;
+	}
+
+	void kirby::SetThings(starBlock * input) {
+		StarBlockTest = input;
 	}
 
 	void kirby::SetBlockers(int** input_blockers, int input_number_of_block) {

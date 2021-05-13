@@ -144,8 +144,12 @@ namespace game_framework {
 
 	void enemy::OnMove()
 	{
+		
 		// set moving XY
 		const int length = 2;
+
+		SetXy(x - Map->GetXChange(), y - Map->GetYChange());
+		Map->ResetChange();
 
 		if (!IsAttack) {
 			MovingL.OnMove();
@@ -181,8 +185,17 @@ namespace game_framework {
 
 	void enemy::LoadBitmap(){}
 
+	void enemy::SetMap(CMovingBitmap * input) {
+		Map = input;
+	}
+
 	bool enemy::EnemyFacingR() {
 		return IsFacingR;
+	}
+
+	void enemy::SetXy(int input_x, int input_y) {
+		x = input_x;
+		y = input_y;
 	}
 
 	weapon enemy::GetWeapon() {
