@@ -721,6 +721,7 @@ namespace game_framework {
 				// right
 				if (x_in > BoundaryLeft - now_img_w && Map->Left() > -(BoundaryRight - SIZE_X / 2)) {
 					Map->SetTopLeft(Map->Left() - (x_in - x), Map->Top());
+					Door->SetTopLeft(Door->Left() - (x_in - x), Door->Top());
 					if (StarBlockList != nullptr) {
 						for (int i = 0;i < number_of_star_blocks;i++) {
 							if (StarBlockList[i] != nullptr) {
@@ -749,6 +750,7 @@ namespace game_framework {
 				// left
 				if (x_in < BoundaryLeft && Map->Left() < 0) {
 					Map->SetTopLeft(Map->Left() - (x_in - x), Map->Top());
+					Door->SetTopLeft(Door->Left() - (x_in - x), Door->Top());
 					if (StarBlockList != nullptr) {
 						for (int i = 0;i < number_of_star_blocks;i++) {
 							if (StarBlockList[i] != nullptr) {
@@ -778,6 +780,7 @@ namespace game_framework {
 				// go down
 				if (y_in > BoundaryTop && Map->Top() > -480) {
 					Map->SetTopLeft(Map->Left(), Map->Top() - (y_in - y));
+					Door->SetTopLeft(Door->Left(), Door->Top() - (y_in - y));
 					if (StarBlockList != nullptr) {
 						for (int i = 0;i < number_of_star_blocks;i++) {
 							if (StarBlockList[i] != nullptr) {
@@ -806,6 +809,7 @@ namespace game_framework {
 				// go up
 				if (y_in < BoundaryTop && Map->Top() < 0) {
 					Map->SetTopLeft(Map->Left(), Map->Top() - (y_in - y));
+					Door->SetTopLeft(Door->Left(), Door->Top() - (y_in - y));
 					if (StarBlockList != nullptr) {
 						for (int i = 0;i < number_of_star_blocks;i++) {
 							if (StarBlockList[i] != nullptr) {
@@ -902,12 +906,20 @@ namespace game_framework {
 		OtherFromL = !YouAreLeft;
 	}
 
+	void kirby::SetUpKey(bool input) {
+		PressUpKey = input;
+	}
+
 	void kirby::SetCounter(int input_counter) {
 		game_state_counter = input_counter;
 	}
 
 	void kirby::SetMap(CMovingBitmap* input_Map) {
 		Map = input_Map;
+	}
+
+	void kirby::SetDoor(CMovingBitmap* input_door) {
+		Door = input_door;
 	}
 
 	void kirby::SetThings(starBlock ** input, int number_input) {
@@ -1090,6 +1102,10 @@ namespace game_framework {
 
 	bool kirby::IsScreamL() {
 		return IsAttack && !IsFacingR && !IsDown;
+	}
+
+	bool kirby::GetUpKey() {
+		return PressUpKey;
 	}
 
 

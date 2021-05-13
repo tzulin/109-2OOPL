@@ -52,6 +52,7 @@ namespace game_framework {
 	private:
 		CMovingBitmap kirbyHp;
 		CMovingBitmap Map;
+		CMovingBitmap Door;
 		CInteger kirbyHpInt;
 		kirby Kirby;
 

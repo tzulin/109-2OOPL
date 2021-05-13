@@ -205,6 +205,9 @@ public:
 	void  ShowBitmap(CMovingBitmap &);	// 將圖貼到到另一張圖上 (僅供特殊用途)
 	int   Top();						// 取得圖形的左上角的 y 座標
 	int   Width();						// 取得圖形的寬度
+
+	int*  GetXy();
+	void YouAreLeft(bool);
 	// void SetChange(int x_input, int y_input);
 	void ResetChange();
 	int GetXChange();

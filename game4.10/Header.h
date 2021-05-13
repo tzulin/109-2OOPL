@@ -150,10 +150,11 @@ namespace game_framework {
 		void SetCounter(int);
 
 		void SetMap(CMovingBitmap* Map);
+		void SetDoor(CMovingBitmap* door);
 		void SetThings(starBlock** Blocks_input, int input_number);
 		void SetWaddles(waddle** waddles_input, int input_number);
 		void SetWaddleDoos(waddleDoo** waddle_doos_input, int input_number);
-
+		void SetUpKey(bool input);
 		void SetRun(bool input);
 		void Hurt(int input, int time);
 		void ThrowStar();
@@ -168,6 +169,7 @@ namespace game_framework {
 		bool IsAlive();
 		bool IsScreamR();
 		bool IsScreamL();
+		bool GetUpKey();
 
 	private:
 		CAnimation KirbyMovingL;
@@ -194,6 +196,7 @@ namespace game_framework {
 		CMovingBitmap KirbyDownR;
 		CMovingBitmap KirbyDownL;
 		CMovingBitmap * Map;
+		CMovingBitmap * Door;
 
 		waddle** WaddleList;
 		waddleDoo** WaddleDooList;
@@ -230,6 +233,7 @@ namespace game_framework {
 		bool IsEaten;
 		bool YouAreGround;
 		bool IsRun;
+		bool PressUpKey;
 	};
 
 	inline bool EnemyCanAttack(enemy & e, kirby & k) {

@@ -436,6 +436,14 @@ int CMovingBitmap::Width()
 	return location.right - location.left;
 }
 
+int* CMovingBitmap::GetXy() {
+	return new int[4]{location.top, location.left, location.bottom, location.right};
+}
+
+void CMovingBitmap::YouAreLeft(bool input) {
+
+}
+
 /////////////////////////////////////////////////////////////////////////////
 // 這個class為遊戲的各種狀態之Base class(是一個abstract class)
 /////////////////////////////////////////////////////////////////////////////

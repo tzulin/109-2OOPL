@@ -175,8 +175,15 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	counter++;
 
+	/*
+	if (Meet(Kirby, Door) && Kirby.GetUpKey()) {
+		GotoGameState(GAME_STATE_OVER);
+	}
+	*/
+
 	Kirby.SetCounter(counter);							// kirby get counter
 	Kirby.SetMap(&Map);									// kirby get map pointer
+	Kirby.SetDoor(&Door);
 	Kirby.SetThings(StarBlockList, number_of_star_blocks);					// kirby get things pointer 
 	Kirby.SetWaddles(WaddleList, number_of_waddles);						// kirby get waddles pointer
 	Kirby.SetWaddleDoos(WaddleDooList, number_of_waddle_doos);				// kirby get waddleDoos pointer
@@ -312,6 +319,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
 	Map.LoadBitmap(".\\res\\map_example.bmp");			// map load and set
 	Map.SetTopLeft(0, -480);
+	Door.LoadBitmap(IDB_DOOR, RGB(255, 255, 255));
+	Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
 	kirbyHp.LoadBitmap(".\\res\\kirby_hpPic.bmp", RGB(236, 28, 36));
 	kirbyHp.SetTopLeft(0, SIZE_Y  - kirbyHp.Height());											// kirbyHp load and set
 	kirbyHpInt.LoadBitmap();
@@ -321,6 +330,77 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	WaddleList = nullptr;
 	WaddleDooList = nullptr;
 	StarBlockList = nullptr;
+
+	if (WaddleDooList != nullptr) {
+		for (int i = 0;i < number_of_waddle_doos;i++) {
+			if (WaddleDooList[i] != nullptr) {
+				delete WaddleDooList[i];
+			}
+		}
+		delete WaddleDooList;
+	}
+	WaddleDooList = new waddleDoo*[3];
+	number_of_waddle_doos = 3;
+	for (int i = 0;i < number_of_waddle_doos;i++) {
+		WaddleDooList[i] = new waddleDoo;
+		WaddleDooList[i]->LoadBitmap();								// Waddle LoadBitmap
+		WaddleDooList[i]->Reset();
+		WaddleDooList[i]->SetXy(1500 + 300 * i, SIZE_Y - temp_floor - WaddleDooList[i]->GetHeight());
+	}
+
+	if (WaddleList != nullptr) {
+		for (int i = 0;i < number_of_waddles;i++) {
+			if (WaddleList[i] != nullptr) {
+				delete WaddleList[i];
+			}
+		}
+		delete WaddleList;
+	}
+	WaddleList = new waddle*[3];
+	number_of_waddles = 3;
+	for (int i = 0;i < number_of_waddles;i++) {
+		WaddleList[i] = new waddle;
+		WaddleList[i]->LoadBitmap();								// Waddle LoadBitmap
+		WaddleList[i]->Reset();
+		WaddleList[i]->SetXy(500 + 400 * i, SIZE_Y - temp_floor - WaddleList[i]->GetHeight());
+	}
+
+	if (StarBlockList != nullptr) {
+		for (int i = 0;i < number_of_star_blocks;i++) {
+			if (StarBlockList[i] != nullptr) {
+				delete[] StarBlockList[i];
+			}
+		}
+		delete[] StarBlockList;
+	}
+	StarBlockList = new starBlock*[38];
+	number_of_star_blocks = 38;
+	starBlock** blocks = StarBlockList;
+	for (int i = 0;i < 5;i++) {
+		for (int n = 0;n < 5;n++) {
+			blocks[i * 5 + n] = new starBlock;
+			blocks[i * 5 + n]->LoadBitmap();							// StarBlock LoadBitmap setTopLeft
+			blocks[i * 5 + n]->SetXY(1020 + 32 * i, SIZE_Y - 32 - 32 * n - temp_floor);
+		}
+	}
+
+	StarBlockList[25] = new starBlock;
+	StarBlockList[25]->LoadBitmap();
+	StarBlockList[25]->SetXY(620, SIZE_Y - 32 - temp_floor);
+
+	for (int i = 0;i < 10;i++) {
+		StarBlockList[26 + i] = new starBlock;
+		StarBlockList[26 + i]->LoadBitmap();
+		StarBlockList[26 + i]->SetXY(1330 + 32 * i, SIZE_Y - 32 - 200 - temp_floor);
+	}
+
+	StarBlockList[36] = new starBlock;
+	StarBlockList[36]->LoadBitmap();
+	StarBlockList[36]->SetXY(1650, SIZE_Y - 32 - temp_floor);
+
+	StarBlockList[37] = new starBlock;
+	StarBlockList[37]->LoadBitmap();
+	StarBlockList[37]->SetXY(1950, SIZE_Y - 32 - temp_floor);
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -370,60 +450,12 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_W) {
-		if (WaddleList != nullptr) {
-			for (int i = 0;i < number_of_waddles;i++) {
-				if (WaddleList[i] != nullptr) {
-					delete WaddleList[i];
-				}
-			}
-			delete WaddleList;
-		}
-		WaddleList = new waddle*[3];
-		number_of_waddles = 3;
-		for (int i = 0;i < number_of_waddles;i++) {
-			WaddleList[i] = new waddle;
-			WaddleList[i]->LoadBitmap();								// Waddle LoadBitmap
-			WaddleList[i]->Reset();
-			WaddleList[i]->SetXy(200 + 100 * i, SIZE_Y - temp_floor - WaddleList[i]->GetHeight());
-		}
 
-		if (WaddleDooList != nullptr) {
-			for (int i = 0;i < number_of_waddle_doos;i++) {
-				if (WaddleDooList[i] != nullptr) {
-					delete WaddleDooList[i];
-				}
-			}
-			delete WaddleDooList;
-		}
-		WaddleDooList = new waddleDoo*[3];
-		number_of_waddle_doos = 3;
-		for (int i = 0;i < number_of_waddle_doos;i++) {
-			WaddleDooList[i] = new waddleDoo;
-			WaddleDooList[i]->LoadBitmap();								// Waddle LoadBitmap
-			WaddleDooList[i]->Reset();
-			WaddleDooList[i]->SetXy(500 + 100 * i, SIZE_Y - temp_floor - WaddleDooList[i]->GetHeight());
-		}
+		
 	}
 
 	if (nChar == KEY_S) {
-		if (StarBlockList != nullptr) {
-			for (int i = 0;i < number_of_star_blocks;i++) {
-				if (StarBlockList[i] != nullptr) {
-					delete[] StarBlockList[i];
-				}
-			}
-			delete[] StarBlockList;
-		}
-		StarBlockList = new starBlock*[25];
-		number_of_star_blocks = 25;
-		starBlock** blocks = StarBlockList;
-		for (int i = 0;i < 5;i++) {
-			for (int n = 0;n < 5;n++) {
-				blocks[i * 5 + n] = new starBlock;
-				blocks[i * 5 + n]->LoadBitmap();							// StarBlock LoadBitmap setTopLeft
-				blocks[i * 5 + n]->SetXY(SIZE_X/2 + 32*i, SIZE_Y - 32*n - temp_floor);
-			}
-		}
+		
 	}
 
 	if (nChar == KEY_SPACE) {
@@ -431,7 +463,11 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_UP) {
+		Kirby.SetUpKey(true);
 		Kirby.SetFly(true);
+	}
+	else {
+		Kirby.SetUpKey(false);
 	}
 }
 
@@ -489,6 +525,7 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 void CGameStateRun::OnShow()
 {
 	Map.ShowBitmap();
+	Door.ShowBitmap();
 	kirbyHpInt.ShowBitmap();						// hp int show
 	
 	if (WaddleList != nullptr) {
