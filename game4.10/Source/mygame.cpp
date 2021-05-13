@@ -180,6 +180,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	Kirby.SetCounter(counter);							// kirby get counter
 	Kirby.SetMap(&Map);									// kirby get map pointer
 	Kirby.SetThings(StarBlockTest);						// kirby get things pointer 
+	Kirby.SetThings(StarBlockTest2);					// kirby get things pointer 
 	if (!Kirby.IsAlive()) {								// Kirby dead
 		GotoGameState(GAME_STATE_OVER);
 	}
@@ -231,7 +232,46 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
 
-	
+	// enemy block by  StarBlock
+	if (Waddle != nullptr) {
+		if (StarBlockTest != nullptr) {
+			if (Meet(*Waddle, *StarBlockTest)) {
+				Waddle->MeetBlock();
+			}
+		}
+		if (StarBlockTest2 != nullptr) {
+			if (Meet(*Waddle, *StarBlockTest2)) {
+				Waddle->MeetBlock();
+			}
+		}
+	}
+	if (WaddleDoo != nullptr) {
+		if (StarBlockTest != nullptr) {
+			if (Meet(*WaddleDoo, *StarBlockTest)) {
+				WaddleDoo->MeetBlock();
+			}
+		}
+		if (StarBlockTest2 != nullptr) {
+			if (Meet(*WaddleDoo, *StarBlockTest2)) {
+				WaddleDoo->MeetBlock();
+			}
+		}
+	}
+
+	/*
+	if (Waddle != nullptr) {
+		if (StarBlockList != nullptr) {
+			for (int i = 0; i < 25; i++) {
+				if (StarBlockList[i] != nullptr) {
+					if (Meet(*Waddle, *StarBlockList[i])) {
+						Waddle->MeetBlock();
+					}
+				}
+			}
+		}
+	}
+	*/
+
 	if (StarBlockList != nullptr) {							// starblock can attack or not
 		for (int i = 0; i < 25;i++) {
 			if (StarBlockList[i] != nullptr) {
@@ -307,11 +347,16 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	kirbyHpInt.SetTopLeft(kirbyHp.Width(), SIZE_Y - kirbyHp.Height() + 5);						// kirbyHpInt load and set
 	Kirby.LoadBitmap();									// Kirby LoadBitmap
 	
-	StarBlockTest = new starBlock;					
+	StarBlockTest = new starBlock;
+	StarBlockTest2 = new starBlock;
 	StarBlockTest->LoadBitmap();
+	StarBlockTest2->LoadBitmap();
 	int* StarBlockTestHw = StarBlockTest->GetHw();
-	StarBlockTest->SetXY(100, SIZE_Y - StarBlockTestHw[0] -temp_floor);
+	int* StarBlockTestHw2 = StarBlockTest2->GetHw();
+	StarBlockTest->SetXY(100, SIZE_Y - StarBlockTestHw[0] - temp_floor);
+	StarBlockTest2->SetXY(100+SIZE_X/2, SIZE_Y - StarBlockTestHw2[0] -temp_floor);
 	delete[] StarBlockTestHw;
+	delete[] StarBlockTestHw2;
 
 	Waddle = nullptr;
 	WaddleDoo = nullptr;
@@ -450,6 +495,7 @@ void CGameStateRun::OnShow()
 {
 	Map.ShowBitmap();
 	StarBlockTest->OnShow();
+	StarBlockTest2->OnShow();
 	kirbyHpInt.ShowBitmap();						// hp int show
 	
 	if (Waddle != nullptr) {

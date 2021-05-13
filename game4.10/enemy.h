@@ -31,6 +31,7 @@ namespace game_framework {
 		bool EnemyFacingR();
 		void SetMap(CMovingBitmap * Map);
 		weapon GetWeapon();
+		void MeetBlock();
 
 	protected:
 		CAnimation MovingL;

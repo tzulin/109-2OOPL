@@ -57,6 +57,7 @@ namespace game_framework {
 		CInteger kirbyHpInt;
 		starBlock ** StarBlockList;
 		starBlock * StarBlockTest;
+		starBlock * StarBlockTest2;
 		int temp_floor = 60, counter = 0;
 		CInteger test;
 		int** blockXys;

@@ -155,24 +155,25 @@ namespace game_framework {
 			MovingL.OnMove();
 			MovingR.OnMove();
 			// set moving XY and frame of test 
-			if (IsMovingL && x > frame_of_test) {
+			// move left
+			if (IsMovingL && x >= Map->Left()) {
 				if (IsFacingR) {
 					IsFacingR = false;
 				}
 				x -= length;
 			}
-			else if (x <= frame_of_test) {
+			else if (x <= frame_of_test) { // or x < Map->Left(), enemy is at boundary
 				IsMovingL = false;
 				IsMovingR = true;
 			}
-
-			if (IsMovingR && x < SIZE_X - ImgW) {
+			// move right
+			if (IsMovingR && x <= Map->Left()+Map->Width()-ImgW) {
 				if (!IsFacingR) {
 					IsFacingR = true;
 				}
 				x += length;
 			}
-			else if (x >= SIZE_X - ImgW) {
+			else if (x >= SIZE_X - ImgW) {  // or x > Map->Left()+Map->Width()-ImgW, enemy is at boundary
 				IsMovingR = false;
 				IsMovingL = true;
 			}
@@ -204,6 +205,23 @@ namespace game_framework {
 		}
 		else {
 			return wL;
+		}
+	}
+
+	void enemy::MeetBlock() {
+		if (IsMovingR) {
+			if (IsFacingR) {
+				IsFacingR = false;
+			}
+			IsMovingR = false;
+			IsMovingL = true;
+		}
+		else {
+			if (!IsFacingR) {
+				IsFacingR = true;
+			}
+			IsMovingL = false;
+			IsMovingR = true;
 		}
 	}
 }
