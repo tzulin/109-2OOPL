@@ -306,6 +306,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="system.h" />
     <ClInclude Include="things.h" />
     <ClInclude Include="kirby.h" />
@@ -351,6 +352,7 @@
     <Image Include="res\bitmap6.bmp" />
     <Image Include="res\blue.bmp" />
     <Image Include="res\bmp00001.bmp" />
+    <Image Include="RES\door.bmp" />
     <Image Include="RES\downL1.bmp" />
     <Image Include="RES\downL2.bmp" />
     <Image Include="RES\downR1.bmp" />

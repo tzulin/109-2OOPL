@@ -22,12 +22,14 @@ namespace game_framework {
 		int GetWidth();
 		int GetHeight();
 		int GetPower();
+		void SetXy(int input_x, int input_y);
 		void BackX(bool fromL);
 		void Hurt(int input, int time);
 		virtual void Reset();
 		void Attack(kirby k, int time);
 		void YouAreLeft(bool YouAreLeft);
 		bool EnemyFacingR();
+		void SetMap(CMovingBitmap * Map);
 		weapon GetWeapon();
 
 	protected:
@@ -39,6 +41,8 @@ namespace game_framework {
 		CAnimation StandL;
 		weapon wL;
 		weapon wR;
+
+		CMovingBitmap* Map;
 
 		int x, y, hp;
 		int power;			// §ðÀ»¤O

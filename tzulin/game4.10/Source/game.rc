@@ -204,6 +204,8 @@ IDB_STARBLOCK           BITMAP                  "..\\RES\\starblock.bmp"
 
 IDB_STARTHROW           BITMAP                  "..\\RES\\star.bmp"
 
+IDB_DOOR                BITMAP                  "..\\RES\\door.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

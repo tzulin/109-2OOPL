@@ -4,7 +4,8 @@
 #include <ddraw.h>
 #include "source/audio.h"
 #include "source/gamelib.h"
-#include "things.h"
+//#include "things.h"
+#include "Header.h"
 
 namespace game_framework {
 
@@ -46,6 +47,14 @@ namespace game_framework {
 		IsShow = input;
 	}
 
+	int starBlock::Top() {
+		return y;
+	}
+
+	int starBlock::Left() {
+		return x;
+	}
+
 	void blankBlock::SetHW(int input_h, int input_w) {
 		height = input_h;
 		width = input_w;
@@ -55,4 +64,5 @@ namespace game_framework {
 		x = input_x;
 		y = input_y;
 	}
+
 }

@@ -319,12 +319,33 @@ void CInteger::ShowBitmap()
 CMovingBitmap::CMovingBitmap()
 {
 	isBitmapLoaded = false;
+	x_change = 0;
+	y_change = 0;
 }
 
 int CMovingBitmap::Height()
 {
 	GAME_ASSERT(isBitmapLoaded,"A bitmap must be loaded before Height() is called !!!");
 	return location.bottom - location.top;
+}
+/*
+void CMovingBitmap::SetChange(int x_input, int y_input) {
+	x_change = x_input;
+	y_change = y_input;
+}
+*/
+
+void CMovingBitmap::ResetChange() {
+	x_change = 0;
+	y_change = 0;
+}
+
+int CMovingBitmap::GetXChange() {
+	return x_change;
+}
+
+int CMovingBitmap::GetYChange() {
+	return y_change;
 }
 
 int CMovingBitmap::Left()
@@ -373,6 +394,8 @@ void CMovingBitmap::LoadBitmap(char *filename, COLORREF color)
 
 void CMovingBitmap::SetTopLeft(int x, int y)
 {
+	x_change = location.left - x;
+	y_change = location.top - y;
 	GAME_ASSERT(isBitmapLoaded,"A bitmap must be loaded before SetTopLeft() is called !!!");
 	int dx = location.left - x;
 	int dy = location.top - y;
@@ -411,6 +434,14 @@ int CMovingBitmap::Width()
 {
 	GAME_ASSERT(isBitmapLoaded,"A bitmap must be loaded before Width() is called !!!");
 	return location.right - location.left;
+}
+
+int* CMovingBitmap::GetXy() {
+	return new int[4]{location.left, location.top, location.right, location.bottom};
+}
+
+void CMovingBitmap::YouAreLeft(bool input) {
+
 }
 
 /////////////////////////////////////////////////////////////////////////////
