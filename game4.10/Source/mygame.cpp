@@ -35,7 +35,7 @@ void CGameStateInit::OnInit()
 								// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
 								//
 	start_state_zero_back.LoadBitmap(IDB_STARTBACK, RGB(0, 0, 0));
-	start_state_one_back.LoadBitmap(IDB_SAVEBACK, RGB(0, 0, 0));
+	start_state_one_back.LoadBitmap(".\\res\\save_back.bmp", RGB(0, 0, 0));
 }
 
 void CGameStateInit::OnBeginState()
