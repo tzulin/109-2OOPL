@@ -35,6 +35,7 @@ void CGameStateInit::OnInit()
 								// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
 								//
 	start_state_zero_back.LoadBitmap(IDB_STARTBACK, RGB(0, 0, 0));
+	start_state_one_back.LoadBitmap(IDB_SAVEBACK, RGB(0, 0, 0));
 }
 
 void CGameStateInit::OnBeginState()
@@ -73,7 +74,7 @@ void CGameStateInit::OnShow()
 		//
 		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
 		//
-		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+		/*CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 		CFont f, *fp;
 		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
 		fp = pDC->SelectObject(&f);					// 選用 font f
@@ -85,10 +86,10 @@ void CGameStateInit::OnShow()
 			pDC->TextOut(5, 425, "Press Ctrl-Q to pause the Game.");
 		pDC->TextOut(5, 455, "Press Alt-F4 or ESC to Quit.");
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC*/
 	}
 	else {
-
+		start_state_one_back.ShowBitmap();
 	}
 }								
 

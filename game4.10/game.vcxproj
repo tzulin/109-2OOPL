@@ -395,6 +395,7 @@
     <Image Include="RES\kirby_walk_8.bmp" />
     <Image Include="RES\kirby_walk_9.bmp" />
     <Image Include="res\practice.bmp" />
+    <Image Include="RES\save_back.bmp" />
     <Image Include="RES\scream\screamL1.bmp" />
     <Image Include="RES\scream\screamL2.bmp" />
     <Image Include="RES\scream\screamL3.bmp" />

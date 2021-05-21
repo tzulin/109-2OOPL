@@ -528,5 +528,8 @@
     <Image Include="RES\start_background.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\save_back.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

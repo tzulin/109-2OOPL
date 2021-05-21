@@ -27,6 +27,7 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap start_state_zero_back;
+		CMovingBitmap start_state_one_back;
 		int start_state = 0;
 	};
 
