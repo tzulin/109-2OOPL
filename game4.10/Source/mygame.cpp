@@ -34,6 +34,7 @@ void CGameStateInit::OnInit()
 								//
 								// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
 								//
+	start_state_zero_back.LoadBitmap(IDB_STARTBACK, RGB(0, 0, 0));
 }
 
 void CGameStateInit::OnBeginState()
@@ -44,40 +45,51 @@ void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	const char KEY_ESC = 27;
 	const char KEY_SPACE = ' ';
-	if (nChar == KEY_SPACE)
+	const char KEY_ENTER = 0x0D;
+
+	if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
+		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+	if (start_state == 1 && nChar == KEY_ENTER)
 		GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
-	else if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
-		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE,0,0);	// 關閉遊戲
+	else if (start_state == 0 && nChar == KEY_ENTER) {
+		start_state = 1;
+	}
 }
 
 void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 {
-		GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+		//GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
 }
 
 void CGameStateInit::OnShow()
 {
-											//
-											// 貼上logo
-											//
-											//logo.SetTopLeft((SIZE_X - logo.Width())/2, SIZE_Y/8);
-											//logo.ShowBitmap();
-											//
-											// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
-											//
-	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-	CFont f,*fp;
-	f.CreatePointFont(160,"Times New Roman");	// 產生 font f; 160表示16 point的字
-	fp=pDC->SelectObject(&f);					// 選用 font f
-	pDC->SetBkColor(RGB(0,0,0));
-	pDC->SetTextColor(RGB(255,255,0));
-	pDC->TextOut(50,220,"Please press SPACE to begin.");
-	pDC->TextOut(5,395,"Please make sure your typing mode is in English.");
-	if (ENABLE_GAME_PAUSE)
-		pDC->TextOut(5,425,"Press Ctrl-Q to pause the Game.");
-	pDC->TextOut(5,455,"Press Alt-F4 or ESC to Quit.");
-	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	if (start_state == 0) {
+		start_state_zero_back.ShowBitmap();
+		//
+		// 貼上logo
+		//
+		//logo.SetTopLeft((SIZE_X - logo.Width())/2, SIZE_Y/8);
+		//logo.ShowBitmap();
+		//
+		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
+		//
+		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+		CFont f, *fp;
+		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+		fp = pDC->SelectObject(&f);					// 選用 font f
+		pDC->SetBkColor(RGB(0, 0, 0));
+		pDC->SetTextColor(RGB(255, 255, 0));
+		//pDC->TextOut(50,220,"Please press SPACE to begin.");
+		pDC->TextOut(5, 395, "Please make sure your typing mode is in English.");
+		if (ENABLE_GAME_PAUSE)
+			pDC->TextOut(5, 425, "Press Ctrl-Q to pause the Game.");
+		pDC->TextOut(5, 455, "Press Alt-F4 or ESC to Quit.");
+		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	}
+	else {
+
+	}
 }								
 
 /////////////////////////////////////////////////////////////////////////////
@@ -380,6 +392,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_W	 = 0x57;	// keyboard W
 	const char KEY_S	 = 0X53;	// keyboard S
 	const char KEY_SPACE = 0x20;	// keyboard space
+	const char KEY_ENTER = 0x0D;	// keyboard enter
 
 	if (nChar == KEY_ESC) {
 		GotoGameState(GAME_STATE_OVER);
@@ -450,6 +463,10 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		}
 		Kirby.SetFly(true);
 	}
+
+	if (nChar == KEY_ENTER) {
+		
+	}
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -461,8 +478,9 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_ESC   = 0x1B;	// keyboard esc
 	const char KEY_C     = 0x43;	// keyboard C
 	const char KEY_O	 = 0x57;	// keyboard W
-	const char KEY_S = 0X53;	// keyboard S
+	const char KEY_S	 = 0X53;	// keyboard S
 	const char KEY_SPACE = 0x20;	// keyboard space
+	const char KEY_ENTER = 0x0D;	// keyboard enter
 
 	if (nChar == KEY_LEFT) {
 		Kirby.SetMovingL(false);				// Kirby stop moving left

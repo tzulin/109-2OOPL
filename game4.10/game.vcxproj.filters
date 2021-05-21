@@ -525,5 +525,8 @@
     <Image Include="RES\door.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\start_background.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

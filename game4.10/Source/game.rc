@@ -206,6 +206,8 @@ IDB_STARTHROW           BITMAP                  "..\\RES\\star.bmp"
 
 IDB_DOOR                BITMAP                  "..\\RES\\door.bmp"
 
+IDB_STARTBACK           BITMAP                  "..\\RES\\start_background.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

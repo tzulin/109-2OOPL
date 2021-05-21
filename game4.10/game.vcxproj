@@ -407,6 +407,7 @@
     <Image Include="RES\scream\screamR5.bmp" />
     <Image Include="RES\star.bmp" />
     <Image Include="RES\starblock.bmp" />
+    <Image Include="RES\start_background.bmp" />
     <Image Include="RES\test_new.bmp" />
     <Image Include="res\walkL1.bmp" />
     <Image Include="res\walkL10.bmp" />
