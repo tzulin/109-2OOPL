@@ -36,17 +36,37 @@ void CGameStateInit::OnInit()
 								//
 	start_state_zero_back.LoadBitmap(IDB_STARTBACK, RGB(0, 0, 0));
 	start_state_one_back.LoadBitmap(IDB_SAVEBACK, RGB(0, 0, 0));
+	gray_block_1.LoadBitmap(IDB_GRAY_BLOCK, RGB(255, 255, 255));
+	gray_block_2.LoadBitmap(IDB_GRAY_BLOCK, RGB(255, 255, 255));
+	yellow_block.LoadBitmap(IDB_YELLOW_BLOCK, RGB(255, 255, 255));
+
+	/*file1.LoadBitmap();
+	file2.LoadBitmap();
+	file3.LoadBitmap();*/
+	file1.SetDigits(1);
+	file2.SetDigits(1);
+	file3.SetDigits(1);
+	file1.SetInteger(1);
+	file2.SetInteger(2);
+	file3.SetInteger(3);
 }
 
 void CGameStateInit::OnBeginState()
 {
 }
 
-void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	const char KEY_ESC = 27;
-	const char KEY_SPACE = ' ';
-	const char KEY_ENTER = 0x0D;
+	const char KEY_LEFT = 0x25;	// keyboard左箭頭
+	const char KEY_UP = 0x26;	// keyboard上箭頭
+	const char KEY_RIGHT = 0x27;	// keyboard右箭頭
+	const char KEY_DOWN = 0x28;	// keyboard下箭頭
+	const char KEY_ESC = 0x1B;    // keyboard esc
+	const char KEY_C = 0x43;	// keyboard C
+	const char KEY_W = 0x57;	// keyboard W
+	const char KEY_S = 0X53;	// keyboard S
+	const char KEY_SPACE = 0x20;	// keyboard space
+	const char KEY_ENTER = 0x0D;	// keyboard enter
 
 	if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
 		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
@@ -54,6 +74,16 @@ void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 		GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
 	else if (start_state == 0 && nChar == KEY_ENTER) {
 		start_state = 1;
+	}
+	else if (start_state == 1 && nChar == KEY_UP) {
+		if (save_count == 2 || save_count == 3) {
+			save_count--;
+		}
+	}
+	else if (start_state == 1 && nChar == KEY_DOWN) {
+		if (save_count == 1 || save_count == 2) {
+			save_count++;
+		}
 	}
 }
 
@@ -91,6 +121,33 @@ void CGameStateInit::OnShow()
 	}
 	else {
 		start_state_one_back.ShowBitmap();
+		if (save_count == 1) {
+			yellow_block.SetTopLeft(SIZE_X - yellow_block.Width(), -23);
+			gray_block_1.SetTopLeft(SIZE_X - gray_block_1.Width(), 80);
+			gray_block_2.SetTopLeft(SIZE_X - gray_block_2.Width(), 160);
+			yellow_block.ShowBitmap();
+			gray_block_1.ShowBitmap();
+			gray_block_2.ShowBitmap();
+		}
+		else if (save_count == 2) {
+			yellow_block.SetTopLeft(SIZE_X - yellow_block.Width(), 80-23);
+			gray_block_1.SetTopLeft(SIZE_X - gray_block_1.Width(), 0);
+			gray_block_2.SetTopLeft(SIZE_X - gray_block_2.Width(), 160);
+			yellow_block.ShowBitmap();
+			gray_block_1.ShowBitmap();
+			gray_block_2.ShowBitmap();
+		}
+		else if (save_count == 3) {
+			yellow_block.SetTopLeft(SIZE_X - yellow_block.Width(), 160-23);
+			gray_block_1.SetTopLeft(SIZE_X - gray_block_1.Width(), 0);
+			gray_block_2.SetTopLeft(SIZE_X - gray_block_2.Width(), 80);
+			yellow_block.ShowBitmap();
+			gray_block_1.ShowBitmap();
+			gray_block_2.ShowBitmap();
+		}
+		/*file1.LoadBitmap();
+		file1.SetTopLeft(100, 100);
+		file1.ShowBitmap();*/
 	}
 }								
 

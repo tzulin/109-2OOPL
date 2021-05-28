@@ -210,6 +210,10 @@ IDB_STARTBACK           BITMAP                  "..\\RES\\start_background.bmp"
 
 IDB_SAVEBACK            BITMAP                  "..\\RES\\save_back.bmp"
 
+IDB_GRAY_BLOCK          BITMAP                  "..\\RES\\gray_block.bmp"
+
+IDB_YELLOW_BLOCK        BITMAP                  "..\\RES\\yellow_block.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -531,5 +531,11 @@
     <Image Include="RES\save_back.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\gray_block.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\yellow_block.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
