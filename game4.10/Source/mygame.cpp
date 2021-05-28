@@ -40,15 +40,13 @@ void CGameStateInit::OnInit()
 	gray_block_2.LoadBitmap(IDB_GRAY_BLOCK, RGB(255, 255, 255));
 	yellow_block.LoadBitmap(IDB_YELLOW_BLOCK, RGB(255, 255, 255));
 
-	/*file1.LoadBitmap();
-	file2.LoadBitmap();
-	file3.LoadBitmap();*/
-	file1.SetDigits(1);
-	file2.SetDigits(1);
-	file3.SetDigits(1);
-	file1.SetInteger(1);
-	file2.SetInteger(2);
-	file3.SetInteger(3);
+	num_1.LoadBitmap(IDB_1, RGB(255, 255, 255));
+	num_2.LoadBitmap(IDB_2, RGB(255, 255, 255));
+	num_3.LoadBitmap(IDB_3, RGB(255, 255, 255));
+
+	num_1.SetTopLeft(270, 20);
+	num_2.SetTopLeft(270, 100);
+	num_3.SetTopLeft(270, 180);
 }
 
 void CGameStateInit::OnBeginState()
@@ -68,10 +66,20 @@ void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_SPACE = 0x20;	// keyboard space
 	const char KEY_ENTER = 0x0D;	// keyboard enter
 
-	if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
+	if (nChar == KEY_ESC) {						// Demo 關閉遊戲的方法
 		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
-	if (start_state == 1 && nChar == KEY_ENTER)
-		GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
+	}
+	else if (start_state == 1 && nChar == KEY_ENTER) {
+		if (save_count == 1) {
+			GotoGameState(GAME_STATE_RUN, file_1);						// 切換至GAME_STATE_RUN
+		}
+		else if (save_count == 2) {
+			GotoGameState(GAME_STATE_RUN, file_2);						// 切換至GAME_STATE_RUN
+		}
+		else if (save_count == 3) {
+			GotoGameState(GAME_STATE_RUN, file_3);						// 切換至GAME_STATE_RUN
+		}
+	}
 	else if (start_state == 0 && nChar == KEY_ENTER) {
 		start_state = 1;
 	}
@@ -145,9 +153,30 @@ void CGameStateInit::OnShow()
 			gray_block_1.ShowBitmap();
 			gray_block_2.ShowBitmap();
 		}
-		/*file1.LoadBitmap();
-		file1.SetTopLeft(100, 100);
-		file1.ShowBitmap();*/
+		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
+		CFont f, *fp;
+		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+		fp = pDC->SelectObject(&f);					// 選用 font f
+
+		pDC->SetBkColor(RGB(0, 0, 0));
+		pDC->SetTextColor(RGB(255, 255, 0));
+		pDC->TextOut(460, 15, "Stage");
+		pDC->TextOut(460, 95, "Stage");
+		pDC->TextOut(460, 175, "Stage");
+		char str[80];								// Demo 數字對字串的轉換
+		sprintf(str, "(%d)", file_1);
+		pDC->TextOut(555, 15, str);
+		sprintf(str, "(%d)", file_2);
+		pDC->TextOut(555, 95, str);
+		sprintf(str, "(%d)", file_3);
+		pDC->TextOut(555, 175, str);
+
+		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		
+		num_1.ShowBitmap();
+		num_2.ShowBitmap();
+		num_3.ShowBitmap();
 	}
 }								
 
@@ -363,6 +392,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	kirbyHpInt.LoadBitmap();
 	kirbyHpInt.SetDigits(2);
 	kirbyHpInt.SetTopLeft(kirbyHp.Width(), SIZE_Y - kirbyHp.Height() + 5);						// kirbyHpInt load and set
+
+						
+
 	Kirby.LoadBitmap();									// Kirby LoadBitmap
 	WaddleList = nullptr;
 	WaddleDooList = nullptr;
@@ -586,6 +618,7 @@ void CGameStateRun::OnShow()
 	Door.ShowBitmap();
 	kirbyHpInt.ShowBitmap();						// hp int show
 	
+	
 	if (WaddleList != nullptr) {
 		for (int i = 0;i < number_of_waddles;i++) {
 			if (WaddleList[i]->GetHp() > 0) {
@@ -613,6 +646,20 @@ void CGameStateRun::OnShow()
 			}
 		}
 	}
+
+	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
+	CFont f, *fp;
+	f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+	fp = pDC->SelectObject(&f);					// 選用 font f
+
+	pDC->SetBkColor(RGB(0, 0, 0));
+	pDC->SetTextColor(RGB(255, 255, 0));
+	char str[80];								// Demo 數字對字串的轉換
+	sprintf(str, "Stage : (%d)", stage);
+	pDC->TextOut(255, 15, str);
+
+	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	
 }
 }

@@ -5,6 +5,7 @@
 #include "../../game4.10/things.h"
 #include "../../game4.10/system.h"*/
 #include "../../game4.10/Header.h"
+#include <fstream>
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -31,7 +32,8 @@ namespace game_framework {
 		CMovingBitmap gray_block_1;
 		CMovingBitmap gray_block_2;
 		CMovingBitmap yellow_block;
-		CInteger file1, file2, file3;
+		CMovingBitmap num_1, num_2, num_3;
+		int file_1 = 1, file_2 = 2, file_3 = 3;
 		int start_state = 0;
 		int save_count = 1;
 	};

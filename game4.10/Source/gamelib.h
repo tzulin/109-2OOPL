@@ -306,8 +306,12 @@ public:
 	virtual void OnMouseMove(UINT nFlags, CPoint point) {}  // 處理滑鼠的動作 
 	virtual void OnRButtonDown(UINT nFlags, CPoint point) {}// 處理滑鼠的動作
 	virtual void OnRButtonUp(UINT nFlags, CPoint point) {}	// 處理滑鼠的動作
+	void SetStage(int input) {
+		stage = input;
+	}
 protected:
 	void GotoGameState(int state);							// 跳躍至指定的state
+	void GotoGameState(int state, int input_stage);
 	void ShowInitProgress(int percent);						// 顯示初始化的進度
 	//
 	// virtual functions, 由繼承者提供implementation
@@ -315,6 +319,7 @@ protected:
 	virtual void OnMove() {}								// 移動這個狀態的遊戲元素
 	virtual void OnShow() = 0;								// 顯示這個狀態的遊戲畫面
 	CGame *game;
+	int stage = 0;
 };
 
 /////////////////////////////////////////////////////////////////////////////
@@ -343,6 +348,7 @@ public:
 	void OnResume();								// 處理自「待命」還原的動作
 	void OnSetFocus();								// 處理Focus
 	void OnSuspend();								// 處理「待命」的動作
+	void SetGameState(int, int);
 	void SetGameState(int);
 	static CGame *Instance();
 private:
