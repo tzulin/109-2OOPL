@@ -306,6 +306,9 @@ public:
 	virtual void OnMouseMove(UINT nFlags, CPoint point) {}  // 處理滑鼠的動作 
 	virtual void OnRButtonDown(UINT nFlags, CPoint point) {}// 處理滑鼠的動作
 	virtual void OnRButtonUp(UINT nFlags, CPoint point) {}	// 處理滑鼠的動作
+	int GetStage() {
+		return stage;
+	}
 	void SetStage(int input) {
 		stage = input;
 	}

@@ -14,6 +14,10 @@ namespace game_framework {
 	kirby::kirby()
 	{
 		// kirby constructor
+		StageReSet();
+	}
+
+	void kirby::StageReSet() {
 		const int origin_x = frame_of_test;
 		const int origin_y = SIZE_Y - temp_floor - ImgH;
 		const int INIT_VELOCITY = 18;

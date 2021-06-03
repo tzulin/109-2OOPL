@@ -133,6 +133,7 @@ namespace game_framework {
 	class kirby {
 	public:
 		kirby();
+		void kirby::StageReSet();
 		~kirby();
 		void LoadBitmap();
 		void OnMove();
