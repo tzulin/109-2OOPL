@@ -6,8 +6,10 @@
 #include "source/gamelib.h"
 
 #include "Header.h"
-//#include "weapon.h"
-//#include "enemy.h"
+/*
+#include "weapon.h"
+#include "enemy.h"
+*/
 
 namespace game_framework {
 

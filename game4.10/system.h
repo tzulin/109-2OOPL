@@ -5,7 +5,6 @@
 #include "./enemy.h"
 
 namespace game_framework {
-
 	inline bool EnemyCanAttack(enemy & e, kirby & k) {
 		int* kirbyXy = k.GetXy();
 		int* enemyXY = e.GetXy();
@@ -69,13 +68,12 @@ namespace game_framework {
 		delete[] KirbyXy;
 		return false;
 	}
-	
 
 	template <class T, class U>
 	bool Meet(T & a, U & b) {
 		int* aXy = a.GetXy();
 		int* bXy = b.GetXy();
-		
+
 		int i = 0, n = 1;
 		for (int count = 0; count < 2; count++) {
 			for (int _count = 0; _count < 2; _count++) {
@@ -99,7 +97,7 @@ namespace game_framework {
 			n = 1;
 			i += 2;
 		}
-		
+
 		i = 0, n = 1;
 		for (int count = 0; count < 2; count++) {
 			for (int _count = 0; _count < 2; _count++) {
@@ -126,7 +124,7 @@ namespace game_framework {
 		// ¨S¸I¨ì
 		delete[] aXy;
 		delete[] bXy;
- 		return false;
+		return false;
 	}
 }
 

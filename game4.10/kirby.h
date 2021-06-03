@@ -1,7 +1,8 @@
 #ifndef KIRBY_H
 #define KIRBY_H
 
-// #include "./enemy.h"
+
+#include "./waddle.h"
 #include "./weapon.h"
 #include "./things.h"
 
@@ -12,10 +13,10 @@ namespace game_framework {
 //
 /////////////////////////////////////////////////////////////////////////////
 
-	
 	class kirby {
 	public:
 		kirby();
+		void kirby::StageReSet();
 		~kirby();
 		void LoadBitmap();
 		void OnMove();
@@ -33,10 +34,10 @@ namespace game_framework {
 		void SetCounter(int);
 
 		void SetMap(CMovingBitmap* Map);
+		void SetDoor(CMovingBitmap* door);
 		void SetThings(starBlock** Blocks_input, int input_number);
 		void SetWaddles(waddle** waddles_input, int input_number);
 		void SetWaddleDoos(waddleDoo** waddle_doos_input, int input_number);
-
 		void SetRun(bool input);
 		void Hurt(int input, int time);
 		void ThrowStar();
@@ -51,6 +52,7 @@ namespace game_framework {
 		bool IsAlive();
 		bool IsScreamR();
 		bool IsScreamL();
+		//bool GetUpKey();
 
 	private:
 		CAnimation KirbyMovingL;
@@ -77,9 +79,10 @@ namespace game_framework {
 		CMovingBitmap KirbyDownR;
 		CMovingBitmap KirbyDownL;
 		CMovingBitmap * Map;
+		CMovingBitmap * Door;
 
-		waddle* WaddleList;
-		waddleDoo* WaddleDooList;
+		waddle** WaddleList;
+		waddleDoo** WaddleDooList;
 		starBlock ** StarBlockList;
 		int number_of_star_blocks, number_of_waddles, number_of_waddle_doos;
 		weapon StarThrow;
@@ -101,7 +104,7 @@ namespace game_framework {
 		bool IsMovingL;
 		bool IsMovingR;
 		bool IsFacingR;
-		bool IsDown; 
+		bool IsDown;
 		bool IsAttack;
 		bool InAir;
 		bool IsJumping;

@@ -1,9 +1,11 @@
 
-/*#include "../../game4.10/kirby.h"
+/*
+#include "../../game4.10/kirby.h"
 #include "../../game4.10/enemy.h"
 #include "../../game4.10/waddle.h"
 #include "../../game4.10/things.h"
-#include "../../game4.10/system.h"*/
+#include "../../game4.10/system.h"
+*/
 #include "../../game4.10/Header.h"
 #include <fstream>
 
@@ -33,9 +35,8 @@ namespace game_framework {
 		CMovingBitmap gray_block_2;
 		CMovingBitmap yellow_block;
 		CMovingBitmap num_1, num_2, num_3;
-		int file_1 = 1, file_2 = 2, file_3 = 3;
+		int record_1, record_2, record_3;
 		int start_state = 0;
-		int save_count = 1;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

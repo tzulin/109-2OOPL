@@ -458,9 +458,9 @@ void CGameState::GotoGameState(int state)
 	game->SetGameState(state);
 }
 
-void CGameState::GotoGameState(int state, int input_stage)
+void CGameState::GotoGameState(int state, int input_stage, int input_record)
 {
-	game->SetGameState(state, input_stage);
+	game->SetGameState(state, input_stage, input_record);
 }
 
 void CGameState::ShowInitProgress(int percent)
@@ -742,12 +742,13 @@ void CGame::SetGameState(int state)
 	running = true;
 }
 
-void CGame::SetGameState(int state, int input_stage)
+void CGame::SetGameState(int state, int input_stage, int input_record)
 {
 	ASSERT(state >= 0 && state < NUM_GAME_STATES);
 	gameState = gameStateTable[state];
-	gameState->OnBeginState();
 	gameState->SetStage(input_stage);
+	gameState->SetRecord(input_record);
+	gameState->OnBeginState();
 	OnDraw();
 	CSpecialEffect::SetCurrentTime();
 	running = true;

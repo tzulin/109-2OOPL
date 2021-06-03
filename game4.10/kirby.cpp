@@ -14,15 +14,15 @@ namespace game_framework {
 	kirby::kirby()
 	{
 		// kirby constructor
-		StageReSet();
+		StageReSet(10);
 	}
 
-	void kirby::StageReSet() {
+	void kirby::StageReSet(int hp_left) {
 		const int origin_x = frame_of_test;
 		const int origin_y = SIZE_Y - temp_floor - ImgH;
 		const int INIT_VELOCITY = 18;
 		const int INIT_FLY_VELOCITY = 9;
-		const int INIT_HP = 10;
+		const int INIT_HP = hp_left;
 		BoundaryTop = SIZE_Y / 2;
 		BoundaryLeft = SIZE_X / 2;
 		BoundaryRight = 2560 - BoundaryLeft;

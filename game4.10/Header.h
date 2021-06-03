@@ -133,7 +133,7 @@ namespace game_framework {
 	class kirby {
 	public:
 		kirby();
-		void kirby::StageReSet();
+		void kirby::StageReSet(int hp_left);
 		~kirby();
 		void LoadBitmap();
 		void OnMove();
@@ -169,7 +169,7 @@ namespace game_framework {
 		bool IsAlive();
 		bool IsScreamR();
 		bool IsScreamL();
-		bool GetUpKey();
+		//bool GetUpKey();
 
 	private:
 		CAnimation KirbyMovingL;

@@ -9,6 +9,7 @@ namespace game_framework {
 	// class enemy
 	//
 	/////////////////////////////////////////////////////////////////////////////
+	class kirby;
 
 	class enemy {
 	public:
@@ -22,13 +23,17 @@ namespace game_framework {
 		int GetWidth();
 		int GetHeight();
 		int GetPower();
+		int Top();
+		int Left();
 		void SetXy(int input_x, int input_y);
+		void SetThings(starBlock** Blocks_input, int input_number);
 		void BackX(bool fromL);
 		void Hurt(int input, int time);
 		virtual void Reset();
 		void Attack(kirby k, int time);
 		void YouAreLeft(bool YouAreLeft);
 		bool EnemyFacingR();
+
 		void SetMap(CMovingBitmap * Map);
 		weapon GetWeapon();
 
@@ -43,6 +48,9 @@ namespace game_framework {
 		weapon wR;
 
 		CMovingBitmap* Map;
+
+		starBlock ** StarBlockList = nullptr;
+		int number_of_star_blocks = 0;
 
 		int x, y, hp;
 		int power;			// §ðÀ»¤O

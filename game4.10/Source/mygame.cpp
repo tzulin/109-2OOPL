@@ -8,6 +8,10 @@
 #include "gamelib.h"
 #include "mygame.h"
 
+#include <iostream>
+#include <fstream>
+#include <string>
+
 
 namespace game_framework {
 /////////////////////////////////////////////////////////////////////////////
@@ -47,6 +51,25 @@ void CGameStateInit::OnInit()
 	num_1.SetTopLeft(270, 20);
 	num_2.SetTopLeft(270, 100);
 	num_3.SetTopLeft(270, 180);
+
+	string line;
+	ifstream saveFile("save_file.txt");
+	if (saveFile.is_open())
+	{
+		getline(saveFile, line);
+		record_1 = stoi(line);
+		getline(saveFile, line);
+		record_2 = stoi(line);
+		getline(saveFile, line);
+		record_3 = stoi(line);
+		saveFile.close();
+	}
+	else {
+		ofstream firstSaveFile("save_file.txt");
+		firstSaveFile << "0\n0\n0\n";
+		record_1 = 0; record_2 = 0; record_3 = 0;
+		firstSaveFile.close();
+	}
 }
 
 void CGameStateInit::OnBeginState()
@@ -70,27 +93,36 @@ void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
 	}
 	else if (start_state == 1 && nChar == KEY_ENTER) {
-		if (save_count == 1) {
-			GotoGameState(GAME_STATE_RUN, file_1);						// 切換至GAME_STATE_RUN
+		if (record == 1) {
+			if (record_1 == 0) {
+				record_1++;															// 切換至第一關
+			}
+			GotoGameState(GAME_STATE_RUN, record_1, record);						// 切換至GAME_STATE_RUN
 		}
-		else if (save_count == 2) {
-			GotoGameState(GAME_STATE_RUN, file_2);						// 切換至GAME_STATE_RUN
+		else if (record == 2) {
+			if (record_2 == 0) {
+				record_2++;															// 切換至第一關
+			}
+			GotoGameState(GAME_STATE_RUN, record_2, record);						// 切換至GAME_STATE_RUN
 		}
-		else if (save_count == 3) {
-			GotoGameState(GAME_STATE_RUN, file_3);						// 切換至GAME_STATE_RUN
+		else if (record == 3) {
+			if (record_3 == 0) {
+				record_3++;															// 切換至第一關
+			}
+			GotoGameState(GAME_STATE_RUN, record_3, record);						// 切換至GAME_STATE_RUN
 		}
 	}
 	else if (start_state == 0 && nChar == KEY_ENTER) {
 		start_state = 1;
 	}
 	else if (start_state == 1 && nChar == KEY_UP) {
-		if (save_count == 2 || save_count == 3) {
-			save_count--;
+		if (record == 2 || record == 3) {
+			SetRecord(GetRecord() - 1);
 		}
 	}
 	else if (start_state == 1 && nChar == KEY_DOWN) {
-		if (save_count == 1 || save_count == 2) {
-			save_count++;
+		if (record == 1 || record == 2) {
+			SetRecord(GetRecord() + 1);
 		}
 	}
 }
@@ -129,7 +161,7 @@ void CGameStateInit::OnShow()
 	}
 	else {
 		start_state_one_back.ShowBitmap();
-		if (save_count == 1) {
+		if (record == 1) {
 			yellow_block.SetTopLeft(SIZE_X - yellow_block.Width(), -23);
 			gray_block_1.SetTopLeft(SIZE_X - gray_block_1.Width(), 80);
 			gray_block_2.SetTopLeft(SIZE_X - gray_block_2.Width(), 160);
@@ -137,7 +169,7 @@ void CGameStateInit::OnShow()
 			gray_block_1.ShowBitmap();
 			gray_block_2.ShowBitmap();
 		}
-		else if (save_count == 2) {
+		else if (record == 2) {
 			yellow_block.SetTopLeft(SIZE_X - yellow_block.Width(), 80-23);
 			gray_block_1.SetTopLeft(SIZE_X - gray_block_1.Width(), 0);
 			gray_block_2.SetTopLeft(SIZE_X - gray_block_2.Width(), 160);
@@ -145,7 +177,7 @@ void CGameStateInit::OnShow()
 			gray_block_1.ShowBitmap();
 			gray_block_2.ShowBitmap();
 		}
-		else if (save_count == 3) {
+		else if (record == 3) {
 			yellow_block.SetTopLeft(SIZE_X - yellow_block.Width(), 160-23);
 			gray_block_1.SetTopLeft(SIZE_X - gray_block_1.Width(), 0);
 			gray_block_2.SetTopLeft(SIZE_X - gray_block_2.Width(), 80);
@@ -153,6 +185,7 @@ void CGameStateInit::OnShow()
 			gray_block_1.ShowBitmap();
 			gray_block_2.ShowBitmap();
 		}
+
 		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
 		CFont f, *fp;
 		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
@@ -164,11 +197,11 @@ void CGameStateInit::OnShow()
 		pDC->TextOut(460, 95, "Stage");
 		pDC->TextOut(460, 175, "Stage");
 		char str[80];								// Demo 數字對字串的轉換
-		sprintf(str, "(%d)", file_1);
+		sprintf(str, "(%d)", record_1);
 		pDC->TextOut(555, 15, str);
-		sprintf(str, "(%d)", file_2);
+		sprintf(str, "(%d)", record_2);
 		pDC->TextOut(555, 95, str);
-		sprintf(str, "(%d)", file_3);
+		sprintf(str, "(%d)", record_3);
 		pDC->TextOut(555, 175, str);
 
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
@@ -192,12 +225,41 @@ CGameStateOver::CGameStateOver(CGame *g)
 void CGameStateOver::OnMove()
 {
 	counter--;
-	if (counter < 0)
+	if (counter < 0) {
 		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// esc 關閉遊戲		
+	}
 }
 
 void CGameStateOver::OnBeginState()
 {
+	string line;
+	int record_1 = 0, record_2 = 0, record_3 = 0;
+	ifstream oldSaveFile("save_file.txt");
+	if (oldSaveFile.is_open()) {
+		getline(oldSaveFile, line);
+		record_1 = stoi(line);
+		getline(oldSaveFile, line);
+		record_2 = stoi(line);
+		getline(oldSaveFile, line);
+		record_3 = stoi(line);
+		oldSaveFile.close();
+	}
+
+	if (record == 1) {
+		record_1 = stage;
+	}
+	else if (record == 2) {
+		record_2 = stage;
+	}
+	else if (record == 3) {
+		record_3 = stage;
+	}
+
+	ofstream SaveFile("save_file.txt");
+	if (SaveFile.is_open()) {
+		SaveFile << record_1 << "\n" << record_2 << "\n" << record_3 << "\n";
+	}
+	SaveFile.close();
 	counter = 30 * 1; // 1 seconds
 }
 
@@ -269,7 +331,7 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {	
-	Kirby.StageReSet();
+	Kirby.StageReSet(Kirby.GetHp());
 	Map.SetTopLeft(0, -480);
 	Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
 
@@ -370,7 +432,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	Kirby.SetWaddleDoos(WaddleDooList, number_of_waddle_doos);				// kirby get waddleDoos pointer
 
 	if (!Kirby.IsAlive()) {								// Kirby dead
-		GotoGameState(GAME_STATE_OVER);
+		GotoGameState(GAME_STATE_OVER, stage, record);
 	}
 
 	Kirby.OnMove();										// Kirby OnMove
@@ -580,7 +642,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_ENTER = 0x0D;	// keyboard enter
 
 	if (nChar == KEY_ESC) {
-		GotoGameState(GAME_STATE_OVER);
+		GotoGameState(GAME_STATE_OVER, stage, record);
 	}
 
 	if (nChar == KEY_LEFT) {
@@ -644,7 +706,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	if (nChar == KEY_UP) {
 		if (Meet(Kirby, Door)) {
-			GotoGameState(GAME_STATE_RUN, GetStage() + 1);
+			GotoGameState(GAME_STATE_RUN, GetStage() + 1, record);
 		}
 		else {
 			Kirby.SetFly(true);
@@ -751,7 +813,7 @@ void CGameStateRun::OnShow()
 	pDC->SetBkColor(RGB(0, 0, 0));
 	pDC->SetTextColor(RGB(255, 255, 0));
 	char str[80];								// Demo 數字對字串的轉換
-	sprintf(str, "Stage : %2d", stage);
+	sprintf(str, "Stage : %d", stage);
 	pDC->TextOut(SIZE_X - 107, SIZE_Y - 32, str);
 
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
