@@ -83,6 +83,7 @@ namespace game_framework {
 		void Attack(kirby k, int time);
 		void YouAreLeft(bool YouAreLeft);
 		bool EnemyFacingR();
+		bool EnemyHasWeapon();
 
 		void SetMap(CMovingBitmap * Map);
 		weapon GetWeapon();
@@ -115,6 +116,7 @@ namespace game_framework {
 		int LastHurt;
 		int LastAttack;
 		bool OtherFromL;
+		bool HasWeapon;
 	};
 
 	class waddle : public enemy {
@@ -150,11 +152,10 @@ namespace game_framework {
 		void SetEaten(bool input);
 		void SetCounter(int);
 
+		void SetEnemies(vector<enemy*> input_EnemyList);
 		void SetMap(CMovingBitmap* Map);
 		void SetDoor(CMovingBitmap* door);
 		void SetThings(starBlock** Blocks_input, int input_number);
-		void SetWaddles(waddle** waddles_input, int input_number);
-		void SetWaddleDoos(waddleDoo** waddle_doos_input, int input_number);
 		void SetRun(bool input);
 		void Hurt(int input, int time);
 		void ThrowStar();
@@ -198,10 +199,9 @@ namespace game_framework {
 		CMovingBitmap * Map;
 		CMovingBitmap * Door;
 
-		waddle** WaddleList;
-		waddleDoo** WaddleDooList;
+		vector<enemy*> EnemyList;
 		starBlock ** StarBlockList;
-		int number_of_star_blocks, number_of_waddles, number_of_waddle_doos;
+		int number_of_star_blocks;
 		weapon StarThrow;
 
 

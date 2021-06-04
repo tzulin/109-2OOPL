@@ -261,4 +261,8 @@ namespace game_framework {
 			return wL;
 		}
 	}
+
+	bool enemy::EnemyHasWeapon() {
+		return HasWeapon;
+	}
 }

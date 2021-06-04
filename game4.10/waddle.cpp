@@ -41,10 +41,10 @@ namespace game_framework {
 	}
 
 	void waddle::Reset() {
-		const int origin_x = (SIZE_X - ImgW - frame_of_test) / 2;
+		/*const int origin_x = (SIZE_X - ImgW - frame_of_test) / 2;
 		const int origin_y = SIZE_Y - 60 - ImgH;
 		x = origin_x;
-		y = origin_y;
+		y = origin_y;*/
 		hp = 1;
 		power = 1;
 		IsFacingR = false;
@@ -52,6 +52,7 @@ namespace game_framework {
 		IsMovingR = false;
 		IsAttack = false;
 		LastHurt = 0;
+		HasWeapon = false;
 	}
 
 	/*
@@ -94,10 +95,10 @@ namespace game_framework {
 	}
 
 	void waddleDoo::Reset() {
-		const int origin_x = SIZE_X - ImgW - frame_of_test;
+		/*const int origin_x = SIZE_X - ImgW - frame_of_test;
 		const int origin_y = SIZE_Y - 60 - ImgH;
 		x = origin_x;
-		y = origin_y;
+		y = origin_y;*/
 		hp = 2;
 		power = 1;
 		IsFacingR = false;
@@ -105,6 +106,7 @@ namespace game_framework {
 		IsMovingR = false;
 		IsAttack = false;
 		LastHurt = 0;
+		HasWeapon = true;
 	}
 
 }

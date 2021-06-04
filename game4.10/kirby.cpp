@@ -677,7 +677,7 @@ namespace game_framework {
 	}
 
 	void kirby::SetXY(int x_in, int y_in) {
-		int aXy[4] = { x_in, y_in, x_in + now_img_w, y_in + now_img_h};
+		int aXy[4] = { x_in, y_in, x_in + now_img_w, y_in + now_img_h };
 		bool result = true;
 		if (StarBlockList != nullptr) {
 			for (int k = 0;k < number_of_star_blocks;k++) {
@@ -718,14 +718,17 @@ namespace game_framework {
 				}
 			}
 		}
-		
-		
+
+
 		if (result) {
 			if (x_in - x > 0) {
 				// right
 				if (x_in > BoundaryLeft - now_img_w && Map->Left() > -(BoundaryRight - SIZE_X / 2)) {
 					Map->SetTopLeft(Map->Left() - (x_in - x), Map->Top());
 					Door->SetTopLeft(Door->Left() - (x_in - x), Door->Top());
+					int* temp = StarThrow.GetXy();
+					StarThrow.SetXy(temp[0] - (x_in - x), temp[1]);
+					delete[] temp;
 					if (StarBlockList != nullptr) {
 						for (int i = 0;i < number_of_star_blocks;i++) {
 							if (StarBlockList[i] != nullptr) {
@@ -733,18 +736,9 @@ namespace game_framework {
 							}
 						}
 					}
-					if (WaddleList != nullptr) {
-						for (int i = 0;i < number_of_waddles;i++) {
-							if (WaddleList[i] != nullptr) {
-								WaddleList[i]->SetXy(WaddleList[i]->Left() - (x_in - x), WaddleList[i]->Top());
-							}
-						}
-					}
-					if (WaddleDooList != nullptr) {
-						for (int i = 0;i < number_of_waddle_doos;i++) {
-							if (WaddleDooList[i] != nullptr) {
-								WaddleDooList[i]->SetXy(WaddleDooList[i]->Left() - (x_in - x), WaddleDooList[i]->Top());
-							}
+					if (!EnemyList.empty()) {
+						for (auto n : EnemyList) {
+							n->SetXy(n->Left() - (x_in - x), n->Top());
 						}
 					}
 					return;
@@ -755,6 +749,9 @@ namespace game_framework {
 				if (x_in < BoundaryLeft && Map->Left() < 0) {
 					Map->SetTopLeft(Map->Left() - (x_in - x), Map->Top());
 					Door->SetTopLeft(Door->Left() - (x_in - x), Door->Top());
+					int* temp = StarThrow.GetXy();
+					StarThrow.SetXy(temp[0] - (x_in - x), temp[1]);
+					delete[] temp;
 					if (StarBlockList != nullptr) {
 						for (int i = 0;i < number_of_star_blocks;i++) {
 							if (StarBlockList[i] != nullptr) {
@@ -762,18 +759,9 @@ namespace game_framework {
 							}
 						}
 					}
-					if (WaddleList != nullptr) {
-						for (int i = 0;i < number_of_waddles;i++) {
-							if (WaddleList[i] != nullptr) {
-								WaddleList[i]->SetXy(WaddleList[i]->Left() - (x_in - x), WaddleList[i]->Top());
-							}
-						}
-					}
-					if (WaddleDooList != nullptr) {
-						for (int i = 0;i < number_of_waddle_doos;i++) {
-							if (WaddleDooList[i] != nullptr) {
-								WaddleDooList[i]->SetXy(WaddleDooList[i]->Left() - (x_in - x), WaddleDooList[i]->Top());
-							}
+					if (!EnemyList.empty()) {
+						for (auto n : EnemyList) {
+							n->SetXy(n->Left() - (x_in - x), n->Top());
 						}
 					}
 					return;
@@ -785,6 +773,9 @@ namespace game_framework {
 				if (y_in > BoundaryTop && Map->Top() > -480) {
 					Map->SetTopLeft(Map->Left(), Map->Top() - (y_in - y));
 					Door->SetTopLeft(Door->Left(), Door->Top() - (y_in - y));
+					int* temp = StarThrow.GetXy();
+					StarThrow.SetXy(temp[0], temp[1] - (y_in - y));
+					delete[] temp;
 					if (StarBlockList != nullptr) {
 						for (int i = 0;i < number_of_star_blocks;i++) {
 							if (StarBlockList[i] != nullptr) {
@@ -792,18 +783,9 @@ namespace game_framework {
 							}
 						}
 					}
-					if (WaddleList != nullptr) {
-						for (int i = 0;i < number_of_waddles;i++) {
-							if (WaddleList[i] != nullptr) {
-								WaddleList[i]->SetXy(WaddleList[i]->Left(), WaddleList[i]->Top() - (y_in - y));
-							}
-						}
-					}
-					if (WaddleDooList != nullptr) {
-						for (int i = 0;i < number_of_waddle_doos;i++) {
-							if (WaddleDooList[i] != nullptr) {
-								WaddleDooList[i]->SetXy(WaddleDooList[i]->Left(), WaddleDooList[i]->Top() - (y_in - y));
-							}
+					if (!EnemyList.empty()) {
+						for (auto n : EnemyList) {
+							n->SetXy(n->Left(), n->Top() - (y_in - y));
 						}
 					}
 					return;
@@ -814,6 +796,9 @@ namespace game_framework {
 				if (y_in < BoundaryTop && Map->Top() < 0) {
 					Map->SetTopLeft(Map->Left(), Map->Top() - (y_in - y));
 					Door->SetTopLeft(Door->Left(), Door->Top() - (y_in - y));
+					int* temp = StarThrow.GetXy();
+					StarThrow.SetXy(temp[0], temp[1] - (y_in - y));
+					delete[] temp;
 					if (StarBlockList != nullptr) {
 						for (int i = 0;i < number_of_star_blocks;i++) {
 							if (StarBlockList[i] != nullptr) {
@@ -821,18 +806,9 @@ namespace game_framework {
 							}
 						}
 					}
-					if (WaddleList != nullptr) {
-						for (int i = 0;i < number_of_waddles;i++) {
-							if (WaddleList[i] != nullptr) {
-								WaddleList[i]->SetXy(WaddleList[i]->Left(), WaddleList[i]->Top() - (y_in - y));
-							}
-						}
-					}
-					if (WaddleDooList != nullptr) {
-						for (int i = 0;i < number_of_waddle_doos;i++) {
-							if (WaddleDooList[i] != nullptr) {
-								WaddleDooList[i]->SetXy(WaddleDooList[i]->Left(), WaddleDooList[i]->Top() - (y_in - y));
-							}
+					if (!EnemyList.empty()) {
+						for (auto n : EnemyList) {
+							n->SetXy(n->Left(), n->Top() - (y_in - y));
 						}
 					}
 					return;
@@ -927,14 +903,8 @@ namespace game_framework {
 		number_of_star_blocks = number_input;
 	}
 
-	void kirby::SetWaddles(waddle** input, int number_input) {
-		WaddleList = input;
-		number_of_waddles = number_input;
-	}
-
-	void kirby::SetWaddleDoos(waddleDoo** input, int number_input) {
-		WaddleDooList = input;
-		number_of_waddle_doos = number_input;
+	void kirby::SetEnemies(vector<enemy*> input_EnemyList) {
+		EnemyList = input_EnemyList;
 	}
 
 	void kirby::SetRun(bool input) {
