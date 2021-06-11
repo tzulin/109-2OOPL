@@ -64,10 +64,16 @@ namespace game_framework {
 
 	void enemy::BackX(bool fromL) {
 		if (fromL) {
-			SetXy(x + 60, y);
+			// SetXy(x + 60, y);
+			for (int i = 0; i < 60; i++) {
+				SetXy(x + 1, y);
+			}
 		}
 		else {
-			SetXy(x - 60, y);
+			// SetXy(x - 60, y);
+			for (int i = 0; i < 60; i++) {
+				SetXy(x - 1, y);
+			}
 		}
 	}
 
@@ -107,11 +113,15 @@ namespace game_framework {
 		if (!IsAttack) {
 			if (IsMovingR) {
 				MovingR.SetDelayCount(3);
+				ImgH = MovingR.Height();
+				ImgW = MovingR.Width();
 				MovingR.SetTopLeft(x, y);
 				MovingR.OnShow();
 			}
 			else {
 				MovingL.SetDelayCount(3);
+				ImgH = MovingL.Height();
+				ImgW = MovingL.Width();
 				MovingL.SetTopLeft(x, y);
 				MovingL.OnShow();
 			}
@@ -119,6 +129,8 @@ namespace game_framework {
 		else {
 			if (OtherFromL) {
 				AttackL.SetDelayCount(5);
+				ImgH = AttackL.Height();
+				ImgW = AttackL.Width();
 				AttackL.SetTopLeft(x, y);
 				AttackL.OnShow();
 				wL.SetWeapon(x, y, IsFacingR);
@@ -134,6 +146,8 @@ namespace game_framework {
 			}
 			else {
 				AttackR.SetDelayCount(5);
+				ImgH = AttackR.Height();
+				ImgW = AttackR.Width();
 				AttackR.SetTopLeft(x, y);
 				AttackR.OnShow();
 				wR.SetWeapon(x, y, IsFacingR);
@@ -155,7 +169,7 @@ namespace game_framework {
 	{
 		
 		// set moving XY
-		const int length = 2;
+		const int length = 3;
 
 		/*
 		SetXy(x - Map->GetXChange(), y - Map->GetYChange());
@@ -170,7 +184,10 @@ namespace game_framework {
 				if (IsFacingR) {
 					IsFacingR = false;
 				}
-				SetXy(x - length, y);
+				// SetXy(x - length, y);
+				for (int i = 0; i < length; i++) {
+					SetXy(x - 1, y);
+				}
 			}
 			else if (x <= Map->Left()) {
 				IsMovingL = false;
@@ -181,7 +198,10 @@ namespace game_framework {
 				if (!IsFacingR) {
 					IsFacingR = true;
 				}
-				SetXy(x + length, y);
+				// SetXy(x + length, y);
+				for (int i = 0; i < length; i++) {
+					SetXy(x + 1, y);
+				}
 			}
 			else if (x >= Map->Left() + Map->Width() - ImgW) {
 				IsMovingR = false;
@@ -210,7 +230,7 @@ namespace game_framework {
 	}
 
 	void enemy::SetXy(int x_in, int y_in) {
-		int aXy[4] = { x_in, y_in, x_in + MovingR.Width(), y_in +  MovingR.Height()};
+		int aXy[4] = { x_in, y_in, x_in + ImgW, y_in +  ImgH};
 		bool result = true;
 		if (StarBlockList != nullptr) {
 			for (int k = 0;k < number_of_star_blocks;k++) {

@@ -206,6 +206,12 @@ public:
 	int   Top();						// 取得圖形的左上角的 y 座標
 	int   Width();						// 取得圖形的寬度
 
+	void ResetLoad() {
+		isBitmapLoaded = false;
+		x_change = 0;
+		y_change = 0;
+	}
+
 	int*  GetXy();
 	void YouAreLeft(bool);
 	// void SetChange(int x_input, int y_input);

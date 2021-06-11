@@ -287,7 +287,7 @@ namespace game_framework {
 			KirbyJumpR.SetDelayCount(4);
 			now_img_h = KirbyJumpR.Height();
 			now_img_w = KirbyJumpR.Width();
-			KirbyJumpR.SetTopLeft(x, y);
+			KirbyJumpR.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyJumpR.OnMove();
 			KirbyJumpR.OnShow();
 			break;
@@ -297,7 +297,7 @@ namespace game_framework {
 			KirbyDownAttackR.SetDelayCount(5);
 			now_img_h = KirbyDownAttackR.Height();
 			now_img_w = KirbyDownAttackR.Width();
-			KirbyDownAttackR.SetTopLeft(x, y + ImgH - KirbyDownR.Height());
+			KirbyDownAttackR.SetTopLeft(x, y + KirbyStand.Height() - KirbyDownR.Height());
 			KirbyDownAttackR.OnMove();
 			KirbyDownAttackR.OnShow();
 			if (KirbyDownAttackR.IsFinalBitmap()) {
@@ -310,7 +310,7 @@ namespace game_framework {
 		case 3:
 			now_img_h = KirbyDownR.Height();
 			now_img_w = KirbyDownR.Width();
-			KirbyDownR.SetTopLeft(x, y + ImgH - KirbyDownR.Height());
+			KirbyDownR.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyDownR.ShowBitmap();
 			break;
 
@@ -319,7 +319,7 @@ namespace game_framework {
 			KirbyScreamR.SetDelayCount(3);
 			now_img_h = KirbyScreamR.Height();
 			now_img_w = KirbyScreamR.Width();
-			KirbyScreamR.SetTopLeft(x, y + ImgH - KirbyScreamR.Height());
+			KirbyScreamR.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyScreamR.OnMove();
 			KirbyScreamR.OnShow();
 			if (KirbyScreamR.IsFinalBitmap()) {
@@ -333,7 +333,7 @@ namespace game_framework {
 			KirbyMovingR.SetDelayCount(2);
 			now_img_h = KirbyMovingR.Height();
 			now_img_w = KirbyMovingR.Width();
-			KirbyMovingR.SetTopLeft(x, y);
+			KirbyMovingR.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyMovingR.OnShow();
 			break;
 
@@ -342,7 +342,7 @@ namespace game_framework {
 			KirbyStand.SetDelayCount(3);
 			now_img_h = KirbyStand.Height();
 			now_img_w = KirbyStand.Width();
-			KirbyStand.SetTopLeft(x, y);
+			KirbyStand.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyStand.OnShow();
 			break;
 
@@ -351,7 +351,7 @@ namespace game_framework {
 			KirbyFlyR.SetDelayCount(5);
 			now_img_h = KirbyFlyR.Height();
 			now_img_w = KirbyFlyR.Width();
-			KirbyFlyR.SetTopLeft(x, y);
+			KirbyFlyR.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyFlyR.OnMove();
 			KirbyFlyR.OnShow();
 			if (KirbyFlyR.IsFinalBitmap()) {
@@ -364,7 +364,7 @@ namespace game_framework {
 			KirbyFlyingR.SetDelayCount(3);
 			now_img_h = KirbyFlyingR.Height();
 			now_img_w = KirbyFlyingR.Width();
-			KirbyFlyingR.SetTopLeft(x, y);
+			KirbyFlyingR.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyFlyingR.OnMove();
 			KirbyFlyingR.OnShow();
 			if (KirbyFlyingR.IsFinalBitmap()) {
@@ -377,7 +377,7 @@ namespace game_framework {
 			KirbyJumpL.SetDelayCount(4);
 			now_img_h = KirbyJumpL.Height();
 			now_img_w = KirbyJumpL.Width();
-			KirbyJumpL.SetTopLeft(x, y);
+			KirbyJumpL.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyJumpL.OnMove();
 			KirbyJumpL.OnShow();
 			break;
@@ -387,7 +387,7 @@ namespace game_framework {
 			KirbyDownAttackL.SetDelayCount(5);
 			now_img_h = KirbyDownAttackL.Height();
 			now_img_w = KirbyDownAttackL.Width();
-			KirbyDownAttackL.SetTopLeft(x, y + ImgH - KirbyDownAttackL.Height());
+			KirbyDownAttackL.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyDownAttackL.OnMove();
 			KirbyDownAttackL.OnShow();
 			if (KirbyDownAttackL.IsFinalBitmap()) {
@@ -400,7 +400,7 @@ namespace game_framework {
 		case 11:
 			now_img_h = KirbyDownL.Height();
 			now_img_w = KirbyDownL.Width();
-			KirbyDownL.SetTopLeft(x, y + ImgH - KirbyDownL.Height());
+			KirbyDownL.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyDownL.ShowBitmap();
 			break;
 
@@ -409,7 +409,7 @@ namespace game_framework {
 			KirbyScreamL.SetDelayCount(3);
 			now_img_h = KirbyScreamL.Height();
 			now_img_w = KirbyScreamL.Width();
-			KirbyScreamL.SetTopLeft(x, y + ImgH - KirbyScreamL.Height());
+			KirbyScreamL.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyScreamL.OnMove();
 			KirbyScreamL.OnShow();
 			if (KirbyScreamL.IsFinalBitmap()) {
@@ -423,7 +423,7 @@ namespace game_framework {
 			KirbyMovingL.SetDelayCount(2);
 			now_img_h = KirbyMovingL.Height();
 			now_img_w = KirbyMovingL.Width();
-			KirbyMovingL.SetTopLeft(x, y);
+			KirbyMovingL.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyMovingL.OnShow();
 			break;
 
@@ -432,7 +432,7 @@ namespace game_framework {
 			KirbyStandL.SetDelayCount(3);
 			now_img_h = KirbyStandL.Height();
 			now_img_w = KirbyStandL.Width();
-			KirbyStandL.SetTopLeft(x, y);
+			KirbyStandL.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyStandL.OnShow();
 			break;
 
@@ -441,7 +441,7 @@ namespace game_framework {
 			KirbyFlyL.SetDelayCount(5);
 			now_img_h = KirbyFlyL.Height();
 			now_img_w = KirbyFlyL.Width();
-			KirbyFlyL.SetTopLeft(x, y);
+			KirbyFlyL.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyFlyL.OnMove();
 			KirbyFlyL.OnShow();
 			if (KirbyFlyL.IsFinalBitmap()) {
@@ -454,7 +454,7 @@ namespace game_framework {
 			KirbyFlyingL.SetDelayCount(3);
 			now_img_h = KirbyFlyingL.Height();
 			now_img_w = KirbyFlyingL.Width();
-			KirbyFlyingL.SetTopLeft(x, y);
+			KirbyFlyingL.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyFlyingL.OnMove();
 			KirbyFlyingL.OnShow();
 			if (KirbyFlyingL.IsFinalBitmap()) {
@@ -467,7 +467,7 @@ namespace game_framework {
 			KirbyHurtR.SetDelayCount(2);
 			now_img_h = KirbyHurtR.Height();
 			now_img_w = KirbyHurtR.Width();
-			KirbyHurtR.SetTopLeft(x, y);
+			KirbyHurtR.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyHurtR.OnMove();
 			KirbyHurtR.OnShow();
 			if (KirbyHurtR.IsFinalBitmap()) {
@@ -481,7 +481,7 @@ namespace game_framework {
 			KirbyHurtL.SetDelayCount(2);
 			now_img_h = KirbyHurtL.Height();
 			now_img_w = KirbyHurtL.Width();
-			KirbyHurtL.SetTopLeft(x, y);
+			KirbyHurtL.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyHurtL.OnMove();
 			KirbyHurtL.OnShow();
 			if (KirbyHurtL.IsFinalBitmap()) {
@@ -493,7 +493,9 @@ namespace game_framework {
 		// case IsEaten standing right
 		case 19:
 			KirbyFatStand.SetDelayCount(3);
-			KirbyFatStand.SetTopLeft(x, y);
+			now_img_h = KirbyFatStand.Height();
+			now_img_w = KirbyFatStand.Width();
+			KirbyFatStand.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyFatStand.OnMove();
 			KirbyFatStand.OnShow();
 			break;
@@ -501,7 +503,9 @@ namespace game_framework {
 		// case IsEaten standing left
 		case 20:
 			KirbyFatStandL.SetDelayCount(3);
-			KirbyFatStandL.SetTopLeft(x, y);
+			now_img_h = KirbyFatStandL.Height();
+			now_img_w = KirbyFatStandL.Width();
+			KirbyFatStandL.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyFatStandL.OnMove();
 			KirbyFatStandL.OnShow();
 			break;
@@ -509,7 +513,9 @@ namespace game_framework {
 		// case fat walk right 21
 		case 21:
 			KirbyFatMovingR.SetDelayCount(2);
-			KirbyFatMovingR.SetTopLeft(x, y);
+			now_img_h = KirbyFatMovingR.Height();
+			now_img_w = KirbyFatMovingR.Width();
+			KirbyFatMovingR.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyFatMovingR.OnMove();
 			KirbyFatMovingR.OnShow();
 			break;
@@ -517,7 +523,9 @@ namespace game_framework {
 		// case fat walk left 22
 		case 22:
 			KirbyFatMovingL.SetDelayCount(2);
-			KirbyFatMovingL.SetTopLeft(x, y);
+			now_img_h = KirbyFatMovingL.Height();
+			now_img_w = KirbyFatMovingL.Width();
+			KirbyFatMovingL.SetTopLeft(x, y + KirbyStand.Height() - now_img_h);
 			KirbyFatMovingL.OnMove();
 			KirbyFatMovingL.OnShow();
 			break;
@@ -541,11 +549,17 @@ namespace game_framework {
 				IsFacingR = false;
 			}
 			if (IsRun && !InAir) {
-				SetXY(x - length * 3, y);
+				//SetXY(x - length * 3, y);
+				for (int i = 0; i < length * 3;i++) {
+					SetXY(x - 1, y);
+				}
 			}
 			else {
 				// x -= length;
-				SetXY(x - length, y);
+				// SetXY(x - length, y);
+				for (int i = 0; i < length;i++) {
+					SetXY(x - 1, y);
+				}
 			}
 		}
 
@@ -554,11 +568,17 @@ namespace game_framework {
 				IsFacingR = true;
 			}
 			if (IsRun && !InAir) {
-				SetXY(x + length * 3, y);
+				//SetXY(x + length * 3, y);
+				for (int i = 0; i < length * 3;i++) {
+					SetXY(x + 1, y);
+				}
 			}
 			else {
 				// x += length;
-				SetXY(x + length, y);
+				// SetXY(x + length, y);
+				for (int i = 0; i < length;i++) {
+					SetXY(x + 1, y);
+				}
 			}
 		}
 
@@ -566,11 +586,17 @@ namespace game_framework {
 		if (IsDown && IsAttack && !IsHurt) {
 			if (IsFacingR && x < SIZE_X - ImgW - frame_of_test) {
 				// x += length * 3;
-				SetXY(x + length * 3, y);
+				// SetXY(x + length * 3, y);
+				for (int i = 0; i < length * 3;i++) {
+					SetXY(x + 1, y);
+				}
 			}
 			else if (x > frame_of_test) {
 				// x -= length * 3;
-				SetXY(x - length * 3, y);
+				// SetXY(x - length * 3, y);
+				for (int i = 0; i < length * 3;i++) {
+					SetXY(x - 1, y);
+				}
 			}
 		}
 
@@ -582,7 +608,10 @@ namespace game_framework {
 			if (IsJumping) {
 				if (velocity > 0) {
 					// y -= velocity;
-					SetXY(x, y - velocity);
+					// SetXY(x, y - velocity);
+					for (int i = 0; i < velocity;i++) {
+						SetXY(x, y - 1);
+					}
 					velocity--;
 				}
 				else {
@@ -593,7 +622,10 @@ namespace game_framework {
 			else if (FlyUp && IsFat) {
 				if (fly_velocity > 0) {
 					// y -= fly_velocity;
-					SetXY(x, y - fly_velocity);
+					// SetXY(x, y - fly_velocity);
+					for (int i = 0; i < fly_velocity;i++) {
+						SetXY(x, y - 1);
+					}
 					fly_velocity--;
 				}
 				else {
@@ -607,7 +639,10 @@ namespace game_framework {
 			if (y < floor - frame_of_test - ImgH) {
 				if (IsJumping || !IsFlying) {
 					// y += velocity;
-					SetXY(x, y + velocity);
+					// SetXY(x, y + velocity);
+					for (int i = 0; i < velocity;i++) {
+						SetXY(x, y + 1);
+					}
 					velocity++;
 				}
 				else if (IsFlying) {
@@ -626,7 +661,10 @@ namespace game_framework {
 				}
 			}
 			else {
-				y = floor - frame_of_test - ImgH;
+				// y = floor - frame_of_test - ImgH;
+				while (y > floor - frame_of_test - ImgH) {
+					SetXY(x, y - 1);
+				}
 				velocity = init_velocity;
 				InAir = false;
 				IsRising = true;
@@ -641,11 +679,15 @@ namespace game_framework {
 		// kirby is hurt
 		if (IsHurt) {
 			if (!OtherFromL && x - 4 > 0) {
-				// x -= 2;
-				SetXY(x - 4, y);
+				// SetXY(x - 4, y);
+				for (int i = 0; i < 4;i++) {
+					SetXY(x - 1, y);
+				}
 			} else if(x + 4 < SIZE_X - now_img_w){
-				// x += 2;
-				SetXY(x + 4, y);
+				// SetXY(x + 4, y);
+				for (int i = 0; i < 4;i++) {
+					SetXY(x + 1, y);
+				}
 			} 
 		}
 
@@ -658,10 +700,10 @@ namespace game_framework {
 		if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 50) {
 			int* temp = StarThrow.GetXy();
 			if (StarThrow.GetAttackFacingR()) {
-				StarThrow.SetXy(temp[0] + 10, temp[1]);
+				StarThrow.SetXy(temp[0] + 15, temp[1]);
 			}
 			else {
-				StarThrow.SetXy(temp[0] - 10, temp[1]);
+				StarThrow.SetXy(temp[0] - 15, temp[1]);
 			}
 			delete[] temp;
 		}
@@ -677,7 +719,7 @@ namespace game_framework {
 	}
 
 	void kirby::SetXY(int x_in, int y_in) {
-		int aXy[4] = { x_in, y_in, x_in + now_img_w, y_in + now_img_h };
+		int aXy[4] = { x_in, y_in - KirbyStand.Height() + now_img_h, x_in + now_img_w, y_in - KirbyStand.Height() + now_img_h + now_img_h };
 		bool result = true;
 		if (StarBlockList != nullptr) {
 			for (int k = 0;k < number_of_star_blocks;k++) {

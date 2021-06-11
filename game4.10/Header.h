@@ -106,7 +106,7 @@ namespace game_framework {
 		int x, y, hp;
 		int power;			// §ðÀ»¤O
 		int origin_x, origin_y;
-		const int ImgW = 64, ImgH = 60;
+		int ImgW = 64, ImgH = 60;
 		int floor;			// ¦aªOy®y¼Ð
 		bool IsFacingR;
 		bool IsMovingL;

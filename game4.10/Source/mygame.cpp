@@ -324,6 +324,8 @@ CGameStateRun::~CGameStateRun()
 void CGameStateRun::OnBeginState()
 {	
 	Kirby.StageReSet(Kirby.GetHp());
+	Map.ResetLoad();
+	Map.LoadBitmap(".\\res\\map_example.bmp");
 	Map.SetTopLeft(0, -480);
 	Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
 
@@ -383,6 +385,20 @@ void CGameStateRun::OnBeginState()
 	EnemyVector[1]->SetXy(400, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
 	EnemyVector[1]->SetMap(&Map);
 	EnemyVector[1]->SetThings(StarBlockList, number_of_star_blocks);
+
+	EnemyVector.push_back(new waddle);
+	EnemyVector[2]->LoadBitmap();
+	EnemyVector[2]->Reset();
+	EnemyVector[2]->SetXy(650, SIZE_Y - temp_floor - EnemyVector[2]->GetHeight());
+	EnemyVector[2]->SetMap(&Map);
+	EnemyVector[2]->SetThings(StarBlockList, number_of_star_blocks);
+
+	EnemyVector.push_back(new waddleDoo);
+	EnemyVector[3]->LoadBitmap();
+	EnemyVector[3]->Reset();
+	EnemyVector[3]->SetXy(700, SIZE_Y - temp_floor - EnemyVector[3]->GetHeight());
+	EnemyVector[3]->SetMap(&Map);
+	EnemyVector[3]->SetThings(StarBlockList, number_of_star_blocks);
 }
 
 void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
@@ -538,6 +554,13 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 				StarBlockList[i]->SetShow(false);
 			}
 		}
+
+		if (!EnemyVector.empty()) {
+			for (auto n : EnemyVector) {
+				delete n;
+			}
+			EnemyVector.clear();
+		}
 	}
 
 	if (nChar == KEY_SPACE) {
@@ -614,9 +637,7 @@ void CGameStateRun::OnShow()
 {
 	Map.ShowBitmap();
 	Door.ShowBitmap();
-	
-	
-	
+		
 	if (!EnemyVector.empty()) {
 		for (auto n : EnemyVector) {
 			n->OnShow();
