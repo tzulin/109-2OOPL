@@ -506,6 +506,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_C     = 0x43;	// keyboard C
 	const char KEY_W	 = 0x57;	// keyboard W
 	const char KEY_S	 = 0X53;	// keyboard S
+	const char KEY_P	 = 0X50;	// keyboard P
 	const char KEY_SPACE = 0x20;	// keyboard space
 	const char KEY_ENTER = 0x0D;	// keyboard enter
 
@@ -563,6 +564,10 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		}
 	}
 
+	if (nChar == KEY_P) {
+		GotoGameState(GAME_STATE_RUN, GetStage() + 1, record);
+	}
+
 	if (nChar == KEY_SPACE) {
 		Kirby.SetJump(true);
 	}
@@ -587,10 +592,11 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_UP    = 0x26;	// keyboard上箭頭
 	const char KEY_RIGHT = 0x27;	// keyboard右箭頭
 	const char KEY_DOWN  = 0x28;	// keyboard下箭頭
-	const char KEY_ESC   = 0x1B;	// keyboard esc
+	const char KEY_ESC   = 0x1B;    // keyboard esc
 	const char KEY_C     = 0x43;	// keyboard C
-	const char KEY_O	 = 0x57;	// keyboard W
+	const char KEY_W	 = 0x57;	// keyboard W
 	const char KEY_S	 = 0X53;	// keyboard S
+	const char KEY_P	 = 0X50;	// keyboard P
 	const char KEY_SPACE = 0x20;	// keyboard space
 	const char KEY_ENTER = 0x0D;	// keyboard enter
 

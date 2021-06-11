@@ -84,6 +84,10 @@ namespace game_framework {
 		void YouAreLeft(bool YouAreLeft);
 		bool EnemyFacingR();
 		bool EnemyHasWeapon();
+		void SetKirbyXy(int x_in, int y_in) {
+			x = x_in;
+			y = y_in;
+		}
 
 		void SetMap(CMovingBitmap * Map);
 		weapon GetWeapon();
@@ -171,6 +175,14 @@ namespace game_framework {
 		bool IsScreamR();
 		bool IsScreamL();
 		//bool GetUpKey();
+
+		int Top() {
+			return y;
+		}
+
+		int Left() {
+			return x;
+		}
 
 	private:
 		CAnimation KirbyMovingL;

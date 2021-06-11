@@ -780,7 +780,7 @@ namespace game_framework {
 					}
 					if (!EnemyList.empty()) {
 						for (auto n : EnemyList) {
-							n->SetXy(n->Left() - (x_in - x), n->Top());
+							n->SetKirbyXy(n->Left() - (x_in - x), n->Top());
 						}
 					}
 					return;
@@ -803,7 +803,7 @@ namespace game_framework {
 					}
 					if (!EnemyList.empty()) {
 						for (auto n : EnemyList) {
-							n->SetXy(n->Left() - (x_in - x), n->Top());
+							n->SetKirbyXy(n->Left() - (x_in - x), n->Top());
 						}
 					}
 					return;
@@ -827,7 +827,7 @@ namespace game_framework {
 					}
 					if (!EnemyList.empty()) {
 						for (auto n : EnemyList) {
-							n->SetXy(n->Left(), n->Top() - (y_in - y));
+							n->SetKirbyXy(n->Left(), n->Top() - (y_in - y));
 						}
 					}
 					return;
@@ -850,7 +850,7 @@ namespace game_framework {
 					}
 					if (!EnemyList.empty()) {
 						for (auto n : EnemyList) {
-							n->SetXy(n->Left(), n->Top() - (y_in - y));
+							n->SetKirbyXy(n->Left(), n->Top() - (y_in - y));
 						}
 					}
 					return;
