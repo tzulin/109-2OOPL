@@ -153,7 +153,7 @@ namespace game_framework {
 
 	void enemy::OnMove()
 	{
-		
+
 		// set moving XY
 		const int length = 2;
 
@@ -194,14 +194,19 @@ namespace game_framework {
 		}
 	}
 
-	void enemy::LoadBitmap(){}
+	void enemy::LoadBitmap() {}
 
 	void enemy::SetMap(CMovingBitmap * input) {
 		Map = input;
 	}
 
+	/*
 	void enemy::SetThings(starBlock** input, int input_number) {
 		number_of_star_blocks = input_number;
+		StarBlockList = input;
+	}
+	*/
+	void enemy::SetThings(vector<thing*> input) {
 		StarBlockList = input;
 	}
 
@@ -210,10 +215,10 @@ namespace game_framework {
 	}
 
 	void enemy::SetXy(int x_in, int y_in) {
-		int aXy[4] = { x_in, y_in, x_in + MovingR.Width(), y_in +  MovingR.Height()};
+		int aXy[4] = { x_in, y_in, x_in + MovingR.Width(), y_in + MovingR.Height() };
 		bool result = true;
-		if (StarBlockList != nullptr) {
-			for (int k = 0;k < number_of_star_blocks;k++) {
+		if (!StarBlockList.empty()) {
+			for (int k = 0; k < int(StarBlockList.size()); k++) {
 				if (StarBlockList[k] != nullptr && StarBlockList[k]->GetShow()) {
 					int* bXy = StarBlockList[k]->GetXy();
 					int i = 0, n = 1;

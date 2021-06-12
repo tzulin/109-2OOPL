@@ -108,7 +108,8 @@ namespace game_framework {
 		int Top();
 		int Left();
 		void SetXy(int input_x, int input_y);
-		void SetThings(starBlock** Blocks_input, int input_number);
+		void SetThings(vector<thing*> input_ThingList);
+		// void SetThings(starBlock** Blocks_input, int input_number);
 		void BackX(bool fromL);
 		void Hurt(int input, int time);
 		virtual void Reset();
@@ -132,8 +133,9 @@ namespace game_framework {
 
 		CMovingBitmap* Map;
 
-		starBlock ** StarBlockList = nullptr;
-		int number_of_star_blocks = 0;
+		vector<thing*> StarBlockList;
+		// starBlock ** StarBlockList = nullptr;
+		// int number_of_star_blocks = 0;
 
 		int x, y, hp;
 		int power;			// §ðÀ»¤O
@@ -186,7 +188,6 @@ namespace game_framework {
 
 		void SetEnemies(vector<enemy*> input_EnemyList);
 		void SetThings(vector<thing*> input_ThingList);
-		// void SetThings(starBlock** Blocks_input, int input_number);
 		void SetMap(CMovingBitmap* Map);
 		void SetDoor(CMovingBitmap* door);
 		void SetRun(bool input);
@@ -312,7 +313,7 @@ namespace game_framework {
 		int* StarBlockXy = t->GetXy();
 		int* KirbyXy = Kirby.GetXy();
 		int for_count = 0;
-		for (;for_count < 10;for_count++) {
+		for (; for_count < 10; for_count++) {
 			int x_different = StarBlockXy[0] - KirbyXy[2];
 			int x_different2 = KirbyXy[0] - StarBlockXy[2];
 			int y_different = StarBlockXy[1] - KirbyXy[1];
