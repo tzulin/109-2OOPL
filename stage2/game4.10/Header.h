@@ -146,6 +146,12 @@ namespace game_framework {
 		void Reset() override;
 	};
 
+	class hotHead : public enemy {
+	public:
+		void LoadBitmap() override;
+		void Reset() override;
+	};
+
 	class kirby {
 	public:
 		kirby();

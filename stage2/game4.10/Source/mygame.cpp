@@ -406,7 +406,7 @@ namespace game_framework {
 		EnemyVector.push_back(new waddleDoo);
 		EnemyVector[1]->LoadBitmap();
 		EnemyVector[1]->Reset();
-		EnemyVector[1]->SetXy(1000, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
+		EnemyVector[1]->SetXy(2000, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
 		EnemyVector[1]->SetMap(&Map);
 		EnemyVector[1]->SetThings(ThingVector);
 
@@ -416,6 +416,13 @@ namespace game_framework {
 		EnemyVector[2]->SetXy(600, SIZE_Y - temp_floor - EnemyVector[2]->GetHeight());
 		EnemyVector[2]->SetMap(&Map);
 		EnemyVector[2]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new hotHead);
+		EnemyVector[3]->LoadBitmap();
+		EnemyVector[3]->Reset();
+		EnemyVector[3]->SetXy(1000, SIZE_Y - temp_floor - 80);
+		EnemyVector[3]->SetMap(&Map);
+		EnemyVector[3]->SetThings(ThingVector);
 	}
 
 	void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À

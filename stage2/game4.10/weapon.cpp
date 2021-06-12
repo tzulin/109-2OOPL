@@ -77,6 +77,16 @@ namespace game_framework {
 			x = enemyX - 20;
 			y = enemyY - 20;
 		}
+		else if (owner == "hotHead") {
+			if (enemyFaceR) {
+				x = enemyX + enemyImgW + 15;
+				y = enemyY + 15;
+			}
+			else {
+				x = enemyX - ImgW;
+				y = enemyY + 15;
+			}
+		}
 	}
 
 	void weapon::SetXy(int input_x, int input_y) {

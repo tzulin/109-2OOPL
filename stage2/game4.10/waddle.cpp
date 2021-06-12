@@ -157,4 +157,54 @@ namespace game_framework {
 		LastHurt = 0;
 		HasWeapon = true;
 	}
+
+	void hotHead::LoadBitmap()
+	{
+		// load walk right
+		char *walk_right[8] = { ".\\res\\hotHead\\walkR1.bmp", ".\\res\\hotHead\\walkR2.bmp", ".\\res\\hotHead\\walkR3.bmp", ".\\res\\hotHead\\walkR4.bmp", ".\\res\\hotHead\\walkR5.bmp", ".\\res\\hotHead\\walkR6.bmp", ".\\res\\hotHead\\walkR7.bmp", ".\\res\\hotHead\\walkR8.bmp" };
+		for (int i = 0; i < 8; i++)
+		{
+			MovingR.AddBitmap(walk_right[i], RGB(255, 255, 255));
+		}
+
+		// load walk left
+		char *walk_left[8] = { ".\\res\\hotHead\\walkL1.bmp", ".\\res\\hotHead\\walkL2.bmp", ".\\res\\hotHead\\walkL3.bmp", ".\\res\\hotHead\\walkL4.bmp", ".\\res\\hotHead\\walkL5.bmp", ".\\res\\hotHead\\walkL6.bmp", ".\\res\\hotHead\\walkL7.bmp", ".\\res\\hotHead\\walkL8.bmp" };
+		for (int i = 0; i < 8; i++)
+		{
+			MovingL.AddBitmap(walk_left[i], RGB(255, 255, 255));
+		}
+
+		// load attack right
+		for (int i = 0; i < 3; i++) {
+			AttackR.AddBitmap(".\\res\\hotHead\\attackR1.bmp", RGB(255, 255, 255));
+			AttackR.AddBitmap(".\\res\\hotHead\\attackR2.bmp", RGB(255, 255, 255));
+			AttackR.AddBitmap(".\\res\\hotHead\\attackR3.bmp", RGB(255, 255, 255));
+		}
+
+		// load attack left
+		for (int i = 0; i < 3; i++) {
+			AttackL.AddBitmap(".\\res\\hotHead\\attackL1.bmp", RGB(255, 255, 255));
+			AttackL.AddBitmap(".\\res\\hotHead\\attackL2.bmp", RGB(255, 255, 255));
+			AttackL.AddBitmap(".\\res\\hotHead\\attackL3.bmp", RGB(255, 255, 255));
+		}
+
+		// load weapon bitmap
+		char* weapon_left[4] = { ".\\res\\weapon\\hotHead\\attackL1.bmp", ".\\res\\weapon\\hotHead\\attackL2.bmp", ".\\res\\weapon\\hotHead\\attackL3.bmp", ".\\res\\weapon\\hotHead\\attackL4.bmp" };
+		char* weapon_right[4] = { ".\\res\\weapon\\hotHead\\attackR1.bmp", ".\\res\\weapon\\hotHead\\attackR2.bmp", ".\\res\\weapon\\hotHead\\attackR3.bmp", ".\\res\\weapon\\hotHead\\attackR4.bmp" };
+		int rgb[3] = { 255, 255, 255 };
+		wL.LoadBitmap(weapon_left, rgb, 4);
+		wR.LoadBitmap(weapon_right, rgb, 4);
+	}
+
+	void hotHead::Reset() {
+		hp = 1;
+		power = 1;
+		kind = "hotHead";
+		IsFacingR = false;
+		IsMovingL = true;
+		IsMovingR = false;
+		IsAttack = false;
+		LastHurt = 0;
+		HasWeapon = true;
+	}
 }
