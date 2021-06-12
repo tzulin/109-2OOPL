@@ -406,9 +406,16 @@ namespace game_framework {
 		EnemyVector.push_back(new waddleDoo);
 		EnemyVector[1]->LoadBitmap();
 		EnemyVector[1]->Reset();
-		EnemyVector[1]->SetXy(600, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
+		EnemyVector[1]->SetXy(1000, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
 		EnemyVector[1]->SetMap(&Map);
 		EnemyVector[1]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new sparky);
+		EnemyVector[2]->LoadBitmap();
+		EnemyVector[2]->Reset();
+		EnemyVector[2]->SetXy(600, SIZE_Y - temp_floor - EnemyVector[2]->GetHeight());
+		EnemyVector[2]->SetMap(&Map);
+		EnemyVector[2]->SetThings(ThingVector);
 	}
 
 	void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
@@ -501,7 +508,6 @@ namespace game_framework {
 			EnemyVector.clear();
 		}
 
-		// StarBlockList = nullptr;
 		if (!ThingVector.empty()) {
 			for (auto block : ThingVector) {
 				delete block;
@@ -563,13 +569,6 @@ namespace game_framework {
 		}
 
 		if (nChar == KEY_S) {
-			/*
-			if (StarBlockList != nullptr) {
-				for (int i = 0;i < number_of_star_blocks;i++) {
-					StarBlockList[i]->SetShow(false);
-				}
-			}
-			*/
 			if (!ThingVector.empty()) {
 				for (auto block : ThingVector) {
 					block->SetShow(false);
@@ -652,8 +651,6 @@ namespace game_framework {
 		Map.ShowBitmap();
 		Door.ShowBitmap();
 
-
-
 		if (!EnemyVector.empty()) {
 			for (auto n : EnemyVector) {
 				n->OnShow();
@@ -668,17 +665,6 @@ namespace game_framework {
 				}
 			}
 		}
-		/*
-		if (StarBlockList != nullptr) {
-			for (int i = 0;i < number_of_star_blocks;i++) {
-				if (StarBlockList[i] != nullptr) {
-					if (StarBlockList[i]->GetShow()) {
-						StarBlockList[i]->OnShow();							// StarBlock onShow
-					}
-				}
-			}
-		}
-		*/
 
 		Kirby.OnShow();									// Kirby OnShow
 		kirbyHpInt.ShowBitmap();						// hp int show

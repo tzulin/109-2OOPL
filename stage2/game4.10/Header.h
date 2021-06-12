@@ -32,35 +32,6 @@ namespace game_framework {
 		void LoadBitmap() override;
 		bool isStarBlock() override;
 	};
-	/*
-	class starBlock {
-	public:
-		void LoadBitmap();
-		void OnShow();
-		void SetShow(bool);
-		void SetXY(int, int);
-		starBlock();
-		int* GetHw();
-		int* GetXy();
-		bool GetShow();
-		void YouAreLeft(bool);
-		int Top();
-		int Left();
-	private:
-		CMovingBitmap starBlockPic;
-		int x, y;
-		bool IsShow;
-	};
-
-	class blankBlock {
-	public:
-		void SetXY(int, int);
-		void SetHW(int, int);
-	private:
-		int x, y;
-		int height, width;
-	};
-	*/
 
 	class weapon {
 	public:
@@ -80,6 +51,7 @@ namespace game_framework {
 		void YouAreLeft(bool YouAreLeft);
 		bool GetAttackFacingR();
 		bool WeaponIsShow();
+		void SetOwner(std::string which_enemy);
 	protected:
 		CAnimation PlayAttack;
 		int x, y;
@@ -89,6 +61,7 @@ namespace game_framework {
 		bool IsShow;
 		bool AttackIsFacingR;
 		bool OtherFromL;
+		std::string owner;
 	};
 
 	class kirby;
@@ -151,6 +124,7 @@ namespace game_framework {
 		int LastAttack;
 		bool OtherFromL;
 		bool HasWeapon;
+		std::string kind;
 	};
 
 	class waddle : public enemy {
@@ -161,6 +135,12 @@ namespace game_framework {
 	};
 
 	class waddleDoo : public enemy {
+	public:
+		void LoadBitmap() override;
+		void Reset() override;
+	};
+
+	class sparky : public enemy {
 	public:
 		void LoadBitmap() override;
 		void Reset() override;

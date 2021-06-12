@@ -121,6 +121,7 @@ namespace game_framework {
 				AttackL.SetDelayCount(5);
 				AttackL.SetTopLeft(x, y);
 				AttackL.OnShow();
+				wL.SetOwner(kind);
 				wL.SetWeapon(x, y, IsFacingR);
 				wL.SetShow(true);
 				wL.OnMove();
@@ -136,6 +137,7 @@ namespace game_framework {
 				AttackR.SetDelayCount(5);
 				AttackR.SetTopLeft(x, y);
 				AttackR.OnShow();
+				wR.SetOwner(kind);
 				wR.SetWeapon(x, y, IsFacingR);
 				wR.SetShow(true);
 				wR.OnMove();
@@ -200,12 +202,6 @@ namespace game_framework {
 		Map = input;
 	}
 
-	/*
-	void enemy::SetThings(starBlock** input, int input_number) {
-		number_of_star_blocks = input_number;
-		StarBlockList = input;
-	}
-	*/
 	void enemy::SetThings(vector<thing*> input) {
 		StarBlockList = input;
 	}

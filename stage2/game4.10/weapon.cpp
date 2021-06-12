@@ -57,14 +57,25 @@ namespace game_framework {
 			IsShow = false;
 		}
 	}
+
+	void weapon::SetOwner(std::string input) {
+		owner = input;
+	}
+
 	void weapon::SetWeapon(int enemyX, int enemyY, bool enemyFaceR) {
-		if (enemyFaceR) {
-			x = enemyX + enemyImgW;
-			y = enemyY - (ImgH - enemyImgH);
+		if (owner == "waddleDoo") {
+			if (enemyFaceR) {
+				x = enemyX + enemyImgW;
+				y = enemyY - (ImgH - enemyImgH);
+			}
+			else {
+				x = enemyX - ImgW;
+				y = enemyY - (ImgH - enemyImgH);
+			}
 		}
-		else {
-			x = enemyX - ImgW;
-			y = enemyY - (ImgH - enemyImgH);
+		else if (owner == "sparky") {
+			x = enemyX - 20;
+			y = enemyY - 20;
 		}
 	}
 
