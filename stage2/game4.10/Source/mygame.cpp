@@ -89,8 +89,13 @@ namespace game_framework {
 		const char KEY_SPACE = 0x20;	// keyboard space
 		const char KEY_ENTER = 0x0D;	// keyboard enter
 
+
 		if (nChar == KEY_ESC) {						// Demo 關閉遊戲的方法
 			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+		}
+		else if (start_state == 1 && nChar == KEY_W) {
+			start_state_one_back.ResetLoad();
+			start_state_one_back.LoadBitmap("./res/save_back_1.bmp", RGB(0, 0, 0));
 		}
 		else if (start_state == 1 && nChar == KEY_ENTER) {
 			if (record == 1) {
@@ -328,7 +333,7 @@ namespace game_framework {
 	void CGameStateRun::OnBeginState()
 	{
 		Kirby.StageReSet(Kirby.GetHp());
-		if (stage % 2 == 1) {
+		if (stage == 1) {
 			if (Map != nullptr) {
 				delete[] Map;
 			}
@@ -405,7 +410,7 @@ namespace game_framework {
 			EnemyVector[3]->SetMap(Map);
 			EnemyVector[3]->SetThings(ThingVector);
 		}
-		else {
+		else if(stage == 2){
 			if (Map != nullptr) {
 				delete[] Map;
 			}
@@ -517,7 +522,27 @@ namespace game_framework {
 			EnemyVector[4]->SetMap(Map);
 			EnemyVector[4]->SetThings(ThingVector);
 		}
-
+		else {
+			if (Map != nullptr) {
+				delete[] Map;
+			}
+			Map = new CMovingBitmap;
+			Map->LoadBitmap(".\\res\\map_example_cloud.bmp");
+			Map->SetTopLeft(0, -260);
+			Door.SetTopLeft(SIZE_X - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
+			if (!EnemyVector.empty()) {
+				for (auto n : EnemyVector) {
+					delete n;
+				}
+				EnemyVector.clear();
+			}
+			if (!ThingVector.empty()) {
+				for (auto block : ThingVector) {
+					delete block;
+				}
+				ThingVector.clear();
+			}
+		}
 	}
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -575,11 +600,11 @@ namespace game_framework {
 		kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
 		if (!ThingVector.empty()) {							// starblock can attack or not
 			for (auto block : ThingVector) {
-				if (block != nullptr && block->GetShow() && block->isStarBlock()) {
+				if (block != nullptr && block->GetShow()) {
 					if (Meet(*KirbyWeapon, *block) && KirbyWeapon->WeaponIsShow()) {			// kirby weapon hit enemy
 						KirbyWeapon->SetShow(false);
 					}
-					if (KirbyCanAttack(Kirby, block)) {
+					if (KirbyCanAttack(Kirby, block) && block->isStarBlock()) {
 						block->SetShow(false);
 						Kirby.SetEaten(true);
 						Kirby.SetAttack(false);
@@ -622,14 +647,16 @@ namespace game_framework {
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		const char KEY_LEFT = 0x25;	// keyboard左箭頭
-		const char KEY_UP = 0x26;	// keyboard上箭頭
+		const char KEY_LEFT = 0x25;		// keyboard左箭頭
+		const char KEY_UP = 0x26;		// keyboard上箭頭
 		const char KEY_RIGHT = 0x27;	// keyboard右箭頭
-		const char KEY_DOWN = 0x28;	// keyboard下箭頭
-		const char KEY_ESC = 0x1B;    // keyboard esc
-		const char KEY_C = 0x43;	// keyboard C
-		const char KEY_W = 0x57;	// keyboard W
-		const char KEY_S = 0X53;	// keyboard S
+		const char KEY_DOWN = 0x28;		// keyboard下箭頭
+		const char KEY_ESC = 0x1B;	    // keyboard esc
+		const char KEY_C = 0x43;		// keyboard C
+		const char KEY_W = 0x57;		// keyboard W
+		const char KEY_S = 0X53;		// keyboard S
+		const char KEY_N = 0x4E;		// keyboard N
+		const char KEY_P = 0x50;		// keyboard P
 		const char KEY_SPACE = 0x20;	// keyboard space
 		const char KEY_ENTER = 0x0D;	// keyboard enter
 
@@ -667,18 +694,28 @@ namespace game_framework {
 			Kirby.SetAttack(true);
 		}
 
-		if (nChar == KEY_W) {
-
-
+		if (nChar == KEY_P) {
+			GotoGameState(GAME_STATE_RUN, GetStage() + 1, record);
 		}
 
 		if (nChar == KEY_S) {
+			Kirby.SetHack(true);
+		}
+
+		if (nChar == KEY_N) {
 			if (!ThingVector.empty()) {
 				for (auto block : ThingVector) {
 					block->SetShow(false);
 					delete block;
 				}
 				ThingVector.clear();
+			}
+
+			if (!EnemyVector.empty()) {
+				for (auto n : EnemyVector) {
+					delete n;
+				}
+				EnemyVector.clear();
 			}
 		}
 
@@ -706,10 +743,11 @@ namespace game_framework {
 		const char KEY_UP = 0x26;	// keyboard上箭頭
 		const char KEY_RIGHT = 0x27;	// keyboard右箭頭
 		const char KEY_DOWN = 0x28;	// keyboard下箭頭
-		const char KEY_ESC = 0x1B;	// keyboard esc
+		const char KEY_ESC = 0x1B;    // keyboard esc
 		const char KEY_C = 0x43;	// keyboard C
-		const char KEY_O = 0x57;	// keyboard W
+		const char KEY_W = 0x57;	// keyboard W
 		const char KEY_S = 0X53;	// keyboard S
+		const char KEY_N = 0x4E;		// keyboard N
 		const char KEY_SPACE = 0x20;	// keyboard space
 		const char KEY_ENTER = 0x0D;	// keyboard enter
 

@@ -171,6 +171,7 @@ namespace game_framework {
 		void SetFly(bool input);
 		void SetEaten(bool input);
 		void SetCounter(int);
+		void SetHack(bool input);
 
 		void SetEnemies(vector<enemy*> input_EnemyList);
 		void SetThings(vector<thing*> input_ThingList);
@@ -254,6 +255,7 @@ namespace game_framework {
 		bool IsEaten;
 		bool YouAreGround;
 		bool IsRun;
+		bool IsHack;
 	};
 
 	inline bool EnemyCanAttack(enemy & e, kirby & k) {

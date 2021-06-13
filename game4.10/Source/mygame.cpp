@@ -393,11 +393,9 @@ void CGameStateRun::OnBeginState()
 		StarBlockList[37]->LoadBitmap();
 		StarBlockList[37]->SetXY(1950, SIZE_Y - 32 - temp_floor);*/
 
-		ThingVector[36] = new starBlock;
 		ThingVector[36]->LoadBitmap();
 		ThingVector[36]->SetXY(1650, SIZE_Y - 32 - temp_floor);
 
-		ThingVector[37] = new starBlock;
 		ThingVector[37]->LoadBitmap();
 		ThingVector[37]->SetXY(1950, SIZE_Y - 32 - temp_floor);
 
