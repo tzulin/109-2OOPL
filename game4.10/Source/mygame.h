@@ -69,9 +69,11 @@ namespace game_framework {
 		kirby Kirby;
 
 		vector<enemy*> EnemyVector;
+		vector<thing*> ThingVector;
 		/*waddle** WaddleList;
-		waddleDoo** WaddleDooList;*/
+		waddleDoo** WaddleDooList;
 		starBlock** StarBlockList;
+		*/
 		int temp_floor = 60, counter = 0, last_left = 0, last_right = 0;
 		int number_of_star_blocks = 0, number_of_waddles = 0, number_of_waddle_doos = 0;
  	};

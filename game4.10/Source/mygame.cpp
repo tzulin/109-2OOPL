@@ -217,10 +217,12 @@ void CGameStateInit::OnShow()
 // 這個class為遊戲的結束狀態(Game Over)
 /////////////////////////////////////////////////////////////////////////////
 
+
 CGameStateOver::CGameStateOver(CGame *g)
 : CGameState(g)
 {
 }
+
 
 void CGameStateOver::OnMove()
 {
@@ -306,11 +308,20 @@ CGameStateRun::CGameStateRun(CGame *g)
 
 CGameStateRun::~CGameStateRun()
 {
+	/*
 	if (StarBlockList != nullptr) {
 		for (int i = 0;i < number_of_star_blocks;i++) {
 			delete[] StarBlockList[i];
 		}
 		delete[] StarBlockList;
+	}
+	*/
+
+	if (!ThingVector.empty()) {
+		for (auto block : ThingVector) {
+			delete block;
+		}
+		ThingVector.clear();
 	}
 
 	if (!EnemyVector.empty()) {
@@ -325,80 +336,208 @@ void CGameStateRun::OnBeginState()
 {	
 	Kirby.StageReSet(Kirby.GetHp());
 	Map.ResetLoad();
-	Map.LoadBitmap(".\\res\\map_example.bmp");
-	Map.SetTopLeft(0, -480);
-	Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
-
-	if (StarBlockList != nullptr) {
-		for (int i = 0;i < number_of_star_blocks;i++) {
-			delete[] StarBlockList[i];
+	if (stage % 2 == 1) {
+		Map.LoadBitmap(".\\res\\map_example_cloud.bmp");
+		Map.SetTopLeft(0, -260);
+		Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
+		if (!ThingVector.empty()) {
+			for (auto block : ThingVector) {
+				delete block;
+			}
+			ThingVector.clear();
 		}
-		delete[] StarBlockList;
-	}
 
-	StarBlockList = new starBlock*[38];
-	number_of_star_blocks = 38;
-	starBlock** blocks = StarBlockList;
-	for (int i = 0;i < 5;i++) {
-		for (int n = 0;n < 5;n++) {
-			blocks[i * 5 + n] = new starBlock;
-			blocks[i * 5 + n]->LoadBitmap();							// StarBlock LoadBitmap setTopLeft
-			blocks[i * 5 + n]->SetXY(1020 + 32 * i, SIZE_Y - 32 - 32 * n - temp_floor);
+		for (int i = 0; i < 38; i++) {
+			ThingVector.push_back(new starBlock);
 		}
-	}
+		/*StarBlockList = new starBlock*[38];
+		number_of_star_blocks = 38;
+		starBlock** blocks = StarBlockList;
+		for (int i = 0;i < 5;i++) {
+			for (int n = 0;n < 5;n++) {
+				blocks[i * 5 + n] = new starBlock;
+				blocks[i * 5 + n]->LoadBitmap();							// StarBlock LoadBitmap setTopLeft
+				blocks[i * 5 + n]->SetXY(1020 + 32 * i, SIZE_Y - 32 - 32 * n - temp_floor);
+			}
+		}*/
 
-	StarBlockList[25] = new starBlock;
-	StarBlockList[25]->LoadBitmap();
-	StarBlockList[25]->SetXY(620, SIZE_Y - 32 - temp_floor);
-
-	for (int i = 0;i < 10;i++) {
-		StarBlockList[26 + i] = new starBlock;
-		StarBlockList[26 + i]->LoadBitmap();
-		StarBlockList[26 + i]->SetXY(1330 + 32 * i, SIZE_Y - 32 - 200 - temp_floor);
-	}
-
-	StarBlockList[36] = new starBlock;
-	StarBlockList[36]->LoadBitmap();
-	StarBlockList[36]->SetXY(1650, SIZE_Y - 32 - temp_floor);
-
-	StarBlockList[37] = new starBlock;
-	StarBlockList[37]->LoadBitmap();
-	StarBlockList[37]->SetXY(1950, SIZE_Y - 32 - temp_floor);
-
-	if (!EnemyVector.empty()) {
-		for (auto n : EnemyVector) {
-			delete n;
+		for (int i = 0; i < 5;i++) {
+			for (int n = 0; n < 5; n++) {
+				ThingVector[i * 5 + n]->LoadBitmap();
+				ThingVector[i * 5 + n]->SetXY(1020 + 32 * i, SIZE_Y - 32 - 32 * n - temp_floor);
+			}
 		}
-		EnemyVector.clear();
+
+		/*StarBlockList[25] = new starBlock;
+		StarBlockList[25]->LoadBitmap();
+		StarBlockList[25]->SetXY(620, SIZE_Y - 32 - temp_floor);*/
+		ThingVector[25]->LoadBitmap();
+		ThingVector[25]->SetXY(620, SIZE_Y - 32 - temp_floor);
+
+		/*for (int i = 0;i < 10;i++) {
+			StarBlockList[26 + i] = new starBlock;
+			StarBlockList[26 + i]->LoadBitmap();
+			StarBlockList[26 + i]->SetXY(1330 + 32 * i, SIZE_Y - 32 - 200 - temp_floor);
+		}*/
+
+		for (int i = 0;i < 10;i++) {
+			ThingVector[26 + i]->LoadBitmap();
+			ThingVector[26 + i]->SetXY(1330 + 32 * i, SIZE_Y - 32 - 200 - temp_floor);
+		}
+
+		/*StarBlockList[36] = new starBlock;
+		StarBlockList[36]->LoadBitmap();
+		StarBlockList[36]->SetXY(1650, SIZE_Y - 32 - temp_floor);
+
+		StarBlockList[37] = new starBlock;
+		StarBlockList[37]->LoadBitmap();
+		StarBlockList[37]->SetXY(1950, SIZE_Y - 32 - temp_floor);*/
+
+		ThingVector[36] = new starBlock;
+		ThingVector[36]->LoadBitmap();
+		ThingVector[36]->SetXY(1650, SIZE_Y - 32 - temp_floor);
+
+		ThingVector[37] = new starBlock;
+		ThingVector[37]->LoadBitmap();
+		ThingVector[37]->SetXY(1950, SIZE_Y - 32 - temp_floor);
+
+		if (!EnemyVector.empty()) {
+			for (auto n : EnemyVector) {
+				delete n;
+			}
+			EnemyVector.clear();
+		}
+
+		EnemyVector.push_back(new waddle);
+		EnemyVector[0]->LoadBitmap();
+		EnemyVector[0]->Reset();
+		EnemyVector[0]->SetXy(200, SIZE_Y - temp_floor - EnemyVector[0]->GetHeight());
+		EnemyVector[0]->SetMap(&Map);
+		EnemyVector[0]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new waddleDoo);
+		EnemyVector[1]->LoadBitmap();
+		EnemyVector[1]->Reset();
+		EnemyVector[1]->SetXy(400, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
+		EnemyVector[1]->SetMap(&Map);
+		EnemyVector[1]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new waddle);
+		EnemyVector[2]->LoadBitmap();
+		EnemyVector[2]->Reset();
+		EnemyVector[2]->SetXy(650, SIZE_Y - temp_floor - EnemyVector[2]->GetHeight());
+		EnemyVector[2]->SetMap(&Map);
+		EnemyVector[2]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new waddleDoo);
+		EnemyVector[3]->LoadBitmap();
+		EnemyVector[3]->Reset();
+		EnemyVector[3]->SetXy(700, SIZE_Y - temp_floor - EnemyVector[3]->GetHeight());
+		EnemyVector[3]->SetMap(&Map);
+		EnemyVector[3]->SetThings(ThingVector);
+	}
+	else {
+		Map.LoadBitmap(".\\res\\map_example.bmp");
+		Map.SetTopLeft(0, -260);
+		Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
+
+		if (!ThingVector.empty()) {
+			for (auto block : ThingVector) {
+				delete block;
+			}
+			ThingVector.clear();
+		}
+
+		// blocks
+		// first hill: 9 blocks
+		for (int count_x = 0; count_x < 3; count_x++) {
+			for (int count_y = 0; count_y < 3; count_y++) {
+				ThingVector.push_back(new blankBlock);
+				ThingVector.at(count_x * 3 + count_y)->LoadBitmap();
+				ThingVector.at(count_x * 3 + count_y)->SetXY(360 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+			}
+		} // last block: 8
+
+		// second hill: 32 blocks
+		for (int count_x = 0; count_x < 4; count_x++) {
+			for (int count_y = 0; count_y < 8; count_y++) {
+				ThingVector.push_back(new blankBlock);
+				ThingVector.at(9 + count_x * 8 + count_y)->LoadBitmap();
+				ThingVector.at(9 + count_x * 8 + count_y)->SetXY(770 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+			}
+		} // last block: 40
+
+		// 3rd hill: 9 blocks
+		for (int count_x = 0; count_x < 3; count_x++) {
+			for (int count_y = 0; count_y < 3; count_y++) {
+				ThingVector.push_back(new blankBlock);
+				ThingVector.at(41 + count_x * 3 + count_y)->LoadBitmap();
+				ThingVector.at(41 + count_x * 3 + count_y)->SetXY(1580 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+			}
+		} // last block: 49
+
+		// 4th hill: 32 blocks
+		for (int count_x = 0; count_x < 4; count_x++) {
+			for (int count_y = 0; count_y < 8; count_y++) {
+				ThingVector.push_back(new blankBlock);
+				ThingVector.at(50 + count_x * 8 + count_y)->LoadBitmap();
+				ThingVector.at(50 + count_x * 8 + count_y)->SetXY(1790 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+			}
+		} // last block: 81
+
+		// 5th hill: 9 blocks
+		for (int count_x = 0; count_x < 3; count_x++) {
+			for (int count_y = 0; count_y < 3; count_y++) {
+				ThingVector.push_back(new blankBlock);
+				ThingVector.at(82 + count_x * 3 + count_y)->LoadBitmap();
+				ThingVector.at(82 + count_x * 3 + count_y)->SetXY(2310 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+			}
+		} // last block: 90
+
+		// star blocks: 5 blocks
+		for (int count_x = 0; count_x < 5; count_x++) {
+			ThingVector.push_back(new starBlock);
+			ThingVector.at(91 + count_x)->LoadBitmap();
+			ThingVector.at(91 + count_x)->SetXY(1150 + 32 * count_x, SIZE_Y - 150 - temp_floor);
+		} // last block: 95
+
+		// enemys
+		if (!EnemyVector.empty()) {
+			for (auto n : EnemyVector) {
+				delete n;
+			}
+			EnemyVector.clear();
+		}
+
+		EnemyVector.push_back(new waddle);
+		EnemyVector[0]->LoadBitmap();
+		EnemyVector[0]->Reset();
+		EnemyVector[0]->SetXy(200, SIZE_Y - temp_floor - EnemyVector[0]->GetHeight());
+		EnemyVector[0]->SetMap(&Map);
+		EnemyVector[0]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new waddleDoo);
+		EnemyVector[1]->LoadBitmap();
+		EnemyVector[1]->Reset();
+		EnemyVector[1]->SetXy(2000, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
+		EnemyVector[1]->SetMap(&Map);
+		EnemyVector[1]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new sparky);
+		EnemyVector[2]->LoadBitmap();
+		EnemyVector[2]->Reset();
+		EnemyVector[2]->SetXy(600, SIZE_Y - temp_floor - EnemyVector[2]->GetHeight());
+		EnemyVector[2]->SetMap(&Map);
+		EnemyVector[2]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new hotHead);
+		EnemyVector[3]->LoadBitmap();
+		EnemyVector[3]->Reset();
+		EnemyVector[3]->SetXy(1000, SIZE_Y - temp_floor - 80);
+		EnemyVector[3]->SetMap(&Map);
+		EnemyVector[3]->SetThings(ThingVector);
 	}
 
-	EnemyVector.push_back(new waddle);
-	EnemyVector[0]->LoadBitmap();
-	EnemyVector[0]->Reset();
-	EnemyVector[0]->SetXy(200, SIZE_Y - temp_floor - EnemyVector[0]->GetHeight());
-	EnemyVector[0]->SetMap(&Map);
-	EnemyVector[0]->SetThings(StarBlockList, number_of_star_blocks);
-
-	EnemyVector.push_back(new waddleDoo);
-	EnemyVector[1]->LoadBitmap();
-	EnemyVector[1]->Reset();
-	EnemyVector[1]->SetXy(400, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
-	EnemyVector[1]->SetMap(&Map);
-	EnemyVector[1]->SetThings(StarBlockList, number_of_star_blocks);
-
-	EnemyVector.push_back(new waddle);
-	EnemyVector[2]->LoadBitmap();
-	EnemyVector[2]->Reset();
-	EnemyVector[2]->SetXy(650, SIZE_Y - temp_floor - EnemyVector[2]->GetHeight());
-	EnemyVector[2]->SetMap(&Map);
-	EnemyVector[2]->SetThings(StarBlockList, number_of_star_blocks);
-
-	EnemyVector.push_back(new waddleDoo);
-	EnemyVector[3]->LoadBitmap();
-	EnemyVector[3]->Reset();
-	EnemyVector[3]->SetXy(700, SIZE_Y - temp_floor - EnemyVector[3]->GetHeight());
-	EnemyVector[3]->SetMap(&Map);
-	EnemyVector[3]->SetThings(StarBlockList, number_of_star_blocks);
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -408,7 +547,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	Kirby.SetCounter(counter);							// kirby get counter
 	Kirby.SetMap(&Map);									// kirby get map pointer
 	Kirby.SetDoor(&Door);
-	Kirby.SetThings(StarBlockList, number_of_star_blocks);					// kirby get things pointer 
+	Kirby.SetThings(ThingVector);					// kirby get things pointer 
 	Kirby.SetEnemies(EnemyVector);
 
 	if (!Kirby.IsAlive()) {								// Kirby dead
@@ -455,7 +594,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
 
-	if (StarBlockList != nullptr) {							// starblock can attack or not
+	/*if (StarBlockList != nullptr) {							// starblock can attack or not
 		for (int i = 0; i < number_of_star_blocks;i++) {
 			if (StarBlockList[i] != nullptr && StarBlockList[i]->GetShow()) {
 				if (Meet(*KirbyWeapon, *StarBlockList[i]) && KirbyWeapon->WeaponIsShow()) {			// kirby weapon hit enemy
@@ -468,12 +607,27 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				}
 			}
 		}
+	}*/
+
+	if (!ThingVector.empty()) {							// starblock can attack or not
+		for (auto block : ThingVector) {
+			if (block != nullptr && block->GetShow() && block->isStarBlock()) {
+				if (Meet(*KirbyWeapon, *block) && KirbyWeapon->WeaponIsShow()) {			// kirby weapon hit enemy
+					KirbyWeapon->SetShow(false);
+				}
+				if (KirbyCanAttack(Kirby, block)) {
+					block->SetShow(false);
+					Kirby.SetEaten(true);
+					Kirby.SetAttack(false);
+				}
+			}
+		}
 	}
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
-	Map.LoadBitmap(".\\res\\map_example.bmp");			// map load and set
+	Map.LoadBitmap(".\\res\\map_example_cloud.bmp");			// map load and set
 	Door.LoadBitmap(IDB_DOOR, RGB(255, 255, 255));
 	kirbyHp.LoadBitmap(".\\res\\kirby_hpPic.bmp", RGB(236, 28, 36));
 	kirbyHpInt.LoadBitmap();
@@ -492,7 +646,12 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		EnemyVector.clear();
 	}
 
-	StarBlockList = nullptr;
+	if (!ThingVector.empty()) {
+		for (auto block : ThingVector) {
+			delete block;
+		}
+		ThingVector.clear();
+	}
 
 }
 
@@ -550,10 +709,17 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_S) {
-		if (StarBlockList != nullptr) {
+		/*if (StarBlockList != nullptr) {
 			for (int i = 0;i < number_of_star_blocks;i++) {
 				StarBlockList[i]->SetShow(false);
 			}
+		}*/
+
+		if (!ThingVector.empty()) {
+			for (auto n : ThingVector) {
+				delete n;
+			}
+			ThingVector.clear();
 		}
 
 		if (!EnemyVector.empty()) {
@@ -650,11 +816,23 @@ void CGameStateRun::OnShow()
 		}
 	}
 	
+	/*
 	if (StarBlockList != nullptr) {
 		for (int i = 0;i < number_of_star_blocks;i++) {
 			if (StarBlockList[i] != nullptr) {
 				if (StarBlockList[i]->GetShow()) {
 					StarBlockList[i]->OnShow();							// StarBlock onShow
+				}
+			}
+		}
+	}
+	*/
+
+	if (!ThingVector.empty()) {
+		for (int i = 0; i < int(ThingVector.size()); i++) {
+			if (ThingVector.at(i) != nullptr) {
+				if (ThingVector.at(i)->GetShow()) {
+					ThingVector.at(i)->OnShow();							// StarBlock onShow
 				}
 			}
 		}

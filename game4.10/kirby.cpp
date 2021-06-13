@@ -53,7 +53,7 @@ namespace game_framework {
 		IsEaten = false;
 		OtherFromL = false;
 		YouAreGround = true;
-		StarBlockList = nullptr;
+		//StarBlockList = nullptr;
 		IsRun = false;
 	}
 
@@ -721,10 +721,10 @@ namespace game_framework {
 	void kirby::SetXY(int x_in, int y_in) {
 		int aXy[4] = { x_in, y_in - KirbyStand.Height() + now_img_h, x_in + now_img_w, y_in - KirbyStand.Height() + now_img_h + now_img_h };
 		bool result = true;
-		if (StarBlockList != nullptr) {
-			for (int k = 0;k < number_of_star_blocks;k++) {
-				if (StarBlockList[k] != nullptr && StarBlockList[k]->GetShow()) {
-					int* bXy = StarBlockList[k]->GetXy();
+		if (!BlockList.empty()) {
+			for (unsigned int k = 0;k < BlockList.size();k++) {
+				if (BlockList[k] != nullptr && BlockList[k]->GetShow()) {
+					int* bXy = BlockList[k]->GetXy();
 					int i = 0, n = 1;
 					for (int count = 0; count < 2; count++) {
 						for (int _count = 0; _count < 2; _count++) {
@@ -771,10 +771,10 @@ namespace game_framework {
 					int* temp = StarThrow.GetXy();
 					StarThrow.SetXy(temp[0] - (x_in - x), temp[1]);
 					delete[] temp;
-					if (StarBlockList != nullptr) {
-						for (int i = 0;i < number_of_star_blocks;i++) {
-							if (StarBlockList[i] != nullptr) {
-								StarBlockList[i]->SetXY(StarBlockList[i]->Left() - (x_in - x), StarBlockList[i]->Top());
+					if (!BlockList.empty()) {
+						for (int i = 0;i < (int)BlockList.size();i++) {
+							if (BlockList[i] != nullptr) {
+								BlockList[i]->SetXY(BlockList[i]->Left() - (x_in - x), BlockList[i]->Top());
 							}
 						}
 					}
@@ -794,10 +794,10 @@ namespace game_framework {
 					int* temp = StarThrow.GetXy();
 					StarThrow.SetXy(temp[0] - (x_in - x), temp[1]);
 					delete[] temp;
-					if (StarBlockList != nullptr) {
-						for (int i = 0;i < number_of_star_blocks;i++) {
-							if (StarBlockList[i] != nullptr) {
-								StarBlockList[i]->SetXY(StarBlockList[i]->Left() - (x_in - x), StarBlockList[i]->Top());
+					if (!BlockList.empty()) {
+						for (int i = 0;i < (int)BlockList.size();i++) {
+							if (BlockList[i] != nullptr) {
+								BlockList[i]->SetXY(BlockList[i]->Left() - (x_in - x), BlockList[i]->Top());
 							}
 						}
 					}
@@ -818,10 +818,10 @@ namespace game_framework {
 					int* temp = StarThrow.GetXy();
 					StarThrow.SetXy(temp[0], temp[1] - (y_in - y));
 					delete[] temp;
-					if (StarBlockList != nullptr) {
-						for (int i = 0;i < number_of_star_blocks;i++) {
-							if (StarBlockList[i] != nullptr) {
-								StarBlockList[i]->SetXY(StarBlockList[i]->Left(), StarBlockList[i]->Top() - (y_in - y));
+					if (!BlockList.empty()) {
+						for (int i = 0;i < (int)BlockList.size();i++) {
+							if (BlockList[i] != nullptr) {
+								BlockList[i]->SetXY(BlockList[i]->Left(), BlockList[i]->Top() - (y_in - y));
 							}
 						}
 					}
@@ -841,10 +841,10 @@ namespace game_framework {
 					int* temp = StarThrow.GetXy();
 					StarThrow.SetXy(temp[0], temp[1] - (y_in - y));
 					delete[] temp;
-					if (StarBlockList != nullptr) {
-						for (int i = 0;i < number_of_star_blocks;i++) {
-							if (StarBlockList[i] != nullptr) {
-								StarBlockList[i]->SetXY(StarBlockList[i]->Left(), StarBlockList[i]->Top() - (y_in - y));
+					if (!BlockList.empty()) {
+						for (int i = 0;i < (int)BlockList.size();i++) {
+							if (BlockList[i] != nullptr) {
+								BlockList[i]->SetXY(BlockList[i]->Left(), BlockList[i]->Top() - (y_in - y));
 							}
 						}
 					}
@@ -940,9 +940,13 @@ namespace game_framework {
 		Door = input_door;
 	}
 
-	void kirby::SetThings(starBlock ** input, int number_input) {
+	/*void kirby::SetThings(starBlock ** input, int number_input) {
 		StarBlockList = input;
 		number_of_star_blocks = number_input;
+	}*/
+
+	void kirby::SetThings(vector<thing*> inputVector) {
+		BlockList = inputVector;
 	}
 
 	void kirby::SetEnemies(vector<enemy*> input_EnemyList) {

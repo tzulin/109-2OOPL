@@ -9,60 +9,68 @@
 
 namespace game_framework {
 
-	starBlock::starBlock() {
+	thing::thing() {
 		IsShow = true;
 	}
 
-	void starBlock::LoadBitmap() {
-		starBlockPic.LoadBitmap(IDB_STARBLOCK);
-	}
+	void thing::LoadBitmap() {}
 
-	void starBlock::SetXY(int input_x, int input_y) {
+	void thing::SetXY(int input_x, int input_y) {
 		x = input_x;
 		y = input_y;
 	}
 
-	void starBlock::YouAreLeft(bool input) {
+	void thing::YouAreLeft(bool input) {
 
 	}
 
-	int* starBlock::GetHw() {
-		return new int[2]{ starBlockPic.Height(), starBlockPic.Width() };
+	int* thing::GetHw() {
+		return new int[2]{ blockPic.Height(), blockPic.Width() };
 	}
 
-	int* starBlock::GetXy() {
-		return new int[4]{ x, y , x + starBlockPic.Width(), y + starBlockPic.Height() };
+	int* thing::GetXy() {
+		return new int[4]{ x, y , x + blockPic.Width(), y + blockPic.Height() };
 	}
 
-	bool starBlock::GetShow() {
+	bool thing::GetShow() {
 		return IsShow;
 	}
 
-	void starBlock::OnShow() {
-		starBlockPic.SetTopLeft(x, y);
-		starBlockPic.ShowBitmap();
+	void thing::OnShow() {
+		blockPic.SetTopLeft(x, y);
+		blockPic.ShowBitmap();
 	}
 
-	void starBlock::SetShow(bool input) {
+	void thing::SetShow(bool input) {
 		IsShow = input;
 	}
 
-	int starBlock::Top() {
+	int thing::Top() {
 		return y;
 	}
 
-	int starBlock::Left() {
+	int thing::Left() {
 		return x;
 	}
 
-	void blankBlock::SetHW(int input_h, int input_w) {
-		height = input_h;
-		width = input_w;
+	bool thing::isStarBlock() {
+		return false;
 	}
 
-	void blankBlock::SetXY(int input_x, int input_y) {
-		x = input_x;
-		y = input_y;
+	void starBlock::LoadBitmap() {
+		blockPic.LoadBitmap(IDB_STARBLOCK);
+	}
+
+	bool starBlock::isStarBlock() {
+		return true;
+	}
+
+	void blankBlock::LoadBitmap() {
+		blockPic.LoadBitmap(".\\res\\blankBlock.bmp", RGB(0, 0, 0));
+	}
+
+	bool blankBlock::isStarBlock() {
+		return false;
 	}
 
 }

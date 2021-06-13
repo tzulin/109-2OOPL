@@ -220,9 +220,13 @@ namespace game_framework {
 		Map = input;
 	}
 
-	void enemy::SetThings(starBlock** input, int input_number) {
+	/*void enemy::SetThings(starBlock** input, int input_number) {
 		number_of_star_blocks = input_number;
 		StarBlockList = input;
+	}*/
+
+	void enemy::SetThings(vector<thing*> inputVector) {
+		BlockList = inputVector;
 	}
 
 	bool enemy::EnemyFacingR() {
@@ -232,10 +236,10 @@ namespace game_framework {
 	void enemy::SetXy(int x_in, int y_in) {
 		int aXy[4] = { x_in, y_in, x_in + ImgW, y_in +  ImgH};
 		bool result = true;
-		if (StarBlockList != nullptr) {
-			for (int k = 0;k < number_of_star_blocks;k++) {
-				if (StarBlockList[k] != nullptr && StarBlockList[k]->GetShow()) {
-					int* bXy = StarBlockList[k]->GetXy();
+		if (!BlockList.empty()) {
+			for (int k = 0;k < (int)BlockList.size();k++) {
+				if (BlockList[k] != nullptr && BlockList[k]->GetShow()) {
+					int* bXy = BlockList[k]->GetXy();
 					int i = 0, n = 1;
 					for (int count = 0; count < 2; count++) {
 						for (int _count = 0; _count < 2; _count++) {

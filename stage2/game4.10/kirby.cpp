@@ -731,10 +731,13 @@ namespace game_framework {
 					StarThrow.SetXy(temp[0] - (x_in - x), temp[1]);
 					delete[] temp;
 					if (!StarBlockList.empty()) {
-						for (int i = 0; i < int(StarBlockList.size()); i++) {
+						/*for (int i = 0; i < int(StarBlockList.size()); i++) {
 							if (StarBlockList[i] != nullptr) {
 								StarBlockList[i]->SetXY(StarBlockList[i]->Left() - (x_in - x), StarBlockList[i]->Top());
 							}
+						}*/
+						for (auto n : StarBlockList) {
+							n->SetXY(n->Left() - (x_in - x), n->Top());
 						}
 					}
 					if (!EnemyList.empty()) {
@@ -754,10 +757,13 @@ namespace game_framework {
 					StarThrow.SetXy(temp[0] - (x_in - x), temp[1]);
 					delete[] temp;
 					if (!StarBlockList.empty()) {
-						for (int i = 0; i < int(StarBlockList.size()); i++) {
+						/*for (int i = 0; i < int(StarBlockList.size()); i++) {
 							if (StarBlockList[i] != nullptr) {
 								StarBlockList[i]->SetXY(StarBlockList[i]->Left() - (x_in - x), StarBlockList[i]->Top());
 							}
+						}*/
+						for (auto n : StarBlockList) {
+							n->SetXY(n->Left() - (x_in - x), n->Top());
 						}
 					}
 					if (!EnemyList.empty()) {
@@ -778,10 +784,13 @@ namespace game_framework {
 					StarThrow.SetXy(temp[0], temp[1] - (y_in - y));
 					delete[] temp;
 					if (!StarBlockList.empty()) {
-						for (int i = 0; i < int(StarBlockList.size()); i++) {
+						/*for (int i = 0; i < int(StarBlockList.size()); i++) {
 							if (StarBlockList[i] != nullptr) {
 								StarBlockList[i]->SetXY(StarBlockList[i]->Left(), StarBlockList[i]->Top() - (y_in - y));
 							}
+						}*/
+						for (auto n : StarBlockList) {
+							n->SetXY(n->Left(), n->Top() - (y_in - y));
 						}
 					}
 					if (!EnemyList.empty()) {
@@ -801,21 +810,15 @@ namespace game_framework {
 					StarThrow.SetXy(temp[0], temp[1] - (y_in - y));
 					delete[] temp;
 					if (!StarBlockList.empty()) {
-						for (int i = 0; i < int(StarBlockList.size()); i++) {
+						/*for (int i = 0; i < int(StarBlockList.size()); i++) {
 							if (StarBlockList[i] != nullptr) {
 								StarBlockList[i]->SetXY(StarBlockList[i]->Left(), StarBlockList[i]->Top() - (y_in - y));
 							}
+						}*/
+						for (auto n : StarBlockList) {
+							n->SetXY(n->Left(), n->Top() - (y_in - y));
 						}
 					}
-					/*
-					if (!StarBlockList.empty()) {
-						for (auto block : StarBlockList) {
-							if (block != nullptr) {
-								block->SetXY(block->Left(), block->Top() - (y_in - y));
-							}
-						}
-					}
-					*/
 					if (!EnemyList.empty()) {
 						for (auto n : EnemyList) {
 							n->SetXy(n->Left(), n->Top() - (y_in - y));

@@ -2,23 +2,35 @@
 #define HEADER_H
 
 namespace game_framework {
-	class starBlock {
+
+	class thing {
 	public:
-		void LoadBitmap();
+		virtual void LoadBitmap();
+		virtual bool isStarBlock();
 		void OnShow();
 		void SetShow(bool);
 		void SetXY(int, int);
-		starBlock();
+		thing();
 		int* GetHw();
 		int* GetXy();
 		bool GetShow();
 		void YouAreLeft(bool);
 		int Top();
 		int Left();
-	private:
-		CMovingBitmap starBlockPic;
+	protected:
+		CMovingBitmap blockPic;
 		int x, y;
 		bool IsShow;
+	};
+
+	class starBlock : public thing {
+		void LoadBitmap() override;
+		bool isStarBlock() override;
+	};
+
+	class blankBlock : public thing {
+		void LoadBitmap() override;
+		bool isStarBlock() override;
 	};
 
 	class weapon {
@@ -50,15 +62,6 @@ namespace game_framework {
 		bool OtherFromL;
 	};
 
-	class blankBlock {
-	public:
-		void SetXY(int, int);
-		void SetHW(int, int);
-	private:
-		int x, y;
-		int height, width;
-	};
-
 	class kirby;
 
 	class enemy {
@@ -76,7 +79,8 @@ namespace game_framework {
 		int Top();
 		int Left();
 		void SetXy(int input_x, int input_y);
-		void SetThings(starBlock** Blocks_input, int input_number);
+		//void SetThings(starBlock** Blocks_input, int input_number);
+		void SetThings(vector<thing*> inputVector);
 		void BackX(bool fromL);
 		void Hurt(int input, int time);
 		virtual void Reset();
@@ -104,8 +108,9 @@ namespace game_framework {
 
 		CMovingBitmap* Map;
 
-		starBlock ** StarBlockList = nullptr;
-		int number_of_star_blocks = 0;
+		//starBlock ** StarBlockList = nullptr;
+		vector<thing*> BlockList;
+		//int number_of_star_blocks = 0;
 
 		int x, y, hp;
 		int power;			// §ðÀ»¤O
@@ -121,6 +126,7 @@ namespace game_framework {
 		int LastAttack;
 		bool OtherFromL;
 		bool HasWeapon;
+		std::string kind;
 	};
 
 	class waddle : public enemy {
@@ -131,6 +137,18 @@ namespace game_framework {
 	};
 
 	class waddleDoo : public enemy {
+	public:
+		void LoadBitmap() override;
+		void Reset() override;
+	};
+
+	class sparky : public enemy {
+	public:
+		void LoadBitmap() override;
+		void Reset() override;
+	};
+
+	class hotHead : public enemy {
 	public:
 		void LoadBitmap() override;
 		void Reset() override;
@@ -159,7 +177,8 @@ namespace game_framework {
 		void SetEnemies(vector<enemy*> input_EnemyList);
 		void SetMap(CMovingBitmap* Map);
 		void SetDoor(CMovingBitmap* door);
-		void SetThings(starBlock** Blocks_input, int input_number);
+		//void SetThings(starBlock** Blocks_input, int input_number);
+		void SetThings(vector<thing*> inputVector);
 		void SetRun(bool input);
 		void Hurt(int input, int time);
 		void ThrowStar();
@@ -212,8 +231,9 @@ namespace game_framework {
 		CMovingBitmap * Door;
 
 		vector<enemy*> EnemyList;
-		starBlock ** StarBlockList;
-		int number_of_star_blocks;
+		vector<thing*> BlockList;
+		//starBlock ** StarBlockList;
+		//int number_of_star_blocks;
 		weapon StarThrow;
 
 

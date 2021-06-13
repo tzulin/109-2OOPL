@@ -63,7 +63,7 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap kirbyHp;
-		CMovingBitmap Map;
+		CMovingBitmap* Map = nullptr;
 		CMovingBitmap Door;
 		CInteger kirbyHpInt;
 		kirby Kirby;
