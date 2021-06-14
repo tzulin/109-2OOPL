@@ -48,6 +48,11 @@ namespace game_framework {
 		num_2.LoadBitmap(IDB_2, RGB(255, 255, 255));
 		num_3.LoadBitmap(IDB_3, RGB(255, 255, 255));
 
+		CAudio::Instance()->Load(AUDIO_TITLE, "sounds\\title.mp3");
+		CAudio::Instance()->Load(AUDIO_SELECT, "sounds\\selection.mp3");
+
+		CAudio::Instance()->Play(AUDIO_TITLE, true);
+
 		num_1.SetTopLeft(270, 20);
 		num_2.SetTopLeft(270, 100);
 		num_3.SetTopLeft(270, 180);
@@ -89,6 +94,8 @@ namespace game_framework {
 		const char KEY_SPACE = 0x20;	// keyboard space
 		const char KEY_ENTER = 0x0D;	// keyboard enter
 
+		CAudio::Instance()->Stop(AUDIO_TITLE);
+		CAudio::Instance()->Play(AUDIO_SELECT, true);
 
 		if (nChar == KEY_ESC) {						// Demo 關閉遊戲的方法
 			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
@@ -102,18 +109,21 @@ namespace game_framework {
 				if (record_1 == 0) {
 					record_1++;															// 切換至第一關
 				}
+				CAudio::Instance()->Stop(AUDIO_SELECT);
 				GotoGameState(GAME_STATE_RUN, record_1, record);						// 切換至GAME_STATE_RUN
 			}
 			else if (record == 2) {
 				if (record_2 == 0) {
 					record_2++;															// 切換至第一關
 				}
+				CAudio::Instance()->Stop(AUDIO_SELECT);
 				GotoGameState(GAME_STATE_RUN, record_2, record);						// 切換至GAME_STATE_RUN
 			}
 			else if (record == 3) {
 				if (record_3 == 0) {
 					record_3++;															// 切換至第一關
 				}
+				CAudio::Instance()->Stop(AUDIO_SELECT);
 				GotoGameState(GAME_STATE_RUN, record_3, record);						// 切換至GAME_STATE_RUN
 			}
 		}
@@ -237,6 +247,12 @@ namespace game_framework {
 
 	void CGameStateOver::OnBeginState()
 	{
+		CAudio::Instance()->Stop(AUDIO_TITLE);
+		CAudio::Instance()->Stop(AUDIO_SELECT);
+		CAudio::Instance()->Stop(AUDIO_CLOUD);
+		CAudio::Instance()->Stop(AUDIO_RAINBOWROUTE);
+		CAudio::Instance()->Stop(AUDIO_BOSS);
+
 		string line;
 		int record_1 = 0, record_2 = 0, record_3 = 0;
 		ifstream oldSaveFile("save_file.txt");
@@ -334,6 +350,7 @@ namespace game_framework {
 	{
 		Kirby.StageReSet(Kirby.GetHp());
 		if (stage == 1) {
+			CAudio::Instance()->Play(AUDIO_CLOUD, true);
 			if (Map != nullptr) {
 				delete[] Map;
 			}
@@ -411,6 +428,7 @@ namespace game_framework {
 			EnemyVector[3]->SetThings(ThingVector);
 		}
 		else if(stage == 2){
+			CAudio::Instance()->Play(AUDIO_RAINBOWROUTE, true);
 			if (Map != nullptr) {
 				delete[] Map;
 			}
@@ -621,6 +639,11 @@ namespace game_framework {
 		kirbyHp.LoadBitmap(".\\res\\kirby_hpPic.bmp", RGB(236, 28, 36));
 		kirbyHpInt.LoadBitmap();
 		Kirby.LoadBitmap();									// Kirby LoadBitmap
+		
+		// load audio
+		CAudio::Instance()->Load(AUDIO_CLOUD, "sounds\\starting_stage.mp3");
+		CAudio::Instance()->Load(AUDIO_RAINBOWROUTE, "sounds\\forest_and_natural_area.mp3");
+		CAudio::Instance()->Load(AUDIO_BOSS, "sounds\\boss.mp3");
 
 		//Map->SetTopLeft(0, -260);
 		Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
@@ -725,6 +748,9 @@ namespace game_framework {
 
 		if (nChar == KEY_UP) {
 			if (Meet(Kirby, Door)) {
+				CAudio::Instance()->Stop(AUDIO_CLOUD);
+				CAudio::Instance()->Stop(AUDIO_RAINBOWROUTE);
+				CAudio::Instance()->Stop(AUDIO_BOSS);
 				GotoGameState(GAME_STATE_RUN, GetStage() + 1, record);
 			}
 			else {

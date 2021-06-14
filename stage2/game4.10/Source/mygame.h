@@ -15,6 +15,16 @@ namespace game_framework {
 	// Constants
 	/////////////////////////////////////////////////////////////////////////////
 
+	enum AUDIO_ID {				// 定義各種音效的編號
+		AUDIO_TITLE,				// 0
+		AUDIO_SELECT,				// 1
+		AUDIO_CLOUD,				// 2
+		AUDIO_RAINBOWROUTE,			// 3
+		AUDIO_BOSS					// 4
+	};
+
+	// auto musicId = AUDIO_TITLE;
+
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
 	// 每個Member function的Implementation都要弄懂

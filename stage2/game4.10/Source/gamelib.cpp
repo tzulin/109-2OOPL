@@ -640,8 +640,8 @@ void CGame::OnInit()	// OnInit() 只在程式一開始時執行一次
 	//
 	// 開啟DirectX音效介面
 	//
-	//if (!CAudio::Instance()->Open())						// 開啟音效介面
-	//	AfxMessageBox("Audio Interface Failed (muted)");	// 無音效介面
+	if (!CAudio::Instance()->Open())						// 開啟音效介面
+		AfxMessageBox("Audio Interface Failed (muted)");	// 無音效介面
 	//
 	// Switch to the first state
 	//
