@@ -14,10 +14,10 @@ namespace game_framework {
 	kirby::kirby()
 	{
 		// kirby constructor
-		StageReSet(10);
+		StageReSet(10, "normal");
 	}
 
-	void kirby::StageReSet(int hp_left) {
+	void kirby::StageReSet(int hp_left, std::string kind) {
 		const int origin_x = frame_of_test;
 		const int origin_y = SIZE_Y - temp_floor - ImgH;
 		const int INIT_VELOCITY = 18;
@@ -57,6 +57,7 @@ namespace game_framework {
 		IsRun = false;
 		IsHack = false;
 		EatenEnemy = "";
+		kirby_kind = kind;
 	}
 
 	kirby::~kirby()
@@ -282,6 +283,8 @@ namespace game_framework {
 		if (StarThrow.WeaponIsShow()) {
 			StarThrow.OnShow();
 		}
+
+		//TRACE("\n");
 
 		switch (GetCase()) {
 			// case jump up right
@@ -926,12 +929,15 @@ namespace game_framework {
 		}
 		else if (EatenEnemy == "waddleDoo") {
 			TRACE("waddleDoo eaten\n");
+			kirby_kind = "waddleDooKirby";
 		}
 		else if (EatenEnemy == "sparky") {
 			TRACE("sparky eaten\n");
+			kirby_kind = "sparkyKirby";
 		}
 		else if (EatenEnemy == "hotHead") {
 			TRACE("hotHead eaten\n");
+			kirby_kind = "hotHeadKirby";
 		}
 		else {
 			TRACE("other eaten\n");
@@ -978,6 +984,7 @@ namespace game_framework {
 		if (abs(LastHurt - time) < 30) {
 			return;
 		}
+		kirby_kind = "normal";
 		LastHurt = time;
 		hp -= input;
 		IsHurt = true;
@@ -1118,6 +1125,10 @@ namespace game_framework {
 
 	int kirby::GetHeight() {
 		return ImgH;
+	}
+
+	std::string kirby::GetKind() {
+		return kirby_kind;
 	}
 
 	bool kirby::IsAlive() {

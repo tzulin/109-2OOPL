@@ -348,7 +348,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnBeginState()
 	{
-		Kirby.StageReSet(Kirby.GetHp());
+		Kirby.StageReSet(Kirby.GetHp(), Kirby.GetKind());
 		if (stage == 1) {
 			CAudio::Instance()->Play(AUDIO_CLOUD, true);
 			if (Map != nullptr) {

@@ -156,7 +156,7 @@ namespace game_framework {
 	class kirby {
 	public:
 		kirby();
-		void kirby::StageReSet(int hp_left);
+		void kirby::StageReSet(int hp_left, std::string kind);
 		~kirby();
 		void SetAttack(bool input);
 		void SetEaten(bool input);
@@ -186,6 +186,7 @@ namespace game_framework {
 		void YouAreLeft(bool YouAreLeft);
 		weapon* GetWeapon();
 
+		std::string GetKind();
 		int GetCase();
 		int GetHp();
 		int* GetXy();
@@ -230,6 +231,7 @@ namespace game_framework {
 		weapon StarThrow;
 
 		std::string EatenEnemy;
+		std::string kirby_kind;
 		int x, y, hp;
 		const int ImgW = 60, ImgH = 60;
 		int now_img_w, now_img_h;
