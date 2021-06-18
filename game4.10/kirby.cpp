@@ -600,7 +600,19 @@ namespace game_framework {
 		}
 
 		// set down attack right and left
-		if (IsDown && IsAttack && !IsHurt) {
+		/*if (IsDown && IsAttack && !IsHurt) {
+			if (IsFacingR && x < SIZE_X - ImgW - frame_of_test) {
+				// x += length * 3;
+				SetXY(x + length * 3, y);
+			}
+			else if (x > frame_of_test) {
+				// x -= length * 3;
+				SetXY(x - length * 3, y);
+			}
+		}*/
+
+		// set down attack right and left
+		if (IsDown && IsAttack) {
 			if (IsFacingR && x < SIZE_X - ImgW - frame_of_test) {
 				// x += length * 3;
 				SetXY(x + length * 3, y);
@@ -1006,6 +1018,9 @@ namespace game_framework {
 			return;
 		}
 		if (abs(LastHurt - time) < 30) {
+			return;
+		}
+		if (IsDown && IsAttack) {
 			return;
 		}
 		kirby_kind = "normal";
