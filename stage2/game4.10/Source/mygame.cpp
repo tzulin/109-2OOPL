@@ -94,8 +94,11 @@ namespace game_framework {
 		const char KEY_SPACE = 0x20;	// keyboard space
 		const char KEY_ENTER = 0x0D;	// keyboard enter
 
-		CAudio::Instance()->Stop(AUDIO_TITLE);
-		CAudio::Instance()->Play(AUDIO_SELECT, true);
+
+		if (nChar == KEY_ENTER) {
+			CAudio::Instance()->Stop(AUDIO_TITLE);
+			CAudio::Instance()->Play(AUDIO_SELECT, true);
+		}
 
 		if (nChar == KEY_ESC) {						// Demo 關閉遊戲的方法
 			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
