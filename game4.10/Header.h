@@ -51,6 +51,7 @@ namespace game_framework {
 		void YouAreLeft(bool YouAreLeft);
 		bool GetAttackFacingR();
 		bool WeaponIsShow();
+		void SetOwner(std::string which_enemy);
 	protected:
 		CAnimation PlayAttack;
 		int x, y;
@@ -60,6 +61,7 @@ namespace game_framework {
 		bool IsShow;
 		bool AttackIsFacingR;
 		bool OtherFromL;
+		std::string owner;
 	};
 
 	class kirby;
@@ -79,8 +81,8 @@ namespace game_framework {
 		int Top();
 		int Left();
 		void SetXy(int input_x, int input_y);
-		//void SetThings(starBlock** Blocks_input, int input_number);
-		void SetThings(vector<thing*> inputVector);
+		void SetThings(vector<thing*> input_ThingList);
+		// void SetThings(starBlock** Blocks_input, int input_number);
 		void BackX(bool fromL);
 		void Hurt(int input, int time);
 		virtual void Reset();
@@ -88,10 +90,6 @@ namespace game_framework {
 		void YouAreLeft(bool YouAreLeft);
 		bool EnemyFacingR();
 		bool EnemyHasWeapon();
-		void SetKirbyXy(int x_in, int y_in) {
-			x = x_in;
-			y = y_in;
-		}
 
 		void SetMap(CMovingBitmap * Map);
 		weapon GetWeapon();
@@ -108,14 +106,14 @@ namespace game_framework {
 
 		CMovingBitmap* Map;
 
-		//starBlock ** StarBlockList = nullptr;
-		vector<thing*> BlockList;
-		//int number_of_star_blocks = 0;
+		vector<thing*> StarBlockList;
+		// starBlock ** StarBlockList = nullptr;
+		// int number_of_star_blocks = 0;
 
 		int x, y, hp;
 		int power;			// §ðÀ»¤O
 		int origin_x, origin_y;
-		int ImgW = 64, ImgH = 60;
+		const int ImgW = 64, ImgH = 60;
 		int floor;			// ¦aªOy®y¼Ð
 		bool IsFacingR;
 		bool IsMovingL;
@@ -173,12 +171,12 @@ namespace game_framework {
 		void SetFly(bool input);
 		void SetEaten(bool input);
 		void SetCounter(int);
+		void SetHack(bool input);
 
 		void SetEnemies(vector<enemy*> input_EnemyList);
+		void SetThings(vector<thing*> input_ThingList);
 		void SetMap(CMovingBitmap* Map);
 		void SetDoor(CMovingBitmap* door);
-		//void SetThings(starBlock** Blocks_input, int input_number);
-		void SetThings(vector<thing*> inputVector);
 		void SetRun(bool input);
 		void Hurt(int input, int time);
 		void ThrowStar();
@@ -194,14 +192,6 @@ namespace game_framework {
 		bool IsScreamR();
 		bool IsScreamL();
 		//bool GetUpKey();
-
-		int Top() {
-			return y;
-		}
-
-		int Left() {
-			return x;
-		}
 
 	private:
 		CAnimation KirbyMovingL;
@@ -231,9 +221,9 @@ namespace game_framework {
 		CMovingBitmap * Door;
 
 		vector<enemy*> EnemyList;
-		vector<thing*> BlockList;
-		//starBlock ** StarBlockList;
-		//int number_of_star_blocks;
+		vector<thing*> StarBlockList;
+		// starBlock ** StarBlockList;
+		// int number_of_star_blocks;
 		weapon StarThrow;
 
 
@@ -265,6 +255,7 @@ namespace game_framework {
 		bool IsEaten;
 		bool YouAreGround;
 		bool IsRun;
+		bool IsHack;
 	};
 
 	inline bool EnemyCanAttack(enemy & e, kirby & k) {
@@ -310,7 +301,7 @@ namespace game_framework {
 		int* StarBlockXy = t->GetXy();
 		int* KirbyXy = Kirby.GetXy();
 		int for_count = 0;
-		for (;for_count < 10;for_count++) {
+		for (; for_count < 10; for_count++) {
 			int x_different = StarBlockXy[0] - KirbyXy[2];
 			int x_different2 = KirbyXy[0] - StarBlockXy[2];
 			int y_different = StarBlockXy[1] - KirbyXy[1];

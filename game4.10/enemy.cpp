@@ -64,16 +64,10 @@ namespace game_framework {
 
 	void enemy::BackX(bool fromL) {
 		if (fromL) {
-			// SetXy(x + 60, y);
-			for (int i = 0; i < 60; i++) {
-				SetXy(x + 1, y);
-			}
+			SetXy(x + 60, y);
 		}
 		else {
-			// SetXy(x - 60, y);
-			for (int i = 0; i < 60; i++) {
-				SetXy(x - 1, y);
-			}
+			SetXy(x - 60, y);
 		}
 	}
 
@@ -113,15 +107,11 @@ namespace game_framework {
 		if (!IsAttack) {
 			if (IsMovingR) {
 				MovingR.SetDelayCount(3);
-				ImgH = MovingR.Height();
-				ImgW = MovingR.Width();
 				MovingR.SetTopLeft(x, y);
 				MovingR.OnShow();
 			}
 			else {
 				MovingL.SetDelayCount(3);
-				ImgH = MovingL.Height();
-				ImgW = MovingL.Width();
 				MovingL.SetTopLeft(x, y);
 				MovingL.OnShow();
 			}
@@ -129,10 +119,9 @@ namespace game_framework {
 		else {
 			if (OtherFromL) {
 				AttackL.SetDelayCount(5);
-				ImgH = AttackL.Height();
-				ImgW = AttackL.Width();
 				AttackL.SetTopLeft(x, y);
 				AttackL.OnShow();
+				wL.SetOwner(kind);
 				wL.SetWeapon(x, y, IsFacingR);
 				wL.SetShow(true);
 				wL.OnMove();
@@ -146,10 +135,9 @@ namespace game_framework {
 			}
 			else {
 				AttackR.SetDelayCount(5);
-				ImgH = AttackR.Height();
-				ImgW = AttackR.Width();
 				AttackR.SetTopLeft(x, y);
 				AttackR.OnShow();
+				wR.SetOwner(kind);
 				wR.SetWeapon(x, y, IsFacingR);
 				wR.SetShow(true);
 				wR.OnMove();
@@ -167,9 +155,9 @@ namespace game_framework {
 
 	void enemy::OnMove()
 	{
-		
+
 		// set moving XY
-		const int length = 3;
+		const int length = 2;
 
 		/*
 		SetXy(x - Map->GetXChange(), y - Map->GetYChange());
@@ -184,10 +172,7 @@ namespace game_framework {
 				if (IsFacingR) {
 					IsFacingR = false;
 				}
-				// SetXy(x - length, y);
-				for (int i = 0; i < length; i++) {
-					SetXy(x - 1, y);
-				}
+				SetXy(x - length, y);
 			}
 			else if (x <= Map->Left()) {
 				IsMovingL = false;
@@ -198,10 +183,7 @@ namespace game_framework {
 				if (!IsFacingR) {
 					IsFacingR = true;
 				}
-				// SetXy(x + length, y);
-				for (int i = 0; i < length; i++) {
-					SetXy(x + 1, y);
-				}
+				SetXy(x + length, y);
 			}
 			else if (x >= Map->Left() + Map->Width() - ImgW) {
 				IsMovingR = false;
@@ -214,19 +196,14 @@ namespace game_framework {
 		}
 	}
 
-	void enemy::LoadBitmap(){}
+	void enemy::LoadBitmap() {}
 
 	void enemy::SetMap(CMovingBitmap * input) {
 		Map = input;
 	}
 
-	/*void enemy::SetThings(starBlock** input, int input_number) {
-		number_of_star_blocks = input_number;
+	void enemy::SetThings(vector<thing*> input) {
 		StarBlockList = input;
-	}*/
-
-	void enemy::SetThings(vector<thing*> inputVector) {
-		BlockList = inputVector;
 	}
 
 	bool enemy::EnemyFacingR() {
@@ -234,12 +211,12 @@ namespace game_framework {
 	}
 
 	void enemy::SetXy(int x_in, int y_in) {
-		int aXy[4] = { x_in, y_in, x_in + ImgW, y_in +  ImgH};
+		int aXy[4] = { x_in, y_in, x_in + MovingR.Width(), y_in + MovingR.Height() };
 		bool result = true;
-		if (!BlockList.empty()) {
-			for (int k = 0;k < (int)BlockList.size();k++) {
-				if (BlockList[k] != nullptr && BlockList[k]->GetShow()) {
-					int* bXy = BlockList[k]->GetXy();
+		if (!StarBlockList.empty()) {
+			for (int k = 0; k < int(StarBlockList.size()); k++) {
+				if (StarBlockList[k] != nullptr && StarBlockList[k]->GetShow()) {
+					int* bXy = StarBlockList[k]->GetXy();
 					int i = 0, n = 1;
 					for (int count = 0; count < 2; count++) {
 						for (int _count = 0; _count < 2; _count++) {

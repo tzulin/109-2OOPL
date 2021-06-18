@@ -586,7 +586,7 @@ namespace game_framework {
 				if (EnemyVector[i]->GetHp() > 0) {												// waddle can attack check
 					if (KirbyCanAttack(Kirby, EnemyVector[i])) {
 						EnemyVector[i]->Hurt(10, counter);
-						Kirby.SetEaten(true);
+						Kirby.SetEaten(true, EnemyVector[i]->GetKind());
 						Kirby.SetAttack(false);
 					}
 				}

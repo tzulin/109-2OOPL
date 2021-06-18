@@ -53,8 +53,9 @@ namespace game_framework {
 		IsEaten = false;
 		OtherFromL = false;
 		YouAreGround = true;
-		//StarBlockList = nullptr;
+		// StarBlockList = nullptr;
 		IsRun = false;
+		IsHack = false;
 	}
 
 	kirby::~kirby()
@@ -62,7 +63,7 @@ namespace game_framework {
 	}
 
 	void kirby::LoadBitmap()
-	{	
+	{
 		// load walk left
 		char *walk_left[10] = { ".\\res\\walk\\walkL1.bmp", ".\\res\\walk\\walkL2.bmp", ".\\res\\walk\\walkL3.bmp", ".\\res\\walk\\walkL4.bmp", ".\\res\\walk\\walkL5.bmp", ".\\res\\walk\\walkL6.bmp", ".\\res\\walk\\walkL7.bmp", ".\\res\\walk\\walkL8.bmp", ".\\res\\walk\\walkL9.bmp", ".\\res\\walk\\walkL10.bmp" };
 		for (int i = 0; i < 10; i++)
@@ -103,7 +104,7 @@ namespace game_framework {
 		}
 		KirbyStand.AddBitmap(IDB_CLOSE_EYES, RGB(255, 0, 0));
 		KirbyStand.AddBitmap(IDB_STAND, RGB(255, 0, 0));
-		KirbyStand.AddBitmap(IDB_CLOSE_EYES, RGB(255, 0, 0));	
+		KirbyStand.AddBitmap(IDB_CLOSE_EYES, RGB(255, 0, 0));
 
 		// load stand and wink left
 		count = 12;
@@ -117,7 +118,7 @@ namespace game_framework {
 		}
 		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 0, 0));
 		KirbyStandL.AddBitmap(IDB_STANDL, RGB(255, 0, 0));
-		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 0, 0));	
+		KirbyStandL.AddBitmap(IDB_CLOSE_EYES_L, RGB(255, 0, 0));
 
 		// load fat stand and wink right
 		count = 12;
@@ -271,18 +272,18 @@ namespace game_framework {
 		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL8.bmp", RGB(255, 255, 255));
 
 		// load Star Throw
-		int rgb[3] = {0, 0, 0};
+		int rgb[3] = { 0, 0, 0 };
 		StarThrow.LoadBitmap(IDB_STARTHROW, rgb, 100);
-}
+	}
 
 	void kirby::OnShow()
 	{
 		if (StarThrow.WeaponIsShow()) {
 			StarThrow.OnShow();
 		}
-		
+
 		switch (GetCase()) {
-		// case jump up right
+			// case jump up right
 		case 1:
 			KirbyJumpR.SetDelayCount(4);
 			now_img_h = KirbyJumpR.Height();
@@ -292,7 +293,7 @@ namespace game_framework {
 			KirbyJumpR.OnShow();
 			break;
 
-		// case down attack right
+			// case down attack right
 		case 2:
 			KirbyDownAttackR.SetDelayCount(5);
 			now_img_h = KirbyDownAttackR.Height();
@@ -306,7 +307,7 @@ namespace game_framework {
 			}
 			break;
 
-		// case down right
+			// case down right
 		case 3:
 			now_img_h = KirbyDownR.Height();
 			now_img_w = KirbyDownR.Width();
@@ -314,7 +315,7 @@ namespace game_framework {
 			KirbyDownR.ShowBitmap();
 			break;
 
-		// case scream right
+			// case scream right
 		case 4:
 			KirbyScreamR.SetDelayCount(3);
 			now_img_h = KirbyScreamR.Height();
@@ -328,7 +329,7 @@ namespace game_framework {
 			}
 			break;
 
-		// case walking right
+			// case walking right
 		case 5:
 			KirbyMovingR.SetDelayCount(2);
 			now_img_h = KirbyMovingR.Height();
@@ -337,7 +338,7 @@ namespace game_framework {
 			KirbyMovingR.OnShow();
 			break;
 
-		// case standing right
+			// case standing right
 		case 6:
 			KirbyStand.SetDelayCount(3);
 			now_img_h = KirbyStand.Height();
@@ -346,7 +347,7 @@ namespace game_framework {
 			KirbyStand.OnShow();
 			break;
 
-		// case fly up right
+			// case fly up right
 		case 7:
 			KirbyFlyR.SetDelayCount(5);
 			now_img_h = KirbyFlyR.Height();
@@ -359,7 +360,7 @@ namespace game_framework {
 			}
 			break;
 
-		// case flying right
+			// case flying right
 		case 8:
 			KirbyFlyingR.SetDelayCount(3);
 			now_img_h = KirbyFlyingR.Height();
@@ -372,7 +373,7 @@ namespace game_framework {
 			}
 			break;
 
-		// case jump up left
+			// case jump up left
 		case 9:
 			KirbyJumpL.SetDelayCount(4);
 			now_img_h = KirbyJumpL.Height();
@@ -382,7 +383,7 @@ namespace game_framework {
 			KirbyJumpL.OnShow();
 			break;
 
-		// case down attack left
+			// case down attack left
 		case 10:
 			KirbyDownAttackL.SetDelayCount(5);
 			now_img_h = KirbyDownAttackL.Height();
@@ -396,7 +397,7 @@ namespace game_framework {
 			}
 			break;
 
-		// case down left
+			// case down left
 		case 11:
 			now_img_h = KirbyDownL.Height();
 			now_img_w = KirbyDownL.Width();
@@ -404,7 +405,7 @@ namespace game_framework {
 			KirbyDownL.ShowBitmap();
 			break;
 
-		// case scream left 
+			// case scream left 
 		case 12:
 			KirbyScreamL.SetDelayCount(3);
 			now_img_h = KirbyScreamL.Height();
@@ -418,7 +419,7 @@ namespace game_framework {
 			}
 			break;
 
-		// case walking left
+			// case walking left
 		case 13:
 			KirbyMovingL.SetDelayCount(2);
 			now_img_h = KirbyMovingL.Height();
@@ -427,7 +428,7 @@ namespace game_framework {
 			KirbyMovingL.OnShow();
 			break;
 
-		// case standing left
+			// case standing left
 		case 14:
 			KirbyStandL.SetDelayCount(3);
 			now_img_h = KirbyStandL.Height();
@@ -436,7 +437,7 @@ namespace game_framework {
 			KirbyStandL.OnShow();
 			break;
 
-		// case fly up left
+			// case fly up left
 		case 15:
 			KirbyFlyL.SetDelayCount(5);
 			now_img_h = KirbyFlyL.Height();
@@ -449,7 +450,7 @@ namespace game_framework {
 			}
 			break;
 
-		// case flying left
+			// case flying left
 		case 16:
 			KirbyFlyingL.SetDelayCount(3);
 			now_img_h = KirbyFlyingL.Height();
@@ -462,8 +463,8 @@ namespace game_framework {
 			}
 			break;
 
-		// case hurt right
-		case 17: 
+			// case hurt right
+		case 17:
 			KirbyHurtR.SetDelayCount(2);
 			now_img_h = KirbyHurtR.Height();
 			now_img_w = KirbyHurtR.Width();
@@ -476,7 +477,7 @@ namespace game_framework {
 			}
 			break;
 
-		// case hurt left
+			// case hurt left
 		case 18:
 			KirbyHurtL.SetDelayCount(2);
 			now_img_h = KirbyHurtL.Height();
@@ -490,7 +491,7 @@ namespace game_framework {
 			}
 			break;
 
-		// case IsEaten standing right
+			// case IsEaten standing right
 		case 19:
 			KirbyFatStand.SetDelayCount(3);
 			now_img_h = KirbyFatStand.Height();
@@ -500,7 +501,7 @@ namespace game_framework {
 			KirbyFatStand.OnShow();
 			break;
 
-		// case IsEaten standing left
+			// case IsEaten standing left
 		case 20:
 			KirbyFatStandL.SetDelayCount(3);
 			now_img_h = KirbyFatStandL.Height();
@@ -510,7 +511,7 @@ namespace game_framework {
 			KirbyFatStandL.OnShow();
 			break;
 
-		// case fat walk right 21
+			// case fat walk right 21
 		case 21:
 			KirbyFatMovingR.SetDelayCount(2);
 			now_img_h = KirbyFatMovingR.Height();
@@ -520,7 +521,7 @@ namespace game_framework {
 			KirbyFatMovingR.OnShow();
 			break;
 
-		// case fat walk left 22
+			// case fat walk left 22
 		case 22:
 			KirbyFatMovingL.SetDelayCount(2);
 			now_img_h = KirbyFatMovingL.Height();
@@ -549,17 +550,14 @@ namespace game_framework {
 				IsFacingR = false;
 			}
 			if (IsRun && !InAir) {
-				//SetXY(x - length * 3, y);
-				for (int i = 0; i < length * 3;i++) {
-					SetXY(x - 1, y);
-				}
+				SetXY(x - length * 3, y);
+			}
+			else if (IsRun && IsHack) {
+				SetXY(x - length * 3, y);
 			}
 			else {
 				// x -= length;
-				// SetXY(x - length, y);
-				for (int i = 0; i < length;i++) {
-					SetXY(x - 1, y);
-				}
+				SetXY(x - length, y);
 			}
 		}
 
@@ -568,17 +566,14 @@ namespace game_framework {
 				IsFacingR = true;
 			}
 			if (IsRun && !InAir) {
-				//SetXY(x + length * 3, y);
-				for (int i = 0; i < length * 3;i++) {
-					SetXY(x + 1, y);
-				}
+				SetXY(x + length * 3, y);
+			}
+			else if (IsRun && IsHack) {
+				SetXY(x + length * 3, y);
 			}
 			else {
 				// x += length;
-				// SetXY(x + length, y);
-				for (int i = 0; i < length;i++) {
-					SetXY(x + 1, y);
-				}
+				SetXY(x + length, y);
 			}
 		}
 
@@ -586,17 +581,11 @@ namespace game_framework {
 		if (IsDown && IsAttack && !IsHurt) {
 			if (IsFacingR && x < SIZE_X - ImgW - frame_of_test) {
 				// x += length * 3;
-				// SetXY(x + length * 3, y);
-				for (int i = 0; i < length * 3;i++) {
-					SetXY(x + 1, y);
-				}
+				SetXY(x + length * 3, y);
 			}
 			else if (x > frame_of_test) {
 				// x -= length * 3;
-				// SetXY(x - length * 3, y);
-				for (int i = 0; i < length * 3;i++) {
-					SetXY(x - 1, y);
-				}
+				SetXY(x - length * 3, y);
 			}
 		}
 
@@ -608,10 +597,7 @@ namespace game_framework {
 			if (IsJumping) {
 				if (velocity > 0) {
 					// y -= velocity;
-					// SetXY(x, y - velocity);
-					for (int i = 0; i < velocity;i++) {
-						SetXY(x, y - 1);
-					}
+					SetXY(x, y - velocity);
 					velocity--;
 				}
 				else {
@@ -622,10 +608,7 @@ namespace game_framework {
 			else if (FlyUp && IsFat) {
 				if (fly_velocity > 0) {
 					// y -= fly_velocity;
-					// SetXY(x, y - fly_velocity);
-					for (int i = 0; i < fly_velocity;i++) {
-						SetXY(x, y - 1);
-					}
+					SetXY(x, y - fly_velocity);
 					fly_velocity--;
 				}
 				else {
@@ -639,10 +622,7 @@ namespace game_framework {
 			if (y < floor - frame_of_test - ImgH) {
 				if (IsJumping || !IsFlying) {
 					// y += velocity;
-					// SetXY(x, y + velocity);
-					for (int i = 0; i < velocity;i++) {
-						SetXY(x, y + 1);
-					}
+					SetXY(x, y + velocity);
 					velocity++;
 				}
 				else if (IsFlying) {
@@ -661,10 +641,7 @@ namespace game_framework {
 				}
 			}
 			else {
-				// y = floor - frame_of_test - ImgH;
-				while (y > floor - frame_of_test - ImgH) {
-					SetXY(x, y - 1);
-				}
+				y = floor - frame_of_test - ImgH;
 				velocity = init_velocity;
 				InAir = false;
 				IsRising = true;
@@ -679,16 +656,13 @@ namespace game_framework {
 		// kirby is hurt
 		if (IsHurt) {
 			if (!OtherFromL && x - 4 > 0) {
-				// SetXY(x - 4, y);
-				for (int i = 0; i < 4;i++) {
-					SetXY(x - 1, y);
-				}
-			} else if(x + 4 < SIZE_X - now_img_w){
-				// SetXY(x + 4, y);
-				for (int i = 0; i < 4;i++) {
-					SetXY(x + 1, y);
-				}
-			} 
+				// x -= 2;
+				SetXY(x - 4, y);
+			}
+			else if (x + 4 < SIZE_X - now_img_w) {
+				// x += 2;
+				SetXY(x + 4, y);
+			}
 		}
 
 		// kirby throw star
@@ -700,10 +674,10 @@ namespace game_framework {
 		if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 50) {
 			int* temp = StarThrow.GetXy();
 			if (StarThrow.GetAttackFacingR()) {
-				StarThrow.SetXy(temp[0] + 15, temp[1]);
+				StarThrow.SetXy(temp[0] + 10, temp[1]);
 			}
 			else {
-				StarThrow.SetXy(temp[0] - 15, temp[1]);
+				StarThrow.SetXy(temp[0] - 10, temp[1]);
 			}
 			delete[] temp;
 		}
@@ -719,12 +693,12 @@ namespace game_framework {
 	}
 
 	void kirby::SetXY(int x_in, int y_in) {
-		int aXy[4] = { x_in, y_in - KirbyStand.Height() + now_img_h, x_in + now_img_w, y_in - KirbyStand.Height() + now_img_h + now_img_h };
+		int aXy[4] = { x_in, y_in, x_in + now_img_w, y_in + now_img_h };
 		bool result = true;
-		if (!BlockList.empty()) {
-			for (unsigned int k = 0;k < BlockList.size();k++) {
-				if (BlockList[k] != nullptr && BlockList[k]->GetShow()) {
-					int* bXy = BlockList[k]->GetXy();
+		if (!StarBlockList.empty()) {
+			for (int k = 0; k < int(StarBlockList.size()); k++) {
+				if (StarBlockList[k] != nullptr && StarBlockList[k]->GetShow()) {
+					int* bXy = StarBlockList[k]->GetXy();
 					int i = 0, n = 1;
 					for (int count = 0; count < 2; count++) {
 						for (int _count = 0; _count < 2; _count++) {
@@ -771,16 +745,19 @@ namespace game_framework {
 					int* temp = StarThrow.GetXy();
 					StarThrow.SetXy(temp[0] - (x_in - x), temp[1]);
 					delete[] temp;
-					if (!BlockList.empty()) {
-						for (int i = 0;i < (int)BlockList.size();i++) {
-							if (BlockList[i] != nullptr) {
-								BlockList[i]->SetXY(BlockList[i]->Left() - (x_in - x), BlockList[i]->Top());
+					if (!StarBlockList.empty()) {
+						/*for (int i = 0; i < int(StarBlockList.size()); i++) {
+							if (StarBlockList[i] != nullptr) {
+								StarBlockList[i]->SetXY(StarBlockList[i]->Left() - (x_in - x), StarBlockList[i]->Top());
 							}
+						}*/
+						for (auto n : StarBlockList) {
+							n->SetXY(n->Left() - (x_in - x), n->Top());
 						}
 					}
 					if (!EnemyList.empty()) {
 						for (auto n : EnemyList) {
-							n->SetKirbyXy(n->Left() - (x_in - x), n->Top());
+							n->SetXy(n->Left() - (x_in - x), n->Top());
 						}
 					}
 					return;
@@ -794,16 +771,19 @@ namespace game_framework {
 					int* temp = StarThrow.GetXy();
 					StarThrow.SetXy(temp[0] - (x_in - x), temp[1]);
 					delete[] temp;
-					if (!BlockList.empty()) {
-						for (int i = 0;i < (int)BlockList.size();i++) {
-							if (BlockList[i] != nullptr) {
-								BlockList[i]->SetXY(BlockList[i]->Left() - (x_in - x), BlockList[i]->Top());
+					if (!StarBlockList.empty()) {
+						/*for (int i = 0; i < int(StarBlockList.size()); i++) {
+							if (StarBlockList[i] != nullptr) {
+								StarBlockList[i]->SetXY(StarBlockList[i]->Left() - (x_in - x), StarBlockList[i]->Top());
 							}
+						}*/
+						for (auto n : StarBlockList) {
+							n->SetXY(n->Left() - (x_in - x), n->Top());
 						}
 					}
 					if (!EnemyList.empty()) {
 						for (auto n : EnemyList) {
-							n->SetKirbyXy(n->Left() - (x_in - x), n->Top());
+							n->SetXy(n->Left() - (x_in - x), n->Top());
 						}
 					}
 					return;
@@ -812,22 +792,25 @@ namespace game_framework {
 
 			if (y_in - y > 0) {
 				// go down
-				if (y_in > BoundaryTop && Map->Top() > -480) {
+				if (y_in > BoundaryTop && Map->Top() > -260) {
 					Map->SetTopLeft(Map->Left(), Map->Top() - (y_in - y));
 					Door->SetTopLeft(Door->Left(), Door->Top() - (y_in - y));
 					int* temp = StarThrow.GetXy();
 					StarThrow.SetXy(temp[0], temp[1] - (y_in - y));
 					delete[] temp;
-					if (!BlockList.empty()) {
-						for (int i = 0;i < (int)BlockList.size();i++) {
-							if (BlockList[i] != nullptr) {
-								BlockList[i]->SetXY(BlockList[i]->Left(), BlockList[i]->Top() - (y_in - y));
+					if (!StarBlockList.empty()) {
+						/*for (int i = 0; i < int(StarBlockList.size()); i++) {
+							if (StarBlockList[i] != nullptr) {
+								StarBlockList[i]->SetXY(StarBlockList[i]->Left(), StarBlockList[i]->Top() - (y_in - y));
 							}
+						}*/
+						for (auto n : StarBlockList) {
+							n->SetXY(n->Left(), n->Top() - (y_in - y));
 						}
 					}
 					if (!EnemyList.empty()) {
 						for (auto n : EnemyList) {
-							n->SetKirbyXy(n->Left(), n->Top() - (y_in - y));
+							n->SetXy(n->Left(), n->Top() - (y_in - y));
 						}
 					}
 					return;
@@ -841,16 +824,19 @@ namespace game_framework {
 					int* temp = StarThrow.GetXy();
 					StarThrow.SetXy(temp[0], temp[1] - (y_in - y));
 					delete[] temp;
-					if (!BlockList.empty()) {
-						for (int i = 0;i < (int)BlockList.size();i++) {
-							if (BlockList[i] != nullptr) {
-								BlockList[i]->SetXY(BlockList[i]->Left(), BlockList[i]->Top() - (y_in - y));
+					if (!StarBlockList.empty()) {
+						/*for (int i = 0; i < int(StarBlockList.size()); i++) {
+							if (StarBlockList[i] != nullptr) {
+								StarBlockList[i]->SetXY(StarBlockList[i]->Left(), StarBlockList[i]->Top() - (y_in - y));
 							}
+						}*/
+						for (auto n : StarBlockList) {
+							n->SetXY(n->Left(), n->Top() - (y_in - y));
 						}
 					}
 					if (!EnemyList.empty()) {
 						for (auto n : EnemyList) {
-							n->SetKirbyXy(n->Left(), n->Top() - (y_in - y));
+							n->SetXy(n->Left(), n->Top() - (y_in - y));
 						}
 					}
 					return;
@@ -940,13 +926,8 @@ namespace game_framework {
 		Door = input_door;
 	}
 
-	/*void kirby::SetThings(starBlock ** input, int number_input) {
+	void kirby::SetThings(vector<thing*> input) {
 		StarBlockList = input;
-		number_of_star_blocks = number_input;
-	}*/
-
-	void kirby::SetThings(vector<thing*> inputVector) {
-		BlockList = inputVector;
 	}
 
 	void kirby::SetEnemies(vector<enemy*> input_EnemyList) {
@@ -956,8 +937,15 @@ namespace game_framework {
 	void kirby::SetRun(bool input) {
 		IsRun = input;
 	}
-	
+
+	void kirby::SetHack(bool input) {
+		IsHack = input;
+	}
+
 	void kirby::Hurt(int input, int time) {
+		if (IsHack) {
+			return;
+		}
 		if (abs(LastHurt - time) < 30) {
 			return;
 		}
@@ -1092,7 +1080,7 @@ namespace game_framework {
 	}
 
 	int* kirby::GetXy() {
-		return new int[4]{ x, y , x+ImgW, y+ImgH };
+		return new int[4]{ x, y , x + ImgW, y + ImgH };
 	}
 
 	int kirby::GetWidth() {

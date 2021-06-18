@@ -63,17 +63,16 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap kirbyHp;
-		CMovingBitmap Map;
+		CMovingBitmap* Map = nullptr;
 		CMovingBitmap Door;
 		CInteger kirbyHpInt;
 		kirby Kirby;
 
 		vector<enemy*> EnemyVector;
-		vector<thing*> ThingVector;
 		/*waddle** WaddleList;
-		waddleDoo** WaddleDooList;
+		waddleDoo** WaddleDooList;*/
+		vector<thing*> ThingVector;
 		starBlock** StarBlockList;
-		*/
 		int temp_floor = 60, counter = 0, last_left = 0, last_right = 0;
 		int number_of_star_blocks = 0, number_of_waddles = 0, number_of_waddle_doos = 0;
  	};

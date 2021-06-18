@@ -323,6 +323,15 @@ CMovingBitmap::CMovingBitmap()
 	y_change = 0;
 }
 
+void CMovingBitmap::ResetLoad()
+{
+	isBitmapLoaded = false;
+	x_change = 0;
+	y_change = 0;
+}
+
+
+
 int CMovingBitmap::Height()
 {
 	GAME_ASSERT(isBitmapLoaded,"A bitmap must be loaded before Height() is called !!!");

@@ -56,6 +56,7 @@ namespace game_framework {
 		// StarBlockList = nullptr;
 		IsRun = false;
 		IsHack = false;
+		EatenEnemy = "";
 	}
 
 	kirby::~kirby()
@@ -670,6 +671,10 @@ namespace game_framework {
 			ThrowStar();
 		}
 
+		if (IsEaten && IsDown) {
+			SetChange();
+		}
+
 		StarThrow.OnMove();
 		if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 50) {
 			int* temp = StarThrow.GetXy();
@@ -908,6 +913,30 @@ namespace game_framework {
 
 	void kirby::SetEaten(bool input) {
 		IsEaten = input;
+	}
+
+	void kirby::SetEaten(bool input, std::string name) {
+		IsEaten = input;
+		EatenEnemy = name;
+	}
+
+	void kirby::SetChange() {
+		if (EatenEnemy == "waddle") {
+			TRACE("waddle eaten\n");
+		}
+		else if (EatenEnemy == "waddleDoo") {
+			TRACE("waddleDoo eaten\n");
+		}
+		else if (EatenEnemy == "sparky") {
+			TRACE("sparky eaten\n");
+		}
+		else if (EatenEnemy == "hotHead") {
+			TRACE("hotHead eaten\n");
+		}
+		else {
+			TRACE("other eaten\n");
+		}
+		SetEaten(false, "");
 	}
 
 	void kirby::YouAreLeft(bool YouAreLeft) {

@@ -34,6 +34,10 @@ namespace game_framework {
 	{
 	}
 
+	std::string enemy::GetKind() {
+		return kind;
+	}
+
 	int* enemy::GetXy() {
 		return new int[4]{ x, y, x + ImgW, y + ImgH };
 	}
