@@ -18,7 +18,7 @@ namespace game_framework {
 	enum AUDIO_ID {				// 定義各種音效的編號
 		AUDIO_TITLE,				// 0
 		AUDIO_SELECT,				// 1
-		AUDIO_CLOUD,				// 2
+		AUDIO_STARTING,				// 2
 		AUDIO_RAINBOWROUTE,			// 3
 		AUDIO_BOSS					// 4
 	};

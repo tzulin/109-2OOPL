@@ -249,7 +249,7 @@ namespace game_framework {
 	{
 		CAudio::Instance()->Stop(AUDIO_TITLE);
 		CAudio::Instance()->Stop(AUDIO_SELECT);
-		CAudio::Instance()->Stop(AUDIO_CLOUD);
+		CAudio::Instance()->Stop(AUDIO_STARTING);
 		CAudio::Instance()->Stop(AUDIO_RAINBOWROUTE);
 		CAudio::Instance()->Stop(AUDIO_BOSS);
 
@@ -350,7 +350,7 @@ namespace game_framework {
 	{
 		Kirby.StageReSet(Kirby.GetHp());
 		if (stage == 1) {
-			CAudio::Instance()->Play(AUDIO_CLOUD, true);
+			CAudio::Instance()->Play(AUDIO_STARTING, true);
 			if (Map != nullptr) {
 				delete[] Map;
 			}
@@ -767,7 +767,7 @@ namespace game_framework {
 		Kirby.LoadBitmap();									// Kirby LoadBitmap
 		
 		// load audio
-		CAudio::Instance()->Load(AUDIO_CLOUD, "sounds\\starting_stage.mp3");
+		CAudio::Instance()->Load(AUDIO_STARTING, "sounds\\starting_stage.mp3");
 		CAudio::Instance()->Load(AUDIO_RAINBOWROUTE, "sounds\\forest_and_natural_area.mp3");
 		CAudio::Instance()->Load(AUDIO_BOSS, "sounds\\boss.mp3");
 
@@ -874,7 +874,7 @@ namespace game_framework {
 
 		if (nChar == KEY_UP) {
 			if (Meet(Kirby, Door)) {
-				CAudio::Instance()->Stop(AUDIO_CLOUD);
+				CAudio::Instance()->Stop(AUDIO_STARTING);
 				CAudio::Instance()->Stop(AUDIO_RAINBOWROUTE);
 				CAudio::Instance()->Stop(AUDIO_BOSS);
 				GotoGameState(GAME_STATE_RUN, GetStage() + 1, record);
