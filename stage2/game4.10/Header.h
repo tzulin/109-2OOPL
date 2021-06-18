@@ -153,6 +153,18 @@ namespace game_framework {
 		void Reset() override;
 	};
 
+	class droppy : public enemy {
+	public:
+		void LoadBitmap() override;
+		void Reset() override;
+	};
+
+	class bigWaddle : public enemy {
+	public:
+		void LoadBitmap() override;
+		void Reset() override;
+	};
+
 	class kirby {
 	public:
 		kirby();
