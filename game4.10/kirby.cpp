@@ -14,10 +14,10 @@ namespace game_framework {
 	kirby::kirby()
 	{
 		// kirby constructor
-		StageReSet(10);
+		StageReSet(10, "normal");
 	}
 
-	void kirby::StageReSet(int hp_left) {
+	void kirby::StageReSet(int hp_left, std::string kind) {
 		const int origin_x = frame_of_test;
 		const int origin_y = SIZE_Y - temp_floor - ImgH;
 		const int INIT_VELOCITY = 18;
@@ -56,6 +56,8 @@ namespace game_framework {
 		// StarBlockList = nullptr;
 		IsRun = false;
 		IsHack = false;
+		EatenEnemy = "";
+		kirby_kind = kind;
 	}
 
 	kirby::~kirby()
@@ -281,6 +283,26 @@ namespace game_framework {
 		if (StarThrow.WeaponIsShow()) {
 			StarThrow.OnShow();
 		}
+
+		if (kirby_kind == "waddleKirby") {
+			TRACE("waddle\n");
+		}
+		else if (kirby_kind == "bigWaddleKirby") {
+			TRACE("bigWaddle\n");
+		}
+		else if (kirby_kind == "droppyKirby") {
+			TRACE("droppy\n");
+		}
+		else if (kirby_kind == "waddleDooKirby") {
+			TRACE("waddleDoo\n");
+		}
+		else if (kirby_kind == "sparkyKirby") {
+			TRACE("sparky\n");
+		}
+		else if (kirby_kind == "hotHeadKirby") {
+			TRACE("hotHead\n");
+		}
+		
 
 		switch (GetCase()) {
 			// case jump up right
@@ -670,6 +692,10 @@ namespace game_framework {
 			ThrowStar();
 		}
 
+		if (IsEaten && IsDown) {
+			SetChange();
+		}
+
 		StarThrow.OnMove();
 		if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 50) {
 			int* temp = StarThrow.GetXy();
@@ -910,6 +936,39 @@ namespace game_framework {
 		IsEaten = input;
 	}
 
+	void kirby::SetEaten(bool input, std::string name) {
+		IsEaten = input;
+		EatenEnemy = name;
+	}
+
+	void kirby::SetChange() {
+		if (EatenEnemy == "waddle") {
+			TRACE("waddle eaten\n");
+		}
+		else if (EatenEnemy == "bigWaddle") {
+			TRACE("bigWaddle eaten\n");
+		}
+		else if (EatenEnemy == "droppy") {
+			TRACE("droppy eaten\n");
+		}
+		else if (EatenEnemy == "waddleDoo") {
+			TRACE("waddleDoo eaten\n");
+			kirby_kind = "waddleDooKirby";
+		}
+		else if (EatenEnemy == "sparky") {
+			TRACE("sparky eaten\n");
+			kirby_kind = "sparkyKirby";
+		}
+		else if (EatenEnemy == "hotHead") {
+			TRACE("hotHead eaten\n");
+			kirby_kind = "hotHeadKirby";
+		}
+		else {
+			TRACE("other eaten\n");
+		}
+		SetEaten(false, "");
+	}
+
 	void kirby::YouAreLeft(bool YouAreLeft) {
 		OtherFromL = !YouAreLeft;
 	}
@@ -949,6 +1008,7 @@ namespace game_framework {
 		if (abs(LastHurt - time) < 30) {
 			return;
 		}
+		kirby_kind = "normal";
 		LastHurt = time;
 		hp -= input;
 		IsHurt = true;
@@ -1089,6 +1149,10 @@ namespace game_framework {
 
 	int kirby::GetHeight() {
 		return ImgH;
+	}
+
+	std::string kirby::GetKind() {
+		return kirby_kind;
 	}
 
 	bool kirby::IsAlive() {

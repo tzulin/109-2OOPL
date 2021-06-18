@@ -71,6 +71,7 @@ namespace game_framework {
 		enemy();
 		~enemy();
 		virtual void LoadBitmap();
+		virtual void Reset();
 		void OnMove();
 		void OnShow();
 		int* GetXy();
@@ -78,6 +79,7 @@ namespace game_framework {
 		int GetWidth();
 		int GetHeight();
 		int GetPower();
+		std::string GetKind();
 		int Top();
 		int Left();
 		void SetXy(int input_x, int input_y);
@@ -85,7 +87,6 @@ namespace game_framework {
 		// void SetThings(starBlock** Blocks_input, int input_number);
 		void BackX(bool fromL);
 		void Hurt(int input, int time);
-		virtual void Reset();
 		void Attack(kirby k, int time);
 		void YouAreLeft(bool YouAreLeft);
 		bool EnemyFacingR();
@@ -152,11 +153,26 @@ namespace game_framework {
 		void Reset() override;
 	};
 
+	class droppy : public enemy {
+	public:
+		void LoadBitmap() override;
+		void Reset() override;
+	};
+
+	class bigWaddle : public enemy {
+	public:
+		void LoadBitmap() override;
+		void Reset() override;
+	};
+
 	class kirby {
 	public:
 		kirby();
-		void kirby::StageReSet(int hp_left);
+		void kirby::StageReSet(int hp_left, std::string kind);
 		~kirby();
+		void SetAttack(bool input);
+		void SetEaten(bool input);
+		void SetEaten(bool input, std::string name);
 		void LoadBitmap();
 		void OnMove();
 		void OnShow();
@@ -166,10 +182,8 @@ namespace game_framework {
 		void SetFacingR(bool input);
 		void SetFacingL(bool input);
 		void SetDown(bool input);
-		void SetAttack(bool input);
 		void SetJump(bool input);
 		void SetFly(bool input);
-		void SetEaten(bool input);
 		void SetCounter(int);
 		void SetHack(bool input);
 
@@ -178,11 +192,13 @@ namespace game_framework {
 		void SetMap(CMovingBitmap* Map);
 		void SetDoor(CMovingBitmap* door);
 		void SetRun(bool input);
+		void SetChange();
 		void Hurt(int input, int time);
 		void ThrowStar();
 		void YouAreLeft(bool YouAreLeft);
 		weapon* GetWeapon();
 
+		std::string GetKind();
 		int GetCase();
 		int GetHp();
 		int* GetXy();
@@ -226,7 +242,8 @@ namespace game_framework {
 		// int number_of_star_blocks;
 		weapon StarThrow;
 
-
+		std::string EatenEnemy;
+		std::string kirby_kind;
 		int x, y, hp;
 		const int ImgW = 60, ImgH = 60;
 		int now_img_w, now_img_h;

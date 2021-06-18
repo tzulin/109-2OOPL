@@ -207,4 +207,89 @@ namespace game_framework {
 		LastHurt = 0;
 		HasWeapon = true;
 	}
+
+	void droppy::LoadBitmap()
+	{
+		// load walk right
+		char *walk_right[8] = { ".\\res\\droppy\\walkR1.bmp", ".\\res\\droppy\\walkR2.bmp", ".\\res\\droppy\\walkR3.bmp", ".\\res\\droppy\\walkR4.bmp", ".\\res\\droppy\\walkR5.bmp", ".\\res\\droppy\\walkR6.bmp", ".\\res\\droppy\\walkR7.bmp", ".\\res\\droppy\\walkR8.bmp" };
+		for (int i = 0; i < 8; i++)
+		{
+			MovingR.AddBitmap(walk_right[i], RGB(255, 255, 255));
+		}
+		for (int i = 6; i >= 0; i--)
+		{
+			MovingR.AddBitmap(walk_right[i], RGB(255, 255, 255));
+		}
+
+		// load walk left
+		char *walk_left[8] = { ".\\res\\droppy\\walkL1.bmp", ".\\res\\droppy\\walkL2.bmp", ".\\res\\droppy\\walkL3.bmp", ".\\res\\droppy\\walkL4.bmp", ".\\res\\droppy\\walkL5.bmp", ".\\res\\droppy\\walkL6.bmp", ".\\res\\droppy\\walkL7.bmp", ".\\res\\droppy\\walkL8.bmp" };
+		for (int i = 0; i < 8; i++)
+		{
+			MovingL.AddBitmap(walk_left[i], RGB(255, 255, 255));
+		}
+		for (int i = 6; i >= 0; i--)
+		{
+			MovingL.AddBitmap(walk_left[i], RGB(255, 255, 255));
+		}
+
+		// load attack right
+		for (int i = 0; i < 5; i++) {
+			AttackR.AddBitmap(".\\res\\droppy\\walkR1.bmp");
+		}
+
+		// load attack left
+		for (int i = 0; i < 5; i++) {
+			AttackL.AddBitmap(".\\res\\droppy\\walkL1.bmp");
+		}
+	}
+
+	void droppy::Reset() {
+		hp = 1;
+		power = 1;
+		kind = "droppy";
+		IsFacingR = false;
+		IsMovingL = true;
+		IsMovingR = false;
+		IsAttack = false;
+		LastHurt = 0;
+		HasWeapon = false;
+	}
+
+	void bigWaddle::LoadBitmap() {
+		// load walk right
+		char *walk_right[10] = { ".\\res\\bigwaddledee\\walkR1.bmp", ".\\res\\bigwaddledee\\walkR2.bmp", ".\\res\\bigwaddledee\\walkR3.bmp", ".\\res\\bigwaddledee\\walkR4.bmp", ".\\res\\bigwaddledee\\walkR5.bmp", ".\\res\\bigwaddledee\\walkR6.bmp", ".\\res\\bigwaddledee\\walkR7.bmp", ".\\res\\bigwaddledee\\walkR8.bmp", ".\\res\\bigwaddledee\\walkR9.bmp", ".\\res\\bigwaddledee\\walkR10.bmp" };
+		for (int i = 0; i < 10; i++)
+		{
+			MovingR.AddBitmap(walk_right[i], RGB(255, 0, 0));
+		}
+
+		// load walk left
+		char *walk_left[10] = { ".\\res\\bigwaddledee\\walkL1.bmp", ".\\res\\bigwaddledee\\walkL2.bmp", ".\\res\\bigwaddledee\\walkL3.bmp", ".\\res\\bigwaddledee\\walkL4.bmp", ".\\res\\bigwaddledee\\walkL5.bmp", ".\\res\\bigwaddledee\\walkL6.bmp", ".\\res\\bigwaddledee\\walkL7.bmp", ".\\res\\bigwaddledee\\walkL8.bmp", ".\\res\\bigwaddledee\\walkL9.bmp", ".\\res\\bigwaddledee\\walkL10.bmp" };
+		for (int i = 0; i < 10; i++)
+		{
+			MovingL.AddBitmap(walk_left[i], RGB(255, 0, 0));
+		}
+
+		// load attack right
+		for (int i = 0; i < 5; i++) {
+			AttackR.AddBitmap(".\\res\\bigwaddledee\\walkR1.bmp");
+		}
+
+		// load attack left
+		for (int i = 0; i < 5; i++) {
+			AttackL.AddBitmap(".\\res\\bigwaddledee\\walkL1.bmp");
+		}
+	}
+
+	void bigWaddle::Reset() {
+		hp = 1;
+		power = 1;
+		kind = "bigWaddle";
+		IsFacingR = false;
+		IsMovingL = true;
+		IsMovingR = false;
+		IsAttack = false;
+		LastHurt = 0;
+		HasWeapon = false;
+	}
 }
