@@ -209,7 +209,7 @@ namespace game_framework {
 		bool IsScreamL();
 		//bool GetUpKey();
 
-	private:
+	protected:
 		CAnimation KirbyMovingL;
 		CAnimation KirbyMovingR;
 		CAnimation KirbyFatMovingL;
@@ -275,7 +275,18 @@ namespace game_framework {
 		bool IsHack;
 	};
 
-	class normal_kirby : public kirby {
+	class normal_kirby : public kirby {};
+
+	class sparky_kirby : public kirby {
+	public:
+		void SetEaten(bool input) override;
+		void SetEaten(bool input, std::string name) override;
+		void LoadBitmap() override;
+		void ThrowStar() override;
+	};
+
+	class hotHead_kirby : public kirby {
+	public:
 		void SetEaten(bool input) override;
 		void SetEaten(bool input, std::string name) override;
 		void LoadBitmap() override;
