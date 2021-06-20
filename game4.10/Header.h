@@ -171,9 +171,10 @@ namespace game_framework {
 		void kirby::StageReSet(int hp_left, std::string kind);
 		~kirby();
 		void SetAttack(bool input);
-		void SetEaten(bool input);
-		void SetEaten(bool input, std::string name);
-		void LoadBitmap();
+		virtual void SetEaten(bool input);
+		virtual void SetEaten(bool input, std::string name);
+		virtual void LoadBitmap();
+		virtual void ThrowStar();
 		void OnMove();
 		void OnShow();
 		void SetXY(int x_in, int y_in);
@@ -194,7 +195,6 @@ namespace game_framework {
 		void SetRun(bool input);
 		void SetChange();
 		void Hurt(int input, int time);
-		void ThrowStar();
 		void YouAreLeft(bool YouAreLeft);
 		weapon* GetWeapon();
 
@@ -273,6 +273,13 @@ namespace game_framework {
 		bool YouAreGround;
 		bool IsRun;
 		bool IsHack;
+	};
+
+	class normal_kirby : public kirby {
+		void SetEaten(bool input) override;
+		void SetEaten(bool input, std::string name) override;
+		void LoadBitmap() override;
+		void ThrowStar() override;
 	};
 
 	inline bool EnemyCanAttack(enemy & e, kirby & k) {
