@@ -293,6 +293,14 @@ namespace game_framework {
 		void ThrowStar() override;
 	};
 
+	class waddleDoo_kirby : public kirby {
+	public:
+		void SetEaten(bool input) override;
+		void SetEaten(bool input, std::string name) override;
+		void LoadBitmap() override;
+		void ThrowStar() override;
+	};
+
 	inline bool EnemyCanAttack(enemy & e, kirby & k) {
 		int* kirbyXy = k.GetXy();
 		int* enemyXY = e.GetXy();

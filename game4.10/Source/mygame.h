@@ -76,7 +76,7 @@ namespace game_framework {
 		CMovingBitmap* Map = nullptr;
 		CMovingBitmap Door;
 		CInteger kirbyHpInt;
-		normal_kirby Kirby;
+		waddleDoo_kirby Kirby;
 
 		vector<enemy*> EnemyVector;
 		/*waddle** WaddleList;

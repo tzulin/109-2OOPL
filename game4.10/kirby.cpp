@@ -1203,89 +1203,45 @@ namespace game_framework {
 		char *walk_left[10] = { ".\\res\\kirby_sparky\\walk\\walkL1.bmp", ".\\res\\kirby_sparky\\walk\\walkL2.bmp", ".\\res\\kirby_sparky\\walk\\walkL3.bmp", ".\\res\\kirby_sparky\\walk\\walkL4.bmp", ".\\res\\kirby_sparky\\walk\\walkL5.bmp", ".\\res\\kirby_sparky\\walk\\walkL6.bmp", ".\\res\\kirby_sparky\\walk\\walkL7.bmp", ".\\res\\kirby_sparky\\walk\\walkL8.bmp", ".\\res\\kirby_sparky\\walk\\walkL9.bmp", ".\\res\\kirby_sparky\\walk\\walkL10.bmp" };
 		for (int i = 0; i < 10; i++)
 		{
-			KirbyMovingL.AddBitmap(walk_left[i], RGB(255, 0, 0));
+			KirbyMovingL.AddBitmap(walk_left[i], RGB(255, 255, 255));
 		}
 
 		// load walk right
 		char *walk_right[10] = { ".\\res\\kirby_sparky\\walk\\walkR1.bmp", ".\\res\\kirby_sparky\\walk\\walkR2.bmp", ".\\res\\kirby_sparky\\walk\\walkR3.bmp", ".\\res\\kirby_sparky\\walk\\walkR4.bmp", ".\\res\\kirby_sparky\\walk\\walkR5.bmp", ".\\res\\kirby_sparky\\walk\\walkR6.bmp", ".\\res\\kirby_sparky\\walk\\walkR7.bmp", ".\\res\\kirby_sparky\\walk\\walkR8.bmp", ".\\res\\kirby_sparky\\walk\\walkR9.bmp", ".\\res\\kirby_sparky\\walk\\walkR10.bmp" };
 		for (int i = 0; i < 10; i++)
 		{
-			KirbyMovingR.AddBitmap(walk_right[i], RGB(255, 0, 0));
-		}
-
-		// load fat walk left
-		char *fat_walk_left[8] = { ".\\res\\walk\\fat_walkL1.bmp", ".\\res\\walk\\fat_walkL2.bmp", ".\\res\\walk\\fat_walkL3.bmp", ".\\res\\walk\\fat_walkL4.bmp", ".\\res\\walk\\fat_walkL5.bmp", ".\\res\\walk\\fat_walkL6.bmp", ".\\res\\walk\\fat_walkL7.bmp", ".\\res\\walk\\fat_walkL8.bmp" };
-		for (int i = 0; i < 8; i++)
-		{
-			KirbyFatMovingL.AddBitmap(fat_walk_left[i], RGB(255, 255, 255));
-		}
-
-		// load fat walk right
-		char *fat_walk_right[8] = { ".\\res\\walk\\fat_walkR1.bmp", ".\\res\\walk\\fat_walkR2.bmp", ".\\res\\walk\\fat_walkR3.bmp", ".\\res\\walk\\fat_walkR4.bmp", ".\\res\\walk\\fat_walkR5.bmp", ".\\res\\walk\\fat_walkR6.bmp", ".\\res\\walk\\fat_walkR7.bmp", ".\\res\\walk\\fat_walkR8.bmp" };
-		for (int i = 0; i < 8; i++)
-		{
-			KirbyFatMovingR.AddBitmap(fat_walk_right[i], RGB(255, 255, 255));
+			KirbyMovingR.AddBitmap(walk_right[i], RGB(255, 255, 255));
 		}
 
 		// load stand and wink right
 		int count = 12;
 		while (count-- > 0) {
-			KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR1.bmp", RGB(255, 0, 0));
+			KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR1.bmp", RGB(255, 255, 255));
 		}
-		KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR3.bmp", RGB(255, 0, 0));
+		KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR3.bmp", RGB(255, 255, 255));
 		count = 12;
 		while (count-- > 0) {
-			KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR1.bmp", RGB(255, 0, 0));
+			KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR1.bmp", RGB(255, 255, 255));
 		}
-		KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR3.bmp", RGB(255, 0, 0));
-		KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR1.bmp", RGB(255, 0, 0));
-		KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR3.bmp", RGB(255, 0, 0));
+		KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR3.bmp", RGB(255, 255, 255));
+		KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR1.bmp", RGB(255, 255, 255));
+		KirbyStand.AddBitmap(".\\res\\kirby_sparky\\basic\\basicR3.bmp", RGB(255, 255, 255));
 
 		// load stand and wink left
 		count = 12;
 		while (count-- > 0) {
-			KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL1.bmp", RGB(255, 0, 0));
+			KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL1.bmp", RGB(255, 255, 255));
 		}
-		KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL3.bmp", RGB(255, 0, 0));
+		KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL3.bmp", RGB(255, 255, 255));
 		count = 12;
 		while (count-- > 0) {
-			KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL1.bmp", RGB(255, 0, 0));
+			KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL1.bmp", RGB(255, 255, 255));
 		}
-		KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL3.bmp", RGB(255, 0, 0));
-		KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL1.bmp", RGB(255, 0, 0));
-		KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL3.bmp", RGB(255, 0, 0));
+		KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL3.bmp", RGB(255, 255, 255));
+		KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL1.bmp", RGB(255, 255, 255));
+		KirbyStandL.AddBitmap(".\\res\\kirby_sparky\\basic\\basicL3.bmp", RGB(255, 255, 255));
 
-		// load fat stand and wink right
-		count = 12;
-		while (count-- > 0) {
-			KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR1.bmp", RGB(255, 255, 255));
-		}
-		KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR2.bmp", RGB(255, 255, 255));
-
-		count = 12;
-		while (count-- > 0) {
-			KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR1.bmp", RGB(255, 255, 255));
-
-		}
-		KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR2.bmp", RGB(255, 255, 255));
-		KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR1.bmp", RGB(255, 255, 255));
-		KirbyFatStand.AddBitmap(".\\res\\basic\\fat_basicR2.bmp", RGB(255, 255, 255));
-
-		// load fat stand and wink left
-		count = 12;
-		while (count-- > 0) {
-			KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL1.bmp", RGB(255, 255, 255));
-		}
-		KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL2.bmp", RGB(255, 255, 255));
-
-		count = 12;
-		while (count-- > 0) {
-			KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL1.bmp", RGB(255, 255, 255));
-
-		}
-		KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL2.bmp", RGB(255, 255, 255));
-		KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL1.bmp", RGB(255, 255, 255));
-		KirbyFatStandL.AddBitmap(".\\res\\basic\\fat_basicL2.bmp", RGB(255, 255, 255));
+		
 
 		// load down right and left
 		KirbyDownR.LoadBitmap(".\\res\\kirby_sparky\\down\\downR1.bmp", RGB(255, 255, 255));
@@ -1302,14 +1258,14 @@ namespace game_framework {
 		char *jump_right[10] = { ".\\res\\kirby_sparky\\jump\\jumpR1.bmp", ".\\res\\kirby_sparky\\jump\\jumpR2.bmp", ".\\res\\kirby_sparky\\jump\\jumpR3.bmp", ".\\res\\kirby_sparky\\jump\\jumpR4.bmp", ".\\res\\kirby_sparky\\jump\\jumpR5.bmp", ".\\res\\kirby_sparky\\jump\\jumpR6.bmp", ".\\res\\kirby_sparky\\jump\\jumpR7.bmp", ".\\res\\kirby_sparky\\jump\\jumpR8.bmp", ".\\res\\kirby_sparky\\jump\\jumpR9.bmp", ".\\res\\kirby_sparky\\jump\\jumpR10.bmp" };
 		for (int i = 0; i < 10; i++)
 		{
-			KirbyJumpR.AddBitmap(jump_right[i], RGB(255, 0, 0));
+			KirbyJumpR.AddBitmap(jump_right[i], RGB(255, 255, 255));
 		}
 
 		// load jump left
 		char *jump_left[10] = { ".\\res\\kirby_sparky\\jump\\jumpL1.bmp", ".\\res\\kirby_sparky\\jump\\jumpL2.bmp", ".\\res\\kirby_sparky\\jump\\jumpL3.bmp", ".\\res\\kirby_sparky\\jump\\jumpL4.bmp", ".\\res\\kirby_sparky\\jump\\jumpL5.bmp", ".\\res\\kirby_sparky\\jump\\jumpL6.bmp", ".\\res\\kirby_sparky\\jump\\jumpL7.bmp", ".\\res\\kirby_sparky\\jump\\jumpL8.bmp", ".\\res\\kirby_sparky\\jump\\jumpL9.bmp", ".\\res\\kirby_sparky\\jump\\jumpL10.bmp" };
 		for (int i = 0; i < 10; i++)
 		{
-			KirbyJumpL.AddBitmap(jump_left[i], RGB(255, 0, 0));
+			KirbyJumpL.AddBitmap(jump_left[i], RGB(255, 255, 255));
 		}
 
 		// load scream right and left
@@ -1346,47 +1302,47 @@ namespace game_framework {
 		KirbyScreamL.AddBitmap(IDB_SCREAML5, RGB(255, 255, 255));
 
 		// load flyR
-		KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR1.bmp", RGB(255, 0, 0));
-		KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR2.bmp", RGB(255, 0, 0));
-		KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR3.bmp", RGB(255, 0, 0));
+		KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR1.bmp", RGB(255, 255, 255));
+		KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR2.bmp", RGB(255, 255, 255));
+		KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR3.bmp", RGB(255, 255, 255));
 		count = 3;
 		while (count-- > 0) {
-			KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR4.bmp", RGB(255, 0, 0));
+			KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR4.bmp", RGB(255, 255, 255));
 		}
-		KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR4.bmp", RGB(255, 0, 0));
-		KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR5.bmp", RGB(255, 0, 0));
+		KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR4.bmp", RGB(255, 255, 255));
+		KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR5.bmp", RGB(255, 255, 255));
 
 		// load flyingR
-		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR6.bmp", RGB(255, 0, 0));
-		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR7.bmp", RGB(255, 0, 0));
-		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR8.bmp", RGB(255, 0, 0));
-		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR9.bmp", RGB(255, 0, 0));
-		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR10.bmp", RGB(255, 0, 0));
-		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR9.bmp", RGB(255, 0, 0));
-		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR8.bmp", RGB(255, 0, 0));
-		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR7.bmp", RGB(255, 0, 0));
-		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR6.bmp", RGB(255, 0, 0));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR6.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR7.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR8.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR9.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR10.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR9.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR8.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR7.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR6.bmp", RGB(255, 255, 255));
 
 		// load flyL
-		KirbyFlyL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL1.bmp", RGB(255, 0, 0));
-		KirbyFlyL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL2.bmp", RGB(255, 0, 0));
-		KirbyFlyL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL3.bmp", RGB(255, 0, 0));
+		KirbyFlyL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL1.bmp", RGB(255, 255, 255));
+		KirbyFlyL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL2.bmp", RGB(255, 255, 255));
+		KirbyFlyL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL3.bmp", RGB(255, 255, 255));
 		count = 3;
 		while (count-- > 0) {
-			KirbyFlyL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL4.bmp", RGB(255, 0, 0));
+			KirbyFlyL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL4.bmp", RGB(255, 255, 255));
 		}
-		KirbyFlyL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL5.bmp", RGB(255, 0, 0));
+		KirbyFlyL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL5.bmp", RGB(255, 255, 255));
 
 		// load flyingL
-		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL6.bmp", RGB(255, 0, 0));
-		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL7.bmp", RGB(255, 0, 0));
-		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL8.bmp", RGB(255, 0, 0));
-		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL9.bmp", RGB(255, 0, 0));
-		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL10.bmp", RGB(255, 0, 0));
-		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL9.bmp", RGB(255, 0, 0));
-		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL8.bmp", RGB(255, 0, 0));
-		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL7.bmp", RGB(255, 0, 0));
-		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL6.bmp", RGB(255, 0, 0));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL6.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL7.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL8.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL9.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL10.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL9.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL8.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL7.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_sparky\\fly\\flyL6.bmp", RGB(255, 255, 255));
 
 		// load hurtR
 		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR1.bmp", RGB(255, 255, 255));
@@ -1416,4 +1372,348 @@ namespace game_framework {
 	void hotHead_kirby::SetEaten(bool input, std::string name) {}
 
 	void hotHead_kirby::ThrowStar(){}
+
+	void hotHead_kirby::LoadBitmap()
+	{
+		// load walk left
+		char *walk_left[10] = { ".\\res\\kirby_hotHead\\walk\\walkL1.bmp", ".\\res\\kirby_hotHead\\walk\\walkL2.bmp", ".\\res\\kirby_hotHead\\walk\\walkL3.bmp", ".\\res\\kirby_hotHead\\walk\\walkL4.bmp", ".\\res\\kirby_hotHead\\walk\\walkL5.bmp", ".\\res\\kirby_hotHead\\walk\\walkL6.bmp", ".\\res\\kirby_hotHead\\walk\\walkL7.bmp", ".\\res\\kirby_hotHead\\walk\\walkL8.bmp", ".\\res\\kirby_hotHead\\walk\\walkL9.bmp", ".\\res\\kirby_hotHead\\walk\\walkL10.bmp" };
+		for (int i = 0; i < 10; i++)
+		{
+			KirbyMovingL.AddBitmap(walk_left[i], RGB(255, 255, 255));
+		}
+
+		// load walk right
+		char *walk_right[10] = { ".\\res\\kirby_hotHead\\walk\\walkR1.bmp", ".\\res\\kirby_hotHead\\walk\\walkR2.bmp", ".\\res\\kirby_hotHead\\walk\\walkR3.bmp", ".\\res\\kirby_hotHead\\walk\\walkR4.bmp", ".\\res\\kirby_hotHead\\walk\\walkR5.bmp", ".\\res\\kirby_hotHead\\walk\\walkR6.bmp", ".\\res\\kirby_hotHead\\walk\\walkR7.bmp", ".\\res\\kirby_hotHead\\walk\\walkR8.bmp", ".\\res\\kirby_hotHead\\walk\\walkR9.bmp", ".\\res\\kirby_hotHead\\walk\\walkR10.bmp" };
+		for (int i = 0; i < 10; i++)
+		{
+			KirbyMovingR.AddBitmap(walk_right[i], RGB(255, 255, 255));
+		}
+
+		// load stand and wink right
+		int count = 12;
+		while (count-- > 0) {
+			KirbyStand.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicR1.bmp", RGB(255, 255, 255));
+		}
+		KirbyStand.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicR3.bmp", RGB(255, 255, 255));
+		count = 12;
+		while (count-- > 0) {
+			KirbyStand.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicR1.bmp", RGB(255, 255, 255));
+		}
+		KirbyStand.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicR3.bmp", RGB(255, 255, 255));
+		KirbyStand.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicR1.bmp", RGB(255, 255, 255));
+		KirbyStand.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicR3.bmp", RGB(255, 255, 255));
+
+		// load stand and wink left
+		count = 12;
+		while (count-- > 0) {
+			KirbyStandL.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicL1.bmp", RGB(255, 255, 255));
+		}
+		KirbyStandL.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicL3.bmp", RGB(255, 255, 255));
+		count = 12;
+		while (count-- > 0) {
+			KirbyStandL.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicL1.bmp", RGB(255, 255, 255));
+		}
+		KirbyStandL.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicL3.bmp", RGB(255, 255, 255));
+		KirbyStandL.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicL1.bmp", RGB(255, 255, 255));
+		KirbyStandL.AddBitmap(".\\res\\kirby_hotHead\\basic\\basicL3.bmp", RGB(255, 255, 255));
+
+
+
+		// load down right and left
+		KirbyDownR.LoadBitmap(".\\res\\kirby_hotHead\\down\\downR1.bmp", RGB(255, 255, 255));
+		KirbyDownL.LoadBitmap(".\\res\\kirby_hotHead\\down\\downL1.bmp", RGB(255, 255, 255));
+
+		// load down attack right and left
+		count = 3;
+		while (count-- > 0) {
+			KirbyDownAttackR.AddBitmap(".\\res\\kirby_hotHead\\down\\downR3.bmp", RGB(255, 255, 255));
+			KirbyDownAttackL.AddBitmap(".\\res\\kirby_hotHead\\down\\downL3.bmp", RGB(255, 255, 255));
+		}
+
+		// load jump right
+		char *jump_right[10] = { ".\\res\\kirby_hotHead\\jump\\jumpR1.bmp", ".\\res\\kirby_hotHead\\jump\\jumpR2.bmp", ".\\res\\kirby_hotHead\\jump\\jumpR3.bmp", ".\\res\\kirby_hotHead\\jump\\jumpR4.bmp", ".\\res\\kirby_hotHead\\jump\\jumpR5.bmp", ".\\res\\kirby_hotHead\\jump\\jumpR6.bmp", ".\\res\\kirby_hotHead\\jump\\jumpR7.bmp", ".\\res\\kirby_hotHead\\jump\\jumpR8.bmp", ".\\res\\kirby_hotHead\\jump\\jumpR9.bmp", ".\\res\\kirby_hotHead\\jump\\jumpR10.bmp" };
+		for (int i = 0; i < 10; i++)
+		{
+			KirbyJumpR.AddBitmap(jump_right[i], RGB(255, 255, 255));
+		}
+
+		// load jump left
+		char *jump_left[10] = { ".\\res\\kirby_hotHead\\jump\\jumpL1.bmp", ".\\res\\kirby_hotHead\\jump\\jumpL2.bmp", ".\\res\\kirby_hotHead\\jump\\jumpL3.bmp", ".\\res\\kirby_hotHead\\jump\\jumpL4.bmp", ".\\res\\kirby_hotHead\\jump\\jumpL5.bmp", ".\\res\\kirby_hotHead\\jump\\jumpL6.bmp", ".\\res\\kirby_hotHead\\jump\\jumpL7.bmp", ".\\res\\kirby_hotHead\\jump\\jumpL8.bmp", ".\\res\\kirby_hotHead\\jump\\jumpL9.bmp", ".\\res\\kirby_hotHead\\jump\\jumpL10.bmp" };
+		for (int i = 0; i < 10; i++)
+		{
+			KirbyJumpL.AddBitmap(jump_left[i], RGB(255, 255, 255));
+		}
+
+		// load scream right and left
+		KirbyScreamR.AddBitmap(IDB_SCREAMR1, RGB(255, 255, 255));
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
+		}
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamR.AddBitmap(IDB_SCREAMR3, RGB(255, 255, 255));
+			KirbyScreamR.AddBitmap(IDB_SCREAMR4, RGB(255, 255, 255));
+		}
+		count = 5;
+		while (count-- > 0) {
+			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
+		}
+		KirbyScreamR.AddBitmap(IDB_SCREAMR5, RGB(255, 255, 255));
+
+		KirbyScreamL.AddBitmap(IDB_SCREAML1, RGB(255, 255, 255));
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
+		}
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamL.AddBitmap(IDB_SCREAML3, RGB(255, 255, 255));
+			KirbyScreamL.AddBitmap(IDB_SCREAML4, RGB(255, 255, 255));
+		}
+		count = 5;
+		while (count-- > 0) {
+			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
+		}
+		KirbyScreamL.AddBitmap(IDB_SCREAML5, RGB(255, 255, 255));
+
+		// load flyR
+		KirbyFlyR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR1.bmp", RGB(255, 255, 255));
+		KirbyFlyR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR2.bmp", RGB(255, 255, 255));
+		KirbyFlyR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR3.bmp", RGB(255, 255, 255));
+		count = 3;
+		while (count-- > 0) {
+			KirbyFlyR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR4.bmp", RGB(255, 255, 255));
+		}
+		KirbyFlyR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR4.bmp", RGB(255, 255, 255));
+		KirbyFlyR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR5.bmp", RGB(255, 255, 255));
+
+		// load flyingR
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR6.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR7.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR8.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR9.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR10.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR9.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR8.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR7.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR6.bmp", RGB(255, 255, 255));
+
+		// load flyL
+		KirbyFlyL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL1.bmp", RGB(255, 255, 255));
+		KirbyFlyL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL2.bmp", RGB(255, 255, 255));
+		KirbyFlyL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL3.bmp", RGB(255, 255, 255));
+		count = 3;
+		while (count-- > 0) {
+			KirbyFlyL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL4.bmp", RGB(255, 255, 255));
+		}
+		KirbyFlyL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL5.bmp", RGB(255, 255, 255));
+
+		// load flyingL
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL6.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL7.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL8.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL9.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL10.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL9.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL8.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL7.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyL6.bmp", RGB(255, 255, 255));
+
+		// load hurtR
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR1.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR2.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR3.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR5.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR6.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR7.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR8.bmp", RGB(255, 255, 255));
+
+		// load hurtL
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL1.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL2.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL3.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL5.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL6.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL7.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL8.bmp", RGB(255, 255, 255));
+
+		// load Star Throw
+		int rgb[3] = { 0, 0, 0 };
+		StarThrow.LoadBitmap(IDB_STARTHROW, rgb, 100);
+	}
+
+	void waddleDoo_kirby::SetEaten(bool input) {}
+
+	void waddleDoo_kirby::SetEaten(bool input, std::string name) {}
+
+	void waddleDoo_kirby::ThrowStar() {}
+
+	void waddleDoo_kirby::LoadBitmap()
+	{
+		// load walk left
+		char *walk_left[10] = { ".\\res\\kirby_waddleDoo\\walk\\walkL1.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkL2.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkL3.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkL4.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkL5.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkL6.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkL7.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkL8.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkL9.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkL10.bmp" };
+		for (int i = 0; i < 10; i++)
+		{
+			KirbyMovingL.AddBitmap(walk_left[i], RGB(255, 255, 255));
+		}
+
+		// load walk right
+		char *walk_right[10] = { ".\\res\\kirby_waddleDoo\\walk\\walkR1.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkR2.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkR3.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkR4.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkR5.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkR6.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkR7.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkR8.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkR9.bmp", ".\\res\\kirby_waddleDoo\\walk\\walkR10.bmp" };
+		for (int i = 0; i < 10; i++)
+		{
+			KirbyMovingR.AddBitmap(walk_right[i], RGB(255, 255, 255));
+		}
+
+		// load stand and wink right
+		int count = 12;
+		while (count-- > 0) {
+			KirbyStand.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicR1.bmp", RGB(255, 255, 255));
+		}
+		KirbyStand.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicR2.bmp", RGB(255, 255, 255));
+		count = 12;
+		while (count-- > 0) {
+			KirbyStand.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicR1.bmp", RGB(255, 255, 255));
+		}
+		KirbyStand.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicR2.bmp", RGB(255, 255, 255));
+		KirbyStand.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicR1.bmp", RGB(255, 255, 255));
+		KirbyStand.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicR2.bmp", RGB(255, 255, 255));
+
+		// load stand and wink left
+		count = 12;
+		while (count-- > 0) {
+			KirbyStandL.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicL1.bmp", RGB(255, 255, 255));
+		}
+		KirbyStandL.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicL2.bmp", RGB(255, 255, 255));
+		count = 12;
+		while (count-- > 0) {
+			KirbyStandL.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicL1.bmp", RGB(255, 255, 255));
+		}
+		KirbyStandL.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicL2.bmp", RGB(255, 255, 255));
+		KirbyStandL.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicL1.bmp", RGB(255, 255, 255));
+		KirbyStandL.AddBitmap(".\\res\\kirby_waddleDoo\\basic\\basicL2.bmp", RGB(255, 255, 255));
+
+
+
+		// load down right and left
+		KirbyDownR.LoadBitmap(".\\res\\kirby_waddleDoo\\down\\downR1.bmp", RGB(255, 255, 255));
+		KirbyDownL.LoadBitmap(".\\res\\kirby_waddleDoo\\down\\downL1.bmp", RGB(255, 255, 255));
+
+		// load down attack right and left
+		count = 3;
+		while (count-- > 0) {
+			KirbyDownAttackR.AddBitmap(".\\res\\kirby_waddleDoo\\down\\downR2.bmp", RGB(255, 255, 255));
+			KirbyDownAttackL.AddBitmap(".\\res\\kirby_waddleDoo\\down\\downL2.bmp", RGB(255, 255, 255));
+		}
+
+		// load jump right
+		char *jump_right[10] = { ".\\res\\kirby_waddleDoo\\jump\\jumpR1.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpR2.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpR3.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpR4.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpR5.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpR6.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpR7.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpR8.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpR9.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpR10.bmp" };
+		for (int i = 0; i < 10; i++)
+		{
+			KirbyJumpR.AddBitmap(jump_right[i], RGB(255, 255, 255));
+		}
+
+		// load jump left
+		char *jump_left[10] = { ".\\res\\kirby_waddleDoo\\jump\\jumpL1.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpL2.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpL3.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpL4.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpL5.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpL6.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpL7.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpL8.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpL9.bmp", ".\\res\\kirby_waddleDoo\\jump\\jumpL10.bmp" };
+		for (int i = 0; i < 10; i++)
+		{
+			KirbyJumpL.AddBitmap(jump_left[i], RGB(255, 255, 255));
+		}
+
+		// load scream right and left
+		KirbyScreamR.AddBitmap(IDB_SCREAMR1, RGB(255, 255, 255));
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
+		}
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamR.AddBitmap(IDB_SCREAMR3, RGB(255, 255, 255));
+			KirbyScreamR.AddBitmap(IDB_SCREAMR4, RGB(255, 255, 255));
+		}
+		count = 5;
+		while (count-- > 0) {
+			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
+		}
+		KirbyScreamR.AddBitmap(IDB_SCREAMR5, RGB(255, 255, 255));
+
+		KirbyScreamL.AddBitmap(IDB_SCREAML1, RGB(255, 255, 255));
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
+		}
+		count = 6;
+		while (count-- > 0) {
+			KirbyScreamL.AddBitmap(IDB_SCREAML3, RGB(255, 255, 255));
+			KirbyScreamL.AddBitmap(IDB_SCREAML4, RGB(255, 255, 255));
+		}
+		count = 5;
+		while (count-- > 0) {
+			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
+		}
+		KirbyScreamL.AddBitmap(IDB_SCREAML5, RGB(255, 255, 255));
+
+		// load flyR
+		KirbyFlyR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR1.bmp", RGB(255, 255, 255));
+		KirbyFlyR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR2.bmp", RGB(255, 255, 255));
+		KirbyFlyR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR3.bmp", RGB(255, 255, 255));
+		count = 3;
+		while (count-- > 0) {
+			KirbyFlyR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR4.bmp", RGB(255, 255, 255));
+		}
+		KirbyFlyR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR4.bmp", RGB(255, 255, 255));
+		KirbyFlyR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR5.bmp", RGB(255, 255, 255));
+
+		// load flyingR
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR6.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR7.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR8.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR9.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR9.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR8.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR7.bmp", RGB(255, 255, 255));
+		KirbyFlyingR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR6.bmp", RGB(255, 255, 255));
+
+		// load flyL
+		KirbyFlyL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL1.bmp", RGB(255, 255, 255));
+		KirbyFlyL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL2.bmp", RGB(255, 255, 255));
+		KirbyFlyL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL3.bmp", RGB(255, 255, 255));
+		count = 3;
+		while (count-- > 0) {
+			KirbyFlyL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL4.bmp", RGB(255, 255, 255));
+		}
+		KirbyFlyL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL5.bmp", RGB(255, 255, 255));
+
+		// load flyingL
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL6.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL7.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL8.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL9.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL9.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL8.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL7.bmp", RGB(255, 255, 255));
+		KirbyFlyingL.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyL6.bmp", RGB(255, 255, 255));
+
+		// load hurtR
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR1.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR2.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR3.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR5.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR6.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR7.bmp", RGB(255, 255, 255));
+		KirbyHurtR.AddBitmap(".\\res\\hurt\\hurtR8.bmp", RGB(255, 255, 255));
+
+		// load hurtL
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL1.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL2.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL3.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL5.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL6.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL7.bmp", RGB(255, 255, 255));
+		KirbyHurtL.AddBitmap(".\\res\\hurt\\hurtL8.bmp", RGB(255, 255, 255));
+
+		// load Star Throw
+		int rgb[3] = { 0, 0, 0 };
+		StarThrow.LoadBitmap(IDB_STARTHROW, rgb, 100);
+	}
 }
