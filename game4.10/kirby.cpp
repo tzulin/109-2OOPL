@@ -14,7 +14,7 @@ namespace game_framework {
 	kirby::kirby()
 	{
 		// kirby constructor
-		StageReSet(10, "normal");
+		StageReSet(10, "normal_kirby");
 	}
 
 	void kirby::StageReSet(int hp_left, std::string kind) {
@@ -283,27 +283,7 @@ namespace game_framework {
 		if (StarThrow.WeaponIsShow()) {
 			StarThrow.OnShow();
 		}
-
-		if (kirby_kind == "waddleKirby") {
-			TRACE("waddle\n");
-		}
-		else if (kirby_kind == "bigWaddleKirby") {
-			TRACE("bigWaddle\n");
-		}
-		else if (kirby_kind == "droppyKirby") {
-			TRACE("droppy\n");
-		}
-		else if (kirby_kind == "waddleDooKirby") {
-			TRACE("waddleDoo\n");
-		}
-		else if (kirby_kind == "sparkyKirby") {
-			TRACE("sparky\n");
-		}
-		else if (kirby_kind == "hotHeadKirby") {
-			TRACE("hotHead\n");
-		}
 		
-
 		switch (GetCase()) {
 			// case jump up right
 		case 1:
@@ -600,18 +580,6 @@ namespace game_framework {
 		}
 
 		// set down attack right and left
-		/*if (IsDown && IsAttack && !IsHurt) {
-			if (IsFacingR && x < SIZE_X - ImgW - frame_of_test) {
-				// x += length * 3;
-				SetXY(x + length * 3, y);
-			}
-			else if (x > frame_of_test) {
-				// x -= length * 3;
-				SetXY(x - length * 3, y);
-			}
-		}*/
-
-		// set down attack right and left
 		if (IsDown && IsAttack) {
 			if (IsFacingR && x < SIZE_X - ImgW - frame_of_test) {
 				// x += length * 3;
@@ -702,10 +670,6 @@ namespace game_framework {
 		// kirby throw star
 		if (IsEaten && IsAttack) {
 			ThrowStar();
-		}
-
-		if (IsEaten && IsDown) {
-			SetChange();
 		}
 
 		StarThrow.OnMove();
@@ -885,6 +849,10 @@ namespace game_framework {
 		}
 	}
 
+	void kirby::SetKindInit() {
+		kirby_kind = "normal_kirby";
+	}
+
 	void  kirby::SetMovingL(bool input) {
 		IsMovingL = input;
 	}
@@ -953,32 +921,12 @@ namespace game_framework {
 		EatenEnemy = name;
 	}
 
-	void kirby::SetChange() {
-		if (EatenEnemy == "waddle") {
-			TRACE("waddle eaten\n");
-		}
-		else if (EatenEnemy == "bigWaddle") {
-			TRACE("bigWaddle eaten\n");
-		}
-		else if (EatenEnemy == "droppy") {
-			TRACE("droppy eaten\n");
-		}
-		else if (EatenEnemy == "waddleDoo") {
-			TRACE("waddleDoo eaten\n");
-			kirby_kind = "waddleDooKirby";
-		}
-		else if (EatenEnemy == "sparky") {
-			TRACE("sparky eaten\n");
-			kirby_kind = "sparkyKirby";
-		}
-		else if (EatenEnemy == "hotHead") {
-			TRACE("hotHead eaten\n");
-			kirby_kind = "hotHeadKirby";
-		}
-		else {
-			TRACE("other eaten\n");
-		}
-		SetEaten(false, "");
+	void kirby::SetKind(std::string input) {
+		kirby_kind = input;
+	}
+
+	std::string kirby::GetEatenEnemy() {
+		return EatenEnemy;
 	}
 
 	void kirby::YouAreLeft(bool YouAreLeft) {
@@ -1023,7 +971,7 @@ namespace game_framework {
 		if (IsDown && IsAttack) {
 			return;
 		}
-		kirby_kind = "normal";
+		kirby_kind = "normal_kirby";
 		LastHurt = time;
 		hp -= input;
 		IsHurt = true;
@@ -1170,6 +1118,14 @@ namespace game_framework {
 		return kirby_kind;
 	}
 
+	bool kirby::GetEaten() {
+		return IsEaten;
+	}
+
+	bool kirby::GetIsGround() {
+		return YouAreGround;
+	}
+
 	bool kirby::IsAlive() {
 		if (hp > 0) {
 			return true;
@@ -1189,6 +1145,33 @@ namespace game_framework {
 
 	weapon* kirby::GetWeapon() {
 		return &StarThrow;
+	}
+
+	void kirby::KirbyCopy(kirby* copy_kirby) {
+		copy_kirby->EatenEnemy = "";
+		copy_kirby->x = x;
+		copy_kirby->y = y;
+		copy_kirby->hp = hp;
+		copy_kirby->velocity = velocity;
+		copy_kirby->fly_velocity = fly_velocity;
+		copy_kirby->game_state_counter = game_state_counter;
+		copy_kirby->LastHurt = LastHurt;	
+
+		copy_kirby->IsRising = IsRising;
+		copy_kirby->IsMovingL = IsMovingL;
+		copy_kirby->IsMovingR = IsMovingR;
+		copy_kirby->IsFacingR = IsFacingR;
+		copy_kirby->InAir = InAir;
+		copy_kirby->OtherFromL = OtherFromL;
+		copy_kirby->IsDown = IsDown;
+		copy_kirby->IsAttack = IsAttack;
+		copy_kirby->IsJumping = IsJumping;
+		copy_kirby->IsFlying = IsFlying;
+		copy_kirby->FlyUp = FlyUp;
+		copy_kirby->IsHurt = IsHurt;
+		copy_kirby->YouAreGround = YouAreGround;
+		copy_kirby->IsRun = IsRun;
+		copy_kirby->IsHack = IsHack;
 	}
 
 	void sparky_kirby::SetEaten(bool input) {}
@@ -1269,37 +1252,23 @@ namespace game_framework {
 		}
 
 		// load scream right and left
-		KirbyScreamR.AddBitmap(IDB_SCREAMR1, RGB(255, 255, 255));
-		count = 6;
+		count = 3;
 		while (count-- > 0) {
-			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
+			KirbyScreamR.AddBitmap(".\\res\\kirby_sparky\\scream\\screamR2.bmp", RGB(255, 255, 255));
 		}
-		count = 6;
+		count = 10;
 		while (count-- > 0) {
-			KirbyScreamR.AddBitmap(IDB_SCREAMR3, RGB(255, 255, 255));
-			KirbyScreamR.AddBitmap(IDB_SCREAMR4, RGB(255, 255, 255));
+			KirbyScreamR.AddBitmap(".\\res\\kirby_sparky\\scream\\screamR1.bmp", RGB(255, 255, 255));
 		}
-		count = 5;
-		while (count-- > 0) {
-			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
-		}
-		KirbyScreamR.AddBitmap(IDB_SCREAMR5, RGB(255, 255, 255));
 
-		KirbyScreamL.AddBitmap(IDB_SCREAML1, RGB(255, 255, 255));
-		count = 6;
+		count = 3;
 		while (count-- > 0) {
-			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
+			KirbyScreamL.AddBitmap(".\\res\\kirby_sparky\\scream\\screamL2.bmp", RGB(255, 255, 255));
 		}
-		count = 6;
+		count = 10;
 		while (count-- > 0) {
-			KirbyScreamL.AddBitmap(IDB_SCREAML3, RGB(255, 255, 255));
-			KirbyScreamL.AddBitmap(IDB_SCREAML4, RGB(255, 255, 255));
+			KirbyScreamL.AddBitmap(".\\res\\kirby_sparky\\scream\\screamL1.bmp", RGB(255, 255, 255));
 		}
-		count = 5;
-		while (count-- > 0) {
-			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
-		}
-		KirbyScreamL.AddBitmap(IDB_SCREAML5, RGB(255, 255, 255));
 
 		// load flyR
 		KirbyFlyR.AddBitmap(".\\res\\kirby_sparky\\fly\\flyR1.bmp", RGB(255, 255, 255));
@@ -1365,6 +1334,10 @@ namespace game_framework {
 		// load Star Throw
 		int rgb[3] = { 0, 0, 0 };
 		StarThrow.LoadBitmap(IDB_STARTHROW, rgb, 100);
+	}
+
+	void sparky_kirby::SetKindInit() {
+		kirby_kind = "sparky_kirby";
 	}
 
 	void hotHead_kirby::SetEaten(bool input) {}
@@ -1445,37 +1418,31 @@ namespace game_framework {
 		}
 
 		// load scream right and left
-		KirbyScreamR.AddBitmap(IDB_SCREAMR1, RGB(255, 255, 255));
-		count = 6;
-		while (count-- > 0) {
-			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
+		count = 3;
+		while(count-- > 0) {
+			KirbyScreamR.AddBitmap(".\\res\\kirby_hotHead\\scream\\screamR3.bmp", RGB(255, 255, 255));
 		}
-		count = 6;
+		count = 10;
 		while (count-- > 0) {
-			KirbyScreamR.AddBitmap(IDB_SCREAMR3, RGB(255, 255, 255));
-			KirbyScreamR.AddBitmap(IDB_SCREAMR4, RGB(255, 255, 255));
+			KirbyScreamR.AddBitmap(".\\res\\kirby_hotHead\\scream\\screamR2.bmp", RGB(255, 255, 255));
 		}
 		count = 5;
 		while (count-- > 0) {
-			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
+			KirbyScreamR.AddBitmap(".\\res\\kirby_hotHead\\scream\\screamR1.bmp", RGB(255, 255, 255));
 		}
-		KirbyScreamR.AddBitmap(IDB_SCREAMR5, RGB(255, 255, 255));
 
-		KirbyScreamL.AddBitmap(IDB_SCREAML1, RGB(255, 255, 255));
-		count = 6;
+		count = 3;
 		while (count-- > 0) {
-			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
+			KirbyScreamL.AddBitmap(".\\res\\kirby_hotHead\\scream\\screamL3.bmp", RGB(255, 255, 255));
 		}
-		count = 6;
+		count = 10;
 		while (count-- > 0) {
-			KirbyScreamL.AddBitmap(IDB_SCREAML3, RGB(255, 255, 255));
-			KirbyScreamL.AddBitmap(IDB_SCREAML4, RGB(255, 255, 255));
+			KirbyScreamL.AddBitmap(".\\res\\kirby_hotHead\\scream\\screamL2.bmp", RGB(255, 255, 255));
 		}
 		count = 5;
 		while (count-- > 0) {
-			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
+			KirbyScreamL.AddBitmap(".\\res\\kirby_hotHead\\scream\\screamL1.bmp", RGB(255, 255, 255));
 		}
-		KirbyScreamL.AddBitmap(IDB_SCREAML5, RGB(255, 255, 255));
 
 		// load flyR
 		KirbyFlyR.AddBitmap(".\\res\\kirby_hotHead\\fly\\flyR1.bmp", RGB(255, 255, 255));
@@ -1541,6 +1508,10 @@ namespace game_framework {
 		// load Star Throw
 		int rgb[3] = { 0, 0, 0 };
 		StarThrow.LoadBitmap(IDB_STARTHROW, rgb, 100);
+	}
+
+	void hotHead_kirby::SetKindInit() {
+		kirby_kind = "hotHead_kirby";
 	}
 
 	void waddleDoo_kirby::SetEaten(bool input) {}
@@ -1621,37 +1592,23 @@ namespace game_framework {
 		}
 
 		// load scream right and left
-		KirbyScreamR.AddBitmap(IDB_SCREAMR1, RGB(255, 255, 255));
-		count = 6;
+		count = 3;
 		while (count-- > 0) {
-			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
+			KirbyScreamR.AddBitmap(".\\res\\kirby_waddleDoo\\scream\\screamR2.bmp", RGB(255, 255, 255));
 		}
-		count = 6;
+		count = 10;
 		while (count-- > 0) {
-			KirbyScreamR.AddBitmap(IDB_SCREAMR3, RGB(255, 255, 255));
-			KirbyScreamR.AddBitmap(IDB_SCREAMR4, RGB(255, 255, 255));
+			KirbyScreamR.AddBitmap(".\\res\\kirby_waddleDoo\\scream\\screamR1.bmp", RGB(255, 255, 255));
 		}
-		count = 5;
-		while (count-- > 0) {
-			KirbyScreamR.AddBitmap(IDB_SCREAMR2, RGB(255, 255, 255));
-		}
-		KirbyScreamR.AddBitmap(IDB_SCREAMR5, RGB(255, 255, 255));
 
-		KirbyScreamL.AddBitmap(IDB_SCREAML1, RGB(255, 255, 255));
-		count = 6;
+		count = 3;
 		while (count-- > 0) {
-			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
+			KirbyScreamL.AddBitmap(".\\res\\kirby_waddleDoo\\scream\\screamL2.bmp", RGB(255, 255, 255));
 		}
-		count = 6;
+		count = 10;
 		while (count-- > 0) {
-			KirbyScreamL.AddBitmap(IDB_SCREAML3, RGB(255, 255, 255));
-			KirbyScreamL.AddBitmap(IDB_SCREAML4, RGB(255, 255, 255));
+			KirbyScreamL.AddBitmap(".\\res\\kirby_waddleDoo\\scream\\screamL1.bmp", RGB(255, 255, 255));
 		}
-		count = 5;
-		while (count-- > 0) {
-			KirbyScreamL.AddBitmap(IDB_SCREAML2, RGB(255, 255, 255));
-		}
-		KirbyScreamL.AddBitmap(IDB_SCREAML5, RGB(255, 255, 255));
 
 		// load flyR
 		KirbyFlyR.AddBitmap(".\\res\\kirby_waddleDoo\\fly\\flyR1.bmp", RGB(255, 255, 255));
@@ -1715,5 +1672,9 @@ namespace game_framework {
 		// load Star Throw
 		int rgb[3] = { 0, 0, 0 };
 		StarThrow.LoadBitmap(IDB_STARTHROW, rgb, 100);
+	}
+
+	void waddleDoo_kirby::SetKindInit() {
+		kirby_kind = "waddleDoo_kirby";
 	}
 }

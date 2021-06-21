@@ -171,6 +171,7 @@ namespace game_framework {
 		void kirby::StageReSet(int hp_left, std::string kind);
 		~kirby();
 		void SetAttack(bool input);
+		virtual void SetKindInit();
 		virtual void SetEaten(bool input);
 		virtual void SetEaten(bool input, std::string name);
 		virtual void LoadBitmap();
@@ -187,13 +188,13 @@ namespace game_framework {
 		void SetFly(bool input);
 		void SetCounter(int);
 		void SetHack(bool input);
+		void SetKind(std::string input);
 
 		void SetEnemies(vector<enemy*> input_EnemyList);
 		void SetThings(vector<thing*> input_ThingList);
 		void SetMap(CMovingBitmap* Map);
 		void SetDoor(CMovingBitmap* door);
 		void SetRun(bool input);
-		void SetChange();
 		void Hurt(int input, int time);
 		void YouAreLeft(bool YouAreLeft);
 		weapon* GetWeapon();
@@ -204,10 +205,15 @@ namespace game_framework {
 		int* GetXy();
 		int GetWidth();
 		int GetHeight();
+		std::string GetEatenEnemy();
+		bool GetEaten();
+		bool GetIsGround();
 		bool IsAlive();
 		bool IsScreamR();
 		bool IsScreamL();
 		//bool GetUpKey();
+
+		void KirbyCopy(kirby* new_kirby);
 
 	protected:
 		CAnimation KirbyMovingL;
@@ -242,7 +248,7 @@ namespace game_framework {
 		// int number_of_star_blocks;
 		weapon StarThrow;
 
-		std::string EatenEnemy;
+		std::string EatenEnemy = "";
 		std::string kirby_kind;
 		int x, y, hp;
 		const int ImgW = 60, ImgH = 60;
@@ -283,6 +289,7 @@ namespace game_framework {
 		void SetEaten(bool input, std::string name) override;
 		void LoadBitmap() override;
 		void ThrowStar() override;
+		void SetKindInit() override;
 	};
 
 	class hotHead_kirby : public kirby {
@@ -291,6 +298,7 @@ namespace game_framework {
 		void SetEaten(bool input, std::string name) override;
 		void LoadBitmap() override;
 		void ThrowStar() override;
+		void SetKindInit() override;
 	};
 
 	class waddleDoo_kirby : public kirby {
@@ -299,6 +307,7 @@ namespace game_framework {
 		void SetEaten(bool input, std::string name) override;
 		void LoadBitmap() override;
 		void ThrowStar() override;
+		void SetKindInit() override;
 	};
 
 	inline bool EnemyCanAttack(enemy & e, kirby & k) {
@@ -422,6 +431,7 @@ namespace game_framework {
 		delete[] bXy;
 		return false;
 	}
+
 }
 
 #endif

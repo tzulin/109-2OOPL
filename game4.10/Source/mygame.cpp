@@ -334,6 +334,10 @@ namespace game_framework {
 			delete[] Map;
 		}
 
+		if (Kirby != nullptr) {
+			delete Kirby;
+		}
+
 		if (!ThingVector.empty()) {
 			for (auto block : ThingVector) {
 				delete block;
@@ -351,7 +355,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnBeginState()
 	{
-		Kirby.StageReSet(Kirby.GetHp(), Kirby.GetKind());
+		Kirby->StageReSet(Kirby->GetHp(), Kirby->GetKind());
 		if (stage == 1) {
 			CAudio::Instance()->Play(AUDIO_STARTING, true);
 			if (Map != nullptr) {
@@ -697,25 +701,33 @@ namespace game_framework {
 	{
 		counter++;
 
-		Kirby.SetCounter(counter);							// kirby get counter
-		Kirby.SetMap(Map);									// kirby get map pointer
-		Kirby.SetDoor(&Door);
-		Kirby.SetThings(ThingVector);						// kirby get things pointer 
-		Kirby.SetEnemies(EnemyVector);
+		Kirby->SetCounter(counter);							// kirby get counter
+		Kirby->SetMap(Map);									// kirby get map pointer
+		Kirby->SetDoor(&Door);
+		Kirby->SetThings(ThingVector);						// kirby get things pointer 
+		Kirby->SetEnemies(EnemyVector);
 
-		if (!Kirby.IsAlive()) {								// Kirby dead
+		if (!Kirby->IsAlive()) {								// Kirby dead
 			GotoGameState(GAME_STATE_OVER, stage, record);
 		}
 
-		Kirby.OnMove();										// Kirby OnMove
-		weapon* KirbyWeapon = Kirby.GetWeapon();
+		Kirby->OnMove();										// Kirby OnMove
+		weapon* KirbyWeapon = Kirby->GetWeapon();
 
 		if (!EnemyVector.empty()) {
 			for (unsigned int i = 0; i < EnemyVector.size(); i++) {
 				EnemyVector[i]->OnMove();
-				if (Meet(*EnemyVector[i], Kirby)) {
-					Kirby.Hurt(EnemyVector[i]->GetPower(), counter);
+				if (Meet(*EnemyVector[i], *Kirby)) {
 					EnemyVector[i]->Hurt(1, counter);
+					Kirby->Hurt(EnemyVector[i]->GetPower(), counter);
+					temp_kirby = new normal_kirby;
+					if (Kirby != nullptr) {
+						Kirby->KirbyCopy(temp_kirby);
+						delete Kirby;
+					}
+					Kirby = temp_kirby;
+					Kirby->LoadBitmap();
+					Kirby->SetKindInit();
 				}
 				if (Meet(*KirbyWeapon, *EnemyVector[i]) && KirbyWeapon->WeaponIsShow()) {			// kirby weapon hit enemy
 					EnemyVector[i]->Hurt(1, counter);
@@ -723,19 +735,27 @@ namespace game_framework {
 				}
 				if (EnemyVector[i]->EnemyHasWeapon()) {
 					weapon EnemyWeapon = EnemyVector[i]->GetWeapon();
-					if (EnemyCanAttack(*EnemyVector[i], Kirby)) {				// enemy weapon hit kirby
+					if (EnemyCanAttack(*EnemyVector[i], *Kirby)) {				// enemy weapon hit kirby
 						EnemyVector[i]->OnMove();								    // WaddleDoo OnMove
-						EnemyVector[i]->Attack(Kirby, counter);
-						if (Meet(EnemyWeapon, Kirby) && EnemyWeapon.WeaponIsShow()) {
-							Kirby.Hurt(EnemyVector[i]->GetPower(), counter);
+						EnemyVector[i]->Attack(*Kirby, counter);
+						if (Meet(EnemyWeapon, *Kirby) && EnemyWeapon.WeaponIsShow()) {
+							Kirby->Hurt(EnemyVector[i]->GetPower(), counter);
+							temp_kirby = new normal_kirby;
+							if (Kirby != nullptr) {
+								Kirby->KirbyCopy(temp_kirby);
+								delete Kirby;
+							}
+							Kirby = temp_kirby;
+							Kirby->LoadBitmap();
+							Kirby->SetKindInit();
 						}
 					}
 				}
 				if (EnemyVector[i]->GetHp() > 0) {												// waddle can attack check
-					if (KirbyCanAttack(Kirby, EnemyVector[i])) {
+					if (KirbyCanAttack(*Kirby, EnemyVector[i])) {
 						EnemyVector[i]->Hurt(10, counter);
-						Kirby.SetEaten(true, EnemyVector[i]->GetKind());
-						Kirby.SetAttack(false);
+						Kirby->SetEaten(true, EnemyVector[i]->GetKind());
+						Kirby->SetAttack(false);
 					}
 				}
 				if (EnemyVector[i]->GetHp() <= 0) {
@@ -745,17 +765,17 @@ namespace game_framework {
 			}
 		}
 
-		kirbyHpInt.SetInteger(Kirby.GetHp());				// set integer
+		kirbyHpInt.SetInteger(Kirby->GetHp());				// set integer
 		if (!ThingVector.empty()) {							// starblock can attack or not
 			for (auto block : ThingVector) {
 				if (block != nullptr && block->GetShow()) {
 					if (Meet(*KirbyWeapon, *block) && KirbyWeapon->WeaponIsShow()) {			// kirby weapon hit enemy
 						KirbyWeapon->SetShow(false);
 					}
-					if (KirbyCanAttack(Kirby, block) && block->isStarBlock()) {
+					if (KirbyCanAttack(*Kirby, block) && block->isStarBlock()) {
 						block->SetShow(false);
-						Kirby.SetEaten(true);
-						Kirby.SetAttack(false);
+						Kirby->SetEaten(true);
+						Kirby->SetAttack(false);
 					}
 				}
 			}
@@ -768,7 +788,9 @@ namespace game_framework {
 		Door.LoadBitmap(IDB_DOOR, RGB(255, 255, 255));
 		kirbyHp.LoadBitmap(".\\res\\kirby_hpPic.bmp", RGB(236, 28, 36));
 		kirbyHpInt.LoadBitmap();
-		Kirby.LoadBitmap();									// Kirby LoadBitmap
+		Kirby = new normal_kirby;
+		Kirby->LoadBitmap();									// Kirby LoadBitmap
+		Kirby->SetKindInit();
 		
 		// load audio
 		CAudio::Instance()->Load(AUDIO_STARTING, "sounds\\starting_stage.mp3");
@@ -812,6 +834,10 @@ namespace game_framework {
 		const char KEY_P = 0x50;		// keyboard P
 		const char KEY_SPACE = 0x20;	// keyboard space
 		const char KEY_ENTER = 0x0D;	// keyboard enter
+		const char NUM_KEY_1 = 0x61;	// number keyboard 1
+		const char NUM_KEY_2 = 0x62;	// number keyboard 2
+		const char NUM_KEY_3 = 0x63;	// number keyboard 3
+		const char NUM_KEY_4 = 0x64;	// number keyboard 4
 
 		if (nChar == KEY_ESC) {
 			GotoGameState(GAME_STATE_OVER, stage, record);
@@ -819,32 +845,66 @@ namespace game_framework {
 
 		if (nChar == KEY_LEFT) {
 			if (counter - last_left <= 10) {
-				Kirby.SetRun(true);
+				Kirby->SetRun(true);
 			}
 			else {
 				last_left = counter;
 			}
-			Kirby.SetMovingL(true);					// Kirby moving left
-			Kirby.SetFacingL(true);					// Kirby facing left
+			Kirby->SetMovingL(true);					// Kirby moving left
+			Kirby->SetFacingL(true);					// Kirby facing left
 		}
 
 		if (nChar == KEY_RIGHT) {
 			if (counter - last_right <= 10) {
-				Kirby.SetRun(true);
+				Kirby->SetRun(true);
 			}
 			else {
 				last_right = counter;
 			}
-			Kirby.SetMovingR(true);					// Kirby moving right
-			Kirby.SetFacingR(true);					// Kirby facing right
+			Kirby->SetMovingR(true);					// Kirby moving right
+			Kirby->SetFacingR(true);					// Kirby facing right
 		}
 
 		if (nChar == KEY_DOWN) {
-			Kirby.SetDown(true);
+			Kirby->SetDown(true);
+
+			if (Kirby->GetEatenEnemy() == "waddleDoo") {
+				temp_kirby = new waddleDoo_kirby;
+				if (Kirby != nullptr) {
+					Kirby->KirbyCopy(temp_kirby);
+					delete Kirby;
+				}
+				Kirby = temp_kirby;
+				Kirby->LoadBitmap();
+				Kirby->SetKindInit();
+			}
+			else if (Kirby->GetEatenEnemy() == "sparky") {
+				temp_kirby = new sparky_kirby;
+				if (Kirby != nullptr) {
+					Kirby->KirbyCopy(temp_kirby);
+					delete Kirby;
+				}
+				Kirby = temp_kirby;
+				Kirby->LoadBitmap();
+				Kirby->SetKindInit();
+			}
+			else if (Kirby->GetEatenEnemy() == "hotHead") {
+				temp_kirby = new hotHead_kirby;
+				if (Kirby != nullptr) {
+					Kirby->KirbyCopy(temp_kirby);
+					delete Kirby;
+				}
+				Kirby = temp_kirby;
+				Kirby->LoadBitmap();
+				Kirby->SetKindInit();
+			}
+			else if (Kirby->GetEaten()) {
+				Kirby->SetEaten(false);
+			}
 		}
 
 		if (nChar == KEY_C) {
-			Kirby.SetAttack(true);
+			Kirby->SetAttack(true);
 		}
 
 		if (nChar == KEY_P) {
@@ -855,7 +915,7 @@ namespace game_framework {
 		}
 
 		if (nChar == KEY_S) {
-			Kirby.SetHack(true);
+			Kirby->SetHack(true);
 		}
 
 		if (nChar == KEY_N) {
@@ -876,23 +936,67 @@ namespace game_framework {
 		}
 
 		if (nChar == KEY_SPACE) {
-			Kirby.SetJump(true);
+			Kirby->SetJump(true);
 		}
 
 		if (nChar == KEY_UP) {
-			if (Meet(Kirby, Door)) {
+			if (Meet(*Kirby, Door)) {
 				CAudio::Instance()->Stop(AUDIO_STARTING);
 				CAudio::Instance()->Stop(AUDIO_RAINBOWROUTE);
 				CAudio::Instance()->Stop(AUDIO_BOSS);
 				GotoGameState(GAME_STATE_RUN, GetStage() + 1, record);
 			}
 			else {
-				Kirby.SetFly(true);
+				Kirby->SetFly(true);
 			}
 		}
 
 		if (nChar == KEY_ENTER) {
 
+		}
+
+		if (nChar == NUM_KEY_1) {
+			temp_kirby = new normal_kirby;
+			if (Kirby != nullptr) {
+				Kirby->KirbyCopy(temp_kirby);
+				delete Kirby;
+			}
+			Kirby = temp_kirby;
+			Kirby->LoadBitmap();
+			Kirby->SetKindInit();
+		}
+
+		if (nChar == NUM_KEY_2) {
+			temp_kirby = new waddleDoo_kirby;
+			if (Kirby != nullptr) {
+				Kirby->KirbyCopy(temp_kirby);
+				delete Kirby;
+			}
+			Kirby = temp_kirby;
+			Kirby->LoadBitmap();
+			Kirby->SetKindInit();
+		}
+
+		if (nChar == NUM_KEY_3) {
+			temp_kirby = new sparky_kirby;
+			if (Kirby != nullptr) {
+				Kirby->KirbyCopy(temp_kirby);
+				delete Kirby;
+			}
+			Kirby = temp_kirby;
+			Kirby->LoadBitmap();
+			Kirby->SetKindInit();
+		}
+
+		if (nChar == NUM_KEY_4) {
+			temp_kirby = new hotHead_kirby;
+			if (Kirby != nullptr) {
+				Kirby->KirbyCopy(temp_kirby);
+				delete Kirby;
+			}
+			Kirby = temp_kirby;
+			Kirby->LoadBitmap();
+			Kirby->SetKindInit();
 		}
 	}
 
@@ -911,21 +1015,21 @@ namespace game_framework {
 		const char KEY_ENTER = 0x0D;	// keyboard enter
 
 		if (nChar == KEY_LEFT) {
-			Kirby.SetMovingL(false);				// Kirby stop moving left
-			Kirby.SetRun(false);
+			Kirby->SetMovingL(false);				// Kirby stop moving left
+			Kirby->SetRun(false);
 		}
 
 		if (nChar == KEY_RIGHT) {
-			Kirby.SetMovingR(false);				// Kirby stop moving right
-			Kirby.SetRun(false);
+			Kirby->SetMovingR(false);				// Kirby stop moving right
+			Kirby->SetRun(false);
 		}
 
 		if (nChar == KEY_DOWN) {
-			Kirby.SetDown(false);
+			Kirby->SetDown(false);
 		}
 
 		if (nChar == KEY_C) {
-			Kirby.SetAttack(false);
+			Kirby->SetAttack(false);
 		}
 	}
 
@@ -969,7 +1073,7 @@ namespace game_framework {
 			}
 		}
 
-		Kirby.OnShow();									// Kirby OnShow
+		Kirby->OnShow();									// Kirby OnShow
 		kirbyHpInt.ShowBitmap();						// hp int show
 		kirbyHp.ShowBitmap();							// kibyHp show	
 
