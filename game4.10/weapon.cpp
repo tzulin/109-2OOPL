@@ -27,6 +27,12 @@ namespace game_framework {
 		}
 	}
 
+	void weapon::LoadBitmap(char* pic, int* rgb, int n) {
+		for (int i = 0; i < n;i++) {
+			PlayAttack.AddBitmap(pic, RGB(rgb[0], rgb[1], rgb[2]));
+		}
+	}
+
 	void weapon::LoadBitmap(int IDB_INPUT, int* rgb, int n) {
 		for (int i = 0; i < n; i++) {
 			PlayAttack.AddBitmap(IDB_INPUT, RGB(rgb[0], rgb[1], rgb[2]));
@@ -47,6 +53,8 @@ namespace game_framework {
 
 	void weapon::OnMove() {
 		PlayAttack.OnMove();
+		ImgW = PlayAttack.Width();
+		ImgH = PlayAttack.Height();
 	}
 
 	void weapon::SetShow(bool input) {
@@ -102,7 +110,7 @@ namespace game_framework {
 	}
 
 	int* weapon::GetXy() {
-		return new int[4]{ x, y, x + ImgW, y + ImgH };
+		return new int[4]{ x, y, x +ImgW, y + ImgW };
 	}
 
 	int weapon::GetAttackTime() {
@@ -117,7 +125,19 @@ namespace game_framework {
 		return IsShow;
 	}
 
+	bool weapon::IsFinalBitmap() {
+		return PlayAttack.IsFinalBitmap();
+	}
+
 	void weapon::YouAreLeft(bool YouAreLeft) {
 		OtherFromL = !YouAreLeft;
+	}
+
+	int weapon::Width() {
+		return PlayAttack.Width();
+	}
+
+	int weapon::Height() {
+		return PlayAttack.Height();
 	}
 }

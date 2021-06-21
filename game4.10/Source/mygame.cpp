@@ -752,7 +752,7 @@ namespace game_framework {
 					}
 				}
 				if (EnemyVector[i]->GetHp() > 0) {												// waddle can attack check
-					if (KirbyCanAttack(*Kirby, EnemyVector[i])) {
+					if (KirbyCanAttack(*Kirby, EnemyVector[i]) && Kirby->GetKind() == "normal_kirby") {
 						EnemyVector[i]->Hurt(10, counter);
 						Kirby->SetEaten(true, EnemyVector[i]->GetKind());
 						Kirby->SetAttack(false);
@@ -769,10 +769,10 @@ namespace game_framework {
 		if (!ThingVector.empty()) {							// starblock can attack or not
 			for (auto block : ThingVector) {
 				if (block != nullptr && block->GetShow()) {
-					if (Meet(*KirbyWeapon, *block) && KirbyWeapon->WeaponIsShow()) {			// kirby weapon hit enemy
+					if (Meet(*KirbyWeapon, *block) && KirbyWeapon->WeaponIsShow() && Kirby->GetKind() == "normal_kirby") {			// kirby weapon hit enemy
 						KirbyWeapon->SetShow(false);
 					}
-					if (KirbyCanAttack(*Kirby, block) && block->isStarBlock()) {
+					if (KirbyCanAttack(*Kirby, block) && block->isStarBlock() && Kirby->GetKind() == "normal_kirby") {
 						block->SetShow(false);
 						Kirby->SetEaten(true);
 						Kirby->SetAttack(false);

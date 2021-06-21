@@ -39,6 +39,7 @@ namespace game_framework {
 		~weapon();
 		void LoadBitmap(char** pic, int* rgb, int n);
 		void LoadBitmap(int IDB_INPUT, int* rgb, int n);
+		void LoadBitmap(char* pic, int* rgb, int n);
 		void OnShow();
 		void OnMove();
 		void AnimationReset();
@@ -51,7 +52,10 @@ namespace game_framework {
 		void YouAreLeft(bool YouAreLeft);
 		bool GetAttackFacingR();
 		bool WeaponIsShow();
+		bool IsFinalBitmap();
 		void SetOwner(std::string which_enemy);
+		int Width();
+		int Height();
 	protected:
 		CAnimation PlayAttack;
 		int x, y;
@@ -167,17 +171,19 @@ namespace game_framework {
 
 	class kirby {
 	public:
-		kirby();
-		void kirby::StageReSet(int hp_left, std::string kind);
-		~kirby();
-		void SetAttack(bool input);
+		virtual void SetAttack(bool input);
 		virtual void SetKindInit();
 		virtual void SetEaten(bool input);
 		virtual void SetEaten(bool input, std::string name);
 		virtual void LoadBitmap();
 		virtual void ThrowStar();
-		void OnMove();
-		void OnShow();
+		virtual void OnMove();
+		virtual void OnShow();
+		virtual weapon* GetWeapon();
+		
+		kirby();
+		~kirby();
+		void kirby::StageReSet(int hp_left, std::string kind);
 		void SetXY(int x_in, int y_in);
 		void SetMovingL(bool input);
 		void SetMovingR(bool input);
@@ -197,7 +203,6 @@ namespace game_framework {
 		void SetRun(bool input);
 		void Hurt(int input, int time);
 		void YouAreLeft(bool YouAreLeft);
-		weapon* GetWeapon();
 
 		std::string GetKind();
 		int GetCase();
@@ -288,6 +293,7 @@ namespace game_framework {
 		void SetEaten(bool input) override;
 		void SetEaten(bool input, std::string name) override;
 		void LoadBitmap() override;
+		void OnMove() override;
 		void ThrowStar() override;
 		void SetKindInit() override;
 	};
@@ -297,8 +303,13 @@ namespace game_framework {
 		void SetEaten(bool input) override;
 		void SetEaten(bool input, std::string name) override;
 		void LoadBitmap() override;
+		void OnMove() override;
+		void OnShow() override;
 		void ThrowStar() override;
 		void SetKindInit() override;
+		weapon* GetWeapon() override;
+	protected:
+		weapon left_side;
 	};
 
 	class waddleDoo_kirby : public kirby {
@@ -306,8 +317,13 @@ namespace game_framework {
 		void SetEaten(bool input) override;
 		void SetEaten(bool input, std::string name) override;
 		void LoadBitmap() override;
+		void OnMove() override;
+		void OnShow() override;
 		void ThrowStar() override;
 		void SetKindInit() override;
+		void SetAttack(bool input) override;
+	protected:
+		weapon left_side;
 	};
 
 	inline bool EnemyCanAttack(enemy & e, kirby & k) {
