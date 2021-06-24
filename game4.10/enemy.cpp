@@ -207,6 +207,22 @@ namespace game_framework {
 			AttackR.OnMove();
 			AttackL.OnMove();
 		}
+
+		if (game_state_counter % 30 == 0) {
+			int* temp = Map->GetXy();
+			if (x_old - x == m_x_old - temp[0] && y_old - y == m_y_old - temp[1]) {
+				IsMovingR = !IsMovingR;
+				IsMovingL = !IsMovingL;
+				// IsFacingR = !IsFacingR;
+			}
+			else {
+				x_old = x;
+				y_old = y;
+				m_y_old = temp[1];
+				m_x_old = temp[0];
+			}
+			delete[] temp;
+		}
 	}
 
 	void enemy::LoadBitmap() {}
@@ -237,6 +253,7 @@ namespace game_framework {
 								result = false;
 								IsMovingL = !IsMovingL;
 								IsMovingR = !IsMovingR;
+								IsFacingR = !IsFacingR;
 							}
 							n += 2;
 						}
@@ -251,6 +268,7 @@ namespace game_framework {
 								result = false;
 								IsMovingL = !IsMovingL;
 								IsMovingR = !IsMovingR;
+								IsFacingR = !IsFacingR;
 							}
 							n += 2;
 						}

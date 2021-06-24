@@ -1336,8 +1336,8 @@ namespace game_framework {
 
 		// load Star Throw
 		int rgb[3] = { 0, 0, 255 };
-		StarThrow.LoadBitmap(".\\res\\weapon\\sparky\\attack1.bmp", rgb, 2);
-		StarThrow.LoadBitmap(".\\res\\weapon\\sparky\\attack2.bmp", rgb, 2);
+		StarThrow.LoadBitmap(".\\res\\weapon\\attack1.bmp", rgb, 2);
+		StarThrow.LoadBitmap(".\\res\\weapon\\attack2.bmp", rgb, 2);
 	}
 
 	void sparky_kirby::OnMove()

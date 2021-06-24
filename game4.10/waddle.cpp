@@ -45,7 +45,7 @@ namespace game_framework {
 		const int origin_y = SIZE_Y - 60 - ImgH;
 		x = origin_x;
 		y = origin_y;*/
-		hp = 1;
+		hp = 2;
 		power = 1;
 		kind = "waddle";
 		IsFacingR = false;
@@ -100,7 +100,7 @@ namespace game_framework {
 		const int origin_y = SIZE_Y - 60 - ImgH;
 		x = origin_x;
 		y = origin_y;*/
-		hp = 2;
+		hp = 1;
 		power = 1;
 		kind = "waddleDoo";
 		IsFacingR = false;
@@ -244,7 +244,7 @@ namespace game_framework {
 	}
 
 	void droppy::Reset() {
-		hp = 1;
+		hp = 2;
 		power = 1;
 		kind = "droppy";
 		IsFacingR = false;
@@ -282,7 +282,7 @@ namespace game_framework {
 	}
 
 	void bigWaddle::Reset() {
-		hp = 1;
+		hp = 2;
 		power = 1;
 		kind = "bigWaddle";
 		IsFacingR = false;
@@ -338,8 +338,8 @@ namespace game_framework {
 		
 		char* weapon_left = { ".\\res\\weapon\\1.bmp" };
 		int rgb[3] = { 255, 255, 255 };
-		wL.LoadBitmap(weapon_left, rgb, 100);
-		wR.LoadBitmap(weapon_left, rgb, 100);
+		wL.LoadBitmap(weapon_left, rgb, 10);
+		wR.LoadBitmap(weapon_left, rgb, 10);
 	}
 
 	void kingDedede::Reset() {

@@ -99,6 +99,9 @@ namespace game_framework {
 		bool EnemyFacingR();
 		bool EnemyHasWeapon();
 		bool GetCanAttack();
+		void SetCounter(int input) {
+			game_state_counter = input;
+		}
 
 		void SetMap(CMovingBitmap * Map);
 		weapon GetWeapon();
@@ -135,6 +138,7 @@ namespace game_framework {
 		bool HasWeapon;
 		bool CanAttack;
 		std::string kind;
+		int game_state_counter, x_old = 0, y_old = 0, m_x_old = 0, m_y_old = 0;
 	};
 
 	class waddle : public enemy {
