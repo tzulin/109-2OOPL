@@ -279,9 +279,10 @@ namespace game_framework {
 		else if (record == 3) {
 			record_3 = stage;
 		}
+		counter = 30 * 3; // 1 seconds
 
 		if (pass) {
-			record_1 = 0; record_2 = 0; record_3 = 0;
+			record_1 = 0; record_2 = 0; record_3 = 0; counter = 5 * 30;
 		}
 
 		ofstream SaveFile("save_file.txt");
@@ -289,7 +290,7 @@ namespace game_framework {
 			SaveFile << record_1 << "\n" << record_2 << "\n" << record_3 << "\n";
 		}
 		SaveFile.close();
-		counter = 30 * 1; // 1 seconds
+		
 	}
 
 	void CGameStateOver::OnInit()
@@ -319,7 +320,7 @@ namespace game_framework {
 		pDC->SetTextColor(RGB(255, 255, 0));
 		char str[80];								// Demo 數字對字串的轉換
 		if (pass) {
-			sprintf(str, "Stage Pass ! (%d)", counter / 30);
+			sprintf(str, "Game Pass ! (%d)", counter / 30);
 		}
 		else {
 			sprintf(str, "Game Over ! (%d)", counter / 30);
@@ -341,7 +342,7 @@ namespace game_framework {
 	CGameStateRun::~CGameStateRun()
 	{
 		if (Map != nullptr) {
-			delete[] Map;
+			delete Map;
 		}
 
 		if (Kirby != nullptr) {
@@ -369,7 +370,7 @@ namespace game_framework {
 		if (stage == 1) {
 			CAudio::Instance()->Play(AUDIO_STARTING, true);
 			if (Map != nullptr) {
-				delete[] Map;
+				delete Map;
 			}
 			Map = new CMovingBitmap;
 			Map->LoadBitmap(".\\res\\map_cloud1.bmp");
@@ -444,7 +445,7 @@ namespace game_framework {
 		else if (stage == 2) {
 			CAudio::Instance()->Play(AUDIO_STARTING, true);
 			if (Map != nullptr) {
-				delete[] Map;
+				delete Map;
 			}
 			Map = new CMovingBitmap;
 			Map->LoadBitmap(".\\res\\map_cloud1.bmp");
@@ -528,7 +529,7 @@ namespace game_framework {
 		else if (stage == 3) {
 			CAudio::Instance()->Play(AUDIO_STARTING, true);
 			if (Map != nullptr) {
-				delete[] Map;
+				delete Map;
 			}
 			Map = new CMovingBitmap;
 			Map->LoadBitmap(".\\res\\map_cloud2.bmp");
@@ -645,7 +646,7 @@ namespace game_framework {
 		else if (stage == 4) {
 			CAudio::Instance()->Play(AUDIO_RAINBOWROUTE, true);
 			if (Map != nullptr) {
-				delete[] Map;
+				delete Map;
 			}
 			Map = new CMovingBitmap;
 			Map->LoadBitmap(".\\res\\map_forest1.bmp");
@@ -754,7 +755,7 @@ namespace game_framework {
 		else if (stage == 5) {
 		CAudio::Instance()->Play(AUDIO_RAINBOWROUTE, true);
 		if (Map != nullptr) {
-			delete[] Map;
+			delete Map;
 		}
 		Map = new CMovingBitmap;
 		Map->LoadBitmap(".\\res\\map_forest1.bmp");
@@ -863,7 +864,7 @@ namespace game_framework {
 		else if (stage == 6) {
 			CAudio::Instance()->Play(AUDIO_RAINBOWROUTE, true);
 			if (Map != nullptr) {
-				delete[] Map;
+				delete Map;
 			}
 			Map = new CMovingBitmap;
 			Map->LoadBitmap(".\\res\\map_forest2.bmp");
@@ -946,7 +947,7 @@ namespace game_framework {
 		else {
 			CAudio::Instance()->Play(AUDIO_BOSS, true);
 			if (Map != nullptr) {
-				delete[] Map;
+				delete Map;
 			}
 			Map = new CMovingBitmap;
 			Map->LoadBitmap(".\\res\\map_example_cloud.bmp");
@@ -997,6 +998,7 @@ namespace game_framework {
 		if (!EnemyVector.empty()) {
 			for (unsigned int i = 0; i < EnemyVector.size(); i++) {
 				EnemyVector[i]->OnMove();
+				EnemyVector[i]->SetCounter(counter);
 				if (Meet(*EnemyVector[i], *Kirby)) {
 					/*ThingVector.push_back(new starBlock);
 					int * temp = Kirby->GetXy();

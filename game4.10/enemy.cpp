@@ -208,9 +208,9 @@ namespace game_framework {
 			AttackL.OnMove();
 		}
 
-		if (game_state_counter % 30 == 0) {
+		if (game_state_counter % 20 == 0) {
 			int* temp = Map->GetXy();
-			if (x_old - x == m_x_old - temp[0] && y_old - y == m_y_old - temp[1]) {
+			if (x_old - x == m_x_old - temp[0] && y_old - y == m_y_old - temp[1] && !IsAttack) {
 				IsMovingR = !IsMovingR;
 				IsMovingL = !IsMovingL;
 				// IsFacingR = !IsFacingR;

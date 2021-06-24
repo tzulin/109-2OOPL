@@ -385,12 +385,12 @@ namespace game_framework {
 			int x_different2 = (KirbyXy[0] + KirbyXy[2]) / 2 - (StarBlockXy[0] + StarBlockXy[2]) / 2;
 			int y_different = StarBlockXy[1] - KirbyXy[1];
 			int y_different2 = KirbyXy[3] - StarBlockXy[3];
-			if (x_different >= for_count && x_different <= 130 && y_different <= for_count * 8 && y_different2 <= for_count * 8 && Kirby.IsScreamR()) {
+			if (x_different >= for_count && x_different <= 150 && y_different <= for_count * 8 && y_different2 <= for_count * 8 && Kirby.IsScreamR()) {
 				delete[] StarBlockXy;
 				delete[] KirbyXy;
 				return true;
 			}
-			if (x_different2 >= for_count && x_different2 <= 130 && y_different <= for_count * 8 && y_different2 <= for_count * 8 && Kirby.IsScreamL()) {
+			if (x_different2 >= for_count && x_different2 <= 150 && y_different <= for_count * 8 && y_different2 <= for_count * 8 && Kirby.IsScreamL()) {
 				delete[] StarBlockXy;
 				delete[] KirbyXy;
 				return true;
