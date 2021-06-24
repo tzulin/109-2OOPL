@@ -681,6 +681,14 @@ namespace game_framework {
 			Map = new CMovingBitmap;
 			Map->LoadBitmap(".\\res\\map_example_cloud.bmp");
 			Map->SetTopLeft(0, -260);
+
+			if (!ThingVector.empty()) {
+				for (auto block : ThingVector) {
+					delete block;
+				}
+				ThingVector.clear();
+			}
+
 			Door.SetTopLeft(SIZE_X - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
 			if (!EnemyVector.empty()) {
 				for (auto n : EnemyVector) {
@@ -688,12 +696,12 @@ namespace game_framework {
 				}
 				EnemyVector.clear();
 			}
-			if (!ThingVector.empty()) {
-				for (auto block : ThingVector) {
-					delete block;
-				}
-				ThingVector.clear();
-			}
+			EnemyVector.push_back(new kingDedede);
+			EnemyVector[0]->LoadBitmap();
+			EnemyVector[0]->Reset();
+			EnemyVector[0]->SetXy(SIZE_X - 200, SIZE_Y - temp_floor - EnemyVector[0]->GetHeight());
+			EnemyVector[0]->SetMap(Map);
+			EnemyVector[0]->SetThings(ThingVector);
 		}
 	}
 
@@ -739,6 +747,23 @@ namespace game_framework {
 						EnemyVector[i]->OnMove();								    // WaddleDoo OnMove
 						EnemyVector[i]->Attack(*Kirby, counter);
 						if (Meet(EnemyWeapon, *Kirby) && EnemyWeapon.WeaponIsShow()) {
+							Kirby->Hurt(EnemyVector[i]->GetPower(), counter);
+							temp_kirby = new normal_kirby;
+							if (Kirby != nullptr) {
+								Kirby->KirbyCopy(temp_kirby);
+								delete Kirby;
+							}
+							Kirby = temp_kirby;
+							Kirby->LoadBitmap();
+							Kirby->SetKindInit();
+						}
+					}
+				}
+				if (EnemyVector[i]->GetCanAttack()) {
+					if (EnemyCanAttack(*EnemyVector[i], *Kirby)) {				// enemy weapon hit kirby
+						EnemyVector[i]->OnMove();								    // WaddleDoo OnMove
+						EnemyVector[i]->Attack(*Kirby, counter);
+						if (Meet(*EnemyVector[i], *Kirby)) {
 							Kirby->Hurt(EnemyVector[i]->GetPower(), counter);
 							temp_kirby = new normal_kirby;
 							if (Kirby != nullptr) {

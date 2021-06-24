@@ -95,6 +95,7 @@ namespace game_framework {
 		void YouAreLeft(bool YouAreLeft);
 		bool EnemyFacingR();
 		bool EnemyHasWeapon();
+		bool GetCanAttack();
 
 		void SetMap(CMovingBitmap * Map);
 		weapon GetWeapon();
@@ -129,6 +130,7 @@ namespace game_framework {
 		int LastAttack;
 		bool OtherFromL;
 		bool HasWeapon;
+		bool CanAttack;
 		std::string kind;
 	};
 
@@ -164,6 +166,12 @@ namespace game_framework {
 	};
 
 	class bigWaddle : public enemy {
+	public:
+		void LoadBitmap() override;
+		void Reset() override;
+	};
+
+	class kingDedede : public enemy {
 	public:
 		void LoadBitmap() override;
 		void Reset() override;

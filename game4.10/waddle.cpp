@@ -292,4 +292,51 @@ namespace game_framework {
 		LastHurt = 0;
 		HasWeapon = false;
 	}
+
+	void kingDedede::LoadBitmap() {
+		// load walk right
+		char *walk_right[7] = { ".\\res\\king_dedede\\walk\\walkR1.bmp", ".\\res\\king_dedede\\walk\\walkR2.bmp", ".\\res\\king_dedede\\walk\\walkR3.bmp", ".\\res\\king_dedede\\walk\\walkR4.bmp", ".\\res\\king_dedede\\walk\\walkR5.bmp", ".\\res\\king_dedede\\walk\\walkR6.bmp", ".\\res\\king_dedede\\walk\\walkR7.bmp"};
+		for (int i = 0; i < 7; i++)
+		{
+			MovingR.AddBitmap(walk_right[i], RGB(255, 255, 255));
+		}
+
+		// load walk left
+		char *walk_left[7] = { ".\\res\\king_dedede\\walk\\walkL1.bmp", ".\\res\\king_dedede\\walk\\walkL2.bmp", ".\\res\\king_dedede\\walk\\walkL3.bmp", ".\\res\\king_dedede\\walk\\walkL4.bmp", ".\\res\\king_dedede\\walk\\walkL5.bmp", ".\\res\\king_dedede\\walk\\walkL6.bmp", ".\\res\\king_dedede\\walk\\walkL7.bmp" };
+		for (int i = 0; i < 7; i++)
+		{
+			MovingL.AddBitmap(walk_left[i], RGB(255, 255, 255));
+		}
+
+		// load attack right
+		char *attack_right[8] = { ".\\res\\king_dedede\\attack\\attackR1.bmp", ".\\res\\king_dedede\\attack\\attackR2.bmp", ".\\res\\king_dedede\\attack\\attackR3.bmp", ".\\res\\king_dedede\\attack\\attackR4.bmp", ".\\res\\king_dedede\\attack\\attackR5.bmp", ".\\res\\king_dedede\\attack\\attackR6.bmp", ".\\res\\king_dedede\\attack\\attackR7.bmp", ".\\res\\king_dedede\\attack\\attackR8.bmp" };
+		for (int i = 0; i < 8; i++) {
+			AttackR.AddBitmap(attack_right[i], RGB(255, 255, 255));
+		}
+
+		// load attack left
+		char *attack_left[8] = { ".\\res\\king_dedede\\attack\\attackL1.bmp", ".\\res\\king_dedede\\attack\\attackL2.bmp", ".\\res\\king_dedede\\attack\\attackL3.bmp", ".\\res\\king_dedede\\attack\\attackL4.bmp", ".\\res\\king_dedede\\attack\\attackL5.bmp", ".\\res\\king_dedede\\attack\\attackL6.bmp", ".\\res\\king_dedede\\attack\\attackL7.bmp", ".\\res\\king_dedede\\attack\\attackL8.bmp" };
+		for (int i = 0; i < 8; i++) {
+			AttackR.AddBitmap(attack_left[i], RGB(255, 255, 255));
+		}
+		
+		/*char* weapon_left[10] = { ".\\res\\weapon\\waddledoo\\attackL1.bmp", ".\\res\\weapon\\waddledoo\\attackL2.bmp", ".\\res\\weapon\\waddledoo\\attackL3.bmp", ".\\res\\weapon\\waddledoo\\attackL4.bmp", ".\\res\\weapon\\waddledoo\\attackL5.bmp", ".\\res\\weapon\\waddledoo\\attackL6.bmp", ".\\res\\weapon\\waddledoo\\attackL7.bmp", ".\\res\\weapon\\waddledoo\\attackL8.bmp", ".\\res\\weapon\\waddledoo\\attackL9.bmp", ".\\res\\weapon\\waddledoo\\attackL10.bmp" };
+		char* weapon_right[10] = { ".\\res\\weapon\\waddledoo\\attackR1.bmp", ".\\res\\weapon\\waddledoo\\attackR2.bmp", ".\\res\\weapon\\waddledoo\\attackR3.bmp", ".\\res\\weapon\\waddledoo\\attackR4.bmp", ".\\res\\weapon\\waddledoo\\attackR5.bmp", ".\\res\\weapon\\waddledoo\\attackR6.bmp", ".\\res\\weapon\\waddledoo\\attackR7.bmp", ".\\res\\weapon\\waddledoo\\attackR8.bmp", ".\\res\\weapon\\waddledoo\\attackR9.bmp", ".\\res\\weapon\\waddledoo\\attackR10.bmp" };
+		int rgb[3] = { 255, 255, 255 };
+		wL.LoadBitmap(weapon_left, rgb, 10);
+		wR.LoadBitmap(weapon_right, rgb, 10);*/
+	}
+
+	void kingDedede::Reset() {
+		hp = 10;
+		power = 2;
+		kind = "kingDedede";
+		IsFacingR = false;
+		IsMovingL = true;
+		IsMovingR = false;
+		IsAttack = false;
+		LastHurt = 0;
+		HasWeapon = false;
+		CanAttack = true;
+	}
 }

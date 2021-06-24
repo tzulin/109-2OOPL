@@ -28,6 +28,7 @@ namespace game_framework {
 		IsAttack = false;
 		LastHurt = 0;
 		LastAttack = 0;
+		CanAttack = false;
 	}
 
 	enemy::~enemy()
@@ -269,5 +270,9 @@ namespace game_framework {
 
 	bool enemy::EnemyHasWeapon() {
 		return HasWeapon;
+	}
+
+	bool enemy::GetCanAttack() {
+		return CanAttack;
 	}
 }
