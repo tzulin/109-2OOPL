@@ -739,7 +739,9 @@ namespace game_framework {
 				}
 				if (Meet(*KirbyWeapon, *EnemyVector[i]) && KirbyWeapon->WeaponIsShow()) {			// kirby weapon hit enemy
 					EnemyVector[i]->Hurt(1, counter);
-					KirbyWeapon->SetShow(false);
+					if (Kirby->GetKind() == "normal_kirby") {
+						KirbyWeapon->SetShow(false);
+					}
 				}
 				if (EnemyVector[i]->EnemyHasWeapon()) {
 					weapon EnemyWeapon = EnemyVector[i]->GetWeapon();

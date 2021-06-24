@@ -319,6 +319,22 @@ namespace game_framework {
 		for (int i = 0; i < 8; i++) {
 			AttackL.AddBitmap(attack_left[i], RGB(255, 255, 255));
 		}
+
+		// Load hurt right
+		for (int i = 0;i < 5;i++) {
+			HurtR.AddBitmap(".\\res\\king_dedede\\hurt\\hurtR1.bmp", RGB(255, 255, 255));
+		}
+		for (int i = 0;i < 5;i++) {
+			HurtR.AddBitmap(".\\res\\king_dedede\\hurt\\hurtR2.bmp", RGB(255, 255, 255));
+		}
+
+		// Load hurt left
+		for (int i = 0;i < 2;i++) {
+			HurtL.AddBitmap(".\\res\\king_dedede\\hurt\\hurtL1.bmp", RGB(255, 255, 255));
+		}
+		for (int i = 0;i < 2;i++) {
+			HurtL.AddBitmap(".\\res\\king_dedede\\hurt\\hurtL2.bmp", RGB(255, 255, 255));
+		}
 		
 		char* weapon_left = { ".\\res\\weapon\\1.bmp" };
 		int rgb[3] = { 255, 255, 255 };
@@ -336,6 +352,7 @@ namespace game_framework {
 		IsMovingL = true;
 		IsMovingR = false;
 		IsAttack = false;
+		IsHurt = false;
 		LastHurt = 0;
 		HasWeapon = true;
 		CanAttack = false;
@@ -343,7 +360,29 @@ namespace game_framework {
 
 	void kingDedede::OnShow()
 	{
-		if (!IsAttack) {
+		if (IsHurt) {
+			if (!IsFacingR) {
+				HurtL.SetDelayCount(3);
+				HurtL.SetTopLeft(x, y);
+				HurtL.OnMove();
+				HurtL.OnShow();
+				if (HurtL.IsFinalBitmap()) {
+					IsHurt = false;
+					HurtL.Reset();
+				}
+			}
+			else {
+				HurtR.SetDelayCount(3);
+				HurtR.SetTopLeft(x, y);
+				HurtR.OnMove();
+				HurtR.OnShow();
+				if (HurtR.IsFinalBitmap()) {
+					IsHurt = false;
+					HurtR.Reset();
+				}
+			}
+		}
+		else if (!IsAttack) {
 			if (IsMovingR) {
 				MovingR.SetDelayCount(3);
 				MovingR.SetTopLeft(x, y);
@@ -398,5 +437,56 @@ namespace game_framework {
 			}
 		}
 
+	}
+
+	void kingDedede::OnMove()
+	{
+
+		// set moving XY
+		const int length = 2;
+
+		if (!IsAttack && !IsHurt) {
+			MovingL.OnMove();
+			MovingR.OnMove();
+			// set moving XY and frame of test 
+			if (IsMovingL && x >= Map->Left()) {
+				if (IsFacingR) {
+					IsFacingR = false;
+				}
+				SetXy(x - length, y);
+			}
+			else if (x <= Map->Left()) {
+				IsMovingL = false;
+				IsMovingR = true;
+			}
+
+			if (IsMovingR && x <= Map->Left() + Map->Width() - ImgW) {
+				if (!IsFacingR) {
+					IsFacingR = true;
+				}
+				SetXy(x + length, y);
+			}
+			else if (x >= Map->Left() + Map->Width() - ImgW) {
+				IsMovingR = false;
+				IsMovingL = true;
+			}
+		}
+		else {
+			AttackR.OnMove();
+			AttackL.OnMove();
+		}
+	}
+
+	void kingDedede::Hurt(int input, int time) {
+		if (abs(LastHurt - time) < 30) {
+			return;
+		}
+		if (IsAttack) {
+			return;
+		}
+		IsHurt = true;
+		BackX(OtherFromL);
+		LastHurt = time;
+		hp -= input;
 	}
 }

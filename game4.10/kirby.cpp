@@ -1166,7 +1166,7 @@ namespace game_framework {
 		copy_kirby->InAir = InAir;
 		copy_kirby->OtherFromL = OtherFromL;
 		copy_kirby->IsDown = IsDown;
-		copy_kirby->IsAttack = IsAttack;
+		copy_kirby->IsAttack = false;
 		copy_kirby->IsJumping = IsJumping;
 		copy_kirby->IsFlying = IsFlying;
 		copy_kirby->FlyUp = FlyUp;

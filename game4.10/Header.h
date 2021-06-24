@@ -77,7 +77,8 @@ namespace game_framework {
 		virtual void LoadBitmap();
 		virtual void Reset();
 		virtual void OnShow();
-		void OnMove();
+		virtual void Hurt(int input, int time);
+		virtual void OnMove();
 		int* GetXy();
 		int GetHp();
 		int GetWidth();
@@ -90,7 +91,6 @@ namespace game_framework {
 		void SetThings(vector<thing*> input_ThingList);
 		// void SetThings(starBlock** Blocks_input, int input_number);
 		void BackX(bool fromL);
-		void Hurt(int input, int time);
 		void Attack(kirby k, int time);
 		void YouAreLeft(bool YouAreLeft);
 		bool EnemyFacingR();
@@ -176,6 +176,10 @@ namespace game_framework {
 		void LoadBitmap() override;
 		void Reset() override;
 		void OnShow() override;
+		void Hurt(int input, int time) override;
+		void OnMove() override;
+	protected:
+		CAnimation HurtR, HurtL;
 	};
 
 	class kirby {
@@ -339,7 +343,7 @@ namespace game_framework {
 		int* kirbyXy = k.GetXy();
 		int* enemyXY = e.GetXy();
 		// enemy 在 kirby 右邊
-		if (enemyXY[0] - 80 > kirbyXy[0] && enemyXY[0] - 80 < kirbyXy[2] && !e.EnemyFacingR()) {
+		if (enemyXY[0] - e.GetWidth() - 10 < kirbyXy[2] && enemyXY[0]  > kirbyXy[2] && !e.EnemyFacingR()) {
 			if (enemyXY[1] > kirbyXy[1] && enemyXY[1] < kirbyXy[3]) {
 				delete[] kirbyXy;
 				delete[] enemyXY;
@@ -354,7 +358,7 @@ namespace game_framework {
 			}
 		}
 		// enemy 在 kirby 左邊
-		else if (enemyXY[2] + 80 > kirbyXy[0] && enemyXY[2] + 80 < kirbyXy[2] && e.EnemyFacingR()) {				// enemy meet kirby from right
+		else if (enemyXY[2] + e.GetWidth() + 10 > kirbyXy[0] && enemyXY[2] < kirbyXy[0] && e.EnemyFacingR()) {				// enemy meet kirby from right
 			if (enemyXY[1] > kirbyXy[1] && enemyXY[1] < kirbyXy[3]) {
 				delete[] kirbyXy;
 				delete[] enemyXY;
