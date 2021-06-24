@@ -447,6 +447,90 @@ namespace game_framework {
 				delete[] Map;
 			}
 			Map = new CMovingBitmap;
+			Map->LoadBitmap(".\\res\\map_cloud1.bmp");
+			Map->SetTopLeft(0, -260);
+			Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
+			if (!ThingVector.empty()) {
+				for (auto block : ThingVector) {
+					delete block;
+				}
+				ThingVector.clear();
+			}
+
+			// blankBlocks
+			// hill: 9 blocks
+			for (int i = 0; i < 3; i++) {
+				for (int n = 0; n < 3; n++) {
+					ThingVector.push_back(new blankBlock);
+					ThingVector[i * 3 + n]->LoadBitmap();
+					ThingVector[i * 3 + n]->SetXY(960 + 32 * i, SIZE_Y - 32 - 32 * n - temp_floor);
+				}
+			} // last block: 8
+			// platform: 18 blocks
+			for (int count_x = 0; count_x < 9; count_x++) {
+				for (int count_y = 0; count_y < 2; count_y++) {
+					ThingVector.push_back(new blankBlock);
+					ThingVector.at(9 + count_x * 2 + count_y)->LoadBitmap();
+					ThingVector.at(9 + count_x * 2 + count_y)->SetXY(1365 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - 260);
+				}
+			} // last block: 26
+
+			// starBlocks
+			ThingVector.push_back(new starBlock);
+			ThingVector[27]->LoadBitmap();
+			ThingVector[27]->SetXY(200, SIZE_Y - 32 - temp_floor);
+
+			for (int i = 0; i < 3; i++) {
+				ThingVector.push_back(new starBlock);
+				ThingVector[28 + i]->LoadBitmap();
+				ThingVector[28 + i]->SetXY(700 + 32 * i, SIZE_Y - 250);
+			}
+
+			ThingVector.push_back(new starBlock);
+			ThingVector[31]->LoadBitmap();
+			ThingVector[31]->SetXY(1950, SIZE_Y - 32 - temp_floor);
+
+			// enemies
+			if (!EnemyVector.empty()) {
+				for (auto n : EnemyVector) {
+					delete n;
+				}
+				EnemyVector.clear();
+			}
+			EnemyVector.push_back(new droppy);
+			EnemyVector[0]->LoadBitmap();
+			EnemyVector[0]->Reset();
+			EnemyVector[0]->SetXy(300, SIZE_Y - temp_floor - EnemyVector[0]->GetHeight());
+			EnemyVector[0]->SetMap(Map);
+			EnemyVector[0]->SetThings(ThingVector);
+
+			EnemyVector.push_back(new waddleDoo);
+			EnemyVector[1]->LoadBitmap();
+			EnemyVector[1]->Reset();
+			EnemyVector[1]->SetXy(1400, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
+			EnemyVector[1]->SetMap(Map);
+			EnemyVector[1]->SetThings(ThingVector);
+
+			EnemyVector.push_back(new droppy);
+			EnemyVector[2]->LoadBitmap();
+			EnemyVector[2]->Reset();
+			EnemyVector[2]->SetXy(2200, SIZE_Y - temp_floor - EnemyVector[2]->GetHeight());
+			EnemyVector[2]->SetMap(Map);
+			EnemyVector[2]->SetThings(ThingVector);
+
+			EnemyVector.push_back(new waddle);
+			EnemyVector[3]->LoadBitmap();
+			EnemyVector[3]->Reset();
+			EnemyVector[3]->SetXy(1200, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
+			EnemyVector[3]->SetMap(Map);
+			EnemyVector[3]->SetThings(ThingVector);
+		}
+		else if (stage == 3) {
+			CAudio::Instance()->Play(AUDIO_STARTING, true);
+			if (Map != nullptr) {
+				delete[] Map;
+			}
+			Map = new CMovingBitmap;
 			Map->LoadBitmap(".\\res\\map_cloud2.bmp");
 			Map->SetTopLeft(0, -260);
 			Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - 350 - Door.Height());
@@ -556,8 +640,9 @@ namespace game_framework {
 			EnemyVector[4]->SetXy(2200, SIZE_Y - temp_floor - EnemyVector[4]->GetHeight());
 			EnemyVector[4]->SetMap(Map);
 			EnemyVector[4]->SetThings(ThingVector);
+			
 		}
-		else if (stage == 3) {
+		else if (stage == 4) {
 			CAudio::Instance()->Play(AUDIO_RAINBOWROUTE, true);
 			if (Map != nullptr) {
 				delete[] Map;
@@ -666,7 +751,116 @@ namespace game_framework {
 			EnemyVector[4]->SetMap(Map);
 			EnemyVector[4]->SetThings(ThingVector);
 		}
-		else if (stage == 4) {
+		else if (stage == 5) {
+		CAudio::Instance()->Play(AUDIO_RAINBOWROUTE, true);
+		if (Map != nullptr) {
+			delete[] Map;
+		}
+		Map = new CMovingBitmap;
+		Map->LoadBitmap(".\\res\\map_forest1.bmp");
+		Map->SetTopLeft(0, -260);
+		Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
+
+		if (!ThingVector.empty()) {
+			for (auto block : ThingVector) {
+				delete block;
+			}
+			ThingVector.clear();
+		}
+
+		// blankBlocks
+		// first hill: 9 blocks
+		for (int count_x = 0; count_x < 3; count_x++) {
+			for (int count_y = 0; count_y < 3; count_y++) {
+				ThingVector.push_back(new blankBlock);
+				ThingVector.at(count_x * 3 + count_y)->LoadBitmap();
+				ThingVector.at(count_x * 3 + count_y)->SetXY(360 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+			}
+		} // last block: 8
+		// second hill: 32 blocks
+		for (int count_x = 0; count_x < 4; count_x++) {
+			for (int count_y = 0; count_y < 8; count_y++) {
+				ThingVector.push_back(new blankBlock);
+				ThingVector.at(9 + count_x * 8 + count_y)->LoadBitmap();
+				ThingVector.at(9 + count_x * 8 + count_y)->SetXY(770 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+			}
+		} // last block: 40
+		// 3rd hill: 9 blocks
+		for (int count_x = 0; count_x < 3; count_x++) {
+			for (int count_y = 0; count_y < 3; count_y++) {
+				ThingVector.push_back(new blankBlock);
+				ThingVector.at(41 + count_x * 3 + count_y)->LoadBitmap();
+				ThingVector.at(41 + count_x * 3 + count_y)->SetXY(1580 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+			}
+		} // last block: 49
+		// 4th hill: 32 blocks
+		for (int count_x = 0; count_x < 4; count_x++) {
+			for (int count_y = 0; count_y < 8; count_y++) {
+				ThingVector.push_back(new blankBlock);
+				ThingVector.at(50 + count_x * 8 + count_y)->LoadBitmap();
+				ThingVector.at(50 + count_x * 8 + count_y)->SetXY(1790 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+			}
+		} // last block: 81
+		// 5th hill: 9 blocks
+		for (int count_x = 0; count_x < 3; count_x++) {
+			for (int count_y = 0; count_y < 3; count_y++) {
+				ThingVector.push_back(new blankBlock);
+				ThingVector.at(82 + count_x * 3 + count_y)->LoadBitmap();
+				ThingVector.at(82 + count_x * 3 + count_y)->SetXY(2310 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+			}
+		} // last block: 90
+
+		// starBlocks: 5 blocks
+		for (int count_x = 0; count_x < 5; count_x++) {
+			ThingVector.push_back(new starBlock);
+			ThingVector.at(91 + count_x)->LoadBitmap();
+			ThingVector.at(91 + count_x)->SetXY(1150 + 32 * count_x, SIZE_Y - 150 - temp_floor);
+		} // last block: 95
+
+		// enemies
+		if (!EnemyVector.empty()) {
+			for (auto n : EnemyVector) {
+				delete n;
+			}
+			EnemyVector.clear();
+		}
+
+		EnemyVector.push_back(new bigWaddle);
+		EnemyVector[0]->LoadBitmap();
+		EnemyVector[0]->Reset();
+		EnemyVector[0]->SetXy(200, SIZE_Y - temp_floor - 120);
+		EnemyVector[0]->SetMap(Map);
+		EnemyVector[0]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new waddleDoo);
+		EnemyVector[1]->LoadBitmap();
+		EnemyVector[1]->Reset();
+		EnemyVector[1]->SetXy(2200, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
+		EnemyVector[1]->SetMap(Map);
+		EnemyVector[1]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new hotHead);
+		EnemyVector[2]->LoadBitmap();
+		EnemyVector[2]->Reset();
+		EnemyVector[2]->SetXy(600, SIZE_Y - temp_floor - 80);
+		EnemyVector[2]->SetMap(Map);
+		EnemyVector[2]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new sparky);
+		EnemyVector[3]->LoadBitmap();
+		EnemyVector[3]->Reset();
+		EnemyVector[3]->SetXy(1400, SIZE_Y - temp_floor - EnemyVector[3]->GetHeight());
+		EnemyVector[3]->SetMap(Map);
+		EnemyVector[3]->SetThings(ThingVector);
+
+		EnemyVector.push_back(new droppy);
+		EnemyVector[4]->LoadBitmap();
+		EnemyVector[4]->Reset();
+		EnemyVector[4]->SetXy(900, SIZE_Y - temp_floor - EnemyVector[4]->GetHeight());
+		EnemyVector[4]->SetMap(Map);
+		EnemyVector[4]->SetThings(ThingVector);
+		}
+		else if (stage == 6) {
 			CAudio::Instance()->Play(AUDIO_RAINBOWROUTE, true);
 			if (Map != nullptr) {
 				delete[] Map;
@@ -724,7 +918,7 @@ namespace game_framework {
 			EnemyVector.push_back(new bigWaddle);
 			EnemyVector[0]->LoadBitmap();
 			EnemyVector[0]->Reset();
-			EnemyVector[0]->SetXy(300, SIZE_Y - temp_floor - 120);
+			EnemyVector[0]->SetXy(400, SIZE_Y - temp_floor - 120);
 			EnemyVector[0]->SetMap(Map);
 			EnemyVector[0]->SetThings(ThingVector);
 
@@ -1024,7 +1218,7 @@ namespace game_framework {
 			CAudio::Instance()->Stop(AUDIO_STARTING);
 			CAudio::Instance()->Stop(AUDIO_RAINBOWROUTE);
 			CAudio::Instance()->Stop(AUDIO_BOSS);
-			if (stage != 5) {
+			if (stage != 7) {
 				GotoGameState(GAME_STATE_RUN, GetStage() + 1, record, false);
 			}
 		}
