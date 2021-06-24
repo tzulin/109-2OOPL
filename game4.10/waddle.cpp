@@ -404,7 +404,7 @@ namespace game_framework {
 				AttackL.SetTopLeft(x, y - 50);
 				AttackL.OnShow();
 				wL.SetOwner(kind);
-				wL.SetWeapon(x, y, IsFacingR);
+				wL.SetWeapon(x, y - 50, IsFacingR);
 				wL.SetShow(true);
 				wL.OnMove();
 				wL.OnShow();
@@ -412,7 +412,7 @@ namespace game_framework {
 					AttackL.Reset();
 					wL.AnimationReset();
 					IsAttack = false;
-					wL.SetShow(false);
+					wL.SetShow(true);
 				}
 				ImgH = AttackL.Height();
 				ImgW = AttackL.Width();
@@ -422,7 +422,7 @@ namespace game_framework {
 				AttackR.SetTopLeft(x, y - 50);
 				AttackR.OnShow();
 				wR.SetOwner(kind);
-				wR.SetWeapon(x, y, IsFacingR);
+				wR.SetWeapon(x, y - 50, IsFacingR);
 				wR.SetShow(true);
 				wR.OnMove();
 				wR.OnShow();
@@ -430,7 +430,7 @@ namespace game_framework {
 					AttackR.Reset();
 					wR.AnimationReset();
 					IsAttack = false;
-					wR.SetShow(false);
+					wR.SetShow(true);
 				}
 				ImgH = AttackR.Height();
 				ImgW = AttackR.Width();

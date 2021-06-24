@@ -344,13 +344,7 @@ namespace game_framework {
 		int* enemyXY = e.GetXy();
 		// enemy 在 kirby 右邊
 		if (enemyXY[0] - e.GetWidth() - 10 < kirbyXy[2] && enemyXY[0]  > kirbyXy[2] && !e.EnemyFacingR()) {
-			if (enemyXY[1] > kirbyXy[1] && enemyXY[1] < kirbyXy[3]) {
-				delete[] kirbyXy;
-				delete[] enemyXY;
-				e.YouAreLeft(false);
-				return true;
-			}
-			else if (enemyXY[3] > kirbyXy[1] && enemyXY[3] < kirbyXy[3]) {
+			if (kirbyXy[1] - enemyXY[1] < 150) {
 				delete[] kirbyXy;
 				delete[] enemyXY;
 				e.YouAreLeft(false);
@@ -359,13 +353,7 @@ namespace game_framework {
 		}
 		// enemy 在 kirby 左邊
 		else if (enemyXY[2] + e.GetWidth() + 10 > kirbyXy[0] && enemyXY[2] < kirbyXy[0] && e.EnemyFacingR()) {				// enemy meet kirby from right
-			if (enemyXY[1] > kirbyXy[1] && enemyXY[1] < kirbyXy[3]) {
-				delete[] kirbyXy;
-				delete[] enemyXY;
-				e.YouAreLeft(true);
-				return true;
-			}
-			else if (enemyXY[3] > kirbyXy[1] && enemyXY[3] < kirbyXy[3]) {
+			if (kirbyXy[1] - enemyXY[1] < 150) {
 				delete[] kirbyXy;
 				delete[] enemyXY;
 				e.YouAreLeft(true);
