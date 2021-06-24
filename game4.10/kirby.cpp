@@ -677,10 +677,10 @@ namespace game_framework {
 		if (StarThrow.GetAttackTime() > 0 && game_state_counter - StarThrow.GetAttackTime() < 50) {
 			int* temp = StarThrow.GetXy();
 			if (StarThrow.GetAttackFacingR()) {
-				StarThrow.SetXy(temp[0] + 10, temp[1]);
+				StarThrow.SetXy(temp[0] + 20, temp[1]);
 			}
 			else {
-				StarThrow.SetXy(temp[0] - 10, temp[1]);
+				StarThrow.SetXy(temp[0] - 20, temp[1]);
 			}
 			delete[] temp;
 		}
