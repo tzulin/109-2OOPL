@@ -114,11 +114,15 @@ namespace game_framework {
 				MovingR.SetDelayCount(3);
 				MovingR.SetTopLeft(x, y);
 				MovingR.OnShow();
+				ImgH = MovingR.Height();
+				ImgW = MovingL.Width();
 			}
 			else {
 				MovingL.SetDelayCount(3);
 				MovingL.SetTopLeft(x, y);
 				MovingL.OnShow();
+				ImgH = MovingL.Height();
+				ImgW = MovingL.Width();
 			}
 		}
 		else {
@@ -137,6 +141,8 @@ namespace game_framework {
 					IsAttack = false;
 					wL.SetShow(false);
 				}
+				ImgH = AttackL.Height();
+				ImgW = AttackL.Width();
 			}
 			else {
 				AttackR.SetDelayCount(5);
@@ -153,6 +159,8 @@ namespace game_framework {
 					IsAttack = false;
 					wR.SetShow(false);
 				}
+				ImgH = AttackR.Height();
+				ImgW = AttackR.Width();
 			}
 		}
 

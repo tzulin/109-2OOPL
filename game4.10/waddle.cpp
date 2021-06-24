@@ -317,26 +317,86 @@ namespace game_framework {
 		// load attack left
 		char *attack_left[8] = { ".\\res\\king_dedede\\attack\\attackL1.bmp", ".\\res\\king_dedede\\attack\\attackL2.bmp", ".\\res\\king_dedede\\attack\\attackL3.bmp", ".\\res\\king_dedede\\attack\\attackL4.bmp", ".\\res\\king_dedede\\attack\\attackL5.bmp", ".\\res\\king_dedede\\attack\\attackL6.bmp", ".\\res\\king_dedede\\attack\\attackL7.bmp", ".\\res\\king_dedede\\attack\\attackL8.bmp" };
 		for (int i = 0; i < 8; i++) {
-			AttackR.AddBitmap(attack_left[i], RGB(255, 255, 255));
+			AttackL.AddBitmap(attack_left[i], RGB(255, 255, 255));
 		}
 		
-		/*char* weapon_left[10] = { ".\\res\\weapon\\waddledoo\\attackL1.bmp", ".\\res\\weapon\\waddledoo\\attackL2.bmp", ".\\res\\weapon\\waddledoo\\attackL3.bmp", ".\\res\\weapon\\waddledoo\\attackL4.bmp", ".\\res\\weapon\\waddledoo\\attackL5.bmp", ".\\res\\weapon\\waddledoo\\attackL6.bmp", ".\\res\\weapon\\waddledoo\\attackL7.bmp", ".\\res\\weapon\\waddledoo\\attackL8.bmp", ".\\res\\weapon\\waddledoo\\attackL9.bmp", ".\\res\\weapon\\waddledoo\\attackL10.bmp" };
-		char* weapon_right[10] = { ".\\res\\weapon\\waddledoo\\attackR1.bmp", ".\\res\\weapon\\waddledoo\\attackR2.bmp", ".\\res\\weapon\\waddledoo\\attackR3.bmp", ".\\res\\weapon\\waddledoo\\attackR4.bmp", ".\\res\\weapon\\waddledoo\\attackR5.bmp", ".\\res\\weapon\\waddledoo\\attackR6.bmp", ".\\res\\weapon\\waddledoo\\attackR7.bmp", ".\\res\\weapon\\waddledoo\\attackR8.bmp", ".\\res\\weapon\\waddledoo\\attackR9.bmp", ".\\res\\weapon\\waddledoo\\attackR10.bmp" };
+		char* weapon_left = { ".\\res\\weapon\\1.bmp" };
 		int rgb[3] = { 255, 255, 255 };
-		wL.LoadBitmap(weapon_left, rgb, 10);
-		wR.LoadBitmap(weapon_right, rgb, 10);*/
+		wL.LoadBitmap(weapon_left, rgb, 100);
+		wR.LoadBitmap(weapon_left, rgb, 100);
 	}
 
 	void kingDedede::Reset() {
 		hp = 10;
 		power = 2;
+		ImgH = MovingL.Height();
+		ImgW = MovingL.Width();
 		kind = "kingDedede";
 		IsFacingR = false;
 		IsMovingL = true;
 		IsMovingR = false;
 		IsAttack = false;
 		LastHurt = 0;
-		HasWeapon = false;
-		CanAttack = true;
+		HasWeapon = true;
+		CanAttack = false;
+	}
+
+	void kingDedede::OnShow()
+	{
+		if (!IsAttack) {
+			if (IsMovingR) {
+				MovingR.SetDelayCount(3);
+				MovingR.SetTopLeft(x, y);
+				MovingR.OnShow();
+				ImgH = MovingR.Height();
+				ImgW = MovingL.Width();
+			}
+			else {
+				MovingL.SetDelayCount(3);
+				MovingL.SetTopLeft(x, y);
+				MovingL.OnShow();
+				ImgH = MovingL.Height();
+				ImgW = MovingL.Width();
+			}
+		}
+		else {
+			if (OtherFromL) {
+				AttackL.SetDelayCount(5);
+				AttackL.SetTopLeft(x, y - 50);
+				AttackL.OnShow();
+				wL.SetOwner(kind);
+				wL.SetWeapon(x, y, IsFacingR);
+				wL.SetShow(true);
+				wL.OnMove();
+				wL.OnShow();
+				if (AttackL.IsFinalBitmap()) {
+					AttackL.Reset();
+					wL.AnimationReset();
+					IsAttack = false;
+					wL.SetShow(false);
+				}
+				ImgH = AttackL.Height();
+				ImgW = AttackL.Width();
+			}
+			else {
+				AttackR.SetDelayCount(5);
+				AttackR.SetTopLeft(x, y - 50);
+				AttackR.OnShow();
+				wR.SetOwner(kind);
+				wR.SetWeapon(x, y, IsFacingR);
+				wR.SetShow(true);
+				wR.OnMove();
+				wR.OnShow();
+				if (AttackR.IsFinalBitmap()) {
+					AttackR.Reset();
+					wR.AnimationReset();
+					IsAttack = false;
+					wR.SetShow(false);
+				}
+				ImgH = AttackR.Height();
+				ImgW = AttackR.Width();
+			}
+		}
+
 	}
 }

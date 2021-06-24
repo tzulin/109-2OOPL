@@ -76,8 +76,8 @@ namespace game_framework {
 		~enemy();
 		virtual void LoadBitmap();
 		virtual void Reset();
+		virtual void OnShow();
 		void OnMove();
-		void OnShow();
 		int* GetXy();
 		int GetHp();
 		int GetWidth();
@@ -119,7 +119,7 @@ namespace game_framework {
 		int x, y, hp;
 		int power;			// §ðÀ»¤O
 		int origin_x, origin_y;
-		const int ImgW = 64, ImgH = 60;
+		int ImgW = 64, ImgH = 60;
 		int floor;			// ¦aªOy®y¼Ð
 		bool IsFacingR;
 		bool IsMovingL;
@@ -175,6 +175,7 @@ namespace game_framework {
 	public:
 		void LoadBitmap() override;
 		void Reset() override;
+		void OnShow() override;
 	};
 
 	class kirby {

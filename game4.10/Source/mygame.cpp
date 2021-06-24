@@ -759,23 +759,6 @@ namespace game_framework {
 						}
 					}
 				}
-				if (EnemyVector[i]->GetCanAttack()) {
-					if (EnemyCanAttack(*EnemyVector[i], *Kirby)) {				// enemy weapon hit kirby
-						EnemyVector[i]->OnMove();								    // WaddleDoo OnMove
-						EnemyVector[i]->Attack(*Kirby, counter);
-						if (Meet(*EnemyVector[i], *Kirby)) {
-							Kirby->Hurt(EnemyVector[i]->GetPower(), counter);
-							temp_kirby = new normal_kirby;
-							if (Kirby != nullptr) {
-								Kirby->KirbyCopy(temp_kirby);
-								delete Kirby;
-							}
-							Kirby = temp_kirby;
-							Kirby->LoadBitmap();
-							Kirby->SetKindInit();
-						}
-					}
-				}
 				if (EnemyVector[i]->GetHp() > 0) {												// waddle can attack check
 					if (KirbyCanAttack(*Kirby, EnemyVector[i]) && Kirby->GetKind() == "normal_kirby") {
 						EnemyVector[i]->Hurt(10, counter);
