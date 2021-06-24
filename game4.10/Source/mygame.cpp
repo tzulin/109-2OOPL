@@ -947,6 +947,10 @@ namespace game_framework {
 		const char NUM_KEY_2 = 0x62;	// number keyboard 2
 		const char NUM_KEY_3 = 0x63;	// number keyboard 3
 		const char NUM_KEY_4 = 0x64;	// number keyboard 4
+		const char KEY_1 = 0x31;		// keyboard 1
+		const char KEY_2 = 0x32;		// keyboard 2
+		const char KEY_3 = 0x33;		// keyboard 3
+		const char KEY_4 = 0x34;		// keyboard 4
 
 		if (nChar == KEY_ESC) {
 			GotoGameState(GAME_STATE_OVER, stage, record, false);
@@ -1020,7 +1024,9 @@ namespace game_framework {
 			CAudio::Instance()->Stop(AUDIO_STARTING);
 			CAudio::Instance()->Stop(AUDIO_RAINBOWROUTE);
 			CAudio::Instance()->Stop(AUDIO_BOSS);
-			GotoGameState(GAME_STATE_RUN, GetStage() + 1, record, false);
+			if (stage != 5) {
+				GotoGameState(GAME_STATE_RUN, GetStage() + 1, record, false);
+			}
 		}
 
 		if (nChar == KEY_S) {
@@ -1064,7 +1070,7 @@ namespace game_framework {
 
 		}
 
-		if (nChar == NUM_KEY_1) {
+		if (nChar == NUM_KEY_1 || nChar == KEY_1) {
 			temp_kirby = new normal_kirby;
 			if (Kirby != nullptr) {
 				Kirby->KirbyCopy(temp_kirby);
@@ -1075,7 +1081,7 @@ namespace game_framework {
 			Kirby->SetKindInit();
 		}
 
-		if (nChar == NUM_KEY_2) {
+		if (nChar == NUM_KEY_2 || nChar == KEY_2) {
 			temp_kirby = new waddleDoo_kirby;
 			if (Kirby != nullptr) {
 				Kirby->KirbyCopy(temp_kirby);
@@ -1086,7 +1092,7 @@ namespace game_framework {
 			Kirby->SetKindInit();
 		}
 
-		if (nChar == NUM_KEY_3) {
+		if (nChar == NUM_KEY_3 || nChar == KEY_3) {
 			temp_kirby = new sparky_kirby;
 			if (Kirby != nullptr) {
 				Kirby->KirbyCopy(temp_kirby);
@@ -1097,7 +1103,7 @@ namespace game_framework {
 			Kirby->SetKindInit();
 		}
 
-		if (nChar == NUM_KEY_4) {
+		if (nChar == NUM_KEY_4 || nChar == KEY_4) {
 			temp_kirby = new hotHead_kirby;
 			if (Kirby != nullptr) {
 				Kirby->KirbyCopy(temp_kirby);
