@@ -322,8 +322,7 @@ public:
 	bool pass = false;
 protected:
 	void GotoGameState(int state);							// 跳躍至指定的state
-	void GotoGameState(int state, int input_stage, int input_record);
-	void GotoGameState(int state, bool pass);
+	void GotoGameState(int state, int input_stage, int input_record, bool input_pass);
 	void ShowInitProgress(int percent);						// 顯示初始化的進度
 	//
 	// virtual functions, 由繼承者提供implementation
@@ -361,9 +360,8 @@ public:
 	void OnResume();								// 處理自「待命」還原的動作
 	void OnSetFocus();								// 處理Focus
 	void OnSuspend();								// 處理「待命」的動作
-	void SetGameState(int, int, int);
+	void SetGameState(int, int, int, bool);
 	void SetGameState(int);
-	void SetGameState(int, bool);
 	static CGame *Instance();
 private:
 	bool			running;			// 遊戲是否正在進行中(未被Pause)

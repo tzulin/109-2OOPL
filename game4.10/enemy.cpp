@@ -224,7 +224,7 @@ namespace game_framework {
 	}
 
 	void enemy::SetXy(int x_in, int y_in) {
-		int aXy[4] = { x_in, y_in, x_in + MovingR.Width(), y_in + MovingR.Height() };
+		int aXy[4] = { x_in, y_in, x_in + ImgW, y_in + ImgH };
 		bool result = true;
 		if (!StarBlockList.empty()) {
 			for (int k = 0; k < int(StarBlockList.size()); k++) {

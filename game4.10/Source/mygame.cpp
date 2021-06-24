@@ -113,21 +113,21 @@ namespace game_framework {
 					record_1++;															// ち传材闽
 				}
 				CAudio::Instance()->Stop(AUDIO_SELECT);
-				GotoGameState(GAME_STATE_RUN, record_1, record);						// ち传GAME_STATE_RUN
+				GotoGameState(GAME_STATE_RUN, record_1, record, false);						// ち传GAME_STATE_RUN
 			}
 			else if (record == 2) {
 				if (record_2 == 0) {
 					record_2++;															// ち传材闽
 				}
 				CAudio::Instance()->Stop(AUDIO_SELECT);
-				GotoGameState(GAME_STATE_RUN, record_2, record);						// ち传GAME_STATE_RUN
+				GotoGameState(GAME_STATE_RUN, record_2, record, false);						// ち传GAME_STATE_RUN
 			}
 			else if (record == 3) {
 				if (record_3 == 0) {
 					record_3++;															// ち传材闽
 				}
 				CAudio::Instance()->Stop(AUDIO_SELECT);
-				GotoGameState(GAME_STATE_RUN, record_3, record);						// ち传GAME_STATE_RUN
+				GotoGameState(GAME_STATE_RUN, record_3, record, false);						// ち传GAME_STATE_RUN
 			}
 		}
 		else if (start_state == 0 && nChar == KEY_ENTER) {
@@ -270,28 +270,18 @@ namespace game_framework {
 		}
 
 		if (record == 1) {
-			if (pass) {
-				record_1 = 0;
-			}
-			else {
-				record_1 = stage;
-			}
+			record_1 = stage;
 		}
 		else if (record == 2) {
-			if (pass) {
-				record_2 = 0;
-			}
-			else {
-				record_2 = stage;
-			}
+			record_2 = stage;
+
 		}
 		else if (record == 3) {
-			if (pass) {
-				record_2 = 0;
-			}
-			else {
-				record_2 = stage;
-			}
+			record_3 = stage;
+		}
+
+		if (pass) {
+			record_1 = 0; record_2 = 0; record_3 = 0;
 		}
 
 		ofstream SaveFile("save_file.txt");
@@ -804,7 +794,7 @@ namespace game_framework {
 		Kirby->SetEnemies(EnemyVector);
 
 		if (!Kirby->IsAlive()) {								// Kirby dead
-			GotoGameState(GAME_STATE_OVER, stage, record);
+			GotoGameState(GAME_STATE_OVER, stage, record, false);
 		}
 
 		Kirby->OnMove();										// Kirby OnMove
@@ -874,7 +864,7 @@ namespace game_framework {
 					if (EnemyVector[i]->GetKind() == "kingDedede") {
 						delete EnemyVector[i];
 						EnemyVector.erase(EnemyVector.begin() + i);
-						GotoGameState(GAME_STATE_OVER, true);
+						GotoGameState(GAME_STATE_OVER, stage, record, true);
 					}
 					else {
 						delete EnemyVector[i];
@@ -959,7 +949,7 @@ namespace game_framework {
 		const char NUM_KEY_4 = 0x64;	// number keyboard 4
 
 		if (nChar == KEY_ESC) {
-			GotoGameState(GAME_STATE_OVER, stage, record);
+			GotoGameState(GAME_STATE_OVER, stage, record, false);
 		}
 
 		if (nChar == KEY_LEFT) {
@@ -1030,7 +1020,7 @@ namespace game_framework {
 			CAudio::Instance()->Stop(AUDIO_STARTING);
 			CAudio::Instance()->Stop(AUDIO_RAINBOWROUTE);
 			CAudio::Instance()->Stop(AUDIO_BOSS);
-			GotoGameState(GAME_STATE_RUN, GetStage() + 1, record);
+			GotoGameState(GAME_STATE_RUN, GetStage() + 1, record, false);
 		}
 
 		if (nChar == KEY_S) {
@@ -1063,7 +1053,7 @@ namespace game_framework {
 				CAudio::Instance()->Stop(AUDIO_STARTING);
 				CAudio::Instance()->Stop(AUDIO_RAINBOWROUTE);
 				CAudio::Instance()->Stop(AUDIO_BOSS);
-				GotoGameState(GAME_STATE_RUN, GetStage() + 1, record);
+				GotoGameState(GAME_STATE_RUN, GetStage() + 1, record, false);
 			}
 			else {
 				Kirby->SetFly(true);
