@@ -17,10 +17,13 @@ namespace game_framework {
 		void YouAreLeft(bool);
 		int Top();
 		int Left();
+		std::string GetKind();
+		void SetKind(std::string input);
 	protected:
 		CMovingBitmap blockPic;
 		int x, y;
 		bool IsShow;
+		std::string name = "";
 	};
 
 	class starBlock : public thing {
@@ -214,7 +217,7 @@ namespace game_framework {
 		void SetMap(CMovingBitmap* Map);
 		void SetDoor(CMovingBitmap* door);
 		void SetRun(bool input);
-		void Hurt(int input, int time);
+		bool Hurt(int input, int time);
 		void YouAreLeft(bool YouAreLeft);
 
 		std::string GetKind();
@@ -229,6 +232,9 @@ namespace game_framework {
 		bool IsAlive();
 		bool IsScreamR();
 		bool IsScreamL();
+		bool GetFacingR() {
+			return IsFacingR;
+		}
 		//bool GetUpKey();
 
 		void KirbyCopy(kirby* new_kirby);
@@ -371,16 +377,16 @@ namespace game_framework {
 		int* KirbyXy = Kirby.GetXy();
 		int for_count = 0;
 		for (; for_count < 10; for_count++) {
-			int x_different = StarBlockXy[0] - KirbyXy[2];
-			int x_different2 = KirbyXy[0] - StarBlockXy[2];
+			int x_different = (StarBlockXy[0] + StarBlockXy[2]) / 2 - (KirbyXy[0] + KirbyXy[2]) / 2;
+			int x_different2 = (KirbyXy[0] + KirbyXy[2]) / 2 - (StarBlockXy[0] + StarBlockXy[2]) / 2;
 			int y_different = StarBlockXy[1] - KirbyXy[1];
 			int y_different2 = KirbyXy[3] - StarBlockXy[3];
-			if (x_different > for_count && x_different < 60 && y_different < for_count * 8 && y_different2 < for_count * 8 && Kirby.IsScreamR()) {
+			if (x_different >= for_count && x_different <= 130 && y_different <= for_count * 8 && y_different2 <= for_count * 8 && Kirby.IsScreamR()) {
 				delete[] StarBlockXy;
 				delete[] KirbyXy;
 				return true;
 			}
-			if (x_different2 > for_count && x_different2 < 60 && y_different < for_count * 8 && y_different2 < for_count * 8 && Kirby.IsScreamL()) {
+			if (x_different2 >= for_count && x_different2 <= 130 && y_different <= for_count * 8 && y_different2 <= for_count * 8 && Kirby.IsScreamL()) {
 				delete[] StarBlockXy;
 				delete[] KirbyXy;
 				return true;

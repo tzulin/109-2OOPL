@@ -74,7 +74,7 @@
 #define GAME_CYCLE_TIME		 33		    // 每33ms跑一次Move及Show(每秒30次)
 #define SHOW_GAME_CYCLE_TIME false		// 是否在debug mode顯示cycle time
 #define ENABLE_GAME_PAUSE	 true		// 是否允許以 Ctrl-Q 暫停遊戲
-#define ENABLE_AUDIO		 false      //true		// 啟動音效介面  // stop in test remmeber to change comment in gamelib.cpp
+#define ENABLE_AUDIO		 true      //true		// 啟動音效介面  // stop in test remmeber to change comment in gamelib.cpp
 
 /////////////////////////////////////////////////////////////////////////////
 // 定義CGame及CGameState所使用的三個狀態常數
@@ -319,9 +319,11 @@ public:
 	void SetRecord(int input) {
 		record = input;
 	}
+	bool pass = false;
 protected:
 	void GotoGameState(int state);							// 跳躍至指定的state
 	void GotoGameState(int state, int input_stage, int input_record);
+	void GotoGameState(int state, bool pass);
 	void ShowInitProgress(int percent);						// 顯示初始化的進度
 	//
 	// virtual functions, 由繼承者提供implementation
@@ -361,6 +363,7 @@ public:
 	void OnSuspend();								// 處理「待命」的動作
 	void SetGameState(int, int, int);
 	void SetGameState(int);
+	void SetGameState(int, bool);
 	static CGame *Instance();
 private:
 	bool			running;			// 遊戲是否正在進行中(未被Pause)

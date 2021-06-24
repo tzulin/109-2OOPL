@@ -467,6 +467,10 @@ void CGameState::GotoGameState(int state)
 	game->SetGameState(state);
 }
 
+void CGameState::GotoGameState(int state, bool pass) {
+	game->SetGameState(state, pass);
+}
+
 void CGameState::GotoGameState(int state, int input_stage, int input_record)
 {
 	game->SetGameState(state, input_stage, input_record);
@@ -745,6 +749,17 @@ void CGame::SetGameState(int state)
 {
 	ASSERT(state >=0 && state < NUM_GAME_STATES);
 	gameState = gameStateTable[state];
+	gameState->OnBeginState();
+	OnDraw();
+	CSpecialEffect::SetCurrentTime();
+	running = true;
+}
+
+void CGame::SetGameState(int state, bool input_pass)
+{
+	ASSERT(state >= 0 && state < NUM_GAME_STATES);
+	gameState = gameStateTable[state];
+	gameState->pass = input_pass;
 	gameState->OnBeginState();
 	OnDraw();
 	CSpecialEffect::SetCurrentTime();

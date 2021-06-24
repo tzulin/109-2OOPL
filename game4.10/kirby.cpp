@@ -962,15 +962,15 @@ namespace game_framework {
 		IsHack = input;
 	}
 
-	void kirby::Hurt(int input, int time) {
+	bool kirby::Hurt(int input, int time) {
 		if (IsHack) {
-			return;
+			return false;
 		}
 		if (abs(LastHurt - time) < 30) {
-			return;
+			return false;
 		}
 		if (IsDown && IsAttack) {
-			return;
+			return false;
 		}
 		kirby_kind = "normal_kirby";
 		LastHurt = time;
@@ -980,6 +980,7 @@ namespace game_framework {
 		SetAttack(false);
 		SetJump(false);
 		SetFly(false);
+		return true;
 	}
 
 	void kirby::ThrowStar() {

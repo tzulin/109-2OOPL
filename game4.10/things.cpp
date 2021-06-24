@@ -57,6 +57,13 @@ namespace game_framework {
 		return false;
 	}
 
+	std::string thing::GetKind() {
+		return name;
+	}
+	void thing::SetKind(std::string input) {
+		name = input;
+	}
+
 	void starBlock::LoadBitmap() {
 		blockPic.LoadBitmap(IDB_STARBLOCK);
 	}
