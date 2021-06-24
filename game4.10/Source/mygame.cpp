@@ -270,13 +270,28 @@ namespace game_framework {
 		}
 
 		if (record == 1) {
-			record_1 = stage;
+			if (pass) {
+				record_1 = 0;
+			}
+			else {
+				record_1 = stage;
+			}
 		}
 		else if (record == 2) {
-			record_2 = stage;
+			if (pass) {
+				record_2 = 0;
+			}
+			else {
+				record_2 = stage;
+			}
 		}
 		else if (record == 3) {
-			record_3 = stage;
+			if (pass) {
+				record_2 = 0;
+			}
+			else {
+				record_2 = stage;
+			}
 		}
 
 		ofstream SaveFile("save_file.txt");
@@ -760,7 +775,9 @@ namespace game_framework {
 				ThingVector.clear();
 			}
 
-			Door.SetTopLeft(SIZE_X - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
+			Door.ResetLoad();
+			Door.LoadBitmap(".\\res\\weapon\\1.bmp", RGB(255, 255, 255));
+
 			if (!EnemyVector.empty()) {
 				for (auto n : EnemyVector) {
 					delete n;
@@ -855,10 +872,14 @@ namespace game_framework {
 				}
 				if (EnemyVector[i]->GetHp() <= 0) {
 					if (EnemyVector[i]->GetKind() == "kingDedede") {
+						delete EnemyVector[i];
+						EnemyVector.erase(EnemyVector.begin() + i);
 						GotoGameState(GAME_STATE_OVER, true);
 					}
-					delete EnemyVector[i];
-					EnemyVector.erase(EnemyVector.begin() + i);
+					else {
+						delete EnemyVector[i];
+						EnemyVector.erase(EnemyVector.begin() + i);
+					}
 				}
 			}
 		}
