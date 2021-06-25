@@ -79,6 +79,24 @@ namespace game_framework {
 
 	void CGameStateInit::OnBeginState()
 	{
+		string line;
+		ifstream saveFile("save_file.txt");
+		if (saveFile.is_open())
+		{
+			getline(saveFile, line);
+			record_1 = stoi(line);
+			getline(saveFile, line);
+			record_2 = stoi(line);
+			getline(saveFile, line);
+			record_3 = stoi(line);
+			saveFile.close();
+		}
+		else {
+			ofstream firstSaveFile("save_file.txt");
+			firstSaveFile << "0\n0\n0\n";
+			record_1 = 0; record_2 = 0; record_3 = 0;
+			firstSaveFile.close();
+		}
 	}
 
 	void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -244,8 +262,8 @@ namespace game_framework {
 	{
 		counter--;
 		if (counter < 0) {
-			CAudio::Instance()->Stop(AUDIO_SELECT);
-			GotoGameState(GAME_STATE_INIT, stage, record, false);
+			CAudio::Instance()->Play(AUDIO_SELECT);
+			GotoGameState(GAME_STATE_INIT);
 			// PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// esc Ãö³¬¹CÀ¸		
 		}
 	}
