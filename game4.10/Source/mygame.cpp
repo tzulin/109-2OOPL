@@ -244,7 +244,9 @@ namespace game_framework {
 	{
 		counter--;
 		if (counter < 0) {
-			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// esc 關閉遊戲		
+			CAudio::Instance()->Stop(AUDIO_SELECT);
+			GotoGameState(GAME_STATE_INIT, stage, record, false);
+			// PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// esc 關閉遊戲		
 		}
 	}
 
