@@ -207,6 +207,14 @@ public:
 	int   Width();						// 取得圖形的寬度
 	void ResetLoad();
 
+	bool GetShow() {
+		return picShow;
+	}
+
+	void SetShow(bool input) {
+		picShow = input;
+	}
+
 	int*  GetXy();
 	void YouAreLeft(bool);
 	// void SetChange(int x_input, int y_input);
@@ -218,6 +226,7 @@ protected:
 	bool     isBitmapLoaded;	// whether a bitmap has been loaded
 	unsigned SurfaceID;			// the surface id of this bitmap
 	int x_change, y_change;
+	bool picShow = true;
 };
 
 /////////////////////////////////////////////////////////////////////////////

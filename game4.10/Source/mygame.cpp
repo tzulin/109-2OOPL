@@ -386,7 +386,13 @@ namespace game_framework {
 
 	void CGameStateRun::OnBeginState()
 	{
-		Kirby->StageReSet(Kirby->GetHp(), Kirby->GetKind());
+		if (Kirby->GetHp() <= 0) {
+			Kirby->StageReSet(10, Kirby->GetKind());
+		}
+		else {
+			Kirby->StageReSet(Kirby->GetHp(), Kirby->GetKind());
+		}
+		Door.SetShow(true);
 		if (stage == 1) {
 			CAudio::Instance()->Play(AUDIO_STARTING, true);
 			if (Map != nullptr) {
@@ -965,6 +971,7 @@ namespace game_framework {
 			EnemyVector[3]->SetThings(ThingVector);
 		}
 		else {
+			Door.SetShow(false);
 			CAudio::Instance()->Play(AUDIO_BOSS, true);
 			if (Map != nullptr) {
 				delete Map;
@@ -979,9 +986,6 @@ namespace game_framework {
 				}
 				ThingVector.clear();
 			}
-
-			Door.ResetLoad();
-			Door.LoadBitmap(".\\res\\weapon\\1.bmp", RGB(255, 255, 255));
 
 			if (!EnemyVector.empty()) {
 				for (auto n : EnemyVector) {
@@ -1271,7 +1275,7 @@ namespace game_framework {
 		}
 
 		if (nChar == KEY_UP) {
-			if (Meet(*Kirby, Door)) {
+			if (Meet(*Kirby, Door) && Door.GetShow()) {
 				CAudio::Instance()->Stop(AUDIO_STARTING);
 				CAudio::Instance()->Stop(AUDIO_RAINBOWROUTE);
 				CAudio::Instance()->Stop(AUDIO_BOSS);
@@ -1387,7 +1391,9 @@ namespace game_framework {
 	void CGameStateRun::OnShow()
 	{
 		Map->ShowBitmap();
-		Door.ShowBitmap();
+		if (Door.GetShow()) {
+			Door.ShowBitmap();
+		}
 
 		if (!EnemyVector.empty()) {
 			for (auto n : EnemyVector) {
