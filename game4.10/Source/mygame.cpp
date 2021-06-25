@@ -262,7 +262,7 @@ namespace game_framework {
 	{
 		counter--;
 		if (counter < 0) {
-			CAudio::Instance()->Play(AUDIO_SELECT);
+			CAudio::Instance()->Play(AUDIO_SELECT, true);
 			GotoGameState(GAME_STATE_INIT);
 			// PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// esc Ãö³¬¹CÀ¸		
 		}
@@ -290,19 +290,32 @@ namespace game_framework {
 		}
 
 		if (record == 1) {
+			if (pass) {
+				record_1 = 0; counter = 5 * 30;
+			}
+			else {
 			record_1 = stage;
+			}
 		}
 		else if (record == 2) {
+			if (pass) {
+				record_2 = 0; counter = 5 * 30;
+			}
+			else {
 			record_2 = stage;
+			}
 
 		}
 		else if (record == 3) {
+			if (pass) {
+				record_3 = 0; counter = 5 * 30;
+			}
+			else {
 			record_3 = stage;
+			}
 		}
-		counter = 30 * 3; // 1 seconds
-
-		if (pass) {
-			record_1 = 0; record_2 = 0; record_3 = 0; counter = 5 * 30;
+		if (!pass) {
+		counter = 30 * 3; // 3 seconds
 		}
 
 		ofstream SaveFile("save_file.txt");
@@ -386,12 +399,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnBeginState()
 	{
-		if (Kirby->GetHp() <= 0) {
-			Kirby->StageReSet(10, Kirby->GetKind());
-		}
-		else {
-			Kirby->StageReSet(Kirby->GetHp(), Kirby->GetKind());
-		}
+		Kirby->StageReSet(Kirby->GetHp(), Kirby->GetKind());
 		Door.SetShow(true);
 		if (stage == 1) {
 			CAudio::Instance()->Play(AUDIO_STARTING, true);
@@ -1013,6 +1021,15 @@ namespace game_framework {
 		Kirby->SetEnemies(EnemyVector);
 
 		if (!Kirby->IsAlive()) {								// Kirby dead
+			Kirby->StageReSet(10, "normal_kirby");
+			temp_kirby = new normal_kirby;
+			if (Kirby != nullptr) {
+				Kirby->KirbyCopy(temp_kirby);
+				delete Kirby;
+			}
+			Kirby = temp_kirby;
+			Kirby->LoadBitmap();
+			Kirby->SetKindInit();
 			GotoGameState(GAME_STATE_OVER, stage, record, false);
 		}
 
@@ -1084,6 +1101,14 @@ namespace game_framework {
 					if (EnemyVector[i]->GetKind() == "kingDedede") {
 						delete EnemyVector[i];
 						EnemyVector.erase(EnemyVector.begin() + i);
+						temp_kirby = new normal_kirby;
+						if (Kirby != nullptr) {
+							Kirby->KirbyCopy(temp_kirby);
+							delete Kirby;
+						}
+						Kirby = temp_kirby;
+						Kirby->LoadBitmap();
+						Kirby->SetKindInit();
 						GotoGameState(GAME_STATE_OVER, stage, record, true);
 					}
 					else {
@@ -1173,6 +1198,15 @@ namespace game_framework {
 		const char KEY_4 = 0x34;		// keyboard 4
 
 		if (nChar == KEY_ESC) {
+			Kirby->StageReSet(10, "normal_kirby");
+			temp_kirby = new normal_kirby;
+			if (Kirby != nullptr) {
+				Kirby->KirbyCopy(temp_kirby);
+				delete Kirby;
+			}
+			Kirby = temp_kirby;
+			Kirby->LoadBitmap();
+			Kirby->SetKindInit();
 			GotoGameState(GAME_STATE_OVER, stage, record, false);
 		}
 
