@@ -1,60 +1,72 @@
 #ifndef KIRBY_H
 #define KIRBY_H
 
-
-#include "./waddle.h"
+#include <vector>
+#include "./enemy.h"
 #include "./weapon.h"
 #include "./things.h"
-
 
 namespace game_framework {
 /////////////////////////////////////////////////////////////////////////////
 // class kirby
 //
 /////////////////////////////////////////////////////////////////////////////
-
+	
 	class kirby {
 	public:
+		virtual void SetAttack(bool input);
+		virtual void SetKindInit();
+		virtual void SetEaten(bool input);
+		virtual void SetEaten(bool input, std::string name);
+		virtual void LoadBitmap();
+		virtual void ThrowStar();
+		virtual void OnMove();
+		virtual void OnShow();
+		virtual weapon* GetWeapon();
+
 		kirby();
-		void kirby::StageReSet();
-		~kirby();
-		void LoadBitmap();
-		void OnMove();
-		void OnShow();
+		virtual ~kirby();
+		void kirby::StageReSet(int hp_left, std::string kind);
 		void SetXY(int x_in, int y_in);
 		void SetMovingL(bool input);
 		void SetMovingR(bool input);
 		void SetFacingR(bool input);
 		void SetFacingL(bool input);
 		void SetDown(bool input);
-		void SetAttack(bool input);
 		void SetJump(bool input);
 		void SetFly(bool input);
-		void SetEaten(bool input);
 		void SetCounter(int);
+		void SetHack(bool input);
+		void SetKind(std::string input);
 
+		void SetEnemies(std::vector<enemy*> input_EnemyList);
+		void SetThings(std::vector<thing*> input_ThingList);
 		void SetMap(CMovingBitmap* Map);
 		void SetDoor(CMovingBitmap* door);
-		void SetThings(starBlock** Blocks_input, int input_number);
-		void SetWaddles(waddle** waddles_input, int input_number);
-		void SetWaddleDoos(waddleDoo** waddle_doos_input, int input_number);
 		void SetRun(bool input);
-		void Hurt(int input, int time);
-		void ThrowStar();
+		bool Hurt(int input, int time);
 		void YouAreLeft(bool YouAreLeft);
-		weapon* GetWeapon();
 
+		std::string GetKind();
 		int GetCase();
 		int GetHp();
 		int* GetXy();
 		int GetWidth();
 		int GetHeight();
+		std::string GetEatenEnemy();
+		bool GetEaten();
+		bool GetIsGround();
 		bool IsAlive();
 		bool IsScreamR();
 		bool IsScreamL();
+		bool GetFacingR() {
+			return IsFacingR;
+		}
 		//bool GetUpKey();
 
-	private:
+		void KirbyCopy(kirby* new_kirby);
+
+	protected:
 		CAnimation KirbyMovingL;
 		CAnimation KirbyMovingR;
 		CAnimation KirbyFatMovingL;
@@ -81,13 +93,14 @@ namespace game_framework {
 		CMovingBitmap * Map;
 		CMovingBitmap * Door;
 
-		waddle** WaddleList;
-		waddleDoo** WaddleDooList;
-		starBlock ** StarBlockList;
-		int number_of_star_blocks, number_of_waddles, number_of_waddle_doos;
+		std::vector<enemy*> EnemyList;
+		std::vector<thing*> StarBlockList;
+		// starBlock ** StarBlockList;
+		// int number_of_star_blocks;
 		weapon StarThrow;
 
-
+		std::string EatenEnemy = "";
+		std::string kirby_kind;
 		int x, y, hp;
 		const int ImgW = 60, ImgH = 60;
 		int now_img_w, now_img_h;
@@ -116,6 +129,47 @@ namespace game_framework {
 		bool IsEaten;
 		bool YouAreGround;
 		bool IsRun;
+		bool IsHack;
+	};
+
+	class normal_kirby : public kirby {};
+
+	class sparky_kirby : public kirby {
+	public:
+		void SetEaten(bool input) override;
+		void SetEaten(bool input, std::string name) override;
+		void LoadBitmap() override;
+		void OnMove() override;
+		void ThrowStar() override;
+		void SetKindInit() override;
+	};
+
+	class hotHead_kirby : public kirby {
+	public:
+		void SetEaten(bool input) override;
+		void SetEaten(bool input, std::string name) override;
+		void LoadBitmap() override;
+		void OnMove() override;
+		void OnShow() override;
+		void ThrowStar() override;
+		void SetKindInit() override;
+		weapon* GetWeapon() override;
+	protected:
+		weapon left_side;
+	};
+
+	class waddleDoo_kirby : public kirby {
+	public:
+		void SetEaten(bool input) override;
+		void SetEaten(bool input, std::string name) override;
+		void LoadBitmap() override;
+		void OnMove() override;
+		void OnShow() override;
+		void ThrowStar() override;
+		void SetKindInit() override;
+		void SetAttack(bool input) override;
+	protected:
+		weapon left_side;
 	};
 }
 

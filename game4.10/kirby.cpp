@@ -5,7 +5,7 @@
 #include <ddraw.h>
 #include "source/audio.h"
 #include "source/gamelib.h"
-//#include "kirby.h"
+// #include "kirby.h"
 #include "Header.h"
 
 namespace game_framework {

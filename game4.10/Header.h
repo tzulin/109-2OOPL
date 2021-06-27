@@ -11,6 +11,7 @@ namespace game_framework {
 		void SetShow(bool);
 		void SetXY(int, int);
 		thing();
+		virtual ~thing();
 		int* GetHw();
 		int* GetXy();
 		bool GetShow();
@@ -202,7 +203,7 @@ namespace game_framework {
 		virtual weapon* GetWeapon();
 		
 		kirby();
-		~kirby();
+		virtual ~kirby();
 		void kirby::StageReSet(int hp_left, std::string kind);
 		void SetXY(int x_in, int y_in);
 		void SetMovingL(bool input);

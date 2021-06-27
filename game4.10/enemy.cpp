@@ -4,7 +4,10 @@
 #include <ddraw.h>
 #include "source/audio.h"
 #include "source/gamelib.h"
-//#include "enemy.h"
+/*
+#include "kirby.h"
+#include "enemy.h"
+*/
 #include "Header.h"
 
 namespace game_framework {

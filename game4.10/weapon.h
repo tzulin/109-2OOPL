@@ -5,9 +5,10 @@ namespace game_framework {
 	class weapon {
 	public:
 		weapon();
-		~weapon();
+		virtual ~weapon();
 		void LoadBitmap(char** pic, int* rgb, int n);
 		void LoadBitmap(int IDB_INPUT, int* rgb, int n);
+		void LoadBitmap(char* pic, int* rgb, int n);
 		void OnShow();
 		void OnMove();
 		void AnimationReset();
@@ -20,6 +21,10 @@ namespace game_framework {
 		void YouAreLeft(bool YouAreLeft);
 		bool GetAttackFacingR();
 		bool WeaponIsShow();
+		bool IsFinalBitmap();
+		void SetOwner(std::string which_enemy);
+		int Width();
+		int Height();
 	protected:
 		CAnimation PlayAttack;
 		int x, y;
@@ -29,6 +34,7 @@ namespace game_framework {
 		bool IsShow;
 		bool AttackIsFacingR;
 		bool OtherFromL;
+		std::string owner;
 	};
 }
 

@@ -4,6 +4,7 @@
 #include "../../game4.10/enemy.h"
 #include "../../game4.10/waddle.h"
 #include "../../game4.10/things.h"
+#include "../../game4.10/weapon.h"
 #include "../../game4.10/system.h"
 */
 #include "../../game4.10/Header.h"

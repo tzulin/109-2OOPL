@@ -2,32 +2,38 @@
 #define THINGS_H
 
 namespace game_framework {
-	class starBlock {
+	class thing {
 	public:
-		void LoadBitmap();
+		thing();
+		virtual ~thing();
+		virtual void LoadBitmap();
+		virtual bool isStarBlock();
 		void OnShow();
 		void SetShow(bool);
 		void SetXY(int, int);
-		starBlock();
 		int* GetHw();
 		int* GetXy();
 		bool GetShow();
 		void YouAreLeft(bool);
 		int Top();
 		int Left();
-	private:
-		CMovingBitmap starBlockPic;
+		std::string GetKind();
+		void SetKind(std::string input);
+	protected:
+		CMovingBitmap blockPic;
 		int x, y;
 		bool IsShow;
+		std::string name = "";
 	};
 
-	class blankBlock {
-	public:
-		void SetXY(int, int);
-		void SetHW(int, int);
-	private:
-		int x, y;
-		int height, width;
+	class starBlock : public thing {
+		void LoadBitmap() override;
+		bool isStarBlock() override;
+	};
+
+	class blankBlock : public thing {
+		void LoadBitmap() override;
+		bool isStarBlock() override;
 	};
 }
 
