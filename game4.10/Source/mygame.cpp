@@ -1,5 +1,4 @@
 
-
 #include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
@@ -25,19 +24,7 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit()
 	{
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
 		ShowInitProgress(0);		// 一開始的loading進度為0%
-									//
-									// 開始載入資料
-									//
-									//logo.LoadBitmap(IDB_BACKGROUND);
-									//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
-									//
-									// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
-									//
 		start_state_zero_back.LoadBitmap(IDB_STARTBACK, RGB(0, 0, 0));
 		start_state_one_back.LoadBitmap(IDB_SAVEBACK, RGB(0, 0, 0));
 		gray_block_1.LoadBitmap(IDB_GRAY_BLOCK, RGB(255, 255, 255));
@@ -58,7 +45,7 @@ namespace game_framework {
 		num_3.SetTopLeft(270, 180);
 
 		string line;
-		ifstream saveFile("save_file.txt");
+		ifstream saveFile("res\\save_file.h");
 		if (saveFile.is_open())
 		{
 			getline(saveFile, line);
@@ -70,7 +57,7 @@ namespace game_framework {
 			saveFile.close();
 		}
 		else {
-			ofstream firstSaveFile("save_file.txt");
+			ofstream firstSaveFile("res\\save_file.h");
 			firstSaveFile << "0\n0\n0\n";
 			record_1 = 0; record_2 = 0; record_3 = 0;
 			firstSaveFile.close();
@@ -80,7 +67,7 @@ namespace game_framework {
 	void CGameStateInit::OnBeginState()
 	{
 		string line;
-		ifstream saveFile("save_file.txt");
+		ifstream saveFile("res\\save_file.h");
 		if (saveFile.is_open())
 		{
 			getline(saveFile, line);
@@ -92,7 +79,7 @@ namespace game_framework {
 			saveFile.close();
 		}
 		else {
-			ofstream firstSaveFile("save_file.txt");
+			ofstream firstSaveFile("res\\save_file.h");
 			firstSaveFile << "0\n0\n0\n";
 			record_1 = 0; record_2 = 0; record_3 = 0;
 			firstSaveFile.close();
@@ -163,37 +150,12 @@ namespace game_framework {
 		}
 	}
 
-	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
-	{
-		//GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
-	}
+	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point) {}
 
 	void CGameStateInit::OnShow()
 	{
 		if (start_state == 0) {
 			start_state_zero_back.ShowBitmap();
-			//
-			// 貼上logo
-			//
-			//logo.SetTopLeft((SIZE_X - logo.Width())/2, SIZE_Y/8);
-			//logo.ShowBitmap();
-			//
-			// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
-			//
-			/*CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
-			CFont f, *fp;
-			f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-			fp = pDC->SelectObject(&f);					// 選用 font f
-			pDC->SetBkColor(RGB(0, 0, 0));
-			pDC->SetTextColor(RGB(255, 255, 0));
-			/*pDC->TextOut(50,220,"Please press SPACE to begin.");
-			pDC->TextOut(5, 395, "Please make sure your typing mode is in English.");
-			if (ENABLE_GAME_PAUSE)
-				pDC->TextOut(5, 425, "Press Ctrl-Q to pause the Game.");
-			pDC->TextOut(5, 455, "Press Alt-F4 or ESC to Quit.");
-			pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-			CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
-			*/
 		}
 		else {
 			start_state_one_back.ShowBitmap();
@@ -264,7 +226,6 @@ namespace game_framework {
 		if (counter < 0) {
 			CAudio::Instance()->Play(AUDIO_SELECT, true);
 			GotoGameState(GAME_STATE_INIT);
-			// PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// esc 關閉遊戲		
 		}
 	}
 
@@ -278,7 +239,7 @@ namespace game_framework {
 
 		string line;
 		int record_1 = 0, record_2 = 0, record_3 = 0;
-		ifstream oldSaveFile("save_file.txt");
+		ifstream oldSaveFile("res\\save_file.h");
 		if (oldSaveFile.is_open()) {
 			getline(oldSaveFile, line);
 			record_1 = stoi(line);
@@ -318,7 +279,7 @@ namespace game_framework {
 		counter = 30 * 3; // 3 seconds
 		}
 
-		ofstream SaveFile("save_file.txt");
+		ofstream SaveFile("res\\save_file.h");
 		if (SaveFile.is_open()) {
 			SaveFile << record_1 << "\n" << record_2 << "\n" << record_3 << "\n";
 		}
@@ -326,20 +287,9 @@ namespace game_framework {
 		
 	}
 
-	void CGameStateOver::OnInit()
+	void CGameStateOver::OnInit() 
 	{
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
 		ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
-								//
-								// 開始載入資料
-								//
-								//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
-								//
-								// 最終進度為100%
-								//
 		ShowInitProgress(100);
 	}
 
@@ -787,113 +737,113 @@ namespace game_framework {
 			EnemyVector[4]->SetThings(ThingVector);
 		}
 		else if (stage == 5) {
-		CAudio::Instance()->Play(AUDIO_RAINBOWROUTE, true);
-		if (Map != nullptr) {
-			delete Map;
-		}
-		Map = new CMovingBitmap;
-		Map->LoadBitmap(".\\res\\map_forest1.bmp");
-		Map->SetTopLeft(0, -260);
-		Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
-
-		if (!ThingVector.empty()) {
-			for (auto block : ThingVector) {
-				delete block;
+			CAudio::Instance()->Play(AUDIO_RAINBOWROUTE, true);
+			if (Map != nullptr) {
+				delete Map;
 			}
-			ThingVector.clear();
-		}
+			Map = new CMovingBitmap;
+			Map->LoadBitmap(".\\res\\map_forest1.bmp");
+			Map->SetTopLeft(0, -260);
+			Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
 
-		// blankBlocks
-		// first hill: 9 blocks
-		for (int count_x = 0; count_x < 3; count_x++) {
-			for (int count_y = 0; count_y < 3; count_y++) {
-				ThingVector.push_back(new blankBlock);
-				ThingVector.at(count_x * 3 + count_y)->LoadBitmap();
-				ThingVector.at(count_x * 3 + count_y)->SetXY(360 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+			if (!ThingVector.empty()) {
+				for (auto block : ThingVector) {
+					delete block;
+				}
+				ThingVector.clear();
 			}
-		} // last block: 8
-		// second hill: 32 blocks
-		for (int count_x = 0; count_x < 4; count_x++) {
-			for (int count_y = 0; count_y < 8; count_y++) {
-				ThingVector.push_back(new blankBlock);
-				ThingVector.at(9 + count_x * 8 + count_y)->LoadBitmap();
-				ThingVector.at(9 + count_x * 8 + count_y)->SetXY(770 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+
+			// blankBlocks
+			// first hill: 9 blocks
+			for (int count_x = 0; count_x < 3; count_x++) {
+				for (int count_y = 0; count_y < 3; count_y++) {
+					ThingVector.push_back(new blankBlock);
+					ThingVector.at(count_x * 3 + count_y)->LoadBitmap();
+					ThingVector.at(count_x * 3 + count_y)->SetXY(360 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+				}
+			} // last block: 8
+			// second hill: 32 blocks
+			for (int count_x = 0; count_x < 4; count_x++) {
+				for (int count_y = 0; count_y < 8; count_y++) {
+					ThingVector.push_back(new blankBlock);
+					ThingVector.at(9 + count_x * 8 + count_y)->LoadBitmap();
+					ThingVector.at(9 + count_x * 8 + count_y)->SetXY(770 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+				}
+			} // last block: 40
+			// 3rd hill: 9 blocks
+			for (int count_x = 0; count_x < 3; count_x++) {
+				for (int count_y = 0; count_y < 3; count_y++) {
+					ThingVector.push_back(new blankBlock);
+					ThingVector.at(41 + count_x * 3 + count_y)->LoadBitmap();
+					ThingVector.at(41 + count_x * 3 + count_y)->SetXY(1580 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+				}
+			} // last block: 49
+			// 4th hill: 32 blocks
+			for (int count_x = 0; count_x < 4; count_x++) {
+				for (int count_y = 0; count_y < 8; count_y++) {
+					ThingVector.push_back(new blankBlock);
+					ThingVector.at(50 + count_x * 8 + count_y)->LoadBitmap();
+					ThingVector.at(50 + count_x * 8 + count_y)->SetXY(1790 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+				}
+			} // last block: 81
+			// 5th hill: 9 blocks
+			for (int count_x = 0; count_x < 3; count_x++) {
+				for (int count_y = 0; count_y < 3; count_y++) {
+					ThingVector.push_back(new blankBlock);
+					ThingVector.at(82 + count_x * 3 + count_y)->LoadBitmap();
+					ThingVector.at(82 + count_x * 3 + count_y)->SetXY(2310 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
+				}
+			} // last block: 90
+
+			// starBlocks: 5 blocks
+			for (int count_x = 0; count_x < 5; count_x++) {
+				ThingVector.push_back(new starBlock);
+				ThingVector.at(91 + count_x)->LoadBitmap();
+				ThingVector.at(91 + count_x)->SetXY(1150 + 32 * count_x, SIZE_Y - 150 - temp_floor);
+			} // last block: 95
+
+			// enemies
+			if (!EnemyVector.empty()) {
+				for (auto n : EnemyVector) {
+					delete n;
+				}
+				EnemyVector.clear();
 			}
-		} // last block: 40
-		// 3rd hill: 9 blocks
-		for (int count_x = 0; count_x < 3; count_x++) {
-			for (int count_y = 0; count_y < 3; count_y++) {
-				ThingVector.push_back(new blankBlock);
-				ThingVector.at(41 + count_x * 3 + count_y)->LoadBitmap();
-				ThingVector.at(41 + count_x * 3 + count_y)->SetXY(1580 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
-			}
-		} // last block: 49
-		// 4th hill: 32 blocks
-		for (int count_x = 0; count_x < 4; count_x++) {
-			for (int count_y = 0; count_y < 8; count_y++) {
-				ThingVector.push_back(new blankBlock);
-				ThingVector.at(50 + count_x * 8 + count_y)->LoadBitmap();
-				ThingVector.at(50 + count_x * 8 + count_y)->SetXY(1790 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
-			}
-		} // last block: 81
-		// 5th hill: 9 blocks
-		for (int count_x = 0; count_x < 3; count_x++) {
-			for (int count_y = 0; count_y < 3; count_y++) {
-				ThingVector.push_back(new blankBlock);
-				ThingVector.at(82 + count_x * 3 + count_y)->LoadBitmap();
-				ThingVector.at(82 + count_x * 3 + count_y)->SetXY(2310 + 32 * count_x, SIZE_Y - 32 - 32 * count_y - temp_floor);
-			}
-		} // last block: 90
 
-		// starBlocks: 5 blocks
-		for (int count_x = 0; count_x < 5; count_x++) {
-			ThingVector.push_back(new starBlock);
-			ThingVector.at(91 + count_x)->LoadBitmap();
-			ThingVector.at(91 + count_x)->SetXY(1150 + 32 * count_x, SIZE_Y - 150 - temp_floor);
-		} // last block: 95
+			EnemyVector.push_back(new bigWaddle);
+			EnemyVector[0]->LoadBitmap();
+			EnemyVector[0]->Reset();
+			EnemyVector[0]->SetXy(200, SIZE_Y - temp_floor - 120);
+			EnemyVector[0]->SetMap(Map);
+			EnemyVector[0]->SetThings(ThingVector);
 
-		// enemies
-		if (!EnemyVector.empty()) {
-			for (auto n : EnemyVector) {
-				delete n;
-			}
-			EnemyVector.clear();
-		}
+			EnemyVector.push_back(new waddleDoo);
+			EnemyVector[1]->LoadBitmap();
+			EnemyVector[1]->Reset();
+			EnemyVector[1]->SetXy(2200, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
+			EnemyVector[1]->SetMap(Map);
+			EnemyVector[1]->SetThings(ThingVector);
 
-		EnemyVector.push_back(new bigWaddle);
-		EnemyVector[0]->LoadBitmap();
-		EnemyVector[0]->Reset();
-		EnemyVector[0]->SetXy(200, SIZE_Y - temp_floor - 120);
-		EnemyVector[0]->SetMap(Map);
-		EnemyVector[0]->SetThings(ThingVector);
+			EnemyVector.push_back(new hotHead);
+			EnemyVector[2]->LoadBitmap();
+			EnemyVector[2]->Reset();
+			EnemyVector[2]->SetXy(600, SIZE_Y - temp_floor - 80);
+			EnemyVector[2]->SetMap(Map);
+			EnemyVector[2]->SetThings(ThingVector);
 
-		EnemyVector.push_back(new waddleDoo);
-		EnemyVector[1]->LoadBitmap();
-		EnemyVector[1]->Reset();
-		EnemyVector[1]->SetXy(2200, SIZE_Y - temp_floor - EnemyVector[1]->GetHeight());
-		EnemyVector[1]->SetMap(Map);
-		EnemyVector[1]->SetThings(ThingVector);
+			EnemyVector.push_back(new sparky);
+			EnemyVector[3]->LoadBitmap();
+			EnemyVector[3]->Reset();
+			EnemyVector[3]->SetXy(1400, SIZE_Y - temp_floor - EnemyVector[3]->GetHeight());
+			EnemyVector[3]->SetMap(Map);
+			EnemyVector[3]->SetThings(ThingVector);
 
-		EnemyVector.push_back(new hotHead);
-		EnemyVector[2]->LoadBitmap();
-		EnemyVector[2]->Reset();
-		EnemyVector[2]->SetXy(600, SIZE_Y - temp_floor - 80);
-		EnemyVector[2]->SetMap(Map);
-		EnemyVector[2]->SetThings(ThingVector);
-
-		EnemyVector.push_back(new sparky);
-		EnemyVector[3]->LoadBitmap();
-		EnemyVector[3]->Reset();
-		EnemyVector[3]->SetXy(1400, SIZE_Y - temp_floor - EnemyVector[3]->GetHeight());
-		EnemyVector[3]->SetMap(Map);
-		EnemyVector[3]->SetThings(ThingVector);
-
-		EnemyVector.push_back(new droppy);
-		EnemyVector[4]->LoadBitmap();
-		EnemyVector[4]->Reset();
-		EnemyVector[4]->SetXy(900, SIZE_Y - temp_floor - EnemyVector[4]->GetHeight());
-		EnemyVector[4]->SetMap(Map);
-		EnemyVector[4]->SetThings(ThingVector);
+			EnemyVector.push_back(new droppy);
+			EnemyVector[4]->LoadBitmap();
+			EnemyVector[4]->Reset();
+			EnemyVector[4]->SetXy(900, SIZE_Y - temp_floor - EnemyVector[4]->GetHeight());
+			EnemyVector[4]->SetMap(Map);
+			EnemyVector[4]->SetThings(ThingVector);
 		}
 		else if (stage == 6) {
 			CAudio::Instance()->Play(AUDIO_RAINBOWROUTE, true);
@@ -1041,18 +991,6 @@ namespace game_framework {
 				EnemyVector[i]->OnMove();
 				EnemyVector[i]->SetCounter(counter);
 				if (Meet(*EnemyVector[i], *Kirby)) {
-					/*ThingVector.push_back(new starBlock);
-					int * temp = Kirby->GetXy();
-					ThingVector[ThingVector.size() - 1]->LoadBitmap();
-					if (Kirby->GetFacingR()) {
-						ThingVector[ThingVector.size() - 1]->SetXY(temp[0] - 100, temp[1] - 50);
-					}
-					else {
-						ThingVector[ThingVector.size() - 1]->SetXY(temp[0] + 100, temp[1] - 50);
-					}
-					ThingVector[ThingVector.size() - 1]->SetShow(true);
-					ThingVector[ThingVector.size() - 1]->SetKind(Kirby->GetKind());
-					delete[] temp;*/
 					EnemyVector[i]->Hurt(1, counter);
 					if (Kirby->Hurt(EnemyVector[i]->GetPower(), counter)) {
 						temp_kirby = new normal_kirby;
@@ -1138,7 +1076,6 @@ namespace game_framework {
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	{
-		//Map->LoadBitmap(".\\res\\map_example.bmp");			// map load and set
 		Door.LoadBitmap(IDB_DOOR, RGB(255, 255, 255));
 		kirbyHp.LoadBitmap(".\\res\\kirby_hpPic.bmp", RGB(236, 28, 36));
 		kirbyHpInt.LoadBitmap();
@@ -1151,7 +1088,6 @@ namespace game_framework {
 		CAudio::Instance()->Load(AUDIO_RAINBOWROUTE, "sounds\\forest_and_natural_area.mp3");
 		CAudio::Instance()->Load(AUDIO_BOSS, "sounds\\boss.mp3");
 
-		//Map->SetTopLeft(0, -260);
 		Door.SetTopLeft(2560 - 50 - Door.Width(), SIZE_Y - temp_floor - Door.Height());
 		kirbyHp.SetTopLeft(0, SIZE_Y - kirbyHp.Height());											// kirbyHp load and set
 		kirbyHpInt.SetDigits(2);
@@ -1287,24 +1223,6 @@ namespace game_framework {
 			Kirby->SetHack(true);
 		}
 
-		/*
-		if (nChar == KEY_N) {
-			if (!ThingVector.empty()) {
-				for (auto block : ThingVector) {
-					block->SetShow(false);
-					delete block;
-				}
-				ThingVector.clear();
-			}
-
-			if (!EnemyVector.empty()) {
-				for (auto n : EnemyVector) {
-					delete n;
-				}
-				EnemyVector.clear();
-			}
-		}*/
-
 		if (nChar == KEY_SPACE) {
 			Kirby->SetJump(true);
 		}
@@ -1319,10 +1237,6 @@ namespace game_framework {
 			else {
 				Kirby->SetFly(true);
 			}
-		}
-
-		if (nChar == KEY_ENTER) {
-
 		}
 
 		if (nChar == NUM_KEY_1 || nChar == KEY_1) {

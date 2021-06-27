@@ -305,11 +305,7 @@
     <ClCompile Include="weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="enemy.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="system.h" />
-    <ClInclude Include="things.h" />
-    <ClInclude Include="kirby.h" />
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\gameDoc.h" />
@@ -319,8 +315,6 @@
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />
     <ClInclude Include="Source\mygame.h" />
-    <ClInclude Include="waddle.h" />
-    <ClInclude Include="weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\game.rc">

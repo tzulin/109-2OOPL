@@ -1,12 +1,4 @@
 
-/*
-#include "../../game4.10/kirby.h"
-#include "../../game4.10/enemy.h"
-#include "../../game4.10/waddle.h"
-#include "../../game4.10/things.h"
-#include "../../game4.10/weapon.h"
-#include "../../game4.10/system.h"
-*/
 #include "../../game4.10/Header.h"
 #include <vector>
 #include <fstream>
@@ -23,8 +15,6 @@ namespace game_framework {
 		AUDIO_RAINBOWROUTE,			// 3
 		AUDIO_BOSS					// 4
 	};
-
-	// auto musicId = AUDIO_TITLE;
 
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件

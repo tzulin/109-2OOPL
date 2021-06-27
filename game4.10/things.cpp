@@ -4,7 +4,6 @@
 #include <ddraw.h>
 #include "source/audio.h"
 #include "source/gamelib.h"
-// #include "things.h"
 #include "Header.h"
 
 namespace game_framework {
@@ -13,8 +12,7 @@ namespace game_framework {
 		IsShow = true;
 	}
 
-	thing::~thing() {
-	}
+	thing::~thing() {}
 
 	void thing::LoadBitmap() {}
 
@@ -23,9 +21,7 @@ namespace game_framework {
 		y = input_y;
 	}
 
-	void thing::YouAreLeft(bool input) {
-
-	}
+	void thing::YouAreLeft(bool input) {}
 
 	int* thing::GetHw() {
 		return new int[2]{ blockPic.Height(), blockPic.Width() };
@@ -82,5 +78,4 @@ namespace game_framework {
 	bool blankBlock::isStarBlock() {
 		return false;
 	}
-
 }

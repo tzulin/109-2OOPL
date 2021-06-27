@@ -88,12 +88,11 @@ namespace game_framework {
 		int GetWidth();
 		int GetHeight();
 		int GetPower();
-		std::string GetKind();
 		int Top();
 		int Left();
+		std::string GetKind();
 		void SetXy(int input_x, int input_y);
 		void SetThings(vector<thing*> input_ThingList);
-		// void SetThings(starBlock** Blocks_input, int input_number);
 		void BackX(bool fromL);
 		void Attack(kirby k, int time);
 		void YouAreLeft(bool YouAreLeft);
@@ -116,37 +115,32 @@ namespace game_framework {
 		CAnimation StandL;
 		weapon wL;
 		weapon wR;
-
 		CMovingBitmap* Map;
-
 		vector<thing*> StarBlockList;
-		// starBlock ** StarBlockList = nullptr;
-		// int number_of_star_blocks = 0;
 
 		int x, y, hp;
 		int power;			// §ðÀ»¤O
 		int origin_x, origin_y;
 		int ImgW = 64, ImgH = 60;
 		int floor;			// ¦aªOy®y¼Ð
+		int LastHurt;
+		int LastAttack;
+		int game_state_counter, x_old = 0, y_old = 0, m_x_old = 0, m_y_old = 0;
 		bool IsFacingR;
 		bool IsMovingL;
 		bool IsMovingR;
 		bool IsAttack;
 		bool IsHurt;
-		int LastHurt;
-		int LastAttack;
 		bool OtherFromL;
 		bool HasWeapon;
 		bool CanAttack;
 		std::string kind;
-		int game_state_counter, x_old = 0, y_old = 0, m_x_old = 0, m_y_old = 0;
 	};
 
 	class waddle : public enemy {
 	public:
 		void LoadBitmap() override;
 		void Reset() override;
-		//bool SeeKirby(kirby k) override;
 	};
 
 	class waddleDoo : public enemy {
@@ -224,25 +218,21 @@ namespace game_framework {
 		void SetRun(bool input);
 		bool Hurt(int input, int time);
 		void YouAreLeft(bool YouAreLeft);
+		void KirbyCopy(kirby* new_kirby);
 
-		std::string GetKind();
 		int GetCase();
 		int GetHp();
 		int* GetXy();
 		int GetWidth();
 		int GetHeight();
+		std::string GetKind();
 		std::string GetEatenEnemy();
 		bool GetEaten();
 		bool GetIsGround();
 		bool IsAlive();
 		bool IsScreamR();
 		bool IsScreamL();
-		bool GetFacingR() {
-			return IsFacingR;
-		}
-		//bool GetUpKey();
-
-		void KirbyCopy(kirby* new_kirby);
+		bool GetFacingR();
 
 	protected:
 		CAnimation KirbyMovingL;
@@ -273,8 +263,6 @@ namespace game_framework {
 
 		vector<enemy*> EnemyList;
 		vector<thing*> StarBlockList;
-		// starBlock ** StarBlockList;
-		// int number_of_star_blocks;
 		weapon StarThrow;
 
 		std::string EatenEnemy = "";
@@ -459,7 +447,6 @@ namespace game_framework {
 		delete[] bXy;
 		return false;
 	}
-
 }
 
 #endif

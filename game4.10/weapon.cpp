@@ -4,12 +4,7 @@
 #include <ddraw.h>
 #include "source/audio.h"
 #include "source/gamelib.h"
-
 #include "Header.h"
-/*
-#include "weapon.h"
-#include "enemy.h"
-*/
 
 namespace game_framework {
 
@@ -18,8 +13,7 @@ namespace game_framework {
 		attack_time = 0;
 	}
 
-	weapon::~weapon() {
-	}
+	weapon::~weapon() {}
 
 	void weapon::LoadBitmap(char** pic, int* rgb, int n) {
 		for (int i = 0; i < n; i++) {

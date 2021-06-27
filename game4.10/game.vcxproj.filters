@@ -164,24 +164,6 @@
     <ClInclude Include="Source\mygame.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="kirby.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="waddle.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="things.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="enemy.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="weapon.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="system.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Header.h">
       <Filter>MyGame</Filter>
     </ClInclude>

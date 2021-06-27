@@ -4,21 +4,12 @@
 #include <ddraw.h>
 #include "source/audio.h"
 #include "source/gamelib.h"
-/*
-#include "kirby.h"
-#include "enemy.h"
-*/
 #include "Header.h"
 
 namespace game_framework {
 	const int frame_of_test = 5;
 	enemy::enemy()
 	{
-		// enemy constructor
-		/*
-		const int origin_x = SIZE_X - ImgW - frame_of_test;
-		const int origin_y = SIZE_Y - 60 - ImgH;
-		*/
 		const int INIT_HP = 0;
 		hp = INIT_HP;
 		x = origin_x;
@@ -34,9 +25,7 @@ namespace game_framework {
 		CanAttack = false;
 	}
 
-	enemy::~enemy()
-	{
-	}
+	enemy::~enemy() {}
 
 	std::string enemy::GetKind() {
 		return kind;
@@ -175,11 +164,6 @@ namespace game_framework {
 		// set moving XY
 		const int length = 2;
 
-		/*
-		SetXy(x - Map->GetXChange(), y - Map->GetYChange());
-		Map->ResetChange();
-		*/
-
 		if (!IsAttack) {
 			MovingL.OnMove();
 			MovingR.OnMove();
@@ -216,7 +200,6 @@ namespace game_framework {
 			if (x_old - x == m_x_old - temp[0] && y_old - y == m_y_old - temp[1] && !IsAttack) {
 				IsMovingR = !IsMovingR;
 				IsMovingL = !IsMovingL;
-				// IsFacingR = !IsFacingR;
 			}
 			else {
 				x_old = x;
