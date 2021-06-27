@@ -1287,6 +1287,7 @@ namespace game_framework {
 			Kirby->SetHack(true);
 		}
 
+		/*
 		if (nChar == KEY_N) {
 			if (!ThingVector.empty()) {
 				for (auto block : ThingVector) {
@@ -1302,7 +1303,7 @@ namespace game_framework {
 				}
 				EnemyVector.clear();
 			}
-		}
+		}*/
 
 		if (nChar == KEY_SPACE) {
 			Kirby->SetJump(true);

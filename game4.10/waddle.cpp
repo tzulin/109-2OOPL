@@ -319,7 +319,7 @@ namespace game_framework {
 		for (int i = 0; i < 8; i++) {
 			AttackL.AddBitmap(attack_left[i], RGB(255, 255, 255));
 		}
-
+		
 		// Load hurt right
 		for (int i = 0;i < 5;i++) {
 			HurtR.AddBitmap(".\\res\\king_dedede\\hurt\\hurtR1.bmp", RGB(255, 255, 255));
@@ -335,6 +335,7 @@ namespace game_framework {
 		for (int i = 0;i < 2;i++) {
 			HurtL.AddBitmap(".\\res\\king_dedede\\hurt\\hurtL2.bmp", RGB(255, 255, 255));
 		}
+		
 		
 		char* weapon_left = { ".\\res\\weapon\\1.bmp" };
 		int rgb[3] = { 255, 255, 255 };

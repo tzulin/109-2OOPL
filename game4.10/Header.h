@@ -76,7 +76,7 @@ namespace game_framework {
 	class enemy {
 	public:
 		enemy();
-		~enemy();
+		virtual ~enemy();
 		virtual void LoadBitmap();
 		virtual void Reset();
 		virtual void OnShow();
